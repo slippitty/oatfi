@@ -92,13 +92,14 @@
             .force("charge", d3.forceManyBody().strength(-1000))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
-        // Create links
+        // Create links with proper bidirectional handling
         const link = svg.append("g")
             .selectAll("line")
             .data(links)
             .enter().append("line")
             .attr("class", "link")
-            .attr("stroke-width", d => Math.max(2, d.orgs / 50));
+            .attr("stroke-width", d => Math.max(2, d.orgs / 50))
+            .attr("marker-end", "url(#end)");
 
         // Create edge labels
         const edgeLabels = svg.append("g")
