@@ -113,6 +113,7 @@
             .data(nodes)
             .enter().append("text")
             .attr("class", "node-label")
+            .style("fill", "#333")
             .text(d => d.label);
 
         // Tooltip
