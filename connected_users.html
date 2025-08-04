@@ -55,8 +55,10 @@
         const width = +svg.attr("width");
         const height = +svg.attr("height");
 
-        // Add arrow marker
-        svg.append("defs").append("marker")
+        // Add arrow markers for both directions
+        const defs = svg.append("defs");
+        
+        defs.append("marker")
             .attr("id", "end")
             .attr("viewBox", "0 -5 10 10")
             .attr("refX", 25)
@@ -66,6 +68,18 @@
             .attr("orient", "auto")
             .append("path")
             .attr("d", "M0,-5L10,0L0,5")
+            .attr("fill", "#999");
+            
+        defs.append("marker")
+            .attr("id", "start")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", -15)
+            .attr("refY", 0)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M10,-5L0,0L10,5")
             .attr("fill", "#999");
 
         // Data
