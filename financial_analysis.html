@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Statement Analysis Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 40px;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-right: 15px;
+            border-radius: 3px;
+        }
+        
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 60px 40px;
+            text-align: center;
+            background: #f8f9ff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+        
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+            transform: scale(1.02);
+        }
+        
+        .upload-icon {
+            font-size: 4em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .upload-text {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        
+        .upload-subtext {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.95em;
+        }
+        
+        .input-group input,
+        .input-group select {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background: #f8f9ff;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .metric-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .metric-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #333;
+        }
+        
+        .metric-value.positive {
+            color: #10b981;
+        }
+        
+        .metric-value.negative {
+            color: #ef4444;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #666;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            color: #667eea;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 5px solid #10b981;
+        }
+        
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left: 5px solid #3b82f6;
+        }
+        
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border-left: 5px solid #f59e0b;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .results-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .results-summary h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .results-summary p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Financial Statement Analysis Tool</h1>
+            <p>Extract data, calculate metrics, and generate forecasts from financial statements</p>
+        </div>
+        
+        <div class="content">
+            <!-- Upload Section -->
+            <div class="section">
+                <h2 class="section-title">1. Upload Financial Statement</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📄</div>
+                    <div class="upload-text">Drop PDF or Excel file here</div>
+                    <div class="upload-subtext">or click to browse</div>
+                    <input type="file" id="fileInput" accept=".pdf,.xlsx,.xls" style="display:none;">
+                </div>
+                <div id="fileInfo" class="alert alert-info hidden">
+                    <span>📁</span>
+                    <span id="fileName"></span>
+                </div>
+            </div>
+            
+            <!-- Manual Input Section -->
+            <div class="section">
+                <h2 class="section-title">2. Enter Financial Data</h2>
+                <p style="color: #666; margin-bottom: 20px;">
+                    Fill in the fields below, or upload a financial statement above for automatic extraction
+                </p>
+                
+                <div class="input-grid">
+                    <!-- Revenue Metrics -->
+                    <div class="input-group">
+                        <label for="ltmRevenue">LTM Revenue ($)</label>
+                        <input type="number" id="ltmRevenue" placeholder="138686960">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="momRevGrowth">MoM Revenue Growth (%)</label>
+                        <input type="number" id="momRevGrowth" placeholder="0" step="0.01">
+                    </div>
+                    
+                    <!-- Profitability Metrics -->
+                    <div class="input-group">
+                        <label for="grossMargin">LTM Gross Margin (%)</label>
+                        <input type="number" id="grossMargin" placeholder="55.35" step="0.01">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ebdaMargin">LTM EBDA Margin (%)</label>
+                        <input type="number" id="ebdaMargin" placeholder="2.88" step="0.01">
+                    </div>
+                    
+                    <!-- Balance Sheet Items -->
+                    <div class="input-group">
+                        <label for="cash">Cash ($)</label>
+                        <input type="number" id="cash" placeholder="9415000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="accountsReceivable">Accounts Receivable ($)</label>
+                        <input type="number" id="accountsReceivable" placeholder="2203000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="inventory">Inventory ($)</label>
+                        <input type="number" id="inventory" placeholder="554000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="accountsPayable">Accounts Payable ($)</label>
+                        <input type="number" id="accountsPayable" placeholder="3178000">
+                    </div>
+                    
+                    <!-- Leverage Metrics -->
+                    <div class="input-group">
+                        <label for="debtAssets">Debt to Assets Ratio</label>
+                        <input type="number" id="debtAssets" placeholder="0.6379" step="0.0001">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="liquidityRatio">Liquidity Ratio</label>
+                        <input type="number" id="liquidityRatio" placeholder="1.0106" step="0.0001">
+                    </div>
+                    
+                    <!-- Delinquency Metrics -->
+                    <div class="input-group">
+                        <label for="materialDlqCnt">Material Delinquencies (Count)</label>
+                        <input type="number" id="materialDlqCnt" placeholder="0">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="materialDlqPctAP">Material Dlq % of AP</label>
+                        <input type="number" id="materialDlqPctAP" placeholder="0" step="0.01">
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn" onclick="calculateMetrics()">Calculate Metrics</button>
+                    <button class="btn btn-secondary" onclick="loadSampleData()">Load Sample Data</button>
+                    <button class="btn btn-secondary" onclick="resetForm()">Reset</button>
+                </div>
+            </div>
+            
+            <!-- Results Section -->
+            <div class="section hidden" id="resultsSection">
+                <h2 class="section-title">3. EWC Model Scores</h2>
+                
+                <div class="results-summary">
+                    <h3>Analysis Complete ✅</h3>
+                    <p id="summaryText">Financial metrics calculated successfully</p>
+                </div>
+                
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('metrics')">Key Metrics</button>
+                    <button class="tab" onclick="switchTab('forecast')">Monte Carlo Forecast</button>
+                    <button class="tab" onclick="switchTab('details')">Detailed Breakdown</button>
+                </div>
+                
+                <div id="metrics-tab" class="tab-content active">
+                    <div class="metrics-grid" id="metricsGrid"></div>
+                </div>
+                
+                <div id="forecast-tab" class="tab-content">
+                    <div class="alert alert-info">
+                        <span>ℹ️</span>
+                        <span>Monte Carlo simulation with 1,000 iterations over 12 months</span>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn" onclick="runMonteCarloSimulation()">Run Forecast Simulation</button>
+                        <button class="btn btn-secondary" onclick="exportForecast()">Export Results</button>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+                </div>
+                
+                <div id="details-tab" class="tab-content">
+                    <div id="detailsContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let currentMetrics = {};
+        let forecastData = null;
+        let forecastChart = null;
+        
+        // File upload handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+        
+        function handleFile(file) {
+            fileName.textContent = `File loaded: ${file.name}`;
+            fileInfo.classList.remove('hidden');
+            
+            // Here you would implement PDF/Excel parsing
+            // For now, we'll show a message
+            alert(`File "${file.name}" loaded. PDF parsing will be implemented with a backend service.`);
+        }
+        
+        // Load sample data
+        function loadSampleData() {
+            document.getElementById('ltmRevenue').value = 138686960;
+            document.getElementById('momRevGrowth').value = 0;
+            document.getElementById('grossMargin').value = 55.35;
+            document.getElementById('ebdaMargin').value = 2.88;
+            document.getElementById('cash').value = 9415000;
+            document.getElementById('accountsReceivable').value = 2203000;
+            document.getElementById('inventory').value = 554000;
+            document.getElementById('accountsPayable').value = 3178000;
+            document.getElementById('debtAssets').value = 0.6379;
+            document.getElementById('liquidityRatio').value = 1.0106;
+            document.getElementById('materialDlqCnt').value = 0;
+            document.getElementById('materialDlqPctAP').value = 0;
+        }
+        
+        // Reset form
+        function resetForm() {
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.value = '';
+            });
+            document.getElementById('resultsSection').classList.add('hidden');
+            fileInfo.classList.add('hidden');
+        }
+        
+        // Calculate metrics
+        function calculateMetrics() {
+            // Gather input values
+            const ltmRevenue = parseFloat(document.getElementById('ltmRevenue').value) || 0;
+            const momRevGrowth = parseFloat(document.getElementById('momRevGrowth').value) / 100 || 0;
+            const grossMargin = parseFloat(document.getElementById('grossMargin').value) / 100 || 0;
+            const ebdaMargin = parseFloat(document.getElementById('ebdaMargin').value) / 100 || 0;
+            const cash = parseFloat(document.getElementById('cash').value) || 0;
+            const accountsReceivable = parseFloat(document.getElementById('accountsReceivable').value) || 0;
+            const inventory = parseFloat(document.getElementById('inventory').value) || 0;
+            const accountsPayable = parseFloat(document.getElementById('accountsPayable').value) || 0;
+            const debtAssets = parseFloat(document.getElementById('debtAssets').value) || 0;
+            const liquidityRatio = parseFloat(document.getElementById('liquidityRatio').value) || 0;
+            const materialDlqCnt = parseFloat(document.getElementById('materialDlqCnt').value) || 0;
+            const materialDlqPctAP = parseFloat(document.getElementById('materialDlqPctAP').value) / 100 || 0;
+            
+            // Calculate derived metrics
+            const workingCapital = cash + accountsReceivable + inventory - accountsPayable;
+            const ebda = ltmRevenue * ebdaMargin;
+            const monthlyBurn = ebda < 0 ? Math.abs(ebda / 12) : 0;
+            const cashRunway = monthlyBurn > 0 ? cash / monthlyBurn : 999;
+            
+            // Store metrics
+            currentMetrics = {
+                revenue_l12m: ltmRevenue,
+                rev_growth_trend: momRevGrowth,
+                gross_margin_l12m: grossMargin,
+                EBDA_margin: ebdaMargin,
+                debt_asset_ratio: debtAssets,
+                liquidity_ratio: liquidityRatio,
+                material_dlq_count: materialDlqCnt,
+                material_dlq_pct_AP: materialDlqPctAP,
+                wc_test: workingCapital,
+                cash_runway: cashRunway,
+                ebda: ebda
+            };
+            
+            // Display results
+            displayMetrics();
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Display metrics
+        function displayMetrics() {
+            const metricsGrid = document.getElementById('metricsGrid');
+            metricsGrid.innerHTML = '';
+            
+            const metrics = [
+                { label: 'LTM Revenue', value: formatCurrency(currentMetrics.revenue_l12m), positive: true },
+                { label: 'Revenue Growth', value: formatPercent(currentMetrics.rev_growth_trend), positive: currentMetrics.rev_growth_trend >= 0 },
+                { label: 'Gross Margin', value: formatPercent(currentMetrics.gross_margin_l12m), positive: currentMetrics.gross_margin_l12m >= 0.4 },
+                { label: 'EBDA Margin', value: formatPercent(currentMetrics.EBDA_margin), positive: currentMetrics.EBDA_margin >= 0 },
+                { label: 'Debt/Assets Ratio', value: currentMetrics.debt_asset_ratio.toFixed(4), positive: currentMetrics.debt_asset_ratio < 0.5 },
+                { label: 'Liquidity Ratio', value: currentMetrics.liquidity_ratio.toFixed(4), positive: currentMetrics.liquidity_ratio >= 1 },
+                { label: 'Working Capital', value: formatCurrency(currentMetrics.wc_test), positive: currentMetrics.wc_test >= 0 },
+                { label: 'Cash Runway', value: currentMetrics.cash_runway === 999 ? 'Profitable' : `${currentMetrics.cash_runway.toFixed(1)} months`, positive: currentMetrics.cash_runway > 12 || currentMetrics.cash_runway === 999 },
+                { label: 'Material Delinquencies', value: currentMetrics.material_dlq_count.toString(), positive: currentMetrics.material_dlq_count === 0 },
+                { label: 'EBDA', value: formatCurrency(currentMetrics.ebda), positive: currentMetrics.ebda >= 0 }
+            ];
+            
+            metrics.forEach(metric => {
+                const card = document.createElement('div');
+                card.className = 'metric-card';
+                card.innerHTML = `
+                    <div class="metric-label">${metric.label}</div>
+                    <div class="metric-value ${metric.positive ? 'positive' : 'negative'}">${metric.value}</div>
+                `;
+                metricsGrid.appendChild(card);
+            });
+            
+            // Update summary
+            const health = calculateOverallHealth();
+            document.getElementById('summaryText').textContent = 
+                `Overall Financial Health: ${health.score}/100 - ${health.status}`;
+        }
+        
+        // Calculate overall health score
+        function calculateOverallHealth() {
+            let score = 0;
+            
+            // Revenue growth (0-15 points)
+            if (currentMetrics.rev_growth_trend > 0.05) score += 15;
+            else if (currentMetrics.rev_growth_trend > 0) score += 10;
+            else if (currentMetrics.rev_growth_trend > -0.05) score += 5;
+            
+            // Gross margin (0-20 points)
+            if (currentMetrics.gross_margin_l12m > 0.5) score += 20;
+            else if (currentMetrics.gross_margin_l12m > 0.3) score += 15;
+            else if (currentMetrics.gross_margin_l12m > 0.1) score += 10;
+            
+            // EBDA margin (0-25 points)
+            if (currentMetrics.EBDA_margin > 0.15) score += 25;
+            else if (currentMetrics.EBDA_margin > 0.05) score += 20;
+            else if (currentMetrics.EBDA_margin > 0) score += 15;
+            else if (currentMetrics.EBDA_margin > -0.1) score += 5;
+            
+            // Liquidity (0-15 points)
+            if (currentMetrics.liquidity_ratio > 2) score += 15;
+            else if (currentMetrics.liquidity_ratio > 1.5) score += 12;
+            else if (currentMetrics.liquidity_ratio > 1) score += 10;
+            else if (currentMetrics.liquidity_ratio > 0.75) score += 5;
+            
+            // Leverage (0-15 points)
+            if (currentMetrics.debt_asset_ratio < 0.3) score += 15;
+            else if (currentMetrics.debt_asset_ratio < 0.5) score += 12;
+            else if (currentMetrics.debt_asset_ratio < 0.7) score += 8;
+            else if (currentMetrics.debt_asset_ratio < 0.9) score += 3;
+            
+            // Delinquencies (0-10 points)
+            if (currentMetrics.material_dlq_count === 0) score += 10;
+            else if (currentMetrics.material_dlq_count < 3) score += 5;
+            
+            let status;
+            if (score >= 80) status = 'Excellent';
+            else if (score >= 60) status = 'Good';
+            else if (score >= 40) status = 'Fair';
+            else status = 'Needs Improvement';
+            
+            return { score, status };
+        }
+        
+        // Monte Carlo Simulation
+        function runMonteCarloSimulation() {
+            const nSimulations = 1000;
+            const nPeriods = 12;
+            const baseRevenue = currentMetrics.revenue_l12m / 12; // Monthly revenue
+            
+            // Generate simulations
+            const simulations = [];
+            for (let i = 0; i < nSimulations; i++) {
+                const simulation = [];
+                let revenue = baseRevenue;
+                
+                for (let period = 0; period < nPeriods; period++) {
+                    // Random growth rate with mean from current trend
+                    const growthRate = randomNormal(currentMetrics.rev_growth_trend, 0.05);
+                    revenue = revenue * (1 + growthRate);
+                    
+                    const grossProfit = revenue * currentMetrics.gross_margin_l12m;
+                    const expenses = grossProfit * (1 - currentMetrics.EBDA_margin / currentMetrics.gross_margin_l12m);
+                    const netIncome = grossProfit - expenses;
+                    
+                    simulation.push({
+                        period: period + 1,
+                        revenue: revenue,
+                        grossProfit: grossProfit,
+                        expenses: expenses,
+                        netIncome: netIncome
+                    });
+                }
+                simulations.push(simulation);
+            }
+            
+            // Calculate statistics
+            const stats = [];
+            for (let period = 0; period < nPeriods; period++) {
+                const revenues = simulations.map(s => s[period].revenue);
+                const netIncomes = simulations.map(s => s[period].netIncome);
+                
+                stats.push({
+                    period: period + 1,
+                    revenue: {
+                        mean: mean(revenues),
+                        p10: percentile(revenues, 10),
+                        p90: percentile(revenues, 90)
+                    },
+                    netIncome: {
+                        mean: mean(netIncomes),
+                        p10: percentile(netIncomes, 10),
+                        p90: percentile(netIncomes, 90)
+                    }
+                });
+            }
+            
+            forecastData = stats;
+            drawForecastChart();
+        }
+        
+        // Draw forecast chart
+        function drawForecastChart() {
+            const ctx = document.getElementById('forecastChart').getContext('2d');
+            
+            if (forecastChart) {
+                forecastChart.destroy();
+            }
+            
+            const labels = forecastData.map(d => `Month ${d.period}`);
+            const revenueMean = forecastData.map(d => d.revenue.mean);
+            const revenueP10 = forecastData.map(d => d.revenue.p10);
+            const revenueP90 = forecastData.map(d => d.revenue.p90);
+            
+            forecastChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Revenue (Mean)',
+                            data: revenueMean,
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            borderWidth: 3,
+                            fill: false
+                        },
+                        {
+                            label: 'Revenue (10th Percentile)',
+                            data: revenueP10,
+                            borderColor: '#ef4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false
+                        },
+                        {
+                            label: 'Revenue (90th Percentile)',
+                            data: revenueP90,
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Revenue Forecast - Monte Carlo Simulation',
+                            font: { size: 16, weight: 'bold' }
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + (value / 1000000).toFixed(1) + 'M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Export forecast
+        function exportForecast() {
+            if (!forecastData) {
+                alert('Please run the simulation first');
+                return;
+            }
+            
+            const csv = convertToCSV(forecastData);
+            downloadCSV(csv, 'forecast_results.csv');
+        }
+        
+        // Tab switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+        
+        // Utility functions
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+        
+        function formatPercent(value) {
+            return (value * 100).toFixed(2) + '%';
+        }
+        
+        function randomNormal(mean, stdDev) {
+            // Box-Muller transform
+            const u1 = Math.random();
+            const u2 = Math.random();
+            const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+            return mean + z0 * stdDev;
+        }
+        
+        function mean(arr) {
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+        }
+        
+        function percentile(arr, p) {
+            const sorted = arr.slice().sort((a, b) => a - b);
+            const index = (p / 100) * (sorted.length - 1);
+            const lower = Math.floor(index);
+            const upper = Math.ceil(index);
+            const weight = index - lower;
+            return sorted[lower] * (1 - weight) + sorted[upper] * weight;
+        }
+        
+        function convertToCSV(data) {
+            const headers = ['Period', 'Revenue Mean', 'Revenue P10', 'Revenue P90', 
+                           'Net Income Mean', 'Net Income P10', 'Net Income P90'];
+            const rows = data.map(d => [
+                d.period,
+                d.revenue.mean,
+                d.revenue.p10,
+                d.revenue.p90,
+                d.netIncome.mean,
+                d.netIncome.p10,
+                d.netIncome.p90
+            ]);
+            
+            return [headers, ...rows].map(row => row.join(',')).join('\n');
+        }
+        
+        function downloadCSV(csv, filename) {
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', filename);
+            a.click();
+        }
+    </script>
+</body>
+</html>
