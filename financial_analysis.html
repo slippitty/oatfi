@@ -545,6 +545,8 @@
         
         // Load sample data
         function loadSampleData() {
+            console.log('Loading sample data...');
+            
             document.getElementById('ltmRevenue').value = 138686960;
             document.getElementById('momRevGrowth').value = 0;
             document.getElementById('grossMargin').value = 55.35;
@@ -557,15 +559,60 @@
             document.getElementById('liquidityRatio').value = 1.0106;
             document.getElementById('materialDlqCnt').value = 0;
             document.getElementById('materialDlqPctAP').value = 0;
+            
+            console.log('Sample data loaded successfully');
+            
+            // Visual feedback
+            alert('✅ Sample data loaded! Now click "Calculate Metrics" to see results.');
         }
         
         // Reset form
         function resetForm() {
+            console.log('Reset button clicked');
+            
+            // Clear all input fields
             document.querySelectorAll('input[type="number"]').forEach(input => {
                 input.value = '';
             });
-            document.getElementById('resultsSection').classList.add('hidden');
-            fileInfo.classList.add('hidden');
+            
+            // Clear stored metrics
+            currentMetrics = {};
+            
+            // Hide results section
+            const resultsSection = document.getElementById('resultsSection');
+            if (resultsSection) {
+                resultsSection.classList.add('hidden');
+            }
+            
+            // Hide file info
+            const fileInfoElement = document.getElementById('fileInfo');
+            if (fileInfoElement) {
+                fileInfoElement.classList.add('hidden');
+            }
+            
+            // Clear file input
+            const fileInputElement = document.getElementById('fileInput');
+            if (fileInputElement) {
+                fileInputElement.value = '';
+            }
+            
+            // Clear the metrics grid
+            const metricsGrid = document.getElementById('metricsGrid');
+            if (metricsGrid) {
+                metricsGrid.innerHTML = '';
+            }
+            
+            // Destroy forecast chart if it exists
+            if (forecastChart) {
+                forecastChart.destroy();
+                forecastChart = null;
+            }
+            forecastData = null;
+            
+            console.log('Form reset complete');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // Calculate metrics
