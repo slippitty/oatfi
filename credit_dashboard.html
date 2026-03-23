@@ -31,7 +31,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 18:25</div>
+<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 18:32</div>
 <div class="lag-notice">Indicators marked <strong>lagging</strong> reflect portfolio outcomes with a delay and should be read alongside leading metrics.</div>
 
 <div class="section-label" style="margin-bottom:1rem">Loss rate — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
@@ -249,7 +249,7 @@
 
 <div style="background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:2rem">
   <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:.875rem">Month-over-month commentary <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;text-transform:none;letter-spacing:0;margin-left:4px">AI</span></div>
-  <p style="font-size:13px;line-height:1.7;color:#444441">The 120+ DPD balance experienced a dramatic increase of $1.23 million month-over-month, driven primarily by significant deterioration across existing partners and the addition of new partner Avalara Technologies, which alone contributed $4.6 million in chargeoffs and $118,481 in delinquent balances across 60 organizations. Koverly Inc. showed the most concerning trend among existing partners, with delinquent balances surging from $27,488 to $431,683 while also recording $563,311 in chargeoffs, and Relay Financial's delinquent exposure increased dramatically from $6,026 to $410,676 across a much larger organization count (8 to 61 orgs). The portfolio experienced substantial chargeoff activity totaling over $7.1 million, with Avalara representing the largest single source of losses, suggesting either a major credit event or policy change in chargeoff timing. The significant expansion in organization count across partners, particularly Relay Financial and the addition of Avalara's 60 organizations, indicates growing concentration risk that requires close monitoring.</p>
+  <p style="font-size:13px;line-height:1.7;color:#444441">The 120+ DPD balances surged by $1.2 million month-over-month, driven primarily by massive deterioration at Koverly Inc. and the emergence of new problem credits at Avalara Technologies and Order. Koverly's delinquent balance exploded from $27k to $432k while also generating $563k in chargeoffs, suggesting a broad-based credit event across their expanded 17-organization portfolio. Avalara Technologies appeared as a new major risk concentration with $119k in delinquencies and a staggering $4.5 million in chargeoffs across 60 organizations, while Order's delinquent balance jumped to $290k alongside $1.8 million in chargeoffs. The substantial chargeoff activity across all major partners indicates these increases reflect genuine credit losses rather than temporary payment delays, with concerning concentration risk emerging as our top three problem partners now represent over 80% of total 120+ DPD exposure.</p>
 </div>
 
 <div class="section-label" style="margin-bottom:1rem">Q2 goal progress</div>
@@ -497,8 +497,8 @@ new Chart(document.getElementById('apprChart'), {
 
 // ── Loss Rate (bps) ────────────────────────────────────────
 const lossLabels = ['2022-03-01', '2022-04-01', '2022-05-01', '2022-06-01', '2022-07-01', '2022-08-01', '2022-09-01', '2022-10-01', '2022-11-01', '2022-12-01', '2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01', '2023-06-01', '2023-07-01', '2023-08-01', '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01', '2024-01-01', '2024-02-01', '2024-03-01'];
-const lossRate   = [30.0, 100.0, 90.0, 50.0, 80.0, 50.0, 30.0, 110.0, 90.0, 40.0, 70.0, 40.0, 110.0, 130.0, 100.0, 100.0, 100.0, 80.0, 50.0, 80.0, 110.0, 110.0, 80.0, 70.0, 70.0];
-const loss3m     = [60.0, 70.0, 100.0, 50.0, 100.0, 50.0, 70.0, 100.0, 70.0, 50.0, 80.0, 100.0, 90.0, 70.0, 50.0, 50.0, 90.0, 60.0, 50.0, 70.0, 80.0, 50.0, 60.0, 50.0, 100.0];
+const lossRate   = [120.0, 70.0, 80.0, 130.0, 90.0, 40.0, 110.0, 130.0, 50.0, 50.0, 100.0, 100.0, 110.0, 40.0, 80.0, 90.0, 60.0, 80.0, 80.0, 100.0, 130.0, 70.0, 100.0, 50.0, 80.0];
+const loss3m     = [60.0, 70.0, 60.0, 50.0, 70.0, 70.0, 60.0, 90.0, 60.0, 100.0, 80.0, 60.0, 60.0, 70.0, 100.0, 90.0, 90.0, 60.0, 90.0, 60.0, 90.0, 90.0, 60.0, 90.0, 100.0];
 new Chart(document.getElementById('lossChart'), {
   type: 'line',
   data: {
