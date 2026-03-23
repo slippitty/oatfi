@@ -31,7 +31,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 18:32</div>
+<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 18:45</div>
 <div class="lag-notice">Indicators marked <strong>lagging</strong> reflect portfolio outcomes with a delay and should be read alongside leading metrics.</div>
 
 <div class="section-label" style="margin-bottom:1rem">Loss rate — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
@@ -172,16 +172,16 @@
       <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#F1EFE8;color:#5F5E5A">Monitor only</span>
     </div>
     <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
-      <div style="font-size:11px;color:#888780;margin-bottom:.35rem">MR rate — high line >$150k</div>
+      <div style="font-size:11px;color:#888780;margin-bottom:.35rem">MR rate — high line >$150k (excl. from clean)</div>
       <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">100.0%</div>
-      <div style="font-size:11px;color:#888780;margin-top:.3rem">Unactionable</div>
-      <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#F1EFE8;color:#5F5E5A">Monitor only</span>
+      <div style="font-size:11px;color:#888780;margin-top:.3rem">Always 100% — excluded</div>
+      <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#F1EFE8;color:#5F5E5A">Excluded from clean rate</span>
     </div>
     <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
       <div style="font-size:11px;color:#888780;margin-bottom:.35rem">Approval rate</div>
-      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">82.58%</div>
+      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">33.33%</div>
       <div style="font-size:11px;color:#888780;margin-top:.3rem">Target 55–80%</div>
-      <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#FAEEDA;color:#BA7517">Outside target</span>
+      <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#FCEBEB;color:#A32D2D">Outside target</span>
     </div>
     <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
       <div style="font-size:11px;color:#888780;margin-bottom:.35rem">30+ DPD dollar rate<span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
@@ -249,7 +249,7 @@
 
 <div style="background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:2rem">
   <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:.875rem">Month-over-month commentary <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;text-transform:none;letter-spacing:0;margin-left:4px">AI</span></div>
-  <p style="font-size:13px;line-height:1.7;color:#444441">The 120+ DPD balances surged by $1.2 million month-over-month, driven primarily by massive deterioration at Koverly Inc. and the emergence of new problem credits at Avalara Technologies and Order. Koverly's delinquent balance exploded from $27k to $432k while also generating $563k in chargeoffs, suggesting a broad-based credit event across their expanded 17-organization portfolio. Avalara Technologies appeared as a new major risk concentration with $119k in delinquencies and a staggering $4.5 million in chargeoffs across 60 organizations, while Order's delinquent balance jumped to $290k alongside $1.8 million in chargeoffs. The substantial chargeoff activity across all major partners indicates these increases reflect genuine credit losses rather than temporary payment delays, with concerning concentration risk emerging as our top three problem partners now represent over 80% of total 120+ DPD exposure.</p>
+  <p style="font-size:13px;line-height:1.7;color:#444441">Total 120+ DPD balances increased dramatically by $1.1 million, driven primarily by significant deterioration at Relay Financial Technologies, Inc ($405k increase) and Koverly Inc. ($404k increase). Order also contributed materially with $290k in new delinquencies, while both Order and Relay Financial Technologies, Inc. show concerning concentration patterns with delinquencies now spread across 22 and 61 different organizations respectively, up from much lower prior counts. Flychain and BRKR.IO Inc. are new entrants to the 120+ DPD bucket with $6k and $10k respectively. The increases at Relay Financial Technologies, Inc. and BRKR.IO Inc. appear to represent genuine deterioration since their chargeoff balances remain at zero, while the other partners show substantial chargeoff activity alongside their delinquency increases.</p>
 </div>
 
 <div class="section-label" style="margin-bottom:1rem">Q2 goal progress</div>
@@ -476,7 +476,7 @@ new Chart(document.getElementById('uwChart'), {
 
 // ── Approval Rate ───────────────────────────────────────────
 const apprLabels = ["2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-const apprData   = [78.46, 81.86, 72.12, 70.0, 65.62, 80.28, 82.58];
+const apprData   = [23.08, 41.18, 41.32, 29.05, 40.1, 36.62, 33.33];
 new Chart(document.getElementById('apprChart'), {
   type: 'line',
   data: {
@@ -497,8 +497,8 @@ new Chart(document.getElementById('apprChart'), {
 
 // ── Loss Rate (bps) ────────────────────────────────────────
 const lossLabels = ['2022-03-01', '2022-04-01', '2022-05-01', '2022-06-01', '2022-07-01', '2022-08-01', '2022-09-01', '2022-10-01', '2022-11-01', '2022-12-01', '2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01', '2023-06-01', '2023-07-01', '2023-08-01', '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01', '2024-01-01', '2024-02-01', '2024-03-01'];
-const lossRate   = [120.0, 70.0, 80.0, 130.0, 90.0, 40.0, 110.0, 130.0, 50.0, 50.0, 100.0, 100.0, 110.0, 40.0, 80.0, 90.0, 60.0, 80.0, 80.0, 100.0, 130.0, 70.0, 100.0, 50.0, 80.0];
-const loss3m     = [60.0, 70.0, 60.0, 50.0, 70.0, 70.0, 60.0, 90.0, 60.0, 100.0, 80.0, 60.0, 60.0, 70.0, 100.0, 90.0, 90.0, 60.0, 90.0, 60.0, 90.0, 90.0, 60.0, 90.0, 100.0];
+const lossRate   = [110.0, 40.0, 70.0, 30.0, 70.0, 110.0, 70.0, 70.0, 90.0, 40.0, 100.0, 40.0, 120.0, 70.0, 130.0, 70.0, 130.0, 120.0, 30.0, 100.0, 50.0, 70.0, 70.0, 40.0, 40.0];
+const loss3m     = [100.0, 90.0, 90.0, 60.0, 60.0, 60.0, 50.0, 70.0, 90.0, 50.0, 50.0, 60.0, 80.0, 80.0, 100.0, 70.0, 50.0, 50.0, 70.0, 100.0, 90.0, 90.0, 90.0, 90.0, 50.0];
 new Chart(document.getElementById('lossChart'), {
   type: 'line',
   data: {
