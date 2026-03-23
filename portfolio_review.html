@@ -76,14 +76,14 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 23, 2026 &nbsp;·&nbsp; analytics_development.mart</div>
   </div>
-  <div class="header-right">Generated 2026-03-23 20:50<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-23 21:07<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <!-- AI Narrative -->
 <div class="sl">Assessment</div>
 <div class="narrative">
   <span class="ai-badge">Claude · auto-generated</span>
-  <p>Portfolio delinquency health shows mixed quarter-over-quarter movement across partners. Order improved with 31-60 DPD declining 11 basis points and 61-90 DPD declining 16 basis points. Koverly showed improvement in early delinquency with 31-60 DPD declining 34 basis points but deterioration in later stages with 61-90 DPD increasing 49 basis points across 184 charged-off obligors. BRKR.IO deteriorated with 31-60 DPD increasing 272 basis points to 3.11%, though this represents a small obligor count given their $792k total portfolio. WebCargo improved with 31-60 DPD declining from prior quarter levels. Lawtrades shows structural late payment patterns by program design with recent performance improvement and can be considered within normal parameters.</p><p class='np'>The April 2024 underwrite cohort shows the highest 31+ DPD rate at 37.5% across 32 obligors, with 12 obligors currently delinquent. The May 2024 underwrite cohort has the most delinquent obligors at 18 across 101 total obligors in that cohort, representing a 17.82% 31+ DPD rate. The July 2025 cohort also shows elevated delinquency at 20.59% across 68 obligors with 14 currently delinquent.</p><p class='np'>Order shows a leading balance of $7.7 million, which falls within normal ranges for this partner given their typical payment patterns where customers are cut off at 45 days past partner due date. The leading balance is driven by multiple obligors including Havenly Inc with $375k across multiple facilities and HPI Canna Inc with $121k. Other partners show more modest leading balances: Cledara Limited at $243k, Tab Commerce at $211k, and BRKR.IO at $196k. These represent normal early warning signals rather than concentrated stress.</p><p class='np'>Economic environment stress by sector shows Admin/Support (NAICS 56) with the highest 31+ DPD rate at 14.85% followed by Construction (NAICS 23) at 14.08% and Professional Services (NAICS 54) at 10.99%. Manufacturing (NAICS 32) shows 8.02% delinquency rates while Wholesale Trade (NAICS 42) shows 7.76%. The Professional Services stress appears partly driven by partner concentration, while Construction and Admin/Support stress appears more broadly distributed across the portfolio.</p><p class='np'>The largest past due balances are led by The Surplus Comp LLC (Koverly, Professional Services, $219k), Coboda LLC (Order, Wholesale Trade, $191k), and Marino ave inc (Koverly, Professional Services, $186k). The largest leading balances include Havenly Inc (Order, Professional Services, $375k total across multiple facilities), HPI Canna Inc (Order, Wholesale Trade, $121k), and Epic Games Inc (Lawtrades, Information, $38k). Several large delinquent names fall within stressed sectors: The Surplus Comp LLC and Marino ave inc are both in Professional Services which shows 10.99% sector stress, while Coboda LLC operates in Wholesale Trade which shows 7.76% sector delinquency rates.</p>
+  <p>Overall portfolio delinquency health shows mixed movement quarter-over-quarter. Order improved across early-stage buckets with 31-60 DPD declining 11 basis points and 61-90 DPD declining 16 basis points, though this represents improvement across a small number of obligors given Order's low baseline rates. Koverly deteriorated in later-stage buckets with 61-90 DPD increasing 49 basis points, driven by movement of existing delinquent obligors rather than new defaults. BRKR.IO saw 31-60 DPD increase 272 basis points, though this reflects approximately 1-2 obligors given the partner's small portfolio size. NurseIO improved with 31-60 DPD declining 172 basis points. Lawtrades continues to show elevated rates due to program structure but improved marginally with 31-60 DPD declining 277 basis points.</p><p class='np'>The April 2024 underwrite cohort shows the highest 31+ DPD rate at 37.5% with 12 delinquent obligors out of 32 total obligors. The May 2024 underwrite cohort has the most delinquent obligors at 18 out of 101 total obligors, representing a 17.82% 31+ DPD rate. Both cohorts reflect relatively small populations where individual obligor performance significantly impacts overall rates.</p><p class='np'>Leading balance analysis shows Order at $8.1 million, which falls within normal operating ranges given their 120-day payment terms and typical customer payment patterns. Flychain shows $320,769 leading balance concentrated in healthcare obligors Camelot Chateau Assisted Living ($109,800) and Noble House Senior Living ($109,600). Koverly's $408,156 leading balance is driven primarily by The Surplus Comp LLC at $81,779, which is already 117 days past partner due date. BRKR.IO shows $270,478 leading balance, representing a notable increase for this partner's typical exposure levels.</p><p class='np'>Construction (23) shows the highest stress at 14.08% delinquency, though this appears driven by Koverly's concentration in this sector. Admin/Support (56) follows at 14.85%, also reflecting partner concentration patterns. Professional Services (54) shows 10.99% stress with broad exposure across multiple partners. Manufacturing (32) and Wholesale Trade (42) show elevated rates at 8.02% and 7.76% respectively, with exposure spread across Order and Koverly portfolios.</p><p class='np'>The largest past due balances are led by The Surplus Comp LLC (Koverly, Professional Services, $218,757), Coboda LLC (Order, Wholesale Trade, $191,253), and Marino ave inc (Koverly, Construction, $185,802). Leading balance exposure is concentrated in Havenly Inc. (Order, Professional Services, $94,423 across multiple facilities), Camelot Chateau Assisted Living LLC (Flychain, Health Care, $109,800), and Noble House Senior Living LLC (Flychain, Health Care, $109,600). The largest delinquent names show sector alignment with NAICS stress data: The Surplus Comp LLC operates in Professional Services (54) which shows 10.99% stress, while Marino ave inc operates in Construction (23) which shows the highest sector stress at 14.08%.</p>
 </div>
 
 <!-- TOPLINE SNAPSHOT -->
@@ -113,8 +113,9 @@ tr:last-child td{border-bottom:none}
   <p style="font-size:11.5px;color:var(--ink2);margin-bottom:1rem">
     <strong>Leading balance</strong> = outstanding balance of loans where today is past the partner
     <strong>due_date</strong> (obligor is delinquent at the partner) but today has <em>not yet</em> reached
-    OatFi's <strong>maturity_date</strong> (OatFi does not yet see them as delinquent). This is the early
-    warning signal. <strong>Confirmed</strong> = past due at both. Only partners where due_date ≠ maturity_date shown.
+    OatFi's <strong>delinquency_due_date</strong> (OatFi does not yet count them as delinquent).
+    <em>maturity_date</em> is the scheduled repayment date — <em>delinquency_due_date</em> is when
+    OatFi's delinquency clock starts. <strong>Confirmed</strong> = past due at both.
   </p>
   <table>
     <thead><tr>
@@ -126,66 +127,50 @@ tr:last-child td{border-bottom:none}
           <td class="pn">Order</td>
           <td class="num">$33.2M</td>
           <td class="num" style="color:#BA7517">
-            $7.7M<br>
-            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $4.5M · 16-30 DQ: $1.5M · 31-60 DQ: $1.7M</span>
+            $8.1M<br>
+            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $4.5M · 16-30 DQ: $1.5M · 31-60 DQ: $1.7M · 61-90 DQ: $317K · 90+ DQ: $93K</span>
           </td>
-          <td class="num" style="color:#8F1C1C">$922K</td>
-        </tr><tr>
-          <td class="pn">Cledara Limited</td>
-          <td class="num">$1.0M</td>
-          <td class="num" style="color:#BA7517">
-            $243K<br>
-            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $243K</span>
-          </td>
-          <td class="num" style="color:#888">—</td>
-        </tr><tr>
-          <td class="pn">Tab Commerce</td>
-          <td class="num">$1.5M</td>
-          <td class="num" style="color:#BA7517">
-            $211K<br>
-            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $211K</span>
-          </td>
-          <td class="num" style="color:#8F1C1C">$294K</td>
-        </tr><tr>
-          <td class="pn">BRKR.IO Inc.</td>
-          <td class="num">$792K</td>
-          <td class="num" style="color:#BA7517">
-            $196K<br>
-            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $111K · 16-30 DQ: $44K · 31-60 DQ: $40K</span>
-          </td>
-          <td class="num" style="color:#888">$78K</td>
+          <td class="num" style="color:#8F1C1C">$487K</td>
         </tr><tr>
           <td class="pn">Lawtrades</td>
           <td class="num">$599K</td>
           <td class="num" style="color:#BA7517">
-            $193K<br>
-            <span style="font-size:10px;color:var(--ink3)">16-30 DQ: $51K · 31-60 DQ: $142K</span>
+            $414K<br>
+            <span style="font-size:10px;color:var(--ink3)">16-30 DQ: $51K · 31-60 DQ: $161K · 61-90 DQ: $190K · 90+ DQ: $12K</span>
           </td>
-          <td class="num" style="color:#8F1C1C">$406K</td>
+          <td class="num" style="color:#8F1C1C">$186K</td>
         </tr><tr>
-          <td class="pn">Relay Financial Technologies, Inc</td>
-          <td class="num">$1.7M</td>
+          <td class="pn">Koverly Inc.</td>
+          <td class="num">$13.7M</td>
           <td class="num" style="color:#BA7517">
-            $145K<br>
-            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $145K</span>
+            $408K<br>
+            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $4K · 31-60 DQ: $26K · 61-90 DQ: $146K · 90+ DQ: $231K</span>
           </td>
-          <td class="num" style="color:#8F1C1C">$643K</td>
+          <td class="num" style="color:#8F1C1C">$432K</td>
+        </tr><tr>
+          <td class="pn">Flychain</td>
+          <td class="num">$3.2M</td>
+          <td class="num" style="color:#BA7517">
+            $321K<br>
+            <span style="font-size:10px;color:var(--ink3)">16-30 DQ: $200K · 31-60 DQ: $46K · 61-90 DQ: $75K</span>
+          </td>
+          <td class="num" style="color:#888">$6K</td>
+        </tr><tr>
+          <td class="pn">BRKR.IO Inc.</td>
+          <td class="num">$664K</td>
+          <td class="num" style="color:#BA7517">
+            $270K<br>
+            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $111K · 16-30 DQ: $44K · 31-60 DQ: $62K · 61-90 DQ: $43K · 90+ DQ: $10K</span>
+          </td>
+          <td class="num" style="color:#888">$3K</td>
         </tr><tr>
           <td class="pn">NurseIO</td>
           <td class="num">$581K</td>
           <td class="num" style="color:#BA7517">
-            $16K<br>
-            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $16K · 31-60 DQ: $827</span>
+            $27K<br>
+            <span style="font-size:10px;color:var(--ink3)">1-15 DQ: $16K · 31-60 DQ: $10K · 61-90 DQ: $388 · 90+ DQ: $718</span>
           </td>
-          <td class="num" style="color:#888">$15K</td>
-        </tr><tr>
-          <td class="pn">Avalara Technologies, LLC</td>
-          <td class="num">$122</td>
-          <td class="num" style="color:#888">
-            $0<br>
-            <span style="font-size:10px;color:var(--ink3)"></span>
-          </td>
-          <td class="num" style="color:#888">$119</td>
+          <td class="num" style="color:#888">$5K</td>
         </tr></tbody>
   </table>
 </div>
