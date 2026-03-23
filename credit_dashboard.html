@@ -31,7 +31,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 17:23</div>
+<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 18:25</div>
 <div class="lag-notice">Indicators marked <strong>lagging</strong> reflect portfolio outcomes with a delay and should be read alongside leading metrics.</div>
 
 <div class="section-label" style="margin-bottom:1rem">Loss rate — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
@@ -191,7 +191,7 @@
     </div>
     <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
       <div style="font-size:11px;color:#888780;margin-bottom:.35rem">UW time >3 min</div>
-      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">56.8%</div>
+      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">56.47%</div>
       <div style="font-size:11px;color:#888780;margin-top:.3rem">Target <10%</div>
       <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#FCEBEB;color:#A32D2D">Alert — above target</span>
     </div>
@@ -249,7 +249,7 @@
 
 <div style="background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:2rem">
   <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:.875rem">Month-over-month commentary <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;text-transform:none;letter-spacing:0;margin-left:4px">AI</span></div>
-  <p style="font-size:13px;line-height:1.7;color:#444441">The 120+ DPD balances exploded by $1.2 million month-over-month, driven primarily by massive deterioration at Koverly Inc., which saw delinquencies surge from $27K to $432K while also recording $563K in chargeoffs, and the introduction of new problem credits from Avalara Technologies ($118K delinquent, $4.5M charged off) and a significant expansion at Order (now $290K delinquent with $1.8M in chargeoffs versus zero delinquent balances last month). Relay Financial also contributed materially to the increase, growing from $6K to $411K in delinquent balances across a much larger organization count that expanded from 8 to 61 entities. The portfolio shows dangerous concentration risk emerging, with the top three partners (Koverly, Relay, and Order) accounting for over 90% of current delinquent balances, while the $7.2 million in total chargeoffs this month suggests the underlying credit quality issues are severe and widespread. Several smaller new partners like BRKR.IO, Flychain, GigSafe, and WebCargo have been added but represent minimal exposure relative to the major deterioration in the established book.</p>
+  <p style="font-size:13px;line-height:1.7;color:#444441">The 120+ DPD balance experienced a dramatic increase of $1.23 million month-over-month, driven primarily by significant deterioration across existing partners and the addition of new partner Avalara Technologies, which alone contributed $4.6 million in chargeoffs and $118,481 in delinquent balances across 60 organizations. Koverly Inc. showed the most concerning trend among existing partners, with delinquent balances surging from $27,488 to $431,683 while also recording $563,311 in chargeoffs, and Relay Financial's delinquent exposure increased dramatically from $6,026 to $410,676 across a much larger organization count (8 to 61 orgs). The portfolio experienced substantial chargeoff activity totaling over $7.1 million, with Avalara representing the largest single source of losses, suggesting either a major credit event or policy change in chargeoff timing. The significant expansion in organization count across partners, particularly Relay Financial and the addition of Avalara's 60 organizations, indicates growing concentration risk that requires close monitoring.</p>
 </div>
 
 <div class="section-label" style="margin-bottom:1rem">Q2 goal progress</div>
@@ -458,7 +458,7 @@ new Chart(document.getElementById('dpdChart'), {
 
 // ── UW Time ────────────────────────────────────────────────
 const uwLabels = ["2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-const uwData   = [21.05, 29.81, 19.86, 50.89, 47.65, 42.76, 56.8];
+const uwData   = [21.05, 29.81, 19.86, 50.89, 47.65, 42.76, 56.47];
 new Chart(document.getElementById('uwChart'), {
   type: 'line',
   data: {
@@ -497,8 +497,8 @@ new Chart(document.getElementById('apprChart'), {
 
 // ── Loss Rate (bps) ────────────────────────────────────────
 const lossLabels = ['2022-03-01', '2022-04-01', '2022-05-01', '2022-06-01', '2022-07-01', '2022-08-01', '2022-09-01', '2022-10-01', '2022-11-01', '2022-12-01', '2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01', '2023-06-01', '2023-07-01', '2023-08-01', '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01', '2024-01-01', '2024-02-01', '2024-03-01'];
-const lossRate   = [50.0, 110.0, 40.0, 70.0, 100.0, 70.0, 110.0, 90.0, 80.0, 40.0, 70.0, 100.0, 60.0, 120.0, 110.0, 40.0, 60.0, 60.0, 60.0, 90.0, 130.0, 50.0, 120.0, 60.0, 80.0];
-const loss3m     = [100.0, 80.0, 90.0, 70.0, 100.0, 50.0, 50.0, 50.0, 50.0, 60.0, 60.0, 50.0, 60.0, 70.0, 90.0, 50.0, 80.0, 70.0, 100.0, 60.0, 60.0, 90.0, 100.0, 100.0, 90.0];
+const lossRate   = [30.0, 100.0, 90.0, 50.0, 80.0, 50.0, 30.0, 110.0, 90.0, 40.0, 70.0, 40.0, 110.0, 130.0, 100.0, 100.0, 100.0, 80.0, 50.0, 80.0, 110.0, 110.0, 80.0, 70.0, 70.0];
+const loss3m     = [60.0, 70.0, 100.0, 50.0, 100.0, 50.0, 70.0, 100.0, 70.0, 50.0, 80.0, 100.0, 90.0, 70.0, 50.0, 50.0, 90.0, 60.0, 50.0, 70.0, 80.0, 50.0, 60.0, 50.0, 100.0];
 new Chart(document.getElementById('lossChart'), {
   type: 'line',
   data: {
