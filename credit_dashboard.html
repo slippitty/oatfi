@@ -31,7 +31,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 21:58</div>
+<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 22:40</div>
 <div class="lag-notice">Indicators marked <strong>lagging</strong> reflect portfolio outcomes with a delay and should be read alongside leading metrics.
 
 <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1rem">
@@ -226,7 +226,7 @@
     </div>
     <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
       <div style="font-size:11px;color:#888780;margin-bottom:.35rem">UW time >3 min</div>
-      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">56.65%</div>
+      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">57.47%</div>
       <div style="font-size:11px;color:#888780;margin-top:.3rem">Target <10%</div>
       <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#FCEBEB;color:#A32D2D">Alert — above target</span>
     </div>
@@ -493,7 +493,7 @@ new Chart(document.getElementById('dpdChart'), {
 
 // ── UW Time ────────────────────────────────────────────────
 const uwLabels = ["2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-const uwData   = [21.05, 29.81, 19.86, 50.89, 47.65, 42.38, 56.65];
+const uwData   = [21.05, 29.81, 19.86, 50.89, 47.65, 42.38, 57.47];
 new Chart(document.getElementById('uwChart'), {
   type: 'line',
   data: {
@@ -531,9 +531,9 @@ new Chart(document.getElementById('apprChart'), {
 });
 
 // ── Loss Rate (bps) ────────────────────────────────────────
-const lossLabels = ['2022-03-01', '2022-04-01', '2022-05-01', '2022-06-01', '2022-07-01', '2022-08-01', '2022-09-01', '2022-10-01', '2022-11-01', '2022-12-01', '2023-01-01', '2023-02-01', '2023-03-01', '2023-04-01', '2023-05-01', '2023-06-01', '2023-07-01', '2023-08-01', '2023-09-01', '2023-10-01', '2023-11-01', '2023-12-01', '2024-01-01', '2024-02-01', '2024-03-01'];
-const lossRate   = [110.0, 60.0, 80.0, 90.0, 90.0, 100.0, 100.0, 110.0, 110.0, 90.0, 40.0, 130.0, 110.0, 60.0, 110.0, 50.0, 90.0, 110.0, 80.0, 120.0, 80.0, 40.0, 100.0, 40.0, 90.0];
-const loss3m     = [90.0, 80.0, 50.0, 90.0, 50.0, 60.0, 100.0, 80.0, 60.0, 80.0, 70.0, 60.0, 70.0, 80.0, 50.0, 60.0, 50.0, 90.0, 80.0, 60.0, 100.0, 100.0, 80.0, 60.0, 100.0];
+const lossLabels = ["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"];
+const lossRate   = [110.0, 40.0, 80.0, 120.0, 100.0, 120.0, 130.0, 80.0, 60.0, 40.0, 90.0, 90.0, 40.0, 110.0, 30.0, 130.0, 90.0, 120.0, 90.0, 130.0, 110.0, 110.0, 80.0, 80.0, 30.0];
+const loss3m     = [60.0, 90.0, 100.0, 70.0, 50.0, 70.0, 80.0, 100.0, 50.0, 70.0, 50.0, 60.0, 50.0, 100.0, 80.0, 60.0, 50.0, 50.0, 80.0, 60.0, 60.0, 90.0, 80.0, 100.0, 90.0];
 new Chart(document.getElementById('lossChart'), {
   type: 'line',
   data: {
@@ -554,7 +554,7 @@ new Chart(document.getElementById('lossChart'), {
 });
 
 // ── Vintage ────────────────────────────────────────────────
-const vintageLabels = ['2024-03', '2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-05', '2025-06', '2025-07', '2025-08'];
+const vintageLabels = ["2024-03", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-05", "2025-06", "2025-07", "2025-08"];
 const vintageBal    = [51.258, 51599.802, 25897.513, 316786.789, 270469.03, 122532.21, 223192.771, 77712.378, 481940.424, 20348.91, 17226.64, 10782.47, 31581.26, 32737.02, 13046.55, 5953.5];
 new Chart(document.getElementById('vintageChart'), {
   type: 'bar',
@@ -572,7 +572,7 @@ new Chart(document.getElementById('vintageChart'), {
 });
 
 // ── Loan Origination Vintage ───────────────────────────────
-const loanVintageLabels = ['2024-05', '2024-06', '2024-07', '2024-08', '2024-09', '2024-10', '2024-11', '2024-12', '2025-01', '2025-02', '2025-03', '2025-04', '2025-05', '2025-06', '2025-07', '2025-08', '2025-09', '2025-10'];
+const loanVintageLabels = ["2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10"];
 const loanVintageBal    = [4603.25, 8986.54, 81119.417, 106018.164, 7271.08, 32167.717, 48741.99, 75182.249, 43133.68, 17739.96, 101130.316, 73439.588, 82202.442, 240177.429, 620844.893, 45365.2, 21587.29, 8588.17];
 new Chart(document.getElementById('loanVintageChart'), {
   type: 'bar',
