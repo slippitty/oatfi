@@ -31,8 +31,46 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 14:50</div>
+<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-23 15:56</div>
 <div class="lag-notice">Indicators marked <strong>lagging</strong> reflect portfolio outcomes with a delay and should be read alongside leading metrics.</div>
+
+<div class="section-label" style="margin-bottom:1rem">Loss rate — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
+<div class="charts-grid" style="margin-bottom:2rem">
+
+  <div class="chart-card">
+    <div class="section-label">120+ DPD loss rate vs 25bps target</div>
+    <div style="display:flex;gap:16px;margin-bottom:.75rem;font-size:11px;color:#888780">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#A32D2D;margin-right:4px"></span>Monthly rate (bps)</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#378ADD;margin-right:4px"></span>3-month avg</span>
+      <span><span style="display:inline-block;width:24px;height:0;border-top:2px dashed #BA7517;margin-right:4px;vertical-align:middle"></span>25bps north star</span>
+    </div>
+    <div style="position:relative;width:100%;height:200px"><canvas id="lossChart"></canvas></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="section-label">120+ DPD balance by origination vintage</div>
+    <div style="display:flex;gap:16px;margin-bottom:.75rem;font-size:11px;color:#888780">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#7F77DD;margin-right:4px"></span>Balance 120+ DPD ($)</span>
+    </div>
+    <div style="position:relative;width:100%;height:200px"><canvas id="vintageChart"></canvas></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-bottom:1rem">Loss rate by partner — current month <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
+<div class="goals-card" style="margin-bottom:2rem">
+  <table class="goals-table">
+    <thead>
+      <tr style="border-bottom:.5px solid #e0ddd6">
+        <th style="font-size:10px;color:#888780;font-weight:500;padding:6px 8px;text-align:left">Partner</th>
+        <th style="font-size:10px;color:#888780;font-weight:500;padding:6px 8px;text-align:right">Outstanding balance</th>
+        <th style="font-size:10px;color:#888780;font-weight:500;padding:6px 8px;text-align:right">120+ DPD balance</th>
+        <th style="font-size:10px;color:#888780;font-weight:500;padding:6px 8px;text-align:right">Loss rate</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
 <div class="section-label" style="margin-bottom:1rem">Snapshot</div>
 <div class="snap-grid">
@@ -284,9 +322,9 @@ function deepMerge(a, b) {
 }
 
 // ── MR Rate ────────────────────────────────────────────────
-const mrLabels  = ["2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22"];
-const mrOverall = [48.0, 52.0, 45.0, 51.0, 48.0, 48.0, 50.0, 52.0, 49.0, 50.0, 44.0, 45.0, 48.0, 48.0, 50.0, 47.0, 50.0, 52.0, 51.0, 53.0, 45.0, 52.0, 47.0, 43.0, 47.0, 52.0, 50.0, 49.0, 51.0, 49.0, 53.0, 45.0, 45.0, 48.0, 45.0, 53.0, 44.0, 44.0, 51.0, 50.0, 43.0, 45.0, 53.0, 43.0, 47.0, 53.0, 50.0, 49.0, 48.0, 50.0, 49.0, 48.0, 50.0, 44.0, 45.0, 47.0, 47.0, 47.0, 45.0, 49.0, 45.0, 46.0, 46.0, 44.0, 48.0, 46.0, 50.0, 47.0, 43.0, 51.0, 45.0, 44.0, 43.0, 48.0, 45.0, 49.0, 53.0, 51.0, 47.0, 45.0, 48.0];
-const mrScore   = [30.0, 32.0, 31.0, 29.0, 31.0, 29.0, 30.0, 33.0, 35.0, 34.0, 29.0, 33.0, 29.0, 29.0, 33.0, 34.0, 32.0, 35.0, 32.0, 32.0, 32.0, 32.0, 31.0, 34.0, 30.0, 35.0, 32.0, 30.0, 31.0, 35.0, 34.0, 32.0, 29.0, 30.0, 32.0, 34.0, 35.0, 29.0, 31.0, 33.0, 33.0, 31.0, 33.0, 35.0, 35.0, 34.0, 31.0, 31.0, 32.0, 29.0, 31.0, 34.0, 31.0, 30.0, 31.0, 35.0, 35.0, 35.0, 35.0, 30.0, 34.0, 33.0, 29.0, 31.0, 30.0, 30.0, 33.0, 32.0, 32.0, 30.0, 30.0, 33.0, 35.0, 30.0, 35.0, 31.0, 32.0, 34.0, 29.0, 33.0, 34.0];
+const mrLabels  = [];
+const mrOverall = [];
+const mrScore   = [];
 new Chart(document.getElementById('mrChart'), {
   type: 'line',
   data: {
@@ -305,8 +343,8 @@ new Chart(document.getElementById('mrChart'), {
 });
 
 // ── 30+ DPD ────────────────────────────────────────────────
-const dpdLabels = ["2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22"];
-const dpdData   = [0.4, 0.3, 0.3, 0.5, 0.5, 0.2, 0.3, 0.3, 0.5, 0.2, 0.2, 0.5, 0.4, 0.2, 0.2, 0.2, 0.4, 0.2, 0.3, 0.2, 0.3, 0.4, 0.3, 0.2, 0.3, 0.2, 0.2, 0.3, 0.3, 0.3, 0.4, 0.2, 0.2, 0.2, 0.3, 0.3, 0.3, 0.2, 0.4, 0.4, 0.4, 0.3, 0.2, 0.3, 0.3, 0.4, 0.4, 0.2, 0.4, 0.3, 0.4, 0.2, 0.3, 0.5, 0.4, 0.4, 0.4, 0.2, 0.4, 0.4, 0.3, 0.2, 0.2, 0.3, 0.5, 0.3, 0.5, 0.4, 0.2, 0.3, 0.4, 0.4, 0.3, 0.3, 0.3, 0.3, 0.2, 0.5, 0.2, 0.2, 0.2];
+const dpdLabels = [];
+const dpdData   = [];
 new Chart(document.getElementById('dpdChart'), {
   type: 'line',
   data: {
@@ -323,8 +361,8 @@ new Chart(document.getElementById('dpdChart'), {
 });
 
 // ── UW Time ────────────────────────────────────────────────
-const uwLabels = ["2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22"];
-const uwData   = [41.0, 44.1, 45.2, 45.3, 42.4, 45.5, 42.6, 44.7, 41.8, 42.9, 42.0, 43.1, 45.2, 42.3, 46.4, 43.5, 42.6, 45.7, 44.8, 44.9, 44.0, 43.1, 44.2, 43.3, 43.4, 46.5, 46.6, 45.7, 45.8, 43.9, 48.0, 46.1, 48.2, 45.3, 48.4, 44.5, 45.6, 48.7, 46.8, 45.9, 47.0, 46.1, 45.2, 46.3, 49.4, 47.5, 47.6, 49.7, 48.8, 46.9, 49.0, 48.1, 49.2, 48.3, 47.4, 46.5, 48.6, 50.7, 49.8, 46.9, 47.0, 48.1, 51.2, 49.3, 48.4, 50.5, 49.6, 48.7, 49.8, 48.9, 51.0, 49.1, 48.2, 48.3, 52.4, 49.5, 48.6, 51.7, 50.8, 48.9, 53.0];
+const uwLabels = [];
+const uwData   = [];
 new Chart(document.getElementById('uwChart'), {
   type: 'line',
   data: {
@@ -341,8 +379,8 @@ new Chart(document.getElementById('uwChart'), {
 });
 
 // ── Approval Rate ───────────────────────────────────────────
-const apprLabels = ["2026-01-01", "2026-01-02", "2026-01-03", "2026-01-04", "2026-01-05", "2026-01-06", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-16", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-20", "2026-01-21", "2026-01-22", "2026-01-23", "2026-01-24", "2026-01-25", "2026-01-26", "2026-01-27", "2026-01-28", "2026-01-29", "2026-01-30", "2026-01-31", "2026-02-01", "2026-02-02", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-08", "2026-02-09", "2026-02-10", "2026-02-11", "2026-02-12", "2026-02-13", "2026-02-14", "2026-02-15", "2026-02-16", "2026-02-17", "2026-02-18", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-23", "2026-02-24", "2026-02-25", "2026-02-26", "2026-02-27", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-03", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-07", "2026-03-08", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-16", "2026-03-17", "2026-03-18", "2026-03-19", "2026-03-20", "2026-03-21", "2026-03-22"];
-const apprData   = [66.0, 67.0, 66.0, 68.0, 68.0, 70.0, 71.0, 72.0, 70.0, 69.0, 67.0, 68.0, 67.0, 66.0, 72.0, 66.0, 66.0, 71.0, 70.0, 66.0, 68.0, 72.0, 69.0, 69.0, 71.0, 69.0, 70.0, 67.0, 69.0, 66.0, 71.0, 66.0, 68.0, 68.0, 68.0, 66.0, 67.0, 69.0, 70.0, 70.0, 66.0, 67.0, 67.0, 68.0, 72.0, 72.0, 70.0, 71.0, 70.0, 66.0, 68.0, 66.0, 68.0, 67.0, 67.0, 69.0, 71.0, 70.0, 70.0, 70.0, 71.0, 71.0, 66.0, 68.0, 69.0, 67.0, 70.0, 70.0, 70.0, 68.0, 71.0, 68.0, 72.0, 68.0, 67.0, 70.0, 71.0, 68.0, 72.0, 69.0, 68.0];
+const apprLabels = [];
+const apprData   = [];
 new Chart(document.getElementById('apprChart'), {
   type: 'line',
   data: {
@@ -360,6 +398,48 @@ new Chart(document.getElementById('apprChart'), {
   },
   options: deepMerge(baseOpts, { scales: { y: { min:0, max:100 } } })
 });
+
+// ── Loss Rate (bps) ────────────────────────────────────────
+const lossLabels = [];
+const lossRate   = [];
+const loss3m     = [];
+new Chart(document.getElementById('lossChart'), {
+  type: 'line',
+  data: {
+    labels: skipLabels(lossLabels),
+    datasets: [
+      { label:'Monthly rate', data: lossRate, borderColor:'#A32D2D', borderWidth:1.5,
+         pointRadius:2, pointBackgroundColor:'#A32D2D', tension:.3, fill:false },
+      { label:'3m avg',       data: loss3m,   borderColor:'#378ADD', borderWidth:2,
+         pointRadius:0, tension:.3, fill:false },
+      { label:'25bps target', data: targetLine(25, lossLabels.length),
+         borderColor:'#BA7517', borderWidth:1, borderDash:[4,3], pointRadius:0, fill:false }
+    ]
+  },
+  options: deepMerge(baseOpts, {
+    scales: { y: { min:0, ticks: { callback: v => v + 'bps' } } },
+    plugins: { tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + 'bps' } } }
+  })
+});
+
+// ── Vintage ────────────────────────────────────────────────
+const vintageLabels = [];
+const vintageBal    = [];
+new Chart(document.getElementById('vintageChart'), {
+  type: 'bar',
+  data: {
+    labels: vintageLabels,
+    datasets: [
+      { label:'120+ DPD balance', data: vintageBal, backgroundColor:'#7F77DD',
+         borderRadius:3, borderSkipped:false }
+    ]
+  },
+  options: deepMerge(baseOpts, {
+    scales: { y: { min:0, ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'k' } } },
+    plugins: { tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString() } } }
+  })
+});
+
 </script>
 
 </body></html>
