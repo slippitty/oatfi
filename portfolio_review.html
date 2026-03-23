@@ -9,22 +9,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root {
-  --bg:#F7F5F0; --surface:#fff; --border:#E2DED6;
-  --ink:#1C1B18; --ink2:#6B6760; --ink3:#A8A5A0;
-  --blue:#185FA5; --green:#2E6B0A; --amber:#9A5C00; --red:#8F1C1C;
-  --blue-bg:#EAF1FB; --green-bg:#EBF4E3; --amber-bg:#FDF3E2; --red-bg:#FBEAEA;
-  --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif;
+  --bg:#F7F5F0;--surface:#fff;--border:#E2DED6;
+  --ink:#1C1B18;--ink2:#6B6760;--ink3:#A8A5A0;
+  --blue:#185FA5;--green:#2E6B0A;--amber:#9A5C00;--red:#8F1C1C;
+  --blue-bg:#EAF1FB;--green-bg:#EBF4E3;--amber-bg:#FDF3E2;--red-bg:#FBEAEA;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
-.page{max-width:1280px;margin:0 auto;padding:2.5rem 2rem}
+.page{max-width:1300px;margin:0 auto;padding:2.5rem 2rem}
 .header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem}
 .header h1{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.header .sub{font-size:12px;color:var(--ink2);margin-top:3px;font-family:var(--mono)}
+.sub{font-size:12px;color:var(--ink2);margin-top:3px;font-family:var(--mono)}
 .header-right{font-size:11px;color:var(--ink3);font-family:var(--mono);text-align:right}
 .sl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border)}
 .narrative{background:var(--ink);color:#F0EDE6;border-radius:10px;padding:1.5rem 2rem;margin-bottom:2rem;position:relative}
-.narrative .ai-badge{position:absolute;top:1.25rem;right:1.5rem;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.1);padding:3px 8px;border-radius:4px;color:rgba(255,255,255,.5)}
+.ai-badge{position:absolute;top:1.25rem;right:1.5rem;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.1);padding:3px 8px;border-radius:4px;color:rgba(255,255,255,.5)}
 .narrative p,.np{font-size:13.5px;line-height:1.75;color:#D8D4CC;margin-bottom:.75rem;font-weight:300}
 .narrative p:last-child,.np:last-child{margin-bottom:0}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
@@ -44,7 +44,7 @@ tr:last-child td{border-bottom:none}
 .badge-warn{background:var(--amber-bg);color:var(--amber)}
 .badge-alert{background:var(--red-bg);color:var(--red)}
 .chart-wrap{position:relative;width:100%;height:220px;margin-top:.75rem}
-.vis-callout{background:var(--blue-bg);border:.5px solid #B5D4F4;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:var(--blue);margin-bottom:1rem;font-family:var(--mono);line-height:1.6}
+.mrb-banner{background:var(--red-bg);border:.5px solid #f5c5c5;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:var(--red);margin-bottom:1rem;font-family:var(--mono)}
 .footer{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:3rem;padding-top:1rem;border-top:.5px solid var(--border)}
 @media(max-width:800px){.grid-2{grid-template-columns:1fr}}
 </style>
@@ -55,22 +55,98 @@ tr:last-child td{border-bottom:none}
 <div class="header">
   <div>
     <h1>OatFi — Portfolio Review</h1>
-    <div class="sub">As of March 23, 2026 &nbsp;·&nbsp; Source: analytics_development.mart</div>
+    <div class="sub">As of March 23, 2026 &nbsp;·&nbsp; analytics_development.mart</div>
   </div>
-  <div class="header-right">Generated 2026-03-23 16:52</div>
+  <div class="header-right">Generated 2026-03-23 17:14<br>Excl: Balance Payments, Oat Financial</div>
 </div>
 
-<div class="sl">AI Assessment</div>
+<!-- AI Narrative -->
+<div class="sl">Assessment</div>
 <div class="narrative">
   <span class="ai-badge">Claude · auto-generated</span>
-  <p>The portfolio shows stable overall credit performance with total delinquency (31+ DPD) holding at approximately 2.8% of current UPB across our $56M portfolio. Order, our largest partner at $33M UPB, maintains solid performance with 97.4% current loans and only 1.8% in 31+ day delinquency, representing a quarter-over-quarter improvement of 27 basis points. Koverly presents the primary concern with 6.1% total delinquency on $13.7M UPB, including a troubling 4.8% in 90+ day buckets, though early-stage delinquencies improved by 34 basis points suggesting some stabilization in new originations.</p><p class='np'>Several partners require heightened monitoring due to structural visibility lags that may understate true delinquency risk. Cledara Limited shows zero current delinquencies on $1M UPB but operates with a concerning 60-day observation lag, creating a significant blind spot for emerging credit stress. Similarly, NurseIO's 43-day visibility window masks potential issues despite currently reporting only 1% total delinquency on $581K UPB. BRKR.IO warrants attention as 31-60 day delinquencies spiked 272 basis points quarter-over-quarter to 3.1%, though their 41-day reporting lag suggests actual stress may be higher than the 3.5% total delinquency currently visible.</p><p class='np'>Forward risk concentration remains elevated in cyclical sectors, with Admin/Support (14.9% DQ rate) and Construction (14.1% DQ rate) showing persistent stress that could worsen with any economic softening. The next 30-60 days will be critical for assessing whether Cledara's extended visibility lag reveals latent delinquencies, and whether BRKR.IO's deteriorating early-bucket performance continues migrating to later stages. Koverly's $1.5M in charge-offs over the trailing twelve months, combined with their current 90+ day concentration, suggests potential for additional near-term losses that could impact overall portfolio metrics if the trend accelerates.</p>
+  <p>**Leading Indicators Analysis**: Order shows the most significant early warning signal with $7.2M in loans past due at the partner level but not yet maturity at OatFi, representing exposure across 57,706 loans with an average 60-day gap between partner due dates and OatFi maturity dates. This substantial leading balance provides clear advance visibility into potential portfolio stress, with $1.0M already confirmed past due at OatFi. Cledara Limited shows $244K in leading exposure across 89 loans with no confirmed delinquencies yet, while BRKR.IO presents $204K in leading exposure with $85K already confirmed delinquent. Lawtrades exhibits $200K in leading exposure against $439K confirmed delinquent, though this partner's structural payment timing should be considered when interpreting these figures. The remaining partners show minimal leading exposure, with several partners including Avalara and MyToolbox showing zero leading indicators, eliminating early warning capabilities for potential stress in those channels.</p><p class='np'>**Portfolio Delinquency Health**: The portfolio shows mixed quarter-over-quarter performance with concerning deterioration in several key partners. Relay Financial Technologies experienced notable increases in early-stage delinquencies, with 31-60 day past due rising 0.34 percentage points and 61-90 day delinquencies up 0.37 percentage points, though the $812K confirmed delinquent balance remains below the $1.1M policy threshold. Lawtrades presents severe delinquency concentrations with 22.39% of loans 31-60 days past due and 30.95% in the 61-90 day bucket, though the 61-90 day rate increased 30.95 percentage points from the prior quarter, the 31-60 day rate actually improved by 2.77 percentage points, suggesting some stabilization in newer delinquencies. BRKR.IO shows emerging stress with 31-60 day delinquencies spiking 2.72 percentage points to 3.11%. Order demonstrates improvement with both early delinquency buckets declining quarter-over-quarter, while Koverly shows mixed results with 31-60 day rates improving but 61-90 day delinquencies increasing by 0.49 percentage points against a 4.83% 90+ day delinquency rate.</p><p class='np'>**Economic Sector Performance**: Admin/Support and Construction sectors exhibit the highest stress levels, with delinquency rates of 14.85% and 14.08% respectively, representing $203K and $236K in delinquent balances. Real Estate follows closely at 12.72% delinquency rates on $94K exposure. Professional Services, despite representing the largest sector exposure at $4.5M, shows a 10.99% delinquency rate contributing $490K in past-due balances, making it the largest absolute contributor to portfolio stress. Manufacturing sectors show moderate stress with NAICS 32 at 8.02% delinquency rates, while Wholesale Trade represents significant exposure at $4.0M with 7.76% delinquency rates contributing $307K in past-due balances. Consumer-facing sectors including Food & Accommodation, Information, and Transportation show relatively better performance with delinquency rates between 3-4%, while Retail sectors maintain delinquency rates below 3%, suggesting resilient consumer spending patterns supporting these business segments.</p><p class='np'>**Underwriting and Charge-off Trends**: Charge-off activity over the past 12 months totaled $6.0M across 901 loans, with Avalara representing the largest component at $4.0M in charged-off principal across 207 loans, though this partner is excluded from ongoing analysis per policy overlays. Koverly contributed $1.5M in charge-offs across 184 loans, while Order generated $627K in losses across 449 smaller-balance loans. The manual review basis organizations, predominantly cannabis-related entities through Order, show contained risk with total current exposure of $10.8M across 120 active entities, and only $374K currently delinquent concentrated in five organizations: Dalwhinnie Enterprises ($181K past due), GVB Biopharma ($81K), NorthEast Extracts ($74K), Hudson Valley Hemp Company ($28K), and others. The concentration of MRB exposure in cannabis-related businesses through a single partner channel creates sector concentration risk, though current payment performance among the majority of these entities remains satisfactory with most showing zero delinquency and current payment status.</p>
 </div>
 
-<div class="sl">Delinquency Snapshot — Current vs Prior Quarter (curr_upb, excl. charged-off)</div>
+<!-- 1. LEADING INDICATOR -->
+<div class="sl">1 — Partner leading indicator (past due at partner, current at OatFi)</div>
 <div class="card-full">
   <p style="font-size:11.5px;color:var(--ink2);margin-bottom:1rem">
-    Arrows show QoQ movement. Border color: <span style="color:var(--red);font-weight:500">■</span> 31+ DPD &gt;15% &nbsp;
-    <span style="color:#E08C00;font-weight:500">■</span> 5–15% &nbsp;
+    Loans where <strong>today &gt; due_date</strong> (past due at partner) but <strong>today &le; maturity_date</strong>
+    (still current at OatFi). This is a leading signal — not a blind spot. Confirmed = past due at both.
+    Only partners with due_date ≠ maturity_date shown.
+  </p>
+  <table>
+    <thead><tr>
+      <th>Partner</th><th class="num">Total bal</th>
+      <th class="num">Leading (partner DQ only)</th>
+      <th class="num">Confirmed (both DQ)</th>
+      <th class="num">Avg gap</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="pn">Order</td>
+          <td class="num">$33.2M</td>
+          <td class="num" style="color:#BA7517">$7.2M (21.6%)</td>
+          <td class="num" style="color:#8F1C1C">$1.0M (3.1%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">60d</td>
+        </tr><tr>
+          <td class="pn">Cledara Limited</td>
+          <td class="num">$1.0M</td>
+          <td class="num" style="color:#BA7517">$244K (23.5%)</td>
+          <td class="num" style="color:#888">$0 (0.0%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">60d</td>
+        </tr><tr>
+          <td class="pn">BRKR.IO Inc.</td>
+          <td class="num">$835K</td>
+          <td class="num" style="color:#BA7517">$204K (24.4%)</td>
+          <td class="num" style="color:#888">$85K (10.2%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">46d</td>
+        </tr><tr>
+          <td class="pn">Lawtrades</td>
+          <td class="num">$639K</td>
+          <td class="num" style="color:#BA7517">$200K (31.3%)</td>
+          <td class="num" style="color:#8F1C1C">$439K (68.7%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">49d</td>
+        </tr><tr>
+          <td class="pn">Tab Commerce</td>
+          <td class="num">$1.5M</td>
+          <td class="num" style="color:#BA7517">$93K (6.3%)</td>
+          <td class="num" style="color:#8F1C1C">$348K (23.6%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">7d</td>
+        </tr><tr>
+          <td class="pn">Relay Financial Technologies, Inc</td>
+          <td class="num">$1.9M</td>
+          <td class="num" style="color:#BA7517">$78K (4.1%)</td>
+          <td class="num" style="color:#8F1C1C">$812K (43.2%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">6d</td>
+        </tr><tr>
+          <td class="pn">NurseIO</td>
+          <td class="num">$838K</td>
+          <td class="num" style="color:#BA7517">$17K (2.0%)</td>
+          <td class="num" style="color:#888">$16K (1.9%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">45d</td>
+        </tr><tr>
+          <td class="pn">Avalara Technologies, LLC</td>
+          <td class="num">$134</td>
+          <td class="num" style="color:#888">$0 (0.0%)</td>
+          <td class="num" style="color:#888">$129 (96.2%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">6d</td>
+        </tr><tr>
+          <td class="pn">MyToolbox Technologies, Inc.</td>
+          <td class="num">$52K</td>
+          <td class="num" style="color:#888">$0 (0.0%)</td>
+          <td class="num" style="color:#888">$52K (100.0%)</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">12d</td>
+        </tr></tbody>
+  </table>
+</div>
+
+<!-- 2. DQ SNAPSHOT -->
+<div class="sl">2 — Portfolio DQ snapshot vs prior quarter</div>
+<div class="card-full">
+  <p style="font-size:11.5px;color:var(--ink2);margin-bottom:1rem">
+    Dollar-weighted (curr_upb). Arrows = QoQ movement.
+    Border: <span style="color:var(--red);font-weight:500">■</span> 31+ DPD &gt;15%
+    <span style="color:#E08C00;font-weight:500">■</span> 5–15%
     <span style="color:var(--green);font-weight:500">■</span> &lt;5%
   </p>
   <table>
@@ -80,7 +156,7 @@ tr:last-child td{border-bottom:none}
       <th class="num">31–60 DQ</th><th class="num">61–90 DQ</th><th class="num">90+ DQ</th>
     </tr></thead>
     <tbody><tr class="heat-green">
-          <td class="partner-name">Order</td>
+          <td class="pn">Order</td>
           <td class="num">$33.2M</td>
           <td class="num">97.4%</td>
           <td class="num"><span style="color:#888">0.5%&nbsp;▲</span></td>
@@ -89,7 +165,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.2%&nbsp;▼</span></td>
           <td class="num"><span style="color:#A32D2D">1.3%&nbsp;▲</span></td>
         </tr><tr class="heat-amber">
-          <td class="partner-name">Koverly Inc.</td>
+          <td class="pn">Koverly Inc.</td>
           <td class="num">$13.7M</td>
           <td class="num">93.9%</td>
           <td class="num"><span style="color:#3B6D11">0.0%&nbsp;▼</span></td>
@@ -98,7 +174,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">1.0%&nbsp;▲</span></td>
           <td class="num"><span style="color:#A32D2D">4.8%&nbsp;▲</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">Relay Financial Technologies, Inc</td>
+          <td class="pn">Relay Financial Technologies, Inc</td>
           <td class="num">$3.4M</td>
           <td class="num">66.7%</td>
           <td class="num"><span style="color:#A32D2D">12.1%&nbsp;▲</span></td>
@@ -107,7 +183,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">1.2%&nbsp;▲</span></td>
           <td class="num"><span style="color:#A32D2D">14.2%&nbsp;▲</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">Flychain</td>
+          <td class="pn">Flychain</td>
           <td class="num">$3.2M</td>
           <td class="num">92.3%</td>
           <td class="num"><span style="color:#A32D2D">3.2%&nbsp;▲</span></td>
@@ -116,7 +192,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#A32D2D">1.2%&nbsp;▲</span></td>
           <td class="num"><span style="color:#3B6D11">0.2%&nbsp;▼</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">Tab Commerce</td>
+          <td class="pn">Tab Commerce</td>
           <td class="num">$1.5M</td>
           <td class="num">91.5%</td>
           <td class="num"><span style="color:#A32D2D">8.4%&nbsp;▲</span></td>
@@ -124,17 +200,8 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
-        </tr><tr class="heat-amber">
-          <td class="partner-name">Balance Payments Inc.</td>
-          <td class="num">$1.1M</td>
-          <td class="num">82.6%</td>
-          <td class="num"><span style="color:#3B6D11">5.5%&nbsp;▼</span></td>
-          <td class="num"><span style="color:#A32D2D">1.8%&nbsp;▲</span></td>
-          <td class="num"><span style="color:#3B6D11">2.2%&nbsp;▼</span></td>
-          <td class="num"><span style="color:#3B6D11">0.8%&nbsp;▼</span></td>
-          <td class="num"><span style="color:#A32D2D">7.2%&nbsp;▲</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">Cledara Limited</td>
+          <td class="pn">Cledara Limited</td>
           <td class="num">$1.0M</td>
           <td class="num">100.0%</td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
@@ -143,7 +210,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">BRKR.IO Inc.</td>
+          <td class="pn">BRKR.IO Inc.</td>
           <td class="num">$792K</td>
           <td class="num">90.2%</td>
           <td class="num"><span style="color:#888">2.8%&nbsp;▼</span></td>
@@ -152,7 +219,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.4%&nbsp;▲</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">Lawtrades</td>
+          <td class="pn">Lawtrades</td>
           <td class="num">$599K</td>
           <td class="num">32.2%</td>
           <td class="num"><span style="color:#3B6D11">3.2%&nbsp;▼</span></td>
@@ -161,7 +228,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#A32D2D">31.0%&nbsp;▲</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">NurseIO</td>
+          <td class="pn">NurseIO</td>
           <td class="num">$581K</td>
           <td class="num">97.4%</td>
           <td class="num"><span style="color:#A32D2D">1.6%&nbsp;▲</span></td>
@@ -170,7 +237,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.8%&nbsp;▼</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">GigSafe</td>
+          <td class="pn">GigSafe</td>
           <td class="num">$279K</td>
           <td class="num">100.0%</td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
@@ -179,7 +246,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
         </tr><tr class="heat-red">
-          <td class="partner-name">Avalara Technologies, LLC</td>
+          <td class="pn">Avalara Technologies, LLC</td>
           <td class="num">$43K</td>
           <td class="num">0.3%</td>
           <td class="num"><span style="color:#3B6D11">0.0%&nbsp;▼</span></td>
@@ -188,7 +255,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#3B6D11">0.0%&nbsp;▼</span></td>
           <td class="num"><span style="color:#A32D2D">99.7%&nbsp;▲</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">WebCargo</td>
+          <td class="pn">WebCargo</td>
           <td class="num">$34K</td>
           <td class="num">100.0%</td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
@@ -197,7 +264,7 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">Edstruments (Highnote)</td>
+          <td class="pn">Edstruments (Highnote)</td>
           <td class="num">$18K</td>
           <td class="num">77.8%</td>
           <td class="num"><span style="color:#A32D2D">11.0%&nbsp;▲</span></td>
@@ -206,8 +273,8 @@ tr:last-child td{border-bottom:none}
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
         </tr><tr class="heat-green">
-          <td class="partner-name">MyToolbox Technologies, Inc.</td>
-          <td class="num">$0K</td>
+          <td class="pn">MyToolbox Technologies, Inc.</td>
+          <td class="num">$0</td>
           <td class="num">0.0%</td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
           <td class="num"><span style="color:#888">0.0%&nbsp;</span></td>
@@ -218,6 +285,8 @@ tr:last-child td{border-bottom:none}
   </table>
 </div>
 
+<!-- 3. VINTAGE -->
+<div class="sl">3 — Underwriting quality by vintage</div>
 <div class="grid-2">
   <div class="card">
     <div class="sl">30+ DPD rate by vintage month &amp; partner</div>
@@ -227,1094 +296,1185 @@ tr:last-child td{border-bottom:none}
     <div class="sl">Monthly origination ($K) by partner</div>
     <div class="chart-wrap"><canvas id="origChart"></canvas></div>
   </div>
+</div>
+
+<!-- 4. NAICS -->
+<div class="sl">4 — Economic environment — NAICS sector stress</div>
+<div class="grid-2">
   <div class="card">
-    <div class="sl">Monthly charge-offs ($K principal) — all partners</div>
-    <div class="chart-wrap"><canvas id="coChart"></canvas></div>
+    <div class="sl">Sector softening trend — 31+ DPD rate over 6 months</div>
+    <div class="chart-wrap"><canvas id="naicsTrendChart"></canvas></div>
   </div>
   <div class="card">
-    <div class="sl">Charge-offs last 12 months by partner</div>
+    <div class="sl">Current 31+ DPD by sector</div>
     <table>
       <thead><tr>
-        <th>Partner</th><th class="num">Loans</th><th class="num">Principal</th>
+        <th>Code</th><th>Sector</th><th class="num">Loans</th>
+        <th class="num">UPB</th><th class="num">DQ bal</th><th class="num">31+ DPD</th>
       </tr></thead>
       <tbody><tr>
-          <td class="partner-name">Avalara Technologies, LLC</td>
-          <td class="num">207</td>
-          <td class="num">$3.95M</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">56</td>
+          <td class="pn">Admin/Support</td>
+          <td class="num">6,295</td>
+          <td class="num">$1.4M</td>
+          <td class="num">$203K</td>
+          <td><span class="badge badge-warn">14.9%</span></td>
         </tr><tr>
-          <td class="partner-name">Koverly Inc.</td>
-          <td class="num">184</td>
-          <td class="num">$1.52M</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">23</td>
+          <td class="pn">Construction</td>
+          <td class="num">6,203</td>
+          <td class="num">$1.7M</td>
+          <td class="num">$236K</td>
+          <td><span class="badge badge-warn">14.1%</span></td>
         </tr><tr>
-          <td class="partner-name">Order</td>
-          <td class="num">449</td>
-          <td class="num">$627,315</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">53</td>
+          <td class="pn">Real Estate</td>
+          <td class="num">4,448</td>
+          <td class="num">$739K</td>
+          <td class="num">$94K</td>
+          <td><span class="badge badge-warn">12.7%</span></td>
         </tr><tr>
-          <td class="partner-name">Flychain</td>
-          <td class="num">13</td>
-          <td class="num">$347,733</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">54</td>
+          <td class="pn">Professional Services</td>
+          <td class="num">12,825</td>
+          <td class="num">$4.5M</td>
+          <td class="num">$490K</td>
+          <td><span class="badge badge-warn">11.0%</span></td>
         </tr><tr>
-          <td class="partner-name">Harvv (Qisstpay)</td>
-          <td class="num">3</td>
-          <td class="num">$167,743</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">32</td>
+          <td class="pn">Manufacturing</td>
+          <td class="num">1,152</td>
+          <td class="num">$1.2M</td>
+          <td class="num">$93K</td>
+          <td><span class="badge badge-warn">8.0%</span></td>
         </tr><tr>
-          <td class="partner-name">Ply</td>
-          <td class="num">2</td>
-          <td class="num">$145,980</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">42</td>
+          <td class="pn">Wholesale Trade</td>
+          <td class="num">4,108</td>
+          <td class="num">$4.0M</td>
+          <td class="num">$307K</td>
+          <td><span class="badge badge-warn">7.8%</span></td>
         </tr><tr>
-          <td class="partner-name">MyToolbox Technologies, Inc.</td>
-          <td class="num">31</td>
-          <td class="num">$108,045</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">72</td>
+          <td class="pn">Food & Accommodation</td>
+          <td class="num">5,204</td>
+          <td class="num">$1.3M</td>
+          <td class="num">$58K</td>
+          <td><span class="badge badge-ok">4.3%</span></td>
         </tr><tr>
-          <td class="partner-name">Lawtrades</td>
-          <td class="num">5</td>
-          <td class="num">$46,754</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">51</td>
+          <td class="pn">Information</td>
+          <td class="num">2,797</td>
+          <td class="num">$928K</td>
+          <td class="num">$36K</td>
+          <td><span class="badge badge-ok">3.9%</span></td>
         </tr><tr>
-          <td class="partner-name">Melengo, Inc.</td>
-          <td class="num">5</td>
-          <td class="num">$11,871</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">48</td>
+          <td class="pn">Transportation</td>
+          <td class="num">523</td>
+          <td class="num">$1.1M</td>
+          <td class="num">$34K</td>
+          <td><span class="badge badge-ok">3.1%</span></td>
         </tr><tr>
-          <td class="partner-name">XSQRD, Inc.</td>
-          <td class="num">2</td>
-          <td class="num">$8,096</td>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">33</td>
+          <td class="pn">Manufacturing</td>
+          <td class="num">1,515</td>
+          <td class="num">$909K</td>
+          <td class="num">$27K</td>
+          <td><span class="badge badge-ok">3.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">44</td>
+          <td class="pn">Retail</td>
+          <td class="num">5,174</td>
+          <td class="num">$2.4M</td>
+          <td class="num">$69K</td>
+          <td><span class="badge badge-ok">2.9%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">45</td>
+          <td class="pn">Retail</td>
+          <td class="num">8,714</td>
+          <td class="num">$2.6M</td>
+          <td class="num">$74K</td>
+          <td><span class="badge badge-ok">2.9%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">62</td>
+          <td class="pn">Health Care</td>
+          <td class="num">18,670</td>
+          <td class="num">$6.3M</td>
+          <td class="num">$123K</td>
+          <td><span class="badge badge-ok">2.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">81</td>
+          <td class="pn">Other Services</td>
+          <td class="num">4,847</td>
+          <td class="num">$1.1M</td>
+          <td class="num">$16K</td>
+          <td><span class="badge badge-ok">1.5%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">71</td>
+          <td class="pn">Arts & Entertainment</td>
+          <td class="num">2,604</td>
+          <td class="num">$444K</td>
+          <td class="num">$6K</td>
+          <td><span class="badge badge-ok">1.4%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">52</td>
+          <td class="pn">Finance & Insurance</td>
+          <td class="num">4,445</td>
+          <td class="num">$511K</td>
+          <td class="num">$7K</td>
+          <td><span class="badge badge-ok">1.3%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">55</td>
+          <td class="pn">Management</td>
+          <td class="num">2,927</td>
+          <td class="num">$573K</td>
+          <td class="num">$5K</td>
+          <td><span class="badge badge-ok">1.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">31</td>
+          <td class="pn">Manufacturing</td>
+          <td class="num">2,860</td>
+          <td class="num">$908K</td>
+          <td class="num">$5K</td>
+          <td><span class="badge badge-ok">0.6%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">92</td>
+          <td class="pn">Public Admin</td>
+          <td class="num">326</td>
+          <td class="num">$87K</td>
+          <td class="num">$315</td>
+          <td><span class="badge badge-ok">0.4%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">61</td>
+          <td class="pn">Education</td>
+          <td class="num">5,269</td>
+          <td class="num">$780K</td>
+          <td class="num">$131</td>
+          <td><span class="badge badge-ok">0.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">49</td>
+          <td class="pn">Transportation</td>
+          <td class="num">243</td>
+          <td class="num">$634K</td>
+          <td class="num">$0</td>
+          <td><span class="badge badge-ok">0.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">11</td>
+          <td class="pn">Agriculture</td>
+          <td class="num">1,949</td>
+          <td class="num">$704K</td>
+          <td class="num">$0</td>
+          <td><span class="badge badge-ok">0.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">22</td>
+          <td class="pn">Utilities</td>
+          <td class="num">149</td>
+          <td class="num">$3K</td>
+          <td class="num">$0</td>
+          <td><span class="badge badge-ok">0.0%</span></td>
         </tr></tbody>
     </table>
   </div>
 </div>
 
-<div class="sl">Delinquency visibility window (due_date → maturity_date)</div>
+<!-- MRb -->
+<div class="sl">MRb — Manual review basis orgs</div>
 <div class="card-full">
-  <div class="vis-callout">
-    Partners with avg_gap &gt;10 days have a structural blind spot — obligors can be delinquent at the partner
-    before OatFi's maturity_date triggers. ~5 days is normal ACH/R01 float.
-  </div>
+  <div class="mrb-banner">These orgs are on manual review basis. Exposure and DQ shown against current active loan balance.</div>
   <table>
     <thead><tr>
-      <th>Partner</th><th class="num">Loans</th>
-      <th class="num">Avg gap</th><th class="num">% with gap</th><th>Signal</th>
+      <th>Org</th><th>Partner</th>
+      <th class="num">Exposure</th><th class="num">31+ DQ bal</th><th class="num">Max DPD</th>
     </tr></thead>
     <tbody><tr>
-          <td>Cledara Limited</td>
-          <td class="num">14,865</td>
-          <td class="num">60.0d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-alert">High lag</span></td>
+          <td class="pn">Greener Standards Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Order</td>
-          <td class="num">1,025,203</td>
-          <td class="num">55.9d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-alert">High lag</span></td>
+          <td class="pn">Organic Remedies MO, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>NurseIO</td>
-          <td class="num">1,735</td>
-          <td class="num">42.8d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-alert">High lag</span></td>
+          <td class="pn">Firefly CBD LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>BRKR.IO Inc.</td>
-          <td class="num">667</td>
-          <td class="num">41.3d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-alert">High lag</span></td>
+          <td class="pn">Vice Capital Extraction LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Lawtrades</td>
-          <td class="num">1,913</td>
-          <td class="num">40.7d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-alert">High lag</span></td>
+          <td class="pn">Zen Asset Management LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Tab Commerce</td>
-          <td class="num">3,984</td>
-          <td class="num">7.0d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-ok">Normal</span></td>
+          <td class="pn">RHMT LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Relay Financial Technologies, Inc</td>
-          <td class="num">107,556</td>
-          <td class="num">5.3d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-ok">Normal</span></td>
+          <td class="pn">Dub Brothers Management, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Koverly Inc.</td>
-          <td class="num">10,710</td>
-          <td class="num">5.0d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-ok">Normal</span></td>
+          <td class="pn">Aster Farms, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Edstruments (Highnote)</td>
-          <td class="num">109</td>
-          <td class="num">4.2d</td>
-          <td class="num">100%</td>
-          <td><span class="badge badge-ok">Normal</span></td>
+          <td class="pn">Show Me Alternatives LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Avalara Technologies, LLC</td>
-          <td class="num">905</td>
-          <td class="num">0.9d</td>
-          <td class="num">18%</td>
-          <td><span class="badge badge-ok">Normal</span></td>
+          <td class="pn">LuvBuds LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr><tr>
-          <td>Flychain</td>
-          <td class="num">895</td>
-          <td class="num">0.2d</td>
-          <td class="num">6%</td>
-          <td><span class="badge badge-ok">Normal</span></td>
+          <td class="pn">Northern Emeralds</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Dunegrass</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Beyond Broadway LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Hepworth Pura LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Verde Natural</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Satori VT</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Cresco Labs, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Mammoth Incorporated</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">MidSouth Extracts, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Kind Love, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Valley Wide Hydro Tulsa LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Trees Corporation</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Nuka Enterprises LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Community Growth Partners Holdings, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Farming First Holdings LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Green Theory Cultivation</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Rehbel Industries LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">305 Farms LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">MCR Labs LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Lowell Farms</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Nature Med, Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Love's Oven, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Wicked Cannabis LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">American Green, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Flourish Michigan Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Aeriz / Wellness Group Pharms, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">SATORI VT LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">East Fork Group Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Crested River</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">CLS Holding USA, Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">New England Craft Cultivators LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Verano Holdings Corp</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$972K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">The Cerberean Group LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$951K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">HPI CANNA INC.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$607K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Kaycha Holdings, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$526K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Act Laboratories, Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$458K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Naturae LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$378K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">14th Round Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$373K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">iAnthus Capital Management, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$348K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">GOOD DAY FARM, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$345K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Attitude Wellness, LLC dba Lume Cannabis Co.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$336K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">CPC of Missouri - Smithville, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$298K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Curador Holdings Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$280K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Standard Wellness Company, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$275K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Amazing Budz LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$253K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Columbia Care</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$251K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">GC Flint LLC dba Jars Cannabis</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$246K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">The Doe Store LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$212K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Dalwhinnie Enterprises, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$197K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$181K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">140</td>
+        </tr><tr>
+          <td class="pn">Copperstate Farms Management, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$196K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Illicit Gardens</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$195K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Silver Therapeutics, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$191K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Hemp Hunter Labs, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$184K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Parallel Georgia, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$169K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">GVB Biopharma</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$164K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$81K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">49</td>
+        </tr><tr>
+          <td class="pn">Ilera Healthcare LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$161K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">INSA, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$154K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Dark Horse Medicinals LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$147K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Grön Holdings, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$144K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Cannabis Cured/Green Alien Cannabis Company</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$141K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Haven</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$138K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">D&K Ventures LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$134K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">South Cord Holdings</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$130K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Ocean State Controlled Botanicals, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$120K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">RWOODSII LLC/OPTIMUM EXTRACTS</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$120K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">FW GREEN REAL ESTATE LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$111K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">BILL’S NURSERY, INC.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$106K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Grasshopper Farms</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$102K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Sea Smoke Extracts, Inc. dba SeaWeed</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$100K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">RMZ LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$97K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">The Verdes Foundation</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$97K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Navajo Management</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$96K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Emerald Mountain Labs, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$90K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Maitri Genetics LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$87K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">NUG INC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$86K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Native Sun Holdings, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$83K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">City Compassionate Caregivers, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$81K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Waabigwan Mashkiki LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$81K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">NorthEast Extracts, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$80K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$74K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">168</td>
+        </tr><tr>
+          <td class="pn">Glass Meadows Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$79K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">OGeez! Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$74K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Saphire Farms</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$69K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Mana Supply Management</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$66K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Ascend Wellness Holdings, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$65K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Nuera Holdings Hillcrest LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$64K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">CannaPlanners</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$61K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Ohio Green Systems Llc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$60K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">PA Options for Wellness, Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$58K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Flora Arbor LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$56K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Sozo Companies, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$56K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Hippos, LLC.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$54K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">PRIMITIV WHOLESALE, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$53K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Hudson Valley Hemp Company LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$44K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$28K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63</td>
+        </tr><tr>
+          <td class="pn">Bountiful Farms Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$43K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">sacred sun farms</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$43K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">CBD Kratom</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$40K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">EmmaLeaf Process, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$38K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">PTS Corp</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$37K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Pro Green Medical LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$31K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Noire DIspensary</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$29K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Berkshire Welco, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$28K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Exclusive Brands</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$24K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Las Vegas Paiute Cannabis Authority</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$23K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Final Bell Corp</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$21K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Embarc LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$21K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Uplift</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$19K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Pecos Valley Production, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$18K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Cannaplanet, Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$18K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Green Meadows Farm, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$17K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Highway Horticulture LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$17K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">The Five Seasons Cannabis Company, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$15K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">42</td>
+        </tr><tr>
+          <td class="pn">Kansas City Cannabis Company LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$13K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">JNJ Management LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$12K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Joyology of Centerline</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$12K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Etain LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Carbidex LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Nova Farms LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Quality Roots, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Hudson Botanical Processing, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$6K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Harvest Foundation Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$6K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$4K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">77</td>
+        </tr><tr>
+          <td class="pn">Artist Tree Management LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$6K</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
+        </tr><tr>
+          <td class="pn">Wheelhouse Growers, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$12</td>
+          <td class="num" style="color:#888">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
         </tr></tbody>
   </table>
 </div>
 
-<div class="sl">Top DQ Obligors — 31+ Days Past Due</div>
-<div class="card-full">
-  <table>
-    <thead><tr>
-      <th style="width:28px">#</th><th>Obligor</th><th>Partner</th>
-      <th class="num">31–60 DQ</th><th class="num">61–90 DQ</th>
-      <th class="num">90+ DQ</th><th class="num">Total DQ bal</th>
-    </tr></thead>
-    <tbody><tr>
+<!-- Charge-offs + Top DQ -->
+<div class="grid-2">
+  <div class="card">
+    <div class="sl">Monthly charge-offs ($K principal)</div>
+    <div class="chart-wrap"><canvas id="coChart"></canvas></div>
+  </div>
+  <div class="card" style="overflow:auto">
+    <div class="sl">Top DQ obligors — 31+ DPD</div>
+    <table>
+      <thead><tr>
+        <th>#</th><th>Obligor</th><th>Partner</th>
+        <th class="num">31–60</th><th class="num">61–90</th>
+        <th class="num">90+</th><th class="num">Total</th>
+      </tr></thead>
+      <tbody><tr>
           <td class="num" style="color:#888;font-size:11px">1</td>
-          <td>The Surplus Comp LLC</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">The Surplus Comp LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$218,757</td>
           <td class="num" style="font-weight:600">$218,757</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">2</td>
-          <td>Coboda LLC</td>
-          <td style="color:#888;font-size:12px">Order</td>
+          <td class="pn">Coboda LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Order</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$191,253</td>
           <td class="num" style="font-weight:600">$191,253</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">3</td>
-          <td>Marino ave inc</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">Marino ave inc</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$185,802</td>
           <td class="num" style="font-weight:600">$185,802</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">4</td>
-          <td>Dalwhinnie Enterprises, LLC</td>
-          <td style="color:#888;font-size:12px">Order</td>
+          <td class="pn">Dalwhinnie Enterprises, LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Order</td>
           <td class="num">—</td>
           <td class="num">$32,856</td>
           <td class="num">$148,259</td>
           <td class="num" style="font-weight:600">$181,115</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">5</td>
-          <td>Wholesale Solar and Consulting Inc</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">Wholesale Solar and Consulting Inc</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">$1,000</td>
           <td class="num">$91,244</td>
           <td class="num">$79,327</td>
           <td class="num" style="font-weight:600">$171,572</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">6</td>
-          <td>GVB Biopharma</td>
-          <td style="color:#888;font-size:12px">Order</td>
+          <td class="pn">GVB Biopharma</td>
+          <td style="color:var(--ink2);font-size:12px">Order</td>
           <td class="num">$80,630</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$80,630</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">7</td>
-          <td>TITANIO TRAVELGOODS GROUP LLC</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">TITANIO TRAVELGOODS GROUP LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$79,116</td>
           <td class="num" style="font-weight:600">$79,116</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">8</td>
-          <td>NorthEast Extracts, LLC</td>
-          <td style="color:#888;font-size:12px">Order</td>
+          <td class="pn">NorthEast Extracts, LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Order</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$74,063</td>
           <td class="num" style="font-weight:600">$74,063</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">9</td>
-          <td>PSIQuantum Corp</td>
-          <td style="color:#888;font-size:12px">Lawtrades</td>
+          <td class="pn">PSIQuantum Corp</td>
+          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
           <td class="num">$26,438</td>
           <td class="num">$36,565</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$63,002</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">10</td>
-          <td>NEIMAN WHOLESALE DISTRIBUTORS INC</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">NEIMAN WHOLESALE DISTRIBUTORS INC</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">—</td>
           <td class="num">$42,341</td>
           <td class="num">$4,397</td>
           <td class="num" style="font-weight:600">$46,738</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">11</td>
-          <td>Hedgerow Properties LLC</td>
-          <td style="color:#888;font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="pn">Hedgerow Properties LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$45,231</td>
           <td class="num" style="font-weight:600">$45,231</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">12</td>
-          <td>Lilmod Illameid Inc</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">Lilmod Illameid Inc</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$41,188</td>
           <td class="num" style="font-weight:600">$41,188</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">13</td>
-          <td>Epic Games, Inc.</td>
-          <td style="color:#888;font-size:12px">Lawtrades</td>
+          <td class="pn">Epic Games, Inc.</td>
+          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
           <td class="num">$38,340</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$38,340</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">14</td>
-          <td>Teamwork Licensed Behavior Analyst Services PLLC</td>
-          <td style="color:#888;font-size:12px">Flychain</td>
+          <td class="pn">Teamwork Licensed Behavior Analyst Services PLLC</td>
+          <td style="color:var(--ink2);font-size:12px">Flychain</td>
           <td class="num">—</td>
           <td class="num">$36,914</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$36,914</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">15</td>
-          <td>Jobandtalent Hirings LLC</td>
-          <td style="color:#888;font-size:12px">Lawtrades</td>
+          <td class="pn">Jobandtalent Hirings LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
           <td class="num">$15,686</td>
           <td class="num">$17,234</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$32,920</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">16</td>
-          <td>ABC Residential Casework Inc.</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">ABC Residential Casework Inc.</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$32,515</td>
           <td class="num" style="font-weight:600">$32,515</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">17</td>
-          <td>Headspace</td>
-          <td style="color:#888;font-size:12px">Lawtrades</td>
+          <td class="pn">Headspace</td>
+          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
           <td class="num">$29,202</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$29,202</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">18</td>
-          <td>Hudson Valley Hemp Company LLC</td>
-          <td style="color:#888;font-size:12px">Order</td>
+          <td class="pn">Hudson Valley Hemp Company LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Order</td>
           <td class="num">—</td>
           <td class="num">$28,136</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$28,136</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">19</td>
-          <td>Smart Medical Solutions LLC</td>
-          <td style="color:#888;font-size:12px">Koverly Inc.</td>
+          <td class="pn">Smart Medical Solutions LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
           <td class="num">$26,132</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num" style="font-weight:600">$26,132</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">20</td>
-          <td>OConnor Enterprise Group Inc</td>
-          <td style="color:#888;font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="pn">OConnor Enterprise Group Inc</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">$24,759</td>
           <td class="num" style="font-weight:600">$24,759</td>
         </tr></tbody>
-  </table>
-</div>
-
-<div class="sl">Economic environment — NAICS sector stress (31+ DPD % of UPB)</div>
-<div class="card-full">
-  <table>
-    <thead><tr>
-      <th>Code</th><th>Sector</th><th class="num">Loans</th>
-      <th class="num">UPB</th><th class="num">31+ DPD</th>
-    </tr></thead>
-    <tbody><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">56</td>
-          <td>Admin/Support</td>
-          <td class="num">6,295</td>
-          <td class="num">$1.4M</td>
-          <td class="num"><span class="badge badge-warn">14.9%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">23</td>
-          <td>Construction</td>
-          <td class="num">6,203</td>
-          <td class="num">$1.7M</td>
-          <td class="num"><span class="badge badge-warn">14.1%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">53</td>
-          <td>Real Estate</td>
-          <td class="num">4,448</td>
-          <td class="num">$739K</td>
-          <td class="num"><span class="badge badge-warn">12.7%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">54</td>
-          <td>Professional Services</td>
-          <td class="num">12,825</td>
-          <td class="num">$4.5M</td>
-          <td class="num"><span class="badge badge-warn">11.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">32</td>
-          <td>Manufacturing</td>
-          <td class="num">1,152</td>
-          <td class="num">$1.2M</td>
-          <td class="num"><span class="badge badge-warn">8.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">42</td>
-          <td>Wholesale Trade</td>
-          <td class="num">4,108</td>
-          <td class="num">$4.0M</td>
-          <td class="num"><span class="badge badge-warn">7.8%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">72</td>
-          <td>Food & Accommodation</td>
-          <td class="num">5,204</td>
-          <td class="num">$1.3M</td>
-          <td class="num"><span class="badge badge-ok">4.3%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">51</td>
-          <td>Information</td>
-          <td class="num">2,797</td>
-          <td class="num">$928K</td>
-          <td class="num"><span class="badge badge-ok">3.9%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">48</td>
-          <td>Transportation</td>
-          <td class="num">523</td>
-          <td class="num">$1.1M</td>
-          <td class="num"><span class="badge badge-ok">3.1%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">33</td>
-          <td>Manufacturing</td>
-          <td class="num">1,515</td>
-          <td class="num">$909K</td>
-          <td class="num"><span class="badge badge-ok">3.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">44</td>
-          <td>Retail</td>
-          <td class="num">5,174</td>
-          <td class="num">$2.4M</td>
-          <td class="num"><span class="badge badge-ok">2.9%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">45</td>
-          <td>Retail</td>
-          <td class="num">8,714</td>
-          <td class="num">$2.6M</td>
-          <td class="num"><span class="badge badge-ok">2.9%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">62</td>
-          <td>Health Care</td>
-          <td class="num">18,670</td>
-          <td class="num">$6.3M</td>
-          <td class="num"><span class="badge badge-ok">2.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">81</td>
-          <td>Other Services</td>
-          <td class="num">4,847</td>
-          <td class="num">$1.1M</td>
-          <td class="num"><span class="badge badge-ok">1.5%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">71</td>
-          <td>Arts & Entertainment</td>
-          <td class="num">2,604</td>
-          <td class="num">$444K</td>
-          <td class="num"><span class="badge badge-ok">1.4%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">52</td>
-          <td>Finance & Insurance</td>
-          <td class="num">4,445</td>
-          <td class="num">$511K</td>
-          <td class="num"><span class="badge badge-ok">1.3%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">55</td>
-          <td>Management</td>
-          <td class="num">2,927</td>
-          <td class="num">$573K</td>
-          <td class="num"><span class="badge badge-ok">1.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">31</td>
-          <td>Manufacturing</td>
-          <td class="num">2,860</td>
-          <td class="num">$908K</td>
-          <td class="num"><span class="badge badge-ok">0.6%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">92</td>
-          <td>Public Admin</td>
-          <td class="num">326</td>
-          <td class="num">$87K</td>
-          <td class="num"><span class="badge badge-ok">0.4%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">61</td>
-          <td>Education</td>
-          <td class="num">5,269</td>
-          <td class="num">$780K</td>
-          <td class="num"><span class="badge badge-ok">0.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">22</td>
-          <td>Utilities</td>
-          <td class="num">149</td>
-          <td class="num">$3K</td>
-          <td class="num"><span class="badge badge-ok">0.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">49</td>
-          <td>Transportation</td>
-          <td class="num">243</td>
-          <td class="num">$634K</td>
-          <td class="num"><span class="badge badge-ok">0.0%</span></td>
-        </tr><tr>
-          <td class="num" style="color:var(--ink3);font-family:var(--mono)">11</td>
-          <td>Agriculture</td>
-          <td class="num">1,949</td>
-          <td class="num">$704K</td>
-          <td class="num"><span class="badge badge-ok">0.0%</span></td>
-        </tr></tbody>
-  </table>
-</div>
-
-<div class="sl">Underwriting vintage — first credit line &amp; Taktile coverage</div>
-<div class="card-full">
-  <p style="font-size:11.5px;color:var(--ink2);margin-bottom:1rem">
-    Shows the initial underwrite date for each org (most recent first, capped at 100 rows).
-    "Taktile UW" means a Taktile decision existed at or before the first credit line was set.
-    "No Taktile at UW" means the line was set without a Taktile decision in place.
-  </p>
-  <table>
-    <thead><tr>
-      <th>Partner</th>
-      <th>Org</th>
-      <th class="num">Underwrite date</th>
-      <th class="num">Credit limit</th>
-      <th>Coverage</th>
-    </tr></thead>
-    <tbody><tr>
-          <td style="font-size:12px;color:var(--ink2)">BRKR.IO Inc.</td>
-          <td class="pn">Venus Brands, Inc.</td>
-          <td class="num">2026-03-20</td>
-          <td class="num">$150K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">GLS INTERNATIONAL INC</td>
-          <td class="num">2026-03-17</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">North Star Franchise Holdings</td>
-          <td class="num">2026-03-16</td>
-          <td class="num">$40K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Patriotic AF LLC</td>
-          <td class="num">2026-03-13</td>
-          <td class="num">$28K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">dsrc goods llc</td>
-          <td class="num">2026-03-13</td>
-          <td class="num">$15K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Modern Septic & Grey Water Systems, Llc</td>
-          <td class="num">2026-03-12</td>
-          <td class="num">$60K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Momii & Trass Certified Public Accountants</td>
-          <td class="num">2026-03-12</td>
-          <td class="num">$28K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Professional Tree Care, Inc.</td>
-          <td class="num">2026-03-12</td>
-          <td class="num">$30K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">VStyles, Inc.</td>
-          <td class="num">2026-03-12</td>
-          <td class="num">$0</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Tanner Industries</td>
-          <td class="num">2026-03-11</td>
-          <td class="num">$18K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">READY 2 GO CABINETS</td>
-          <td class="num">2026-03-10</td>
-          <td class="num">$25K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Desert Valley Abatement</td>
-          <td class="num">2026-03-10</td>
-          <td class="num">$17K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Ben Hall Law, PLLC</td>
-          <td class="num">2026-03-10</td>
-          <td class="num">$40K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">WOW FOOD DISTRIBUTOR CORP</td>
-          <td class="num">2026-03-09</td>
-          <td class="num">$250K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Sci Lase LLC</td>
-          <td class="num">2026-03-09</td>
-          <td class="num">$30K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">MELTED. LLC</td>
-          <td class="num">2026-03-09</td>
-          <td class="num">$22K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">DHT Homes LLC</td>
-          <td class="num">2026-03-09</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Farren Grove LLC</td>
-          <td class="num">2026-03-09</td>
-          <td class="num">$150K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">R&R Collective LLC</td>
-          <td class="num">2026-03-07</td>
-          <td class="num">$20K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">National Association of Professional Staff in Public Safety</td>
-          <td class="num">2026-03-07</td>
-          <td class="num">$12K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">OROS, Inc.</td>
-          <td class="num">2026-03-07</td>
-          <td class="num">$28K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Abyss Battery, Inc.</td>
-          <td class="num">2026-03-06</td>
-          <td class="num">$90K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">FHG Marine Engineering Inc.</td>
-          <td class="num">2026-03-06</td>
-          <td class="num">$160K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Massage Williamsburg Inc</td>
-          <td class="num">2026-03-04</td>
-          <td class="num">$70K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
-          <td class="pn">Craveworthy LLC</td>
-          <td class="num">2026-03-04</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Crownvale Management LLC</td>
-          <td class="num">2026-03-04</td>
-          <td class="num">$19K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Grid Titans</td>
-          <td class="num">2026-03-03</td>
-          <td class="num">$75K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Home and Made Custom Builders LLC D/B/A Goodwin Luxury Homes</td>
-          <td class="num">2026-03-03</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Health and Recovery 88, Inc.</td>
-          <td class="num">2026-03-02</td>
-          <td class="num">$38K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Udor USA Inc</td>
-          <td class="num">2026-03-02</td>
-          <td class="num">$350K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Biscuits & Bath Companies, LLC</td>
-          <td class="num">2026-02-27</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Woodfords Family Services</td>
-          <td class="num">2026-02-27</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">PURPLE PLUM LLC</td>
-          <td class="num">2026-02-26</td>
-          <td class="num">$20K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">BRKR.IO Inc.</td>
-          <td class="pn">TEN35</td>
-          <td class="num">2026-02-26</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Endo-Surgical Center of Kissimmee</td>
-          <td class="num">2026-02-25</td>
-          <td class="num">$120K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Industrial Management Group Inc</td>
-          <td class="num">2026-02-24</td>
-          <td class="num">$60K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">The Yard Operating Company LLC</td>
-          <td class="num">2026-02-24</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Sam Distribution Center LLC</td>
-          <td class="num">2026-02-23</td>
-          <td class="num">$120K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">TRIDENT INTERNATIONAL LLC</td>
-          <td class="num">2026-02-23</td>
-          <td class="num">$10K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
-          <td class="pn">Salt Rock LLC</td>
-          <td class="num">2026-02-23</td>
-          <td class="num">$25K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">YF Holdings 123, LLC</td>
-          <td class="num">2026-02-23</td>
-          <td class="num">$16K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">4D Restoration LLC</td>
-          <td class="num">2026-02-20</td>
-          <td class="num">$12K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Composite Fundamentals Inc</td>
-          <td class="num">2026-02-20</td>
-          <td class="num">$25K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Crafted Solutions LLC</td>
-          <td class="num">2026-02-19</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
-          <td class="pn">Gregorys Coffee, inc.</td>
-          <td class="num">2026-02-19</td>
-          <td class="num">$350K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">DogeNet LLC</td>
-          <td class="num">2026-02-19</td>
-          <td class="num">$12K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Crossroads Trading Co., Inc</td>
-          <td class="num">2026-02-19</td>
-          <td class="num">$200K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">123 deals from a to z</td>
-          <td class="num">2026-02-19</td>
-          <td class="num">$140K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
-          <td class="pn">Magnum Foods, Inc.</td>
-          <td class="num">2026-02-18</td>
-          <td class="num">$20K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">EndoSurgical center of Florida</td>
-          <td class="num">2026-02-18</td>
-          <td class="num">$150K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Corporate Management Group, Inc.</td>
-          <td class="num">2026-02-17</td>
-          <td class="num">$7K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">HANGZHOU CHEN TECHNOLOGY CO. LLC</td>
-          <td class="num">2026-02-17</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Ningbo Xiwang International Trading Co LLC</td>
-          <td class="num">2026-02-17</td>
-          <td class="num">$200K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Finsweet Inc.</td>
-          <td class="num">2026-02-16</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">RE Stores LLC</td>
-          <td class="num">2026-02-16</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Conversion Bees LLC</td>
-          <td class="num">2026-02-15</td>
-          <td class="num">$0</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">ARTIS</td>
-          <td class="num">2026-02-15</td>
-          <td class="num">$6K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Edstruments (Highnote)</td>
-          <td class="pn">Midwest Athletes Against Childhood Cancer</td>
-          <td class="num">2026-02-13</td>
-          <td class="num">$80K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Mindful Consultants LLC</td>
-          <td class="num">2026-02-13</td>
-          <td class="num">$12K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">DDM Pizzeria One Inc</td>
-          <td class="num">2026-02-13</td>
-          <td class="num">$35K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">iMPERIAL STONE INC</td>
-          <td class="num">2026-02-13</td>
-          <td class="num">$90K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
-          <td class="pn">297 Park Ave Bakery LLC</td>
-          <td class="num">2026-02-12</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">REVIVED HYDRATION PLLC</td>
-          <td class="num">2026-02-12</td>
-          <td class="num">$65K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Optimum Value Partners LLC</td>
-          <td class="num">2026-02-12</td>
-          <td class="num">$11K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
-          <td class="pn">Amber Green Corp.</td>
-          <td class="num">2026-02-12</td>
-          <td class="num">$75K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">GREENLEAF MILLWORK NY INC.</td>
-          <td class="num">2026-02-11</td>
-          <td class="num">$400K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">VidOvation Corporation</td>
-          <td class="num">2026-02-10</td>
-          <td class="num">$32K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Flychain</td>
-          <td class="pn">Open To Grace Wellness, LLC </td>
-          <td class="num">2026-02-10</td>
-          <td class="num">$60K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">NutraShure Distribution, LLC.</td>
-          <td class="num">2026-02-09</td>
-          <td class="num">$18K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Handy Laundry Products Corp</td>
-          <td class="num">2026-02-09</td>
-          <td class="num">$400K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">E. Daniel Vasquez Consulting, LLC</td>
-          <td class="num">2026-02-06</td>
-          <td class="num">$14K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Ultra Carriers Inc.</td>
-          <td class="num">2026-02-06</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Float Studio Design Inc.</td>
-          <td class="num">2026-02-06</td>
-          <td class="num">$19K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Freedom Path Consulting LLC</td>
-          <td class="num">2026-02-05</td>
-          <td class="num">$17K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">WAVOSC LLC</td>
-          <td class="num">2026-02-05</td>
-          <td class="num">$16K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Flychain</td>
-          <td class="pn">MCH Ventures, Inc.</td>
-          <td class="num">2026-02-05</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Highbrow Moving, LLC</td>
-          <td class="num">2026-02-04</td>
-          <td class="num">$17K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">SOMOS PROPERTIES LLC</td>
-          <td class="num">2026-02-04</td>
-          <td class="num">$22K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Mindful Nourishment</td>
-          <td class="num">2026-02-03</td>
-          <td class="num">$17K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">GPAZ</td>
-          <td class="num">2026-02-02</td>
-          <td class="num">$20K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">KC Market Oasis LLC</td>
-          <td class="num">2026-02-02</td>
-          <td class="num">$200K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">V4VICTOR LLC</td>
-          <td class="num">2026-02-01</td>
-          <td class="num">$20K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Flychain</td>
-          <td class="pn">HAPPY HEARTS ABA LLC</td>
-          <td class="num">2026-01-30</td>
-          <td class="num">$120K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">EDGE CONSTRUCTION AND CONCRETE LLC</td>
-          <td class="num">2026-01-29</td>
-          <td class="num">$250K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">Duffield Lane LLC</td>
-          <td class="num">2026-01-29</td>
-          <td class="num">$150K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">HILLSIDE LUMBER INC</td>
-          <td class="num">2026-01-29</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Namnum Design Co.</td>
-          <td class="num">2026-01-29</td>
-          <td class="num">$14K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">GLAUBERS TRADITIONAL CLOTHING LLC</td>
-          <td class="num">2026-01-28</td>
-          <td class="num">$45K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">BRP Enterprises</td>
-          <td class="num">2026-01-28</td>
-          <td class="num">$10K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Edstruments (Highnote)</td>
-          <td class="pn">Tierra Pacifica Charter School</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$45K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">KC Boynton LLC</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Edstruments (Highnote)</td>
-          <td class="pn">Freedom Preparatory Academy Inc</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$250K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="pn">Inventit, LLC</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$50K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Edstruments (Highnote)</td>
-          <td class="pn">Briya Public Charter School</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Loro Piana & C Inc</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$150K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Glass House Brands INC</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$75K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">MINISO DEPOT CA INC</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="pn">Peter Millar LLC</td>
-          <td class="num">2026-01-27</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">BRKR.IO Inc.</td>
-          <td class="pn">SONY MUSIC HOLDINGS INC.</td>
-          <td class="num">2026-01-26</td>
-          <td class="num">$100K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr><tr>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="pn">ADLER'S PHARMACY LTC, INC.</td>
-          <td class="num">2026-01-26</td>
-          <td class="num">$225K</td>
-          <td><span class="badge badge-ok">Taktile UW</span></td>
-        </tr></tbody>
-  </table>
+    </table>
+  </div>
 </div>
 
 <div class="footer">
-  OatFi Credit Risk &nbsp;·&nbsp; DQ % are dollar-weighted (curr_upb). Charged-off loans excluded from DQ snapshot.
-  Charge-off balances use charged_off_principal_balance. Vintage DQ rates are as-of-today and not loss-adjusted.
+  OatFi Credit Risk &nbsp;·&nbsp; DQ % dollar-weighted (curr_upb). Charged-off loans excluded from DQ snapshot.
+  Leading indicator uses mart_core_summary due_date vs maturity_date on active loans.
+  NAICS trend sampled monthly. Source: analytics_development.mart / monitoring.
 </div>
 </div>
 
 <script>
 const baseOpts = {
-  responsive:true, maintainAspectRatio:false,
+  responsive:true,maintainAspectRatio:false,
   interaction:{mode:'index',intersect:false},
   plugins:{
-    legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:10}},
+    legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
     tooltip:{bodyFont:{size:11},titleFont:{size:11}}
   },
   scales:{
@@ -1326,14 +1486,20 @@ function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeo
 
 new Chart(document.getElementById('vintChart'),{
   type:'line',
-  data:{labels:["2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{"label": "Avalara Technologies, LLC", "data": [0.0, 1.35, 0.0, 1.89, 3.57, 0.0, 0.0, 0.0, 4.17, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.82, 0.0, 5.56, 0.0, 5.26, 0.0, 0.0, 0.0], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Balance Payments Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 70.0, 0.0, 13.04, 4.95, 6.78, 8.41, 2.73, 4.35, 3.28, 0.0, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.23, 0.0, 2.78, 2.17, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Koverly Inc.", "data": [0.0, 0.32, 0.3, 0.0, 2.48, 2.2, 0.55, 0.85, 0.96, 1.03, 1.65, 1.43, 2.53, 2.89, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Lawtrades", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.47, 38.71, 44.44, 0.0, 0.0, 0.0], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.29, 2.15, 0.0, 0.0, 0.0, 0.0], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Order", "data": [0.0, 0.0, 0.0, 0.1, 0.04, 0.0, 0.0, 0.0, 0.0, 0.06, 0.21, 0.21, 0.14, 0.09, 0.05, 0.0, 0.0, 0.0, 0.0], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Relay Financial Technologies, Inc", "data": [0.85, 1.25, 2.25, 1.2, 0.83, 0.94, 0.27, 0.17, 0.78, 0.33, 0.11, 0.6, 0.67, 0.81, 1.51, 1.27, 1.3, 0.28, 0.0], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "WebCargo", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.33, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]},
+  data:{labels:["2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{"label": "Avalara Technologies, LLC", "data": [0.0, 1.35, 0.0, 1.89, 3.57, 0.0, 0.0, 0.0, 4.17, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.82, 0.0, 5.56, 0.0, 5.26, 0.0, 0.0, 0.0], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.23, 0.0, 2.78, 2.17, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Koverly Inc.", "data": [0.0, 0.32, 0.3, 0.0, 2.48, 2.2, 0.55, 0.85, 0.96, 1.03, 1.65, 1.43, 2.53, 2.89, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Lawtrades", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.47, 38.71, 44.44, 0.0, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.29, 2.15, 0.0, 0.0, 0.0, 0.0], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Order", "data": [0.0, 0.0, 0.0, 0.1, 0.04, 0.0, 0.0, 0.0, 0.0, 0.06, 0.21, 0.21, 0.14, 0.09, 0.05, 0.0, 0.0, 0.0, 0.0], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Relay Financial Technologies, Inc", "data": [0.85, 1.25, 2.25, 1.2, 0.83, 0.94, 0.27, 0.17, 0.78, 0.33, 0.11, 0.6, 0.67, 0.81, 1.51, 1.27, 1.3, 0.28, 0.0], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "WebCargo", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.33, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#D4A017", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
 });
 
 new Chart(document.getElementById('origChart'),{
   type:'line',
-  data:{labels:["2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{"label": "Avalara Technologies, LLC", "data": [676.2, 2303.5, 969.1, 1685.8, 1014.0, 668.5, 463.9, 681.3, 776.0, 364.3, 434.8, 126.2, 272.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 184.7, 351.8, 227.0, 239.4, 123.7, 275.8, 262.3, 316.6, 217.2, 413.7, 469.6, 281.6, 319.8, 436.4], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Cledara Limited", "data": [0.2, 19.7, 20.0, 17.5, 19.3, 11.8, 60.1, 382.2, 1824.5, 1935.7, 2062.5, 1987.5, 1903.9, 1899.7, 1905.7, 1871.3, 1788.3, 1787.5, 1650.3], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 13.4, 27.7, 16.7], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Flychain", "data": [336.0, 898.0, 1052.5, 1523.7, 1077.2, 1052.9, 767.9, 1617.8, 1190.8, 1132.3, 902.1, 1629.1, 854.3, 925.9, 1071.9, 704.1, 1159.8, 1612.7, 750.8], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Foodomarket Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 779.9, 900.2, 1328.8, 1098.5, 837.1], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Harvv (Qisstpay)", "data": [0.0, 79.5, 27.2, 130.1, 20.6, 2.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#888", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Hostfi Inc. DBA Accountable", "data": [0.0, 0.0, 0.0, 0.0, 113.4, 535.8, 357.2, 405.4, 547.5, 461.3, 436.9, 383.5, 101.5, 0.6, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#D4A017", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Kaya Pay, Inc.", "data": [0.0, 12.3, 6.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Koverly Inc.", "data": [1155.5, 5166.6, 6677.2, 6984.7, 8786.7, 10127.0, 8596.2, 9212.8, 9972.0, 10663.1, 12933.6, 10869.3, 11194.4, 11962.6, 9559.3, 13602.1, 11350.9, 12817.2, 9150.7], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Lawtrades", "data": [471.2, 702.5, 781.4, 1751.1, 311.0, 934.6, 1099.7, 642.5, 916.8, 678.3, 606.8, 1380.3, 795.8, 637.5, 401.7, 177.4, 193.1, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1320.5, 832.4, 646.9, 1044.4, 892.8, 794.3, 1159.8, 935.3, 914.6, 1039.9], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Order", "data": [3908.1, 16730.5, 15127.5, 17278.7, 18282.2, 16940.9, 19836.9, 20586.6, 20959.9, 19142.1, 20737.3, 22463.6, 23979.7, 27729.6, 22581.6, 23030.4, 25670.2, 23587.0, 18566.6], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Relay Financial Technologies, Inc", "data": [438.5, 1933.6, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 4521.8], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 81.6, 1256.2, 951.4, 1409.3, 1407.5, 1335.2], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Upflow", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "VenuePilot Inc", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#888", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "WebCargo", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 0.0, 0.0, 0.0, 38.4, 0.0], "borderColor": "#D4A017", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]},
+  data:{labels:["2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{"label": "Avalara Technologies, LLC", "data": [676.2, 2303.5, 969.1, 1685.8, 1014.0, 668.5, 463.9, 681.3, 776.0, 364.3, 434.8, 126.2, 272.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 184.7, 351.8, 227.0, 239.4, 123.7, 275.8, 262.3, 316.6, 217.2, 413.7, 469.6, 281.6, 319.8, 458.2], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Cledara Limited", "data": [0.2, 19.7, 20.0, 17.5, 19.3, 11.8, 60.1, 382.2, 1824.5, 1935.7, 2062.5, 1987.5, 1903.9, 1899.7, 1905.7, 1871.3, 1788.3, 1787.5, 1650.3], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 13.4, 27.7, 16.7], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Flychain", "data": [336.0, 898.0, 1052.5, 1523.7, 1077.2, 1052.9, 767.9, 1617.8, 1190.8, 1132.3, 902.1, 1629.1, 854.3, 925.9, 1071.9, 704.1, 1159.8, 1612.7, 930.8], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Foodomarket Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 779.9, 900.2, 1328.8, 1098.5, 837.1], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Harvv (Qisstpay)", "data": [0.0, 79.5, 27.2, 130.1, 20.6, 2.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#888", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Hostfi Inc. DBA Accountable", "data": [0.0, 0.0, 0.0, 0.0, 113.4, 535.8, 357.2, 405.4, 547.5, 461.3, 436.9, 383.5, 101.5, 0.6, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#D4A017", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Kaya Pay, Inc.", "data": [0.0, 12.3, 6.8, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Koverly Inc.", "data": [1155.5, 5166.6, 6677.2, 6984.7, 8786.7, 10127.0, 8596.2, 9212.8, 9972.0, 10663.1, 12933.6, 10869.3, 11194.4, 11962.6, 9559.3, 13602.1, 11350.9, 12817.2, 9199.8], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Lawtrades", "data": [471.2, 702.5, 781.4, 1751.1, 311.0, 934.6, 1099.7, 642.5, 916.8, 678.3, 606.8, 1380.3, 795.8, 637.5, 401.7, 177.4, 193.1, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1320.5, 832.4, 646.9, 1044.4, 892.8, 794.3, 1159.8, 935.3, 914.6, 1039.9], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Order", "data": [3908.1, 16730.5, 15127.5, 17278.7, 18282.2, 16940.9, 19836.9, 20586.6, 20959.9, 19142.1, 20737.3, 22463.6, 23979.7, 27729.6, 22581.6, 23030.4, 25670.2, 23587.0, 18651.7], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Relay Financial Technologies, Inc", "data": [438.5, 1933.6, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 4521.8], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 81.6, 1256.2, 951.4, 1409.3, 1407.5, 1335.2], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "Upflow", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "VenuePilot Inc", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#888", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "WebCargo", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 0.0, 0.0, 0.0, 38.4, 0.0], "borderColor": "#D4A017", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]},
   options:merge(baseOpts,{scales:{y:{ticks:{callback:v=>'$'+v+'K'}}}})
+});
+
+new Chart(document.getElementById('naicsTrendChart'),{
+  type:'line',
+  data:{labels:["2025-10-22", "2025-11-22", "2025-12-22", "2026-01-22", "2026-02-22", "2026-03-22"],datasets:[{"label": "Construction", "data": [5.5, 5.53, 4.33, 10.49, 13.84, 14.08], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Wholesale Trade", "data": [4.54, 5.7, 3.5, 8.68, 6.38, 7.76], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [2.61, 2.36, 2.33, 2.59, 2.53, 2.91], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [2.22, 1.72, 0.46, 0.66, 1.0, 2.88], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Information", "data": [2.34, 1.85, 7.6, 4.81, 3.91, 3.85], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Finance & Insurance", "data": [0.99, 3.72, 1.79, 1.82, 0.91, 1.34], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Professional Services", "data": [5.32, 9.35, 6.44, 8.73, 11.09, 10.99], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Health Care", "data": [4.11, 3.37, 2.87, 2.65, 2.4, 1.96], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Food & Accommodation", "data": [1.21, 1.01, 3.22, 5.98, 5.27, 4.32], "borderColor": "#888", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}]},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
 });
 
 new Chart(document.getElementById('coChart'),{
