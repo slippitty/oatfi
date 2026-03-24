@@ -31,7 +31,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-24 20:26</div>
+<div class="as-of">As of March 6, 2026 &nbsp;·&nbsp; Q2 target period: April – June 2026 &nbsp;·&nbsp; Generated 2026-03-24 20:32</div>
 <div class="lag-notice">Indicators marked <strong>lagging</strong> reflect portfolio outcomes with a delay and should be read alongside leading metrics.</div>
 
 <div class="section-label" style="margin-bottom:1rem">Loss rate — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px">lagging</span></div>
@@ -160,14 +160,8 @@
       <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#F1EFE8;color:#5F5E5A">Monitor only</span>
     </div>
     <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
-      <div style="font-size:11px;color:#888780;margin-bottom:.35rem">MR rate — high line only</div>
-      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">88.24%</div>
-      <div style="font-size:11px;color:#888780;margin-top:.3rem">Context — no scorecard/KYB</div>
-      <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#F1EFE8;color:#5F5E5A">Monitor only</span>
-    </div>
-    <div style="background:#f5f4f0;border-radius:8px;padding:.875rem 1rem">
       <div style="font-size:11px;color:#888780;margin-bottom:.35rem">MR rate — new partner only</div>
-      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">—</div>
+      <div style="font-size:22px;font-weight:500;line-height:1;color:#1a1a1a">40.0%</div>
       <div style="font-size:11px;color:#888780;margin-top:.3rem">Context — partner <90 days</div>
       <span style="display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;margin-top:.4rem;font-weight:500;background:#F1EFE8;color:#5F5E5A">Monitor only</span>
     </div>
@@ -212,7 +206,6 @@
       <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#1D9E75;margin-right:4px"></span>Scorecard</span>
       <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#7F77DD;margin-right:4px"></span>Clean (excl. KYB + high line + new)</span>
       <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#D85A30;margin-right:4px"></span>KYB</span>
-      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#888780;margin-right:4px"></span>High line &gt;$150k</span>
       <span><span style="display:inline-block;width:24px;height:0;border-top:2px dashed #BA7517;margin-right:4px;vertical-align:middle"></span>35% ceiling</span>
     </div>
     <div style="position:relative;width:100%;height:200px"><canvas id="mrChart"></canvas></div>
@@ -259,7 +252,7 @@
 
 <div style="background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:2rem">
   <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:.875rem">Month-over-month commentary <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;text-transform:none;letter-spacing:0;margin-left:4px">AI</span></div>
-  <p style="font-size:13px;line-height:1.7;color:#444441">Total 120+ DPD balances increased significantly from $27,572 to $1,148,520, driven primarily by deterioration across five partners. Relay Financial Technologies shows the most concerning pattern with delinquencies rising $403,955 across 60 different organizations and no chargeoffs, indicating widespread new delinquencies rather than concentration in a few borrowers. Order experienced the second-largest dollar increase at $267,318 spread across 22 organizations, while Koverly Inc. added $432,183 across 17 organizations. Both Order and Koverly have substantial chargeoff balances suggesting some losses have already been recognized, whereas Relay Financial's zero chargeoff balance indicates these are fresh delinquencies.</p>
+  <p style="font-size:13px;line-height:1.7;color:#444441">Total 120+ DPD balances increased dramatically by $1.12 million, with Koverly Inc. being the largest single contributor at $432k in new delinquencies. Relay Financial Technologies also showed significant deterioration with $404k in new delinquencies spread across 60 different organizations, indicating broad-based portfolio stress rather than concentration in a single borrower. Order contributed $267k in additional delinquencies across 22 organizations, while both BRKR.IO Inc. and Flychain entered the 120+ DPD bucket for the first time. The zero chargeoff balance at Relay Financial Technologies suggests their delinquency increase represents actual deterioration rather than a chargeoff event, whereas the substantial chargeoff balances at Koverly Inc. and Order indicate these partners have experienced significant loss recognition activity.</p>
 </div>
 
 <div class="section-label" style="margin-bottom:1rem">Q2 goal progress</div>
@@ -643,8 +636,7 @@ const mrLabels   = ["2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "202
 const mrOverall  = [46.88, 35.58, 40.0, 42.22, 39.13, 52.73, 55.45];
 const mrScore    = [40.63, 35.58, 31.0, 32.22, 27.54, 30.91, 27.72];
 const mrKybOnly  = [6.25, 3.85, 1.0, 1.11, 1.45, 0.0, 5.94];
-const mrNewOnly  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-const mrHighLine = [41.67, 47.06, 77.78, 54.55, 53.57, 77.27, 88.24];
+const mrNewOnly  = [18.18, 21.74, 22.22, 40.0, 0.0, 0.0, 0.0];
 new Chart(document.getElementById('mrChart'), {
   type: 'line',
   data: {
@@ -654,14 +646,10 @@ new Chart(document.getElementById('mrChart'), {
          pointRadius:0, tension:.3, fill:false },
       { label:'KYB only',          data: mrKybOnly,  borderColor:'#D85A30', borderWidth:1.5,
          pointRadius:0, tension:.3, fill:false, borderDash:[4,3] },
-      { label:'High line only',    data: mrHighLine, borderColor:'#888780', borderWidth:1.5,
-         pointRadius:0, tension:.3, fill:false, borderDash:[2,2] },
       { label:'New partner only',  data: mrNewOnly,  borderColor:'#7F77DD', borderWidth:1.5,
          pointRadius:0, tension:.3, fill:false, borderDash:[2,2] },
       { label:'Overall',           data: mrOverall,  borderColor:'#378ADD', borderWidth:1,
          pointRadius:0, tension:.3, fill:false, borderDash:[1,2] },
-      { label:'High line',  data: mrHighLine, borderColor:'#888780', borderWidth:1.5,
-         pointRadius:0, tension:.3, fill:false, borderDash:[2,2] },
       { label:'35% ceiling', data: targetLine(35, mrLabels.length),
          borderColor:'#BA7517', borderWidth:1, borderDash:[4,3],
          pointRadius:0, fill:false }
@@ -729,8 +717,8 @@ new Chart(document.getElementById('apprChart'), {
 
 // ── Loss Rate (bps) ────────────────────────────────────────
 const lossLabels = ["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"];
-const lossRate   = [90.0, 60.0, 40.0, 50.0, 80.0, 100.0, 110.0, 120.0, 50.0, 120.0, 130.0, 80.0, 60.0, 120.0, 70.0, 100.0, 110.0, 100.0, 110.0, 50.0, 60.0, 60.0, 130.0, 80.0, 60.0];
-const loss3m     = [80.0, 90.0, 80.0, 70.0, 90.0, 50.0, 60.0, 100.0, 60.0, 90.0, 60.0, 60.0, 80.0, 100.0, 60.0, 50.0, 80.0, 90.0, 80.0, 80.0, 100.0, 100.0, 100.0, 60.0, 90.0];
+const lossRate   = [100.0, 30.0, 100.0, 80.0, 50.0, 50.0, 90.0, 80.0, 70.0, 120.0, 60.0, 130.0, 60.0, 110.0, 130.0, 100.0, 70.0, 30.0, 70.0, 130.0, 80.0, 110.0, 30.0, 120.0, 50.0];
+const loss3m     = [90.0, 100.0, 70.0, 90.0, 60.0, 70.0, 60.0, 80.0, 80.0, 80.0, 70.0, 80.0, 80.0, 100.0, 60.0, 80.0, 60.0, 50.0, 80.0, 50.0, 60.0, 100.0, 70.0, 100.0, 70.0];
 new Chart(document.getElementById('lossChart'), {
   type: 'line',
   data: {
