@@ -11,7 +11,7 @@
   h1{font-size:18px;font-weight:500;margin-bottom:.25rem}
   .as-of{font-size:12px;color:#888780;margin-bottom:2rem}
   .section-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:1rem}
-  .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:2rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:2rem}
   .metric-card{background:#f5f4f0;border-radius:8px;padding:.875rem 1rem}
   .metric-label{font-size:11px;color:#888780;margin-bottom:.35rem}
   .metric-value{font-size:24px;font-weight:500;line-height:1}
@@ -30,7 +30,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">Generated 2026-03-25 18:38 &nbsp;·&nbsp; Q2 target period: April–June 2026</div>
+<div class="as-of">Generated 2026-03-25 18:58 &nbsp;·&nbsp; Q2 target period: April–June 2026</div>
 
 <!-- Summary cards -->
 <div class="section-label">120+ DPD — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px;text-transform:none;letter-spacing:0">lagging</span></div>
@@ -38,12 +38,17 @@
   <div class="metric-card">
     <div class="metric-label">Current month 120+ DPD balance</div>
     <div class="metric-value" style="color:#A32D2D">$1.35M</div>
-    <div class="metric-sub">Prior month $28K</div>
+    <div class="metric-sub">Prior month $30K</div>
   </div>
   <div class="metric-card">
     <div class="metric-label">Month-over-month change</div>
     <div class="metric-value" style="color:#A32D2D">▲ $1.32M</div>
     <div class="metric-sub">Increase</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-label">120+ DPD as % of book</div>
+    <div class="metric-value" style="color:#A32D2D">1.94%</div>
+    <div class="metric-sub">Prior month 0.69% &nbsp;·&nbsp; <span style="color:#A32D2D">▲1.25pp</span></div>
   </div>
   <div class="metric-card">
     <div class="metric-label">North star target</div>
@@ -81,10 +86,22 @@
 </div>
 
 
+<div class="section-label" style="margin-top:1.5rem">Underwriting signals — monthly</div>
+<div class="chart-card" style="margin-bottom:2rem">
+  <div class="legend">
+    <span><span class="legend-dot" style="background:#A32D2D"></span>Approved &gt;modeled limit</span>
+    <span><span class="legend-dot" style="background:#BA7517"></span>Risk rank 7</span>
+    <span><span class="legend-dot" style="background:#7F77DD"></span>Risk rank 8+</span>
+    <span><span class="legend-dot" style="background:#378ADD"></span>Approved over model decline</span>
+    <span><span class="legend-dot" style="background:#1D9E75"></span>Approved over scorecard MR</span>
+  </div>
+  <div class="chart-wrap" style="height:260px"><canvas id="uwChart"></canvas></div>
+</div>
+
 <script>
 const lossLabels = ["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"];
-const lossRate   = [90.0, 80.0, 120.0, 80.0, 100.0, 110.0, 100.0, 50.0, 30.0, 80.0, 50.0, 40.0, 130.0, 70.0, 110.0, 60.0, 60.0, 110.0, 70.0, 100.0, 50.0, 80.0, 80.0, 110.0, 100.0];
-const loss3m     = [90.0, 90.0, 50.0, 70.0, 90.0, 90.0, 50.0, 70.0, 60.0, 100.0, 50.0, 100.0, 60.0, 80.0, 90.0, 100.0, 80.0, 80.0, 60.0, 100.0, 100.0, 60.0, 70.0, 100.0, 70.0];
+const lossRate   = [110.0, 60.0, 50.0, 90.0, 40.0, 50.0, 30.0, 130.0, 70.0, 100.0, 50.0, 110.0, 40.0, 130.0, 50.0, 90.0, 70.0, 100.0, 60.0, 110.0, 30.0, 120.0, 90.0, 90.0, 80.0];
+const loss3m     = [60.0, 60.0, 50.0, 100.0, 50.0, 100.0, 50.0, 50.0, 70.0, 50.0, 50.0, 50.0, 80.0, 70.0, 50.0, 80.0, 50.0, 80.0, 70.0, 70.0, 100.0, 90.0, 100.0, 100.0, 90.0];
 
 const baseOpts = {
   responsive:true, maintainAspectRatio:false,
@@ -145,5 +162,27 @@ new Chart(document.getElementById('loanChart'),{
   })
 });
 buildLegend('loanLegend', loanDatasets);
+// UW signals chart
+new Chart(document.getElementById('uwChart'), {
+  type: 'bar',
+  data: {
+    labels: ["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],
+    datasets: [
+      { label:'Approved >modeled limit', data:[13, 17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 1], backgroundColor:'#A32D2D', borderRadius:2 },
+      { label:'Risk rank 7',             data:[2, 0, 3, 1, 4, 10, 15, 12, 12, 17, 12, 13, 12, 9, 8, 21, 15, 19],         backgroundColor:'#BA7517', borderRadius:2 },
+      { label:'Risk rank 8+',            data:[24, 18, 36, 29, 34, 33, 18, 21, 19, 28, 28, 26, 30, 28, 26, 34, 34, 34],         backgroundColor:'#7F77DD', borderRadius:2 },
+      { label:'Approved over decline',   data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],backgroundColor:'#378ADD', borderRadius:2 },
+      { label:'Approved over scorecard MR', data:[12, 10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 13], backgroundColor:'#1D9E75', borderRadius:2 }
+    ]
+  },
+  options: merge(baseOpts, {
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { stacked: false, ticks: { font:{size:10}, color:'#888780', autoSkip:true, maxTicksLimit:12, maxRotation:45 }, grid:{display:false}, border:{display:false} },
+      y: { ticks: { font:{size:10}, color:'#888780' }, grid:{color:'rgba(0,0,0,.04)'}, border:{display:false} }
+    }
+  })
+});
+
 </script>
 </body></html>
