@@ -11,7 +11,7 @@
   h1{font-size:18px;font-weight:500;margin-bottom:.25rem}
   .as-of{font-size:12px;color:#888780;margin-bottom:2rem}
   .section-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:1rem}
-  .summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:2rem}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:2rem}
   .metric-card{background:#f5f4f0;border-radius:8px;padding:.875rem 1rem}
   .metric-label{font-size:11px;color:#888780;margin-bottom:.35rem}
   .metric-value{font-size:24px;font-weight:500;line-height:1}
@@ -30,7 +30,7 @@
 <body>
 
 <h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">Generated 2026-03-25 18:58 &nbsp;·&nbsp; Q2 target period: April–June 2026</div>
+<div class="as-of">Generated 2026-03-25 23:42 &nbsp;·&nbsp; Q2 target period: April–June 2026</div>
 
 <!-- Summary cards -->
 <div class="section-label">120+ DPD — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px;text-transform:none;letter-spacing:0">lagging</span></div>
@@ -39,11 +39,6 @@
     <div class="metric-label">Current month 120+ DPD balance</div>
     <div class="metric-value" style="color:#A32D2D">$1.35M</div>
     <div class="metric-sub">Prior month $30K</div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-label">Month-over-month change</div>
-    <div class="metric-value" style="color:#A32D2D">▲ $1.32M</div>
-    <div class="metric-sub">Increase</div>
   </div>
   <div class="metric-card">
     <div class="metric-label">120+ DPD as % of book</div>
@@ -100,8 +95,8 @@
 
 <script>
 const lossLabels = ["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"];
-const lossRate   = [110.0, 60.0, 50.0, 90.0, 40.0, 50.0, 30.0, 130.0, 70.0, 100.0, 50.0, 110.0, 40.0, 130.0, 50.0, 90.0, 70.0, 100.0, 60.0, 110.0, 30.0, 120.0, 90.0, 90.0, 80.0];
-const loss3m     = [60.0, 60.0, 50.0, 100.0, 50.0, 100.0, 50.0, 50.0, 70.0, 50.0, 50.0, 50.0, 80.0, 70.0, 50.0, 80.0, 50.0, 80.0, 70.0, 70.0, 100.0, 90.0, 100.0, 100.0, 90.0];
+const lossRate   = [30.0, 70.0, 120.0, 60.0, 40.0, 120.0, 80.0, 80.0, 130.0, 120.0, 130.0, 100.0, 60.0, 60.0, 110.0, 80.0, 110.0, 90.0, 30.0, 100.0, 40.0, 70.0, 80.0, 80.0, 100.0];
+const loss3m     = [80.0, 90.0, 60.0, 90.0, 60.0, 60.0, 100.0, 60.0, 60.0, 100.0, 60.0, 50.0, 100.0, 70.0, 90.0, 100.0, 80.0, 80.0, 50.0, 90.0, 100.0, 70.0, 80.0, 70.0, 50.0];
 
 const baseOpts = {
   responsive:true, maintainAspectRatio:false,
