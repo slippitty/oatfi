@@ -58,10 +58,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 26 Mar 2026, 14:44</span>
+    <span style="font-size:12px;color:#888780">Generated 26 Mar 2026, 15:52</span>
   </div>
 
-  <!-- ══ SECTION 1: NORTH STAR ══ -->
   <div class="section-label">
     North star
     <span class="badge" style="background:#FCEBEB;color:#A32D2D">ABOVE TARGET</span>
@@ -94,7 +93,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="metric-label">120+ DPD % of book</div>
       <div style="display:flex;align-items:baseline;gap:8px">
         <div class="metric-value" style="font-size:22px;color:#A32D2D">1.9%</div>
-        <span style="font-size:11px;color:#A32D2D">▲0.12pp</span>
+        <span style="font-size:11px;color:#A32D2D">▲1.12pp</span>
       </div>
       <div class="ns-bar-track">
         <div class="ns-bar-fill" style="width:100.0%;background:#A32D2D"></div>
@@ -104,12 +103,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="metric-bg">
       <div class="metric-label">120+ DPD balance</div>
       <div class="metric-value" style="font-size:22px;color:#A32D2D">$1.33M</div>
-      <div class="metric-sub">Prior n/a</div>
+      <div class="metric-sub">Prior $25K</div>
     </div>
     <div class="metric-bg">
       <div class="metric-label">Loss rate</div>
-      <div class="metric-value" style="font-size:22px">70.0bps</div>
-      <div class="metric-sub">Prior 80.0bps</div>
+      <div class="metric-value" style="font-size:22px">30.0bps</div>
+      <div class="metric-sub">Prior 110.0bps</div>
     </div>
     <div class="metric-bg">
       <div class="metric-label">Avg risk rank (latest)</div>
@@ -118,21 +117,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
   </div>
 
-  <!-- ══ SECTION 2: NARRATIVE ══ -->
   <div class="narrative-card" style="margin-bottom:1.5rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">120+ DPD stands at $1.33M — 1.9% of the book, 0.12pp up month-on-month and above target for the 0.25% target. Average risk rank at underwriting is 5.86 (deteriorating from 5.49 last month) with 1 approvals above modeled limit and 13 over scorecard manual review — loss rate is 70.0bps, down from 80.0bps. Largest active 120+ exposure: GigSafe.</p>
+    <p class="narrative-text">120+ DPD stands at $1.33M — 1.9% of the book, 1.12pp up month-on-month and above target for the 0.25% target. Average risk rank at underwriting is 5.86 (deteriorating from 5.49 last month) with 1 approvals above modeled limit and 13 over scorecard manual review — loss rate is 30.0bps, down from 110.0bps. Largest active 120+ exposure: GigSafe.</p>
   </div>
 
-  <!-- ══ SECTION 3: RR PREDICTIVENESS ══ -->
   <div class="section-label">
-    Is risk rank predictive of loss?
+    Is risk rank predictive of loss — and are we approving a better mix?
     <span class="badge" style="background:#E6F1FB;color:#185FA5">RR 1–5 should show near-zero delinquency</span>
   </div>
 
   <div class="grid-2" style="margin-bottom:1.5rem">
     <div class="card">
-      <div class="chart-title">30-day delinquency rate by RR band (% of approvals in that band that went delinquent)</div>
+      <div class="chart-title">30-day delinquency rate by RR band (% of that band that went delinquent)</div>
       <div class="legend">
         <span><span class="ld" style="background:#3B6D11"></span>RR 1–5 (target: 0%)</span>
         <span><span class="ld" style="background:#378ADD"></span>RR 6</span>
@@ -142,7 +139,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="chart-wrap-lg"><canvas id="rrDelChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="chart-title">Share of approvals by RR band — are we approving fewer high-risk? (stacks to 100%)</div>
+      <div class="chart-title">Share of approvals by RR band — stacks to 100% — green growing means improving mix</div>
       <div class="legend">
         <span><span class="ld" style="background:#3B6D11"></span>RR 1–5</span>
         <span><span class="ld" style="background:#378ADD"></span>RR 6</span>
@@ -153,41 +150,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
   </div>
 
-  <!-- ══ SECTION 4: ABOVE LIMIT ══ -->
   <div class="section-label">
-    Above-modeled-limit approvals — count, severity and loss outcome
+    Above-modeled-limit approvals — are overrides concentrated in high-risk bands?
     <span class="badge" style="background:#FFF3CD;color:#854F0B">leading indicator</span>
   </div>
 
-  <div class="grid-3" style="margin-bottom:1.5rem">
+  <div class="grid-2" style="margin-bottom:1.5rem">
     <div class="card">
-      <div class="chart-title">Count by decision type — stacked total overrides per month</div>
+      <div class="chart-title">Share of above-limit approvals by RR band — stacks to 100% — red means overrides in high-risk</div>
       <div class="legend">
-        <span><span class="ld" style="background:#378ADD"></span>BCD bank</span>
-        <span><span class="ld" style="background:#888780"></span>E bureau</span>
-        <span><span class="ld" style="background:#1D9E75"></span>A financial</span>
+        <span><span class="ld" style="background:#3B6D11"></span>RR 1–5</span>
+        <span><span class="ld" style="background:#378ADD"></span>RR 6</span>
+        <span><span class="ld" style="background:#EF9F27"></span>RR 7</span>
+        <span><span class="ld" style="background:#A32D2D"></span>RR 8+</span>
       </div>
-      <div class="chart-wrap-lg"><canvas id="alCountChart"></canvas></div>
+      <div class="chart-wrap-lg"><canvas id="alShareChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="chart-title">Severity — avg and max override ratio (approved ÷ modeled limit)</div>
+      <div class="chart-title">30d delinquent amount from above-limit approvals by RR band ($K)</div>
       <div class="legend">
-        <span><span class="ld" style="background:#EF9F27"></span>Avg ratio</span>
-        <span><span class="ld" style="background:#A32D2D"></span>Max ratio</span>
-      </div>
-      <div class="chart-wrap-lg"><canvas id="alRatioChart"></canvas></div>
-    </div>
-    <div class="card">
-      <div class="chart-title">Loss outcome — 30d delinquent amount: above-limit vs within-limit ($K)</div>
-      <div class="legend">
-        <span><span class="ld" style="background:#A32D2D"></span>Above limit del.</span>
-        <span><span class="ld" style="background:#378ADD"></span>Within limit del.</span>
+        <span><span class="ld" style="background:#3B6D11"></span>RR 1–5</span>
+        <span><span class="ld" style="background:#378ADD"></span>RR 6</span>
+        <span><span class="ld" style="background:#EF9F27"></span>RR 7</span>
+        <span><span class="ld" style="background:#A32D2D"></span>RR 8+</span>
       </div>
       <div class="chart-wrap-lg"><canvas id="alLossChart"></canvas></div>
     </div>
   </div>
 
-  <!-- ══ SECTION 5: DECISIONING SIGNALS ══ -->
   <div class="section-label">
     Decisioning signals — monthly detail
     <span class="badge" style="background:#E6F1FB;color:#185FA5">3–5 month lag to loss</span>
@@ -204,7 +194,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="chart-wrap-lg"><canvas id="uwChart"></canvas></div>
     </div>
     <div class="card">
-      <div style="font-size:11px;color:#888780;margin-bottom:12px">Latest vs prior month — lower is better across all risk signals</div>
+      <div style="font-size:11px;color:#888780;margin-bottom:12px">Latest vs prior month — lower is better</div>
       <table class="sig-table">
         <thead>
           <tr><th>Signal</th><th>Prior</th><th>Latest</th><th>Change</th></tr>
@@ -272,12 +262,11 @@ function buildLegend(elId,ds){
   });
 }
 
-// ── North star ──
 new Chart(document.getElementById('lossChart'),{
   type:'line',
   data:{labels:["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"],datasets:[
-    {label:'Monthly',data:[40.0, 110.0, 40.0, 40.0, 80.0, 30.0, 40.0, 30.0, 130.0, 130.0, 110.0, 60.0, 60.0, 130.0, 130.0, 120.0, 30.0, 90.0, 120.0, 90.0, 40.0, 80.0, 90.0, 80.0, 70.0],borderColor:'#A32D2D',borderWidth:1.5,pointRadius:2,pointBackgroundColor:'#A32D2D',tension:.3,fill:false},
-    {label:'3m avg', data:[100.0, 50.0, 50.0, 60.0, 70.0, 90.0, 70.0, 90.0, 80.0, 60.0, 60.0, 80.0, 90.0, 100.0, 60.0, 70.0, 60.0, 100.0, 80.0, 60.0, 80.0, 100.0, 100.0, 70.0, 60.0],  borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:.3,fill:false},
+    {label:'Monthly',data:[90.0, 90.0, 120.0, 130.0, 130.0, 110.0, 50.0, 30.0, 100.0, 60.0, 40.0, 100.0, 40.0, 110.0, 80.0, 40.0, 120.0, 50.0, 90.0, 130.0, 120.0, 70.0, 120.0, 110.0, 30.0],borderColor:'#A32D2D',borderWidth:1.5,pointRadius:2,pointBackgroundColor:'#A32D2D',tension:.3,fill:false},
+    {label:'3m avg', data:[90.0, 60.0, 100.0, 60.0, 60.0, 90.0, 80.0, 70.0, 100.0, 90.0, 60.0, 60.0, 90.0, 70.0, 90.0, 60.0, 100.0, 100.0, 60.0, 100.0, 70.0, 90.0, 70.0, 70.0, 100.0],  borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:.3,fill:false},
     {label:'25bps',  data:Array(25).fill(25),borderColor:'#BA7517',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
@@ -298,7 +287,6 @@ new Chart(document.getElementById('loanChart'),{
 });
 buildLegend('loanLegend',loanDatasets);
 
-// ── RR delinquency rate ──
 new Chart(document.getElementById('rrDelChart'),{
   type:'line',
   data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
@@ -310,60 +298,45 @@ new Chart(document.getElementById('rrDelChart'),{
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
 
-// ── RR share — 100% stacked bar ──
 new Chart(document.getElementById('rrShareChart'),{
   type:'bar',
   data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'RR 1–5',data:[20.2, 31.2, 11.8, 12.8, 30.3, 6.8, 18.3, 29.5, 17.1, 19.4, 18.1, 32.9, 81.8, 74.6, 76.3, 70.7, 68.4, 74.7, 73.3, 85.0, 84.4, 83.5, 74.5, 54.5],backgroundColor:'rgba(59,109,17,.75)', borderWidth:0},
-    {label:'RR 6',  data:[2.3, 2.1, 0.6, 0.0, 1.5, 0.9, 0.0, 0.0, 0.6, 1.1, 0.0, 0.0, 2.3, 0.0, 1.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.6, 26.3], backgroundColor:'rgba(55,138,221,.75)',borderWidth:0},
-    {label:'RR 7',  data:[1.6, 0.0, 5.9, 1.2, 0.8, 0.9, 1.7, 0.0, 1.3, 0.0, 1.7, 1.4, 13.6, 7.5, 5.3, 5.1, 6.8, 9.2, 7.8, 6.2, 7.8, 8.3, 11.7, 12.1], backgroundColor:'rgba(239,159,39,.75)',borderWidth:0},
-    {label:'RR 8+', data:[5.4, 1.1, 4.1, 2.3, 0.8, 0.0, 2.5, 0.0, 1.3, 2.2, 2.6, 6.8, 2.3, 10.4, 5.3, 5.1, 6.0, 8.0, 8.9, 2.5, 3.1, 4.6, 3.2, 4.0],backgroundColor:'rgba(163,45,45,.75)', borderWidth:0}
+    {label:'RR 1–5',data:[68.4, 90.8, 52.6, 78.6, 90.9, 78.9, 81.5, 100.0, 84.4, 85.7, 80.8, 80.0, 81.8, 80.6, 86.6, 87.5, 84.2, 81.2, 81.5, 90.7, 88.5, 86.7, 74.5, 56.2],backgroundColor:'rgba(59,109,17,.75)', borderWidth:0},
+    {label:'RR 6',  data:[7.9, 6.2, 2.6, 0.0, 4.5, 10.5, 0.0, 0.0, 3.1, 4.8, 0.0, 0.0, 2.3, 0.0, 1.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.6, 27.1], backgroundColor:'rgba(55,138,221,.75)',borderWidth:0},
+    {label:'RR 7',  data:[5.3, 0.0, 26.3, 7.1, 2.3, 10.5, 7.4, 0.0, 6.2, 0.0, 7.7, 3.3, 13.6, 8.1, 6.0, 6.2, 8.4, 10.0, 8.6, 6.7, 8.2, 8.6, 11.7, 12.5], backgroundColor:'rgba(239,159,39,.75)',borderWidth:0},
+    {label:'RR 8+', data:[18.4, 3.1, 18.4, 14.3, 2.3, 0.0, 11.1, 0.0, 6.2, 9.5, 11.5, 16.7, 2.3, 11.3, 6.0, 6.2, 7.4, 8.8, 9.9, 2.7, 3.3, 4.8, 3.2, 4.2],backgroundColor:'rgba(163,45,45,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{
-    scales:{
-      x:{stacked:true},
-      y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}
-    }
+    scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}
   })
 });
 
-// ── Above limit count — stacked bar ──
-new Chart(document.getElementById('alCountChart'),{
+new Chart(document.getElementById('alShareChart'),{
   type:'bar',
   data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'BCD bank',   data:[4, 26, 2, 4, 6, 67, 9, 17, 21, 13, 14, 5, 6, 2, 7, 6, 17, 11, 0, 1, 3, 4, 1, 1],backgroundColor:'rgba(55,138,221,.75)',borderWidth:0},
-    {label:'E bureau',   data:[30, 14, 5, 5, 2, 0, 3, 0, 2, 1, 1, 3, 0, 3, 1, 5, 2, 4, 2, 1, 0, 1, 0, 0],  backgroundColor:'rgba(136,135,128,.75)',borderWidth:0},
-    {label:'A financial',data:[0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],  backgroundColor:'rgba(29,158,117,.75)', borderWidth:0}
+    {label:'RR 1–5',data:[28.6, 66.7, 0.0, 0.0, 100.0, 50.0, 0.0, 0, 0, 100.0, 0.0, 33.3, 66.7, 50.0, 75.0, 33.3, 82.4, 50.0, 0.0, 50.0, 100.0, 80.0, 100.0, 0.0],backgroundColor:'rgba(59,109,17,.75)', borderWidth:0},
+    {label:'RR 6',  data:[14.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], backgroundColor:'rgba(55,138,221,.75)',borderWidth:0},
+    {label:'RR 7',  data:[14.3, 0.0, 0.0, 0.0, 0.0, 50.0, 0.0, 0, 0, 0.0, 0.0, 0.0, 16.7, 0.0, 12.5, 33.3, 5.9, 21.4, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0], backgroundColor:'rgba(239,159,39,.75)',borderWidth:0},
+    {label:'RR 8+', data:[42.9, 33.3, 100.0, 100.0, 0.0, 0.0, 100.0, 0, 0, 0.0, 100.0, 66.7, 16.7, 50.0, 12.5, 33.3, 11.8, 28.6, 100.0, 50.0, 0.0, 20.0, 0.0, 0.0],backgroundColor:'rgba(163,45,45,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{
-    scales:{
-      x:{stacked:true},
-      y:{stacked:true,ticks:{callback:v=>v}}
-    }
+    scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}
   })
 });
 
-// ── Override ratio severity ──
-new Chart(document.getElementById('alRatioChart'),{
-  type:'line',
-  data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'Avg ratio',data:[15.38, 9.43, 4.33, 2.63, 3.27, 7.29, 4.72, 1.32, 3.53, 2.87, 61.16, 6.38, 2.07, 3.6, 1.28, 2.2, 21.59, 3.58, 58.08, 4.56, 1.31, 15.57, 1.11, 1.13],borderColor:'#EF9F27',borderWidth:2,pointRadius:2,tension:.3,fill:false,spanGaps:true},
-    {label:'Max ratio',data:[69.97, 99.3, 13.0, 5.25, 5.55, 13.64, 10.66, 2.54, 6.48, 6.5, 62.99, 11.61, 5.06, 6.66, 1.63, 4.17, 31.23, 8.35, 100.0, 4.56, 1.31, 15.63, 1.11, 1.13],borderColor:'#A32D2D',borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[3,3],spanGaps:true}
-  ]},
-  options:merge(baseOpts,{scales:{y:{min:1,ticks:{callback:v=>v+'x'}}}})
-});
-
-// ── Above limit loss vs within limit ──
 new Chart(document.getElementById('alLossChart'),{
   type:'bar',
   data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'Above limit del.',  data:[998.7, 331.3, 386.0, 32.7, 0.0, 95.5, 11.2, 78.4, 26.9, 3.4, 0.6, 156.2, 0.0, 12.2, 4.6, 19.9, 0.0, 2.9, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0],          backgroundColor:'rgba(163,45,45,.75)', borderWidth:0},
-    {label:'Within limit del.', data:[1623.3, 608.3, 1388.2, 3230.5, 2048.8, 509.2, 1354.5, 254.2, 1028.3, 458.1, 251.0, 100.5, 0.0, 137.3, 68.3, 229.1, 92.0, 31.5, 128.6, 61.9, 5.6, 0.0, 0.0, 0.0],   backgroundColor:'rgba(55,138,221,.5)', borderWidth:0}
+    {label:'RR 1–5',data:[114.4, 3.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.6, 1.4, 0.0, 2.9, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0],backgroundColor:'rgba(59,109,17,.75)', borderWidth:0},
+    {label:'RR 6',  data:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], backgroundColor:'rgba(55,138,221,.75)',borderWidth:0},
+    {label:'RR 7',  data:[45.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], backgroundColor:'rgba(239,159,39,.75)',borderWidth:0},
+    {label:'RR 8+', data:[159.2, 6.5, 0.0, 32.7, 0.0, 0.0, 8.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],backgroundColor:'rgba(163,45,45,.75)', borderWidth:0}
   ]},
-  options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>'$'+v+'K'}}}})
+  options:merge(baseOpts,{
+    scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}
+  })
 });
 
-// ── Decisioning signals bar ──
 new Chart(document.getElementById('uwChart'),{
   type:'bar',
   data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
@@ -375,7 +348,6 @@ new Chart(document.getElementById('uwChart'),{
   options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>v}}}})
 });
 
-// ── Signal table ──
 const sigData={
   'Above modeled limit':[2,1],
   'Risk rank 7':        [15,19],
@@ -399,7 +371,6 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
   </tr>`;
 });
 
-// ── Avg RR sparkline ──
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
   data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{
