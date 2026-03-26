@@ -58,7 +58,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 26 Mar 2026, 15:52</span>
+    <span style="font-size:12px;color:#888780">Generated 26 Mar 2026, 16:21</span>
   </div>
 
   <div class="section-label">
@@ -107,19 +107,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
     <div class="metric-bg">
       <div class="metric-label">Loss rate</div>
-      <div class="metric-value" style="font-size:22px">30.0bps</div>
-      <div class="metric-sub">Prior 110.0bps</div>
+      <div class="metric-value" style="font-size:22px">90.0bps</div>
+      <div class="metric-sub">Prior 120.0bps</div>
     </div>
     <div class="metric-bg">
       <div class="metric-label">Avg risk rank (latest)</div>
-      <div class="metric-value" style="font-size:22px;color:#A32D2D">5.86</div>
+      <div class="metric-value" style="font-size:22px;color:#A32D2D">5.88</div>
       <div class="metric-sub">Prior 5.49 — lower is better</div>
     </div>
   </div>
 
   <div class="narrative-card" style="margin-bottom:1.5rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">120+ DPD stands at $1.33M — 1.9% of the book, 1.12pp up month-on-month and above target for the 0.25% target. Average risk rank at underwriting is 5.86 (deteriorating from 5.49 last month) with 1 approvals above modeled limit and 13 over scorecard manual review — loss rate is 30.0bps, down from 110.0bps. Largest active 120+ exposure: GigSafe.</p>
+    <p class="narrative-text">120+ DPD stands at $1.33M — 1.9% of the book, 1.12pp up month-on-month and above target for the 0.25% target. Average risk rank at underwriting is 5.88 (deteriorating from 5.49 last month) with 1 approvals above modeled limit and 13 over scorecard manual review — loss rate is 90.0bps, down from 120.0bps. Largest active 120+ exposure: GigSafe.</p>
   </div>
 
   <div class="section-label">
@@ -265,8 +265,8 @@ function buildLegend(elId,ds){
 new Chart(document.getElementById('lossChart'),{
   type:'line',
   data:{labels:["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"],datasets:[
-    {label:'Monthly',data:[90.0, 90.0, 120.0, 130.0, 130.0, 110.0, 50.0, 30.0, 100.0, 60.0, 40.0, 100.0, 40.0, 110.0, 80.0, 40.0, 120.0, 50.0, 90.0, 130.0, 120.0, 70.0, 120.0, 110.0, 30.0],borderColor:'#A32D2D',borderWidth:1.5,pointRadius:2,pointBackgroundColor:'#A32D2D',tension:.3,fill:false},
-    {label:'3m avg', data:[90.0, 60.0, 100.0, 60.0, 60.0, 90.0, 80.0, 70.0, 100.0, 90.0, 60.0, 60.0, 90.0, 70.0, 90.0, 60.0, 100.0, 100.0, 60.0, 100.0, 70.0, 90.0, 70.0, 70.0, 100.0],  borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:.3,fill:false},
+    {label:'Monthly',data:[50.0, 120.0, 60.0, 30.0, 100.0, 80.0, 50.0, 40.0, 50.0, 40.0, 40.0, 40.0, 60.0, 100.0, 90.0, 80.0, 30.0, 30.0, 110.0, 60.0, 130.0, 100.0, 50.0, 120.0, 90.0],borderColor:'#A32D2D',borderWidth:1.5,pointRadius:2,pointBackgroundColor:'#A32D2D',tension:.3,fill:false},
+    {label:'3m avg', data:[70.0, 80.0, 90.0, 70.0, 90.0, 80.0, 50.0, 70.0, 80.0, 90.0, 60.0, 90.0, 60.0, 70.0, 90.0, 50.0, 50.0, 60.0, 70.0, 100.0, 50.0, 90.0, 90.0, 100.0, 70.0],  borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:.3,fill:false},
     {label:'25bps',  data:Array(25).fill(25),borderColor:'#BA7517',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
@@ -342,7 +342,7 @@ new Chart(document.getElementById('uwChart'),{
   data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
     {label:'Above modeled limit',data:[13, 17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 1],backgroundColor:'rgba(226,75,74,.75)', borderWidth:0},
     {label:'Risk rank 7',        data:[2, 0, 3, 1, 4, 10, 15, 12, 12, 17, 12, 13, 12, 9, 8, 21, 15, 19],        backgroundColor:'rgba(239,159,39,.75)',borderWidth:0},
-    {label:'Risk rank 8+',       data:[24, 18, 36, 29, 34, 33, 18, 21, 19, 28, 28, 26, 30, 28, 26, 34, 32, 35],        backgroundColor:'rgba(127,119,221,.75)',borderWidth:0},
+    {label:'Risk rank 8+',       data:[24, 18, 36, 29, 34, 33, 18, 21, 19, 28, 28, 26, 30, 28, 26, 34, 32, 36],        backgroundColor:'rgba(127,119,221,.75)',borderWidth:0},
     {label:'Over scorecard MR',  data:[12, 10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 13],    backgroundColor:'rgba(29,158,117,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>v}}}})
@@ -351,9 +351,9 @@ new Chart(document.getElementById('uwChart'),{
 const sigData={
   'Above modeled limit':[2,1],
   'Risk rank 7':        [15,19],
-  'Risk rank 8+':       [32,35],
+  'Risk rank 8+':       [32,36],
   'Over scorecard MR':  [15,13],
-  'Approval rate %':    [66.2,63.9],
+  'Approval rate %':    [66.2,63.1],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
@@ -374,7 +374,7 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
   data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{
-    data:[6.39, 6.13, 6.6, 6.51, 6.51, 6.61, 5.79, 5.34, 5.26, 5.53, 5.38, 5.62, 5.51, 5.37, 5.43, 5.19, 5.49, 5.86],
+    data:[6.39, 6.13, 6.6, 6.51, 6.51, 6.61, 5.79, 5.34, 5.26, 5.53, 5.38, 5.62, 5.51, 5.37, 5.43, 5.19, 5.49, 5.88],
     borderColor:'#378ADD',borderWidth:2,pointRadius:2,
     pointBackgroundColor:'#378ADD',tension:.3,fill:false
   }]},
