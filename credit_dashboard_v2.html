@@ -3,181 +3,318 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Q2 2026 Credit Risk Dashboard</title>
+<title>Credit Risk Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f4f0;color:#1a1a1a;padding:2rem}
-  h1{font-size:18px;font-weight:500;margin-bottom:.25rem}
-  .as-of{font-size:12px;color:#888780;margin-bottom:2rem}
-  .section-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#888780;border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin-bottom:1rem}
-  .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:2rem}
-  .metric-card{background:#f5f4f0;border-radius:8px;padding:.875rem 1rem}
-  .metric-label{font-size:11px;color:#888780;margin-bottom:.35rem}
-  .metric-value{font-size:24px;font-weight:500;line-height:1}
-  .metric-sub{font-size:11px;color:#888780;margin-top:.3rem}
-  .charts-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;margin-bottom:2rem}
-  .chart-card{background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem}
-  .chart-wrap{position:relative;width:100%;height:220px}
-  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:.75rem;font-size:11px;color:#888780}
-  .legend span{display:flex;align-items:center;gap:4px}
-  .legend-dot{display:inline-block;width:10px;height:10px;border-radius:2px}
-  .table-card{background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem}
-  table{width:100%;border-collapse:collapse}
-  tr:not(:last-child) td{border-bottom:.5px solid #e0ddd6}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f4f0;color:#1a1a1a}
+#gate{position:fixed;inset:0;background:#f5f4f0;display:flex;align-items:center;
+  justify-content:center;z-index:9999;flex-direction:column;gap:12px}
+#gate input{padding:10px 14px;font-size:15px;border:.5px solid #ccc;border-radius:8px;
+  width:220px;outline:none}
+#gate button{padding:9px 28px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;
+  font-size:14px;cursor:pointer}
+#gate .err{font-size:12px;color:#A32D2D;height:16px}
+#main{display:none;padding:2rem;max-width:1400px;margin:0 auto}
+.section-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#888780;
+  border-bottom:.5px solid #e0ddd6;padding-bottom:.5rem;margin:2rem 0 1rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1.25rem}
+.metric-bg{background:#f5f4f0;border-radius:8px;padding:.875rem 1rem}
+.metric-label{font-size:11px;color:#888780;margin-bottom:.35rem}
+.metric-value{font-size:26px;font-weight:500;line-height:1}
+.metric-sub{font-size:11px;color:#888780;margin-top:.3rem}
+.chart-wrap{position:relative;width:100%;height:220px}
+.chart-wrap-tall{position:relative;width:100%;height:260px}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:.75rem;font-size:11px;color:#888780}
+.legend span{display:flex;align-items:center;gap:4px}
+.ld{display:inline-block;width:9px;height:9px;border-radius:2px}
+.pill{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:500}
+.narrative-card{background:#fff;border:.5px solid #e0ddd6;border-radius:12px;padding:1.25rem 1.5rem}
+.narrative-text{font-size:15px;line-height:1.7;color:#1a1a1a}
+.ns-bar-track{background:#e8e6e0;border-radius:4px;height:6px;margin-top:10px}
+.ns-bar-fill{height:6px;border-radius:4px}
+.sig-table{width:100%;border-collapse:collapse;font-size:12px}
+.sig-table th{font-size:10px;color:#888780;font-weight:500;padding:4px 8px;
+  text-align:right;border-bottom:.5px solid #e0ddd6}
+.sig-table th:first-child{text-align:left}
+.sig-table td{padding:6px 8px;text-align:right;border-bottom:.5px solid #f0ede8}
+.sig-table td:first-child{text-align:left;font-weight:500}
+.sig-table tr:last-child td{border-bottom:none}
+.up{color:#A32D2D} .down{color:#3B6D11} .flat{color:#888780}
 </style>
 </head>
 <body>
 
-<h1>Q2 2026 Credit Risk Dashboard</h1>
-<div class="as-of">Generated 2026-03-25 23:42 &nbsp;·&nbsp; Q2 target period: April–June 2026</div>
-
-<!-- Summary cards -->
-<div class="section-label">120+ DPD — north star <span style="font-size:9px;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#185FA5;font-weight:500;margin-left:4px;text-transform:none;letter-spacing:0">lagging</span></div>
-<div class="summary-grid">
-  <div class="metric-card">
-    <div class="metric-label">Current month 120+ DPD balance</div>
-    <div class="metric-value" style="color:#A32D2D">$1.35M</div>
-    <div class="metric-sub">Prior month $30K</div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-label">120+ DPD as % of book</div>
-    <div class="metric-value" style="color:#A32D2D">1.94%</div>
-    <div class="metric-sub">Prior month 0.69% &nbsp;·&nbsp; <span style="color:#A32D2D">▲1.25pp</span></div>
-  </div>
-  <div class="metric-card">
-    <div class="metric-label">North star target</div>
-    <div class="metric-value" style="color:#888780">0.25%</div>
-    <div class="metric-sub">Loss rate by end 2026</div>
-  </div>
+<div id="gate">
+  <div style="font-size:13px;color:#888780;margin-bottom:4px">Credit Risk Dashboard</div>
+  <input type="password" id="pwInput" placeholder="Password"
+    onkeydown="if(event.key==='Enter')checkPw()">
+  <button onclick="checkPw()">Enter</button>
+  <div class="err" id="pwErr"></div>
 </div>
 
-<!-- Three charts -->
-<div class="section-label">Trends</div>
-<div class="charts-row">
+<div id="main">
+  <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
+    <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
+    <span style="font-size:12px;color:#888780">
+      Generated 26 Mar 2026, 00:07
+    </span>
+  </div>
 
-  <div class="chart-card">
-    <div class="section-label">Loss rate vs 25bps target</div>
+  <div class="section-label">This month</div>
+  <div class="grid-2" style="margin-bottom:1.5rem;align-items:start">
+
+    <div class="narrative-card">
+      <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+        color:#888780;margin-bottom:.75rem">Summary</div>
+      <p class="narrative-text">120+ DPD stands at $1.35M — 1.94% of the book, 1.25pp up month-on-month and above target for the 0.25% target. Average risk rank at underwriting is 5.85 (deteriorating from 5.55 last month) with 1 approvals above modeled limit and 13 over scorecard manual review — loss rate is 130.0bps, up from 70.0bps last month. Largest active exposure concentration: GigSafe — monitor closely.</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="metric-bg">
+        <div class="metric-label">120+ DPD — % of book</div>
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <div class="metric-value" style="color:#A32D2D">1.94%</div>
+          <span class="pill" style="background:#FCEBEB;color:#A32D2D">ABOVE TARGET</span>
+        </div>
+        <div class="ns-bar-track">
+          <div class="ns-bar-fill"
+            style="width:100.0%;background:#A32D2D"></div>
+        </div>
+        <div class="metric-sub" style="margin-top:6px">
+          Target 0.25% &nbsp;·&nbsp;
+          <span style="color:#A32D2D">▲1.25pp vs last month</span>
+        </div>
+      </div>
+      <div class="grid-2" style="gap:10px">
+        <div class="metric-bg">
+          <div class="metric-label">120+ DPD balance</div>
+          <div class="metric-value" style="font-size:20px;color:#A32D2D">
+            $1.35M
+          </div>
+          <div class="metric-sub">Prior $30K</div>
+        </div>
+        <div class="metric-bg">
+          <div class="metric-label">Loss rate (latest)</div>
+          <div class="metric-value" style="font-size:20px">130.0bps</div>
+          <div class="metric-sub">Prior month 70.0bps</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">
+    Why loss is under pressure — decisioning signals
+    <span style="font-size:9px;padding:1px 6px;border-radius:3px;background:#E6F1FB;
+      color:#185FA5;font-weight:500;margin-left:6px;text-transform:none;
+      letter-spacing:0">3–5 month lag to loss</span>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:1.5rem;align-items:start">
+    <div class="card">
+      <div class="legend">
+        <span><span class="ld" style="background:#E24B4A"></span>Above modeled limit</span>
+        <span><span class="ld" style="background:#EF9F27"></span>Risk rank 7</span>
+        <span><span class="ld" style="background:#7F77DD"></span>Risk rank 8+</span>
+        <span><span class="ld" style="background:#1D9E75"></span>Over scorecard MR</span>
+      </div>
+      <div class="chart-wrap-tall"><canvas id="uwChart"></canvas></div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:11px;color:#888780;margin-bottom:12px">
+        Latest vs prior month — lower is better across all risk signals
+      </div>
+      <table class="sig-table">
+        <thead>
+          <tr>
+            <th>Signal</th><th>Prior</th><th>Latest</th><th>Change</th>
+          </tr>
+        </thead>
+        <tbody id="sigTableBody"></tbody>
+      </table>
+      <div style="margin-top:1.25rem;padding-top:1rem;border-top:.5px solid #e0ddd6">
+        <div style="font-size:11px;color:#888780;margin-bottom:.5rem">
+          Avg risk rank trend
+        </div>
+        <div class="chart-wrap" style="height:100px"><canvas id="rrChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">What to watch — active 120+ DPD exposure by vintage</div>
+  <div class="grid-2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div style="font-size:11px;color:#888780;margin-bottom:8px">
+        By underwriting vintage
+      </div>
+      <div class="legend" id="vintLegend"></div>
+      <div class="chart-wrap"><canvas id="vintChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div style="font-size:11px;color:#888780;margin-bottom:8px">
+        By loan origination vintage
+      </div>
+      <div class="legend" id="loanLegend"></div>
+      <div class="chart-wrap"><canvas id="loanChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section-label">Loss rate trend vs 25bps target</div>
+  <div class="card" style="margin-bottom:2rem">
     <div class="legend">
-      <span><span class="legend-dot" style="background:#A32D2D"></span>Monthly (bps)</span>
-      <span><span class="legend-dot" style="background:#378ADD"></span>3-month avg</span>
+      <span><span class="ld" style="background:#A32D2D"></span>Monthly (bps)</span>
+      <span><span class="ld" style="background:#378ADD"></span>3-month avg</span>
       <span style="color:#BA7517">— — 25bps target</span>
     </div>
     <div class="chart-wrap"><canvas id="lossChart"></canvas></div>
   </div>
 
-  <div class="chart-card">
-    <div class="section-label">120+ DPD by underwriting vintage ($K)</div>
-    <div class="legend" id="vintLegend"></div>
-    <div class="chart-wrap"><canvas id="vintChart"></canvas></div>
-  </div>
-
-  <div class="chart-card">
-    <div class="section-label">120+ DPD by loan origination vintage ($K)</div>
-    <div class="legend" id="loanLegend"></div>
-    <div class="chart-wrap"><canvas id="loanChart"></canvas></div>
-  </div>
-
-</div>
-
-
-<div class="section-label" style="margin-top:1.5rem">Underwriting signals — monthly</div>
-<div class="chart-card" style="margin-bottom:2rem">
-  <div class="legend">
-    <span><span class="legend-dot" style="background:#A32D2D"></span>Approved &gt;modeled limit</span>
-    <span><span class="legend-dot" style="background:#BA7517"></span>Risk rank 7</span>
-    <span><span class="legend-dot" style="background:#7F77DD"></span>Risk rank 8+</span>
-    <span><span class="legend-dot" style="background:#378ADD"></span>Approved over model decline</span>
-    <span><span class="legend-dot" style="background:#1D9E75"></span>Approved over scorecard MR</span>
-  </div>
-  <div class="chart-wrap" style="height:260px"><canvas id="uwChart"></canvas></div>
 </div>
 
 <script>
-const lossLabels = ["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"];
-const lossRate   = [30.0, 70.0, 120.0, 60.0, 40.0, 120.0, 80.0, 80.0, 130.0, 120.0, 130.0, 100.0, 60.0, 60.0, 110.0, 80.0, 110.0, 90.0, 30.0, 100.0, 40.0, 70.0, 80.0, 80.0, 100.0];
-const loss3m     = [80.0, 90.0, 60.0, 90.0, 60.0, 60.0, 100.0, 60.0, 60.0, 100.0, 60.0, 50.0, 100.0, 70.0, 90.0, 100.0, 80.0, 80.0, 50.0, 90.0, 100.0, 70.0, 80.0, 70.0, 50.0];
+async function sha256(s){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function checkPw(){
+  const v  = document.getElementById('pwInput').value;
+  const h  = await sha256(v);
+  const th = await sha256('renegade');
+  if(h === th){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('main').style.display='block';
+    sessionStorage.setItem('cr_auth','1');
+  } else {
+    document.getElementById('pwErr').textContent='Incorrect password';
+    document.getElementById('pwInput').value='';
+  }
+}
+if(sessionStorage.getItem('cr_auth')==='1'){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('main').style.display='block';
+}
 
 const baseOpts = {
   responsive:true, maintainAspectRatio:false,
   interaction:{mode:'index',intersect:false},
   plugins:{legend:{display:false},tooltip:{bodyFont:{size:11},titleFont:{size:11}}},
   scales:{
-    x:{ticks:{font:{size:10},color:'#888780',autoSkip:true,maxTicksLimit:8,maxRotation:45},grid:{display:false},border:{display:false}},
-    y:{ticks:{font:{size:10},color:'#888780'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
+    x:{ticks:{font:{size:10},color:'#888780',autoSkip:true,maxTicksLimit:10,maxRotation:45},
+       grid:{display:false},border:{display:false}},
+    y:{ticks:{font:{size:10},color:'#888780'},
+       grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
   }
 };
-function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);else o[k]=b[k]}return o}
-
-// Loss rate chart
-new Chart(document.getElementById('lossChart'),{
-  type:'line',
-  data:{labels:lossLabels,datasets:[
-    {label:'Monthly',data:lossRate,borderColor:'#A32D2D',borderWidth:1.5,pointRadius:2,pointBackgroundColor:'#A32D2D',tension:.3,fill:false},
-    {label:'3m avg', data:loss3m,  borderColor:'#378ADD',borderWidth:2,pointRadius:0,tension:.3,fill:false},
-    {label:'25bps',  data:Array(lossLabels.length).fill(25),borderColor:'#BA7517',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
-  ]},
-  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
-});
-
-// Vintage charts — stacked bar
-const vintLabels   = ["2024-06-01", "2024-07-01", "2024-08-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-06-01", "2025-07-01"];
-const vintDatasets = [{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.2, 0.0, 0.0], "backgroundColor": "#7F77DD", "borderColor": "#7F77DD", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0], "backgroundColor": "#185FA5", "borderColor": "#185FA5", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 34.0, 89.1, 187.8, 50.2, 464.9, 0.0, 0.0, 0.0], "backgroundColor": "#378ADD", "borderColor": "#378ADD", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.7, 0.0], "backgroundColor": "#A32D2D", "borderColor": "#A32D2D", "borderWidth": 0}, {"label": "Order", "data": [25.9, 26.5, 120.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#1D9E75", "borderColor": "#1D9E75", "borderWidth": 0}];
-const loanLabels   = ["2024-12-01", "2025-01-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01"];
-const loanDatasets = [{"label": "Koverly Inc.", "data": [0.0, 0.0, 89.1, 50.2, 32.0, 118.7, 528.7, 7.3], "backgroundColor": "#378ADD", "borderColor": "#378ADD", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.7], "backgroundColor": "#A32D2D", "borderColor": "#A32D2D", "borderWidth": 0}, {"label": "Order", "data": [22.5, 3.9, 0.0, 0.0, 0.0, 67.7, 78.8, 0.0], "backgroundColor": "#1D9E75", "borderColor": "#1D9E75", "borderWidth": 0}];
-
-const PALETTE = ["#378ADD", "#1D9E75", "#888780", "#BA7517", "#7F77DD", "#D85A30", "#3B6D11", "#D4A017", "#6B3FA0", "#A32D2D", "#185FA5", "#0F6E56", "#9A3B72"];
-
-function buildLegend(elId, datasets){
-  const el = document.getElementById(elId);
+function merge(a,b){
+  const o=Object.assign({},a);
+  for(const k in b){
+    if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);
+    else o[k]=b[k];
+  }
+  return o;
+}
+function buildLegend(elId,datasets){
+  const el=document.getElementById(elId);
   datasets.forEach(d=>{
-    const s = document.createElement('span');
-    s.innerHTML = `<span class="legend-dot" style="background:${d.backgroundColor}"></span>${d.label}`;
+    const s=document.createElement('span');
     s.style.cssText='display:flex;align-items:center;gap:4px;font-size:11px;color:#888780';
+    s.innerHTML=`<span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${d.backgroundColor}"></span>${d.label}`;
     el.appendChild(s);
   });
 }
 
-new Chart(document.getElementById('vintChart'),{
-  type:'bar',
-  data:{labels:vintLabels,datasets:vintDatasets},
-  options:merge(baseOpts,{
-    plugins:{legend:{display:false}},
-    scales:{x:{stacked:true,ticks:{font:{size:10},color:'#888780',autoSkip:true,maxTicksLimit:8,maxRotation:45},grid:{display:false},border:{display:false}},y:{stacked:true,ticks:{font:{size:10},color:'#888780',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}}
-  })
+const sigData = {
+  'Above modeled limit': [2, 1],
+  'Risk rank 7':         [15,  19],
+  'Risk rank 8+':        [34, 34],
+  'Over scorecard MR':   [15, 13],
+  'Approval rate %':     [65.3, 64.7],
+};
+const tbody = document.getElementById('sigTableBody');
+Object.entries(sigData).forEach(([label,[prior,latest]])=>{
+  const diff = latest - prior;
+  const isGoodDown = label !== 'Approval rate %';
+  const cls  = diff===0?'flat':(diff<0===isGoodDown?'down':'up');
+  const arrow= diff>0?'▲':(diff<0?'▼':'—');
+  const fmt  = label.includes('%') ? v=>v+'%' : v=>v;
+  tbody.innerHTML += `<tr>
+    <td>${label}</td>
+    <td class="flat">${fmt(prior)}</td>
+    <td>${fmt(latest)}</td>
+    <td class="${cls}">${arrow} ${Math.abs(diff)}${label.includes('%')?'%':''}</td>
+  </tr>`;
 });
-buildLegend('vintLegend', vintDatasets);
 
-new Chart(document.getElementById('loanChart'),{
+new Chart(document.getElementById('uwChart'),{
   type:'bar',
-  data:{labels:loanLabels,datasets:loanDatasets},
-  options:merge(baseOpts,{
-    plugins:{legend:{display:false}},
-    scales:{x:{stacked:true,ticks:{font:{size:10},color:'#888780',autoSkip:true,maxTicksLimit:8,maxRotation:45},grid:{display:false},border:{display:false}},y:{stacked:true,ticks:{font:{size:10},color:'#888780',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}}
-  })
-});
-buildLegend('loanLegend', loanDatasets);
-// UW signals chart
-new Chart(document.getElementById('uwChart'), {
-  type: 'bar',
-  data: {
-    labels: ["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],
-    datasets: [
-      { label:'Approved >modeled limit', data:[13, 17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 1], backgroundColor:'#A32D2D', borderRadius:2 },
-      { label:'Risk rank 7',             data:[2, 0, 3, 1, 4, 10, 15, 12, 12, 17, 12, 13, 12, 9, 8, 21, 15, 19],         backgroundColor:'#BA7517', borderRadius:2 },
-      { label:'Risk rank 8+',            data:[24, 18, 36, 29, 34, 33, 18, 21, 19, 28, 28, 26, 30, 28, 26, 34, 34, 34],         backgroundColor:'#7F77DD', borderRadius:2 },
-      { label:'Approved over decline',   data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],backgroundColor:'#378ADD', borderRadius:2 },
-      { label:'Approved over scorecard MR', data:[12, 10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 13], backgroundColor:'#1D9E75', borderRadius:2 }
+  data:{
+    labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],
+    datasets:[
+      {label:'Above modeled limit',data:[13, 17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 1],backgroundColor:'rgba(226,75,74,.7)',borderRadius:2},
+      {label:'Risk rank 7',        data:[2, 0, 3, 1, 4, 10, 15, 12, 12, 17, 12, 13, 12, 9, 8, 21, 15, 19],        backgroundColor:'rgba(239,159,39,.7)',borderRadius:2},
+      {label:'Risk rank 8+',       data:[24, 18, 36, 29, 34, 33, 18, 21, 19, 28, 28, 26, 30, 28, 26, 34, 34, 34],        backgroundColor:'rgba(127,119,221,.7)',borderRadius:2},
+      {label:'Over scorecard MR',  data:[12, 10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 13],    backgroundColor:'rgba(29,158,117,.7)',borderRadius:2}
     ]
   },
-  options: merge(baseOpts, {
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { stacked: false, ticks: { font:{size:10}, color:'#888780', autoSkip:true, maxTicksLimit:12, maxRotation:45 }, grid:{display:false}, border:{display:false} },
-      y: { ticks: { font:{size:10}, color:'#888780' }, grid:{color:'rgba(0,0,0,.04)'}, border:{display:false} }
+  options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>v}}}})
+});
+
+new Chart(document.getElementById('rrChart'),{
+  type:'line',
+  data:{
+    labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],
+    datasets:[{
+      data:[6.39, 6.13, 6.6, 6.51, 6.51, 6.61, 5.79, 5.34, 5.26, 5.53, 5.38, 5.62, 5.51, 5.37, 5.43, 5.19, 5.55, 5.85],
+      borderColor:'#378ADD',borderWidth:2,pointRadius:2,
+      pointBackgroundColor:'#378ADD',tension:.3,fill:false
+    }]
+  },
+  options:merge(baseOpts,{
+    scales:{
+      x:{ticks:{maxTicksLimit:6}},
+      y:{min:4,max:8,ticks:{callback:v=>'RR '+v}}
     }
   })
 });
 
+const vintDatasets = [{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.2, 0.0, 0.0], "backgroundColor": "#7F77DD", "borderColor": "#7F77DD", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0], "backgroundColor": "#185FA5", "borderColor": "#185FA5", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 34.0, 89.1, 187.8, 50.2, 464.9, 0.0, 0.0, 0.0], "backgroundColor": "#378ADD", "borderColor": "#378ADD", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.7, 0.0], "backgroundColor": "#A32D2D", "borderColor": "#A32D2D", "borderWidth": 0}, {"label": "Order", "data": [25.9, 26.5, 120.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#1D9E75", "borderColor": "#1D9E75", "borderWidth": 0}];
+const loanDatasets = [{"label": "Koverly Inc.", "data": [0.0, 0.0, 89.1, 50.2, 32.0, 118.7, 528.7, 7.3], "backgroundColor": "#378ADD", "borderColor": "#378ADD", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.7], "backgroundColor": "#A32D2D", "borderColor": "#A32D2D", "borderWidth": 0}, {"label": "Order", "data": [22.5, 3.9, 0.0, 0.0, 0.0, 67.7, 78.8, 0.0], "backgroundColor": "#1D9E75", "borderColor": "#1D9E75", "borderWidth": 0}];
+
+new Chart(document.getElementById('vintChart'),{
+  type:'bar',
+  data:{labels:["2024-06-01", "2024-07-01", "2024-08-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-06-01", "2025-07-01"],datasets:vintDatasets},
+  options:merge(baseOpts,{
+    scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}
+  })
+});
+buildLegend('vintLegend',vintDatasets);
+
+new Chart(document.getElementById('loanChart'),{
+  type:'bar',
+  data:{labels:["2024-12-01", "2025-01-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01"],datasets:loanDatasets},
+  options:merge(baseOpts,{
+    scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}
+  })
+});
+buildLegend('loanLegend',loanDatasets);
+
+new Chart(document.getElementById('lossChart'),{
+  type:'line',
+  data:{
+    labels:["2022-03-01", "2022-04-01", "2022-05-01", "2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01"],
+    datasets:[
+      {label:'Monthly',data:[50.0, 130.0, 100.0, 60.0, 30.0, 80.0, 130.0, 40.0, 100.0, 30.0, 90.0, 50.0, 90.0, 70.0, 60.0, 130.0, 80.0, 50.0, 100.0, 30.0, 80.0, 70.0, 60.0, 70.0, 130.0],borderColor:'#A32D2D',borderWidth:1.5,
+        pointRadius:2,pointBackgroundColor:'#A32D2D',tension:.3,fill:false},
+      {label:'3m avg', data:[70.0, 60.0, 60.0, 100.0, 70.0, 100.0, 60.0, 50.0, 90.0, 50.0, 100.0, 80.0, 80.0, 100.0, 80.0, 50.0, 70.0, 60.0, 70.0, 70.0, 100.0, 90.0, 100.0, 70.0, 90.0],  borderColor:'#378ADD',borderWidth:2,
+        pointRadius:0,tension:.3,fill:false},
+      {label:'25bps',  data:Array(25).fill(25),
+        borderColor:'#BA7517',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
+    ]
+  },
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
+});
 </script>
 </body></html>
