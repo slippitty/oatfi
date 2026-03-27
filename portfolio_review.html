@@ -69,7 +69,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 27, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: days_in_delinq, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-03-27 21:08<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-27 21:16<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -603,26 +603,46 @@ tr:last-child td{border-bottom:none}
 <div class="sl">3b — Portfolio composition — risk rank and modeled limit</div>
 <div class="grid-2">
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Outstanding by risk rank ($)</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Current-month outstanding grouped by latest Taktile risk rank. Green = RR 1–4, amber = 5–7, red = 8–10.</p>
-    <div class="chart-wrap" style="height:220px"><canvas id="rrOutChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">Outstanding by risk rank — current month ($)</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Green = RR 1–4, amber = 5–7, red = 8–10.</p>
+    <div class="chart-wrap" style="height:200px"><canvas id="rrOutChart"></canvas></div>
   </div>
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">30+ DPD balance by risk rank ($)</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance (30+ DPD, days_in_delinq) grouped by latest Taktile risk rank.</p>
-    <div class="chart-wrap" style="height:220px"><canvas id="rrDqChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD balance by risk rank — current month ($)</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance (30+ DPD, days_in_delinq) by latest Taktile risk rank.</p>
+    <div class="chart-wrap" style="height:200px"><canvas id="rrDqChart"></canvas></div>
   </div>
 </div>
 <div class="grid-2">
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Outstanding — above vs at/below modeled limit ($)</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Green = credit limit at or below Taktile modeled limit. Red = credit limit exceeds model. Grey = no Taktile record.</p>
-    <div class="chart-wrap" style="height:220px"><canvas id="mlOutChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">Outstanding by risk rank — 12-month trend ($K)</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="rrOutTrendChart"></canvas></div>
   </div>
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">30+ DPD balance — above vs at/below modeled limit ($)</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance (30+ DPD, days_in_delinq) split by whether credit limit exceeds the Taktile model.</p>
-    <div class="chart-wrap" style="height:220px"><canvas id="mlDqChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD % by risk rank — 12-month trend</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="rrDqTrendChart"></canvas></div>
+  </div>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Outstanding — above vs at/below modeled limit — current month ($)</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Green = at/below model. Red = above model. Grey = no Taktile record.</p>
+    <div class="chart-wrap" style="height:200px"><canvas id="mlOutChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD balance — above vs at/below modeled limit — current month ($)</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance split by whether credit limit exceeds Taktile model.</p>
+    <div class="chart-wrap" style="height:200px"><canvas id="mlDqChart"></canvas></div>
+  </div>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Outstanding — above vs at/below modeled limit — 12-month trend ($K)</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="mlOutTrendChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD % — above vs at/below modeled limit — 12-month trend</div>
+    <div class="chart-wrap" style="height:200px"><canvas id="mlDqTrendChart"></canvas></div>
   </div>
 </div>
 <!-- ── END new charts ──────────────────────────────────────────────────── -->
@@ -691,6 +711,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
         </tr><tr>
+          <td class="pn">Physical Rehabilitation Network, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$241K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$500K</td>
+          <td class="num">$150K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$350K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
+          <td style="font-size:11px;color:var(--ink2)">A</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-19</td>
+        </tr><tr>
           <td class="pn">The Nest Schools</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$124K</td>
@@ -700,16 +730,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-25</td>
-        </tr><tr>
-          <td class="pn">Physical Rehabilitation Network, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$240K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$500K</td>
-          <td class="num">$150K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$350K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
-          <td style="font-size:11px;color:var(--ink2)">A</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-19</td>
         </tr><tr>
           <td class="pn">PPTG Holdings LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Tab Commerce</td>
@@ -741,16 +761,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-14</td>
         </tr><tr>
-          <td class="pn">CPC of Missouri - Smithville, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$348K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$350K</td>
-          <td class="num">$25K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$325K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">9</span></td>
-          <td style="font-size:11px;color:var(--ink2)">A</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-03</td>
-        </tr><tr>
           <td class="pn">Training Wheels ABA</td>
           <td style="font-size:12px;color:var(--ink2)">Flychain</td>
           <td class="num">$345K</td>
@@ -761,9 +771,19 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-20</td>
         </tr><tr>
+          <td class="pn">CPC of Missouri - Smithville, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$348K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$350K</td>
+          <td class="num">$25K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$325K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">9</span></td>
+          <td style="font-size:11px;color:var(--ink2)">A</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-03</td>
+        </tr><tr>
           <td class="pn">Haven</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$168K</td>
+          <td class="num">$171K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$300K</td>
           <td class="num">$5K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$295K</td>
@@ -791,15 +811,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-09</td>
         </tr><tr>
-          <td class="pn">Bloostone USA Inc</td>
+          <td class="pn">Flying Blue Imports, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$320K</td>
+          <td class="num">$375K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$500K</td>
           <td class="num">$250K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$250K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-03</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-27</td>
         </tr><tr>
           <td class="pn">Alo Yoga</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
@@ -830,16 +850,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-28</td>
-        </tr><tr>
-          <td class="pn">Thunder Ridge Transport Inc</td>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$157K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$350K</td>
-          <td class="num">$150K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$200K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-17</td>
         </tr><tr>
           <td class="pn">Basatne International LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -891,16 +901,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-05</td>
         </tr><tr>
-          <td class="pn">MINT HOUSE INC.</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$48K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$175K</td>
-          <td class="num">$25K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$150K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">9</span></td>
-          <td style="font-size:11px;color:var(--ink2)">A</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-09</td>
-        </tr><tr>
           <td class="pn">Ark Homes For Rent</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$188K</td>
@@ -910,6 +910,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-20</td>
+        </tr><tr>
+          <td class="pn">BlueSprig Pediatrics, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$177K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$400K</td>
+          <td class="num">$250K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$150K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-26</td>
         </tr><tr>
           <td class="pn">Parallel Georgia, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
@@ -921,15 +931,25 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-07</td>
         </tr><tr>
-          <td class="pn">BlueSprig Pediatrics, Inc.</td>
+          <td class="pn">MINT HOUSE INC.</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$177K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$400K</td>
-          <td class="num">$250K</td>
+          <td class="num">$48K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$175K</td>
+          <td class="num">$25K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$150K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">9</span></td>
+          <td style="font-size:11px;color:var(--ink2)">A</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-09</td>
+        </tr><tr>
+          <td class="pn">Bloostone USA Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
+          <td class="num">$320K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$500K</td>
+          <td class="num">$350K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$150K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-26</td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-27</td>
         </tr><tr>
           <td class="pn">Loro Piana & C Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
@@ -963,7 +983,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="pn">Skin MD of Mass LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$380K</td>
+          <td class="num">$379K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$500K</td>
           <td class="num">$369K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$131K</td>
@@ -991,16 +1011,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-06</td>
         </tr><tr>
-          <td class="pn">Saphire Farms</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$82K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$200K</td>
-          <td class="num">$75K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$125K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-28</td>
-        </tr><tr>
           <td class="pn">Grasshopper Farms</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$114K</td>
@@ -1010,6 +1020,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
           <td style="font-size:11px;color:var(--ink2)">A</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-04</td>
+        </tr><tr>
+          <td class="pn">Saphire Farms</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$82K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$200K</td>
+          <td class="num">$75K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$125K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-28</td>
         </tr><tr>
           <td class="pn">Waabigwan Mashkiki LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
@@ -1071,16 +1091,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-25</td>
         </tr><tr>
-          <td class="pn">Flying Blue Imports, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$375K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$500K</td>
-          <td class="num">$389K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$111K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-21</td>
-        </tr><tr>
           <td class="pn">Moab Place, LLC dba Hyatt Place Moab</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$94K</td>
@@ -1121,26 +1131,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-21</td>
         </tr><tr>
-          <td class="pn">ConnectOne Bank</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$36K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
-          <td class="num">$150K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-29</td>
-        </tr><tr>
-          <td class="pn">Interco Latam LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$191K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$350K</td>
-          <td class="num">$250K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-14</td>
-        </tr><tr>
           <td class="pn">Social House Entertainment LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$18K</td>
@@ -1151,15 +1141,55 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">A</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-26</td>
         </tr><tr>
-          <td class="pn">Illicit Gardens</td>
+          <td class="pn">Hollander Management Group, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$210K</td>
+          <td class="num">$250K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
+          <td class="num">$150K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-08</td>
+        </tr><tr>
+          <td class="pn">Thunder Ridge Transport Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
+          <td class="num">$157K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$350K</td>
+          <td class="num">$250K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-27</td>
+        </tr><tr>
+          <td class="pn">1-800 CONTACTS, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$39K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
+          <td class="num">$150K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-13</td>
+        </tr><tr>
+          <td class="pn">ML Imports Inc</td>
+          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
+          <td class="num">$82K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
           <td class="num">$150K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-10</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-15</td>
+        </tr><tr>
+          <td class="pn">Interco Latam LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
+          <td class="num">$191K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$350K</td>
+          <td class="num">$250K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-14</td>
         </tr><tr>
           <td class="pn">My Battery Supplier</td>
           <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
@@ -1181,35 +1211,25 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-07</td>
         </tr><tr>
-          <td class="pn">ML Imports Inc</td>
-          <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$82K</td>
+          <td class="pn">ConnectOne Bank</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$36K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
+          <td class="num">$150K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-29</td>
+        </tr><tr>
+          <td class="pn">Illicit Gardens</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$210K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
           <td class="num">$150K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-15</td>
-        </tr><tr>
-          <td class="pn">Hollander Management Group, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$250K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
-          <td class="num">$150K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-08</td>
-        </tr><tr>
-          <td class="pn">1-800 CONTACTS, Inc.</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$39K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$250K</td>
-          <td class="num">$150K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$100K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-13</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-10</td>
         </tr><tr>
           <td class="pn">Audemars Piguet Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
@@ -1343,7 +1363,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="pn">Maitri Genetics LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$94K</td>
+          <td class="num">$95K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$150K</td>
           <td class="num">$70K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$80K</td>
@@ -1561,6 +1581,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-22</td>
         </tr><tr>
+          <td class="pn">Gotham Greens Farms LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$139K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$200K</td>
+          <td class="num">$150K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$50K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-28</td>
+        </tr><tr>
           <td class="pn">Thomas Dermatology</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$127K</td>
@@ -1570,16 +1600,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
           <td style="font-size:11px;color:var(--ink2)">A</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-26</td>
-        </tr><tr>
-          <td class="pn">Gotham Greens Farms LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$138K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$200K</td>
-          <td class="num">$150K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$50K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-28</td>
         </tr><tr>
           <td class="pn">Big Sandy Furniture, Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
@@ -1641,6 +1661,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-25</td>
         </tr><tr>
+          <td class="pn">Joyology of Centerline</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$21K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-09</td>
+        </tr><tr>
           <td class="pn">Photomules LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$43K</td>
@@ -1659,17 +1689,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">9</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-04</td>
-        </tr><tr>
-          <td class="pn">Joyology of Centerline</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$21K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-09</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-27</td>
         </tr><tr>
           <td class="pn">Rabelais Wines, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
@@ -1841,6 +1861,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-05-15</td>
         </tr><tr>
+          <td class="pn">Power Home Remodeling Group LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Order</td>
+          <td class="num">$107K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$275K</td>
+          <td class="num">$250K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$25K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-25</td>
+        </tr><tr>
           <td class="pn">True Divine</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
           <td class="num">$24K</td>
@@ -1861,15 +1891,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-08</td>
         </tr><tr>
-          <td class="pn">Cornerstone Fitness Texas, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$26K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$275K</td>
-          <td class="num">$250K</td>
+          <td class="pn">Hedgerow Properties LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$61K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
+          <td class="num">$25K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$25K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">A</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-17</td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-16</td>
         </tr><tr>
           <td class="pn">Relay Financial US Corp</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -1881,25 +1911,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-17</td>
         </tr><tr>
-          <td class="pn">Power Home Remodeling Group LLC</td>
+          <td class="pn">Cornerstone Fitness Texas, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$107K</td>
+          <td class="num">$26K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$275K</td>
           <td class="num">$250K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$25K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-25</td>
-        </tr><tr>
-          <td class="pn">Hedgerow Properties LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$61K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
-          <td class="num">$25K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$25K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-16</td>
+          <td style="font-size:11px;color:var(--ink2)">A</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-17</td>
         </tr><tr>
           <td class="pn">InstaSwitch Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3073,7 +3093,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="pn">Challenge Cargo Services, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$19K</td>
+          <td class="num">$38K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$100K</td>
           <td class="num">$100K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$493</td>
@@ -3363,7 +3383,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="pn">NorthStar Distribution, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Koverly Inc.</td>
-          <td class="num">$16K</td>
+          <td class="num">$18K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$22K</td>
           <td class="num">$22K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$43</td>
@@ -3986,7 +4006,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="pn">Hemp Hunter Labs, Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Order</td>
-          <td class="num">$187K</td>
+          <td class="num">$186K</td>
           <td class="num" style="color:#888">—</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">—</td>
           <td class="num">$450K</td>
@@ -4822,7 +4842,7 @@ function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeo
 const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5","#3B6D11","#888","#D4A017"];
 
 (function(){
-  const mrbExp=[1044336, 992026, 596209, 590816, 439651, 398339, 379104, 371638, 365718, 361674, 342586, 306510, 300053, 249200, 248662, 208763, 208447, 205009, 195854, 187907, 186890, 181831, 181115, 180130, 179494, 172732, 165715, 143543, 136527, 135177, 119256, 117481, 117113, 106897, 104063, 102463, 100054, 99212, 98174, 96586, 95632, 91615, 89901, 89065, 88351, 86621, 84873, 75462, 75306, 73805, 72408, 65966, 65709, 65615, 64786, 63908, 62054, 58377, 57590, 51817, 51646, 42266, 41941, 41026, 40658, 37659, 34309, 30734, 29752, 29670, 25088, 22481, 22242, 20582, 19202, 18920, 18599, 17870, 17797, 17227, 16880, 16750, 11221, 11183, 11108, 10604, 8903, 8238, 6997, 5745, 1356, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const mrbExp=[1044336, 992026, 596209, 590816, 439651, 398339, 379104, 371638, 365718, 361674, 342586, 306510, 300053, 249200, 248662, 208763, 208447, 205009, 195854, 187907, 186018, 181831, 181115, 180130, 179494, 172732, 165715, 143543, 136527, 135177, 119256, 117481, 117113, 106897, 104063, 102463, 100054, 99212, 98174, 96586, 95632, 91615, 89901, 89065, 88351, 86621, 84873, 75462, 75306, 73805, 72408, 65966, 65709, 65615, 64786, 63908, 62054, 58377, 57590, 51817, 51646, 42266, 41941, 41026, 40658, 37659, 34309, 30734, 29752, 29670, 25088, 22481, 22242, 20582, 19202, 18920, 18599, 17870, 17797, 17227, 16880, 16750, 11221, 11183, 11108, 10604, 8903, 8238, 6997, 5745, 1356, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const mrbDQ =[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 181115, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12935, 0, 0, 0, 0, 73805, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39808, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3935, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   function fmtM(v){return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':'$'+(v/1e3).toFixed(0)+'K';}
   document.getElementById('snapMRB').textContent   =fmtM(mrbExp.reduce((a,b)=>a+b,0));
@@ -4848,9 +4868,9 @@ dpdSelect.addEventListener('change',function(){
   dpdChart.update();
 });
 
-const lossChartData={"ALL PARTNERS": {"months": ["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.35, 60.61, 131.74, 121.25, 66.94, 148.24, 52.86, 175.48, 278.14, 50.42, 186.65]}, "Avalara Technologies, LLC": {"months": ["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-03-01"], "bps": [1224.88, 2056.51, 218.0, 6.17, 1564.06, 13838.9, 1893.15, 722.61, 2021.2, 3198.21, 870.64, 3259.98, 0.0, 0.0, 4065.06]}, "BRKR.IO Inc.": {"months": ["2026-03-01"], "bps": [98.45]}, "Flychain": {"months": ["2025-03-01", "2025-04-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-03-01"], "bps": [0.03, 66.36, 1.51, 426.34, 161.87, 341.38, 129.97, 3277.14, 53.8]}, "Koverly Inc.": {"months": ["2025-04-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [331.03, 24.94, 110.58, 2.54, 2.31, 172.47, 114.58, 358.62, 383.7, 97.59, 438.31]}, "Lawtrades": {"months": ["2025-08-01", "2025-09-01", "2025-10-01"], "bps": [308.23, 1356.22, 672.41]}, "NurseIO": {"months": ["2026-02-01"], "bps": [94.33]}, "Order": {"months": ["2024-10-01", "2024-11-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [195.94, 108.35, 151.84, 140.68, 2.5, 23.39, 2.94, 46.14, 3.49, 62.25, 7.24, 66.68, 150.62, 39.11, 52.31]}, "Relay Financial Technologies, Inc": {"months": ["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [228.41, 47.53, 0.97, 198.05, 176.33, 220.41, 261.71, 209.58, 96.61, 95.21, 13.04, 85.14, 41.01, 96.71, 12.22, 42.41, 41.18, 116.55]}};
+const lossChartData={"ALL PARTNERS": {"months": ["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.35, 60.61, 131.74, 121.25, 66.94, 148.24, 52.86, 175.48, 278.14, 50.42, 186.62]}, "Avalara Technologies, LLC": {"months": ["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-03-01"], "bps": [1224.88, 2056.51, 218.0, 6.17, 1564.06, 13838.9, 1893.15, 722.61, 2021.2, 3198.21, 870.64, 3259.98, 0.0, 0.0, 4065.06]}, "BRKR.IO Inc.": {"months": ["2026-03-01"], "bps": [98.45]}, "Flychain": {"months": ["2025-03-01", "2025-04-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-03-01"], "bps": [0.03, 66.36, 1.51, 426.34, 161.87, 341.38, 129.97, 3277.14, 53.8]}, "Koverly Inc.": {"months": ["2025-04-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [331.03, 24.94, 110.58, 2.54, 2.31, 172.47, 114.58, 358.62, 383.7, 97.59, 438.11]}, "Lawtrades": {"months": ["2025-08-01", "2025-09-01", "2025-10-01"], "bps": [308.23, 1356.22, 672.41]}, "NurseIO": {"months": ["2026-02-01"], "bps": [94.33]}, "Order": {"months": ["2024-10-01", "2024-11-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [195.94, 108.35, 151.84, 140.68, 2.5, 23.39, 2.94, 46.14, 3.49, 62.25, 7.24, 66.68, 150.62, 39.11, 52.31]}, "Relay Financial Technologies, Inc": {"months": ["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [228.41, 47.53, 0.97, 198.05, 176.33, 220.41, 261.71, 209.58, 96.61, 95.21, 13.04, 85.14, 41.01, 96.71, 12.22, 42.41, 41.18, 116.55]}};
 const allLossMonths=["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-const allLossBps=[156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.35, 60.61, 131.74, 121.25, 66.94, 148.24, 52.86, 175.48, 278.14, 50.42, 186.65];
+const allLossBps=[156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.35, 60.61, 131.74, 121.25, 66.94, 148.24, 52.86, 175.48, 278.14, 50.42, 186.62];
 const lossSelect=document.getElementById('lossPartnerSelect');
 Object.keys(lossChartData).filter(p=>p!=='ALL PARTNERS').sort().forEach(p=>{
   const o=document.createElement('option');o.value=p;o.textContent=p;lossSelect.appendChild(o);
@@ -4891,7 +4911,7 @@ utilSelect.addEventListener('change',function(){
 // ── NEW: Risk rank charts ─────────────────────────────────────────────────────
 (function(){
   const rrLabels    = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-  const rrOut       = [419644, 4213356, 18321236, 8836920, 11492881, 7827135, 4723729, 1016876, 981626, 730848];
+  const rrOut       = [419644, 4213356, 17945953, 8836920, 11715668, 8202418, 4657578, 860240, 981626, 730848];
   const rrDq        = [156262, 64579, 306353, 236730, 657681, 790896, 251542, 32328, 0, 6766];
   const rrColorsOut = ["#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#BA7517BB", "#BA7517BB", "#BA7517BB", "#A32D2DBB", "#A32D2DBB", "#A32D2DBB"];
   const rrColorsDq  = ["#2E6B0A", "#2E6B0A", "#2E6B0A", "#2E6B0A", "#BA7517", "#BA7517", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D"];
@@ -4912,6 +4932,17 @@ utilSelect.addEventListener('change',function(){
     type:'bar',
     data:{labels:rrLabels,datasets:[{label:'30+ DPD',data:rrDq,backgroundColor:rrColorsDq,borderRadius:3}]},
     options:barOpts
+  });
+  const rrTrendMonths    = ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
+  const rrTrendOutSeries = [{"label": "1", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [4901.4, 3348.7, 2819.6, 2565.5, 2412.1, 1882.7, 1835.2, 1638.9, 1782.2, 1473.4, 901.8, 710.3, 419.6]}, {"label": "2", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1940.6, 1974.8, 2550.0, 3132.8, 3191.1, 2871.3, 3442.3, 3217.2, 3343.9, 3622.1, 3569.9, 4015.5, 4213.4]}, {"label": "3", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [8385.3, 9307.4, 10186.5, 10743.3, 12753.2, 12999.3, 14895.4, 14566.8, 16902.2, 18046.2, 17881.8, 18046.7, 17946.0]}, {"label": "4", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [6069.8, 5884.3, 6656.7, 7491.3, 7945.2, 8391.3, 8612.0, 9088.6, 8750.3, 10137.2, 9190.7, 9574.0, 8836.9]}, {"label": "5", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [13498.7, 12804.3, 12828.6, 13848.4, 12919.6, 13327.0, 14014.4, 14389.8, 13823.5, 13211.0, 12720.0, 12756.8, 11715.7]}, {"label": "6", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [7910.1, 7287.8, 6874.3, 7898.8, 7977.0, 7739.9, 7455.0, 7878.7, 7640.8, 7374.8, 7394.3, 7805.8, 8202.4]}, {"label": "7", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [4696.9, 4139.3, 4133.8, 4203.3, 4519.3, 5282.5, 4799.7, 4670.1, 4673.3, 4348.4, 4561.4, 4908.8, 4657.6]}, {"label": "8", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1447.5, 1245.7, 1268.9, 1436.2, 1442.6, 1254.7, 1319.4, 1343.9, 1348.0, 1145.7, 681.3, 760.3, 860.2]}, {"label": "9", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1186.5, 1004.1, 1148.0, 1216.2, 1116.5, 1141.9, 1092.5, 892.9, 778.3, 957.1, 1005.6, 1072.0, 981.6]}, {"label": "10", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1042.0, 1024.0, 1145.2, 1055.8, 1070.0, 1000.4, 1043.1, 941.0, 841.4, 783.2, 698.3, 787.8, 730.8]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [29.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}];
+  const rrTrendDqSeries  = [{"label": "1", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [50.26, 35.34, 40.28, 41.49, 39.28, 43.75, 41.58, 32.75, 29.1, 36.09, 32.53, 44.45, 37.24]}, {"label": "2", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [0.31, 0.3, 0.23, 0.19, 0.53, 0.21, 1.16, 2.3, 0.18, 0.16, 0.17, 0.57, 1.53]}, {"label": "3", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [0.09, 0.38, 0.75, 0.89, 0.6, 0.59, 0.0, 0.63, 0.91, 1.18, 1.43, 1.31, 1.71]}, {"label": "4", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1.52, 0.0, 0.23, 1.08, 0.54, 1.41, 1.5, 2.35, 7.51, 6.8, 6.88, 7.17, 2.68]}, {"label": "5", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [3.1, 2.3, 4.13, 4.27, 4.26, 4.56, 4.48, 3.6, 4.37, 6.13, 4.56, 5.72, 5.61]}, {"label": "6", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [12.47, 8.85, 6.93, 8.16, 6.83, 6.42, 6.38, 6.95, 6.89, 10.85, 10.91, 9.45, 9.64]}, {"label": "7", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [18.33, 12.07, 12.52, 12.89, 17.13, 15.53, 16.63, 17.66, 17.71, 8.07, 6.42, 5.08, 5.4]}, {"label": "8", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [21.47, 5.84, 12.61, 22.12, 32.01, 9.71, 26.36, 25.42, 24.27, 25.73, 3.77, 3.28, 3.76]}, {"label": "9", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [0.04, 0.05, 0.04, 0.04, 0.04, 0.04, 0.04, 0.0, 0.19, 0.0, 0.0, 0.0, 0.0]}, {"label": "10", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [8.11, 0.65, 0.58, 0.63, 3.05, 13.27, 22.23, 22.82, 28.19, 8.35, 0.95, 0.86, 0.93]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}];
+  new Chart(document.getElementById('rrOutTrendChart'),{
+    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendOutSeries},
+    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v+'K'}}}})
+  });
+  new Chart(document.getElementById('rrDqTrendChart'),{
+    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendDqSeries},
+    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
   });
 })();
 
@@ -4940,11 +4971,22 @@ utilSelect.addEventListener('change',function(){
     data:{labels:mlLabels,datasets:[{label:'30+ DPD',data:mlDq,backgroundColor:mlColorsDq,borderRadius:3}]},
     options:barOpts
   });
+  const mlTrendMonths    = ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
+  const mlTrendOutSeries = [{"label": "At/below modeled", "borderColor": "#1D9E75", "backgroundColor": "#1D9E7522", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [26981.8, 26106.5, 26971.4, 29495.8, 31022.0, 32180.0, 34083.4, 35379.1, 37092.9, 39924.4, 37699.9, 39284.4, 38693.4]}, {"label": "Above modeled", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [18655.7, 18147.0, 19265.6, 21020.7, 21475.4, 21553.6, 22066.7, 21103.3, 20438.7, 19234.9, 19527.7, 19974.8, 18963.8]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [5470.4, 3766.9, 3374.5, 3075.0, 2849.1, 2157.4, 2358.9, 2145.6, 2352.4, 1939.9, 1377.3, 1178.9, 907.1]}];
+  const mlTrendDqSeries  = [{"label": "At/below modeled", "borderColor": "#1D9E75", "backgroundColor": "#1D9E7522", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [6.45, 3.73, 3.73, 3.82, 2.41, 2.85, 3.25, 3.7, 4.11, 4.64, 2.86, 3.19, 3.26]}, {"label": "Above modeled", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [5.46, 3.2, 4.03, 5.48, 8.08, 6.76, 6.82, 6.84, 8.87, 7.13, 7.8, 7.09, 5.38]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [45.67, 31.57, 33.83, 34.81, 33.86, 38.46, 34.04, 28.46, 22.3, 27.72, 21.73, 28.72, 24.35]}];
+  new Chart(document.getElementById('mlOutTrendChart'),{
+    type:'line',data:{labels:mlTrendMonths,datasets:mlTrendOutSeries},
+    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v+'K'}}}})
+  });
+  new Chart(document.getElementById('mlDqTrendChart'),{
+    type:'line',data:{labels:mlTrendMonths,datasets:mlTrendDqSeries},
+    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
+  });
 })();
 
 new Chart(document.getElementById('origChart'),{
   type:'bar',
-  data:{labels:["2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 184.7, 351.8, 227.0, 239.4, 123.7, 275.8, 262.3, 316.6, 217.2, 413.7, 469.6, 281.6, 319.8, 509.9], "backgroundColor": "#378ADD", "borderWidth": 0}, {"label": "Cledara Limited", "data": [0.0, 19.7, 20.0, 17.5, 19.3, 11.8, 60.1, 382.2, 1824.5, 1935.7, 2062.5, 1987.5, 1903.9, 1899.7, 1905.7, 1871.3, 1788.3, 1787.5, 1879.3], "backgroundColor": "#1D9E75", "borderWidth": 0}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 13.4, 27.7, 20.7], "backgroundColor": "#D85A30", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 898.0, 1052.5, 1523.7, 1077.2, 1052.9, 767.9, 1617.8, 1190.8, 1132.3, 902.1, 1629.1, 854.3, 925.9, 1071.9, 704.1, 1159.8, 1612.7, 1203.9], "backgroundColor": "#A32D2D", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 779.9, 900.2, 1328.8, 1098.5, 1116.3], "backgroundColor": "#BA7517", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [427.9, 5166.6, 6677.2, 6984.7, 8786.7, 10127.0, 8596.2, 9212.8, 9972.0, 10663.1, 12933.6, 10869.3, 11194.4, 11962.6, 9559.3, 13602.1, 11350.9, 12817.2, 11579.2], "backgroundColor": "#6B3FA0", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1320.5, 832.4, 646.9, 1044.4, 892.8, 794.3, 1159.8, 935.3, 914.6, 1039.9], "backgroundColor": "#185FA5", "borderWidth": 0}, {"label": "Order", "data": [1527.8, 16730.5, 15127.5, 17278.7, 18282.2, 16940.9, 19836.9, 20586.6, 20959.9, 19142.1, 20737.3, 22463.6, 23979.7, 27729.6, 22581.6, 23030.4, 25670.2, 23587.0, 23152.2], "backgroundColor": "#3B6D11", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [214.3, 1933.6, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 5306.4], "backgroundColor": "#888", "borderWidth": 0}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 81.6, 1256.2, 951.4, 1409.3, 1407.5, 1530.0], "backgroundColor": "#D4A017", "borderWidth": 0}]},
+  data:{labels:["2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 184.7, 351.8, 227.0, 239.4, 123.7, 275.8, 262.3, 316.6, 217.2, 413.7, 469.6, 281.6, 319.8, 509.9], "backgroundColor": "#378ADD", "borderWidth": 0}, {"label": "Cledara Limited", "data": [0.0, 19.7, 20.0, 17.5, 19.3, 11.8, 60.1, 382.2, 1824.5, 1935.7, 2062.5, 1987.5, 1903.9, 1899.7, 1905.7, 1871.3, 1788.3, 1787.5, 1879.3], "backgroundColor": "#1D9E75", "borderWidth": 0}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 13.4, 27.7, 20.7], "backgroundColor": "#D85A30", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 898.0, 1052.5, 1523.7, 1077.2, 1052.9, 767.9, 1617.8, 1190.8, 1132.3, 902.1, 1629.1, 854.3, 925.9, 1071.9, 704.1, 1159.8, 1612.7, 1203.9], "backgroundColor": "#A32D2D", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 779.9, 900.2, 1328.8, 1098.5, 1116.3], "backgroundColor": "#BA7517", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [427.9, 5166.6, 6677.2, 6984.7, 8786.7, 10127.0, 8596.2, 9212.8, 9972.0, 10663.1, 12933.6, 10869.3, 11194.4, 11962.6, 9559.3, 13602.1, 11350.9, 12817.2, 11639.8], "backgroundColor": "#6B3FA0", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1320.5, 832.4, 646.9, 1044.4, 892.8, 794.3, 1159.8, 935.3, 914.6, 1039.9], "backgroundColor": "#185FA5", "borderWidth": 0}, {"label": "Order", "data": [1527.8, 16730.5, 15127.5, 17278.7, 18282.2, 16940.9, 19836.9, 20586.6, 20959.9, 19142.1, 20737.3, 22463.6, 23979.7, 27729.6, 22581.6, 23030.4, 25670.2, 23587.0, 23181.2], "backgroundColor": "#3B6D11", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [214.3, 1933.6, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 5306.4], "backgroundColor": "#888", "borderWidth": 0}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 81.6, 1256.2, 951.4, 1409.3, 1407.5, 1530.0], "backgroundColor": "#D4A017", "borderWidth": 0}]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
 });
 
@@ -4971,22 +5013,22 @@ new Chart(document.getElementById('coChart'),{
 // Mixed chart: stacked bars for originated + DQ buckets, line for loss %.
 // Y-left = $K, Y-right = loss %.
 (function(){
-  const months   = ["2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-  const orig     = [600.0, 22.8, 697.2, 7.1, 392.5, 110.9, 164.1, 414.5, 699.1, 1068.1, 997.7, 1428.7, 2062.4, 1998.9, 6980.0, 2554.3, 4743.9, 6111.5, 7944.1, 11051.0, 10432.2, 18334.2, 19844.2, 20725.1, 22215.3, 23522.8, 27649.3, 22806.2, 27846.1, 26947.4, 32278.6, 32616.9, 33509.0, 35464.0, 37716.7, 41249.9, 40384.6, 44257.3, 45168.1, 46413.4, 50632.0, 45066.0, 50770.0, 51371.8, 49579.0, 47925.4];
-  const dq3060   = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 61.9, 103.2, 167.6, 79.5, 35.1, 0.0];
-  const dq6090   = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.8, 0.0, 68.3, 241.1, 87.5, 20.4, 19.0, 0.0, 0.0];
-  const dq90120  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 53.8, 307.4, 19.7, 43.7, 33.2, 0.0, 0.0, 0.0];
-  const lossVals = [0.0, 15.9, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 15.4, 240.8, 169.5, 40.2, 124.7, 214.5, 118.5, 924.3, 127.4, 154.5, 346.5, 570.6, 686.7, 1186.2, 873.4, 673.2, 740.5, 319.4, 509.8, 396.4, 257.1, 775.6, 409.5, 595.5, 335.0, 703.7, 395.4, 48.0, 54.9, 17.7, 0.0, 0.0, 0.0, 0.0];
-  const lossPct  = [0.0, 69.67, 0.06, 0.0, 0.0, 0.0, 0.0, 0.0, 0.07, 0.0, 0.0, 0.0, 0.75, 12.04, 2.43, 1.57, 2.63, 3.51, 1.49, 8.36, 1.22, 0.84, 1.75, 2.75, 3.09, 5.04, 3.16, 2.95, 2.66, 1.19, 1.58, 1.22, 0.77, 2.19, 1.09, 1.44, 0.83, 1.59, 0.88, 0.1, 0.11, 0.04, 0.0, 0.0, 0.0, 0.0];
+  const months   = ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
+  const orig     = [2062.4, 1998.9, 6980.0, 2554.3, 4743.9, 6111.5, 7944.1, 11051.0, 10432.2, 18334.2, 19844.2, 20725.1, 22215.3, 23522.8, 27649.3, 22806.2, 27846.1, 26947.4, 32278.6, 32616.9, 33509.0, 35464.0, 37716.7, 41249.9, 40384.6, 44257.3, 45168.1, 46413.4, 50632.0, 45066.0, 50770.0, 51371.8, 49579.0, 48014.9];
+  const dq3060   = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 61.9, 103.2, 167.6, 79.5, 35.1, 0.0];
+  const dq6090   = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.8, 0.0, 68.3, 241.1, 87.5, 20.4, 19.0, 0.0, 0.0];
+  const dq90120  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 53.8, 307.4, 19.7, 43.7, 33.2, 0.0, 0.0, 0.0];
+  const lossVals = [15.4, 240.8, 169.5, 40.2, 124.7, 214.5, 118.5, 924.3, 127.4, 154.5, 346.5, 570.6, 686.7, 1186.2, 873.4, 673.2, 740.5, 319.4, 509.8, 396.4, 257.1, 775.6, 409.5, 595.5, 335.0, 703.7, 395.4, 48.0, 54.9, 17.7, 0.0, 0.0, 0.0, 0.0];
+  const lossPct  = [0.75, 12.04, 2.43, 1.57, 2.63, 3.51, 1.49, 8.36, 1.22, 0.84, 1.75, 2.75, 3.09, 5.04, 3.16, 2.95, 2.66, 1.19, 1.58, 1.22, 0.77, 2.19, 1.09, 1.44, 0.83, 1.59, 0.88, 0.1, 0.11, 0.04, 0.0, 0.0, 0.0, 0.0];
   new Chart(document.getElementById('cohortLossChart'),{
     type:'bar',
     data:{
       labels: months,
       datasets:[
         {type:'bar', label:'Originated ($K)',   data:orig,    backgroundColor:'#D8D4CC55', borderColor:'#D8D4CC', borderWidth:1, borderRadius:2, stack:'cohort', yAxisID:'y'},
-        {type:'bar', label:'30–60 DPD ($K)', data:dq3060,  backgroundColor:'#E08C0099', borderWidth:0, stack:'dq', yAxisID:'y'},
-        {type:'bar', label:'60–90 DPD ($K)', data:dq6090,  backgroundColor:'#D85A3099', borderWidth:0, stack:'dq', yAxisID:'y'},
-        {type:'bar', label:'90–120 DPD ($K)',data:dq90120, backgroundColor:'#A32D2D99', borderWidth:0, stack:'dq', yAxisID:'y'},
+        {type:'bar', label:'30–60 DPD ($K)', data:dq3060,  backgroundColor:'#E08C00CC', borderWidth:0, stack:'dq', yAxisID:'y'},
+        {type:'bar', label:'60–90 DPD ($K)', data:dq6090,  backgroundColor:'#D85A30CC', borderWidth:0, stack:'dq', yAxisID:'y'},
+        {type:'bar', label:'90–120 DPD ($K)',data:dq90120, backgroundColor:'#A32D2DCC', borderWidth:0, stack:'dq', yAxisID:'y'},
         {type:'line',label:'Loss % (cumul.)',    data:lossPct, borderColor:'#1C1B18', borderWidth:2, pointRadius:3,
           tension:0.3, fill:false, yAxisID:'y2'}
       ]
