@@ -46,22 +46,11 @@ tr:last-child td{border-bottom:none}
 .snap-card .value{font-size:22px;font-weight:600;line-height:1;letter-spacing:-.02em}
 .snap-card .sub{font-size:11px;color:var(--ink2);margin-top:.3rem;font-family:var(--mono)}
 .footer{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:3rem;padding-top:1rem;border-top:.5px solid var(--border)}
-#gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:12px}
-#gate input{padding:10px 14px;font-size:15px;border:.5px solid var(--border);border-radius:8px;width:220px;outline:none;font-family:var(--sans);background:var(--surface)}
-#gate button{padding:9px 28px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:var(--sans)}
-#gate .err{font-size:12px;color:#8F1C1C;height:16px;font-family:var(--mono)}
-#main{display:none}
 </style>
 </head>
 <body>
-<div id="gate">
-  <div style="font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">OatFi Portfolio Review</div>
-  <input type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
-  <button onclick="checkPw()">Enter</button>
-  <div class="err" id="pwErr"></div>
-</div>
 
-<div id="main">
+<div>
 <div class="page">
 
 <div class="header">
@@ -69,7 +58,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 27, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: days_in_delinq, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-03-27 21:35<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-27 21:37<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -4806,20 +4795,6 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <script>
-function checkPw(){
-  const v=document.getElementById('pwInput').value;
-  if(v==='renegade'){
-    document.getElementById('gate').style.display='none';
-    document.getElementById('main').style.display='block';
-    sessionStorage.setItem('pr_auth','1');
-  }else{
-    document.getElementById('pwErr').textContent='Incorrect password';
-    document.getElementById('pwInput').value='';
-  }
-}
-if(sessionStorage.getItem('pr_auth')==='1'){
-  document.getElementById('gate').style.display='none';
-  document.getElementById('main').style.display='block';
 }
 
 
