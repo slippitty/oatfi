@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 27 Mar 2026, 18:10</span>
+    <span style="font-size:12px;color:#888780">Generated 27 Mar 2026, 18:18</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -97,9 +97,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="metric-bg">
       <div class="metric-label">Annualized loss rate</div>
       <div style="display:flex;align-items:baseline;gap:8px">
-        <div class="metric-value" style="color:#A32D2D">191.4bps</div>
+        <div class="metric-value" style="color:#A32D2D">191.3bps</div>
         <span style="font-size:11px;color:#DC2626">
-          ▲139.5bps
+          ▲139.4bps
         </span>
       </div>
       <div class="ns-bar-track"><div class="ns-bar-fill" style="width:100.0%;background:#A32D2D"></div></div>
@@ -120,7 +120,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
     <div class="metric-bg">
       <div class="metric-label">Approval rate</div>
-      <div class="metric-value" style="color:#DC2626">65.0%</div>
+      <div class="metric-value" style="color:#DC2626">65.2%</div>
       <div class="metric-sub">Prior 66.2%</div>
       <div class="metric-calc">Approved orgs ÷ total orgs evaluated this month.</div>
     </div>
@@ -128,7 +128,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
   <div class="narrative-card" style="margin-bottom:1rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">Annualized loss rate is 191.4bps against a 25bps target — above target, up from 51.9bps last month. Early warning pipeline: 0.75% of book is 30–60 DPD, 0.73% is 60–90 DPD, 0.76% is 90–120 DPD. Approval rate is 65.0% with 1 approvals above modeled limit. Largest active 120+ exposure: GigSafe.</p>
+    <p class="narrative-text">Annualized loss rate is 191.3bps against a 25bps target — above target, up from 51.9bps last month. Early warning pipeline: 0.75% of book is 30–60 DPD, 0.73% is 60–90 DPD, 0.76% is 90–120 DPD. Approval rate is 65.2% with 1 approvals above modeled limit. Largest active 120+ exposure: GigSafe.</p>
   </div>
 
   <div class="grid-3" style="margin-bottom:1rem">
@@ -421,7 +421,7 @@ function buildLegend(elId,ds){
 new Chart(document.getElementById('lossChart'),{
   type:'line',
   data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'Loss rate (bps)',data:[156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 52.93, 178.4, 278.92, 51.91, 191.36],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
+    {label:'Loss rate (bps)',data:[156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 52.93, 178.4, 278.92, 51.91, 191.34],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
     {label:'25bps target',data:Array(18).fill(25),borderColor:'#D97706',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
@@ -558,7 +558,7 @@ const sigData={
   'Risk rank 7':        [15,19],
   'Risk rank 8+':       [32,36],
   'Over scorecard MR':  [15,13],
-  'Approval rate %':    [66.2,65.0],
+  'Approval rate %':    [66.2,65.2],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
