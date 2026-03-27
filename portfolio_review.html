@@ -69,7 +69,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 27, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: days_in_delinq, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-03-27 18:20<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-27 18:25<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -581,11 +581,18 @@ tr:last-child td{border-bottom:none}
       <option value="__all__">All partners</option>
     </select>
   </div>
-  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Orgs with utilization &gt;120% excluded.</p>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Orgs with utilization &gt;120% or zero utilization excluded from chart.</p>
   <div class="chart-wrap" style="height:240px"><canvas id="utilChart"></canvas></div>
+  <div style="margin-top:.75rem;font-size:11px;font-family:var(--mono);color:var(--ink2)">
+    Zero utilization (credit line, no active loans): <strong>1897</strong> orgs · Koverly Inc.: 386 · Relay Financial Technologies, Inc: 351 · Lawtrades: 199 · Avalara Technologies, LLC: 167 · Order: 154 · APFusion, Inc.: 118
+  </div>
 </div>
 <div class="card-full">
-  <div class="sl" style="margin-bottom:.75rem">Credit limit above modeled limit — all active orgs</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:.5rem" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.querySelector('span').textContent=this.nextElementSibling.style.display==='none'?'▼ show':'▲ hide'">
+    <div class="sl" style="margin-bottom:0;border-bottom:none">Credit limit above modeled limit — all active orgs</div>
+    <span style="font-family:var(--mono);font-size:11px;color:var(--ink3)">▼ show</span>
+  </div>
+  <div style="display:none">
   <table style="margin-top:.75rem">
     <thead><tr>
       <th>Org</th><th>Partner</th>
@@ -3345,6 +3352,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-21</td>
         </tr></tbody>
   </table>
+  </div>
 </div>
 
 <div class="sl">4 — Origination and outstanding balance</div>
