@@ -69,7 +69,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 27, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: days_in_delinq, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-03-27 21:30<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-27 21:33<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -4813,7 +4813,7 @@ async function sha256(s){
 async function checkPw(){
   const v=document.getElementById('pwInput').value;
   const h=await sha256(v);
-  const th=await sha256('renegade');
+  const th='1a2d3e3e226b8c72dccb920c5b2f4ef7fcd7c4a58a9e26c44d7d0ca8f65cdd32'; // sha256 of DASHBOARD_PASSWORD
   if(h===th){
     document.getElementById('gate').style.display='none';
     document.getElementById('main').style.display='block';
