@@ -69,7 +69,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 27, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: days_in_delinq, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-03-27 21:16<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-27 21:24<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -613,15 +613,10 @@ tr:last-child td{border-bottom:none}
     <div class="chart-wrap" style="height:200px"><canvas id="rrDqChart"></canvas></div>
   </div>
 </div>
-<div class="grid-2">
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Outstanding by risk rank — 12-month trend ($K)</div>
-    <div class="chart-wrap" style="height:200px"><canvas id="rrOutTrendChart"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">30+ DPD % by risk rank — 12-month trend</div>
-    <div class="chart-wrap" style="height:200px"><canvas id="rrDqTrendChart"></canvas></div>
-  </div>
+<div class="card-full" style="margin-bottom:1.25rem">
+  <div class="sl" style="margin-bottom:.75rem">Composition by risk rank — 12-month trend (% of total outstanding)</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Stacked area. Each band = that risk rank’s share of total outstanding. Adds to 100% each month.</p>
+  <div class="chart-wrap" style="height:220px"><canvas id="rrTrendChart"></canvas></div>
 </div>
 <div class="grid-2">
   <div class="card">
@@ -635,15 +630,10 @@ tr:last-child td{border-bottom:none}
     <div class="chart-wrap" style="height:200px"><canvas id="mlDqChart"></canvas></div>
   </div>
 </div>
-<div class="grid-2">
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Outstanding — above vs at/below modeled limit — 12-month trend ($K)</div>
-    <div class="chart-wrap" style="height:200px"><canvas id="mlOutTrendChart"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">30+ DPD % — above vs at/below modeled limit — 12-month trend</div>
-    <div class="chart-wrap" style="height:200px"><canvas id="mlDqTrendChart"></canvas></div>
-  </div>
+<div class="card-full" style="margin-bottom:1.25rem">
+  <div class="sl" style="margin-bottom:.75rem">Composition — above vs at/below modeled limit — 12-month trend (% of total outstanding)</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Stacked area. Each band = that bucket’s share of total outstanding. Adds to 100% each month.</p>
+  <div class="chart-wrap" style="height:220px"><canvas id="mlTrendChart"></canvas></div>
 </div>
 <!-- ── END new charts ──────────────────────────────────────────────────── -->
 
@@ -4933,16 +4923,15 @@ utilSelect.addEventListener('change',function(){
     data:{labels:rrLabels,datasets:[{label:'30+ DPD',data:rrDq,backgroundColor:rrColorsDq,borderRadius:3}]},
     options:barOpts
   });
-  const rrTrendMonths    = ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-  const rrTrendOutSeries = [{"label": "1", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [4901.4, 3348.7, 2819.6, 2565.5, 2412.1, 1882.7, 1835.2, 1638.9, 1782.2, 1473.4, 901.8, 710.3, 419.6]}, {"label": "2", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1940.6, 1974.8, 2550.0, 3132.8, 3191.1, 2871.3, 3442.3, 3217.2, 3343.9, 3622.1, 3569.9, 4015.5, 4213.4]}, {"label": "3", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [8385.3, 9307.4, 10186.5, 10743.3, 12753.2, 12999.3, 14895.4, 14566.8, 16902.2, 18046.2, 17881.8, 18046.7, 17946.0]}, {"label": "4", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [6069.8, 5884.3, 6656.7, 7491.3, 7945.2, 8391.3, 8612.0, 9088.6, 8750.3, 10137.2, 9190.7, 9574.0, 8836.9]}, {"label": "5", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [13498.7, 12804.3, 12828.6, 13848.4, 12919.6, 13327.0, 14014.4, 14389.8, 13823.5, 13211.0, 12720.0, 12756.8, 11715.7]}, {"label": "6", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [7910.1, 7287.8, 6874.3, 7898.8, 7977.0, 7739.9, 7455.0, 7878.7, 7640.8, 7374.8, 7394.3, 7805.8, 8202.4]}, {"label": "7", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [4696.9, 4139.3, 4133.8, 4203.3, 4519.3, 5282.5, 4799.7, 4670.1, 4673.3, 4348.4, 4561.4, 4908.8, 4657.6]}, {"label": "8", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1447.5, 1245.7, 1268.9, 1436.2, 1442.6, 1254.7, 1319.4, 1343.9, 1348.0, 1145.7, 681.3, 760.3, 860.2]}, {"label": "9", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1186.5, 1004.1, 1148.0, 1216.2, 1116.5, 1141.9, 1092.5, 892.9, 778.3, 957.1, 1005.6, 1072.0, 981.6]}, {"label": "10", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1042.0, 1024.0, 1145.2, 1055.8, 1070.0, 1000.4, 1043.1, 941.0, 841.4, 783.2, 698.3, 787.8, 730.8]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [29.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}];
-  const rrTrendDqSeries  = [{"label": "1", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [50.26, 35.34, 40.28, 41.49, 39.28, 43.75, 41.58, 32.75, 29.1, 36.09, 32.53, 44.45, 37.24]}, {"label": "2", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [0.31, 0.3, 0.23, 0.19, 0.53, 0.21, 1.16, 2.3, 0.18, 0.16, 0.17, 0.57, 1.53]}, {"label": "3", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [0.09, 0.38, 0.75, 0.89, 0.6, 0.59, 0.0, 0.63, 0.91, 1.18, 1.43, 1.31, 1.71]}, {"label": "4", "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [1.52, 0.0, 0.23, 1.08, 0.54, 1.41, 1.5, 2.35, 7.51, 6.8, 6.88, 7.17, 2.68]}, {"label": "5", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [3.1, 2.3, 4.13, 4.27, 4.26, 4.56, 4.48, 3.6, 4.37, 6.13, 4.56, 5.72, 5.61]}, {"label": "6", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [12.47, 8.85, 6.93, 8.16, 6.83, 6.42, 6.38, 6.95, 6.89, 10.85, 10.91, 9.45, 9.64]}, {"label": "7", "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [18.33, 12.07, 12.52, 12.89, 17.13, 15.53, 16.63, 17.66, 17.71, 8.07, 6.42, 5.08, 5.4]}, {"label": "8", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [21.47, 5.84, 12.61, 22.12, 32.01, 9.71, 26.36, 25.42, 24.27, 25.73, 3.77, 3.28, 3.76]}, {"label": "9", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [0.04, 0.05, 0.04, 0.04, 0.04, 0.04, 0.04, 0.0, 0.19, 0.0, 0.0, 0.0, 0.0]}, {"label": "10", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [8.11, 0.65, 0.58, 0.63, 3.05, 13.27, 22.23, 22.82, 28.19, 8.35, 0.95, 0.86, 0.93]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}];
-  new Chart(document.getElementById('rrOutTrendChart'),{
-    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendOutSeries},
-    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v+'K'}}}})
-  });
-  new Chart(document.getElementById('rrDqTrendChart'),{
-    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendDqSeries},
-    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
+  const rrTrendMonths = ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
+  const rrTrendSeries = [{"label": "No model", "data": [0.06, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A033", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "10", "data": [2.04, 2.13, 2.31, 1.97, 1.93, 1.79, 1.78, 1.61, 1.41, 1.28, 1.19, 1.3, 1.25], "borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "9", "data": [2.32, 2.09, 2.31, 2.27, 2.02, 2.04, 1.87, 1.52, 1.3, 1.57, 1.72, 1.77, 1.68], "borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "8", "data": [2.83, 2.59, 2.56, 2.68, 2.61, 2.24, 2.26, 2.29, 2.25, 1.88, 1.16, 1.26, 1.47], "borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "7", "data": [9.19, 8.62, 8.33, 7.84, 8.17, 9.45, 8.2, 7.97, 7.8, 7.12, 7.78, 8.12, 7.95], "borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "6", "data": [15.48, 15.18, 13.86, 14.74, 14.41, 13.85, 12.74, 13.44, 12.76, 12.07, 12.62, 12.92, 14.01], "borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "5", "data": [26.41, 26.66, 25.86, 25.84, 23.34, 23.84, 23.95, 24.54, 23.08, 21.62, 21.7, 21.11, 20.0], "borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "4", "data": [11.88, 12.25, 13.42, 13.98, 14.36, 15.01, 14.72, 15.5, 14.61, 16.59, 15.68, 15.84, 15.09], "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "3", "data": [16.41, 19.38, 20.53, 20.05, 23.04, 23.26, 25.46, 24.85, 28.22, 29.54, 30.51, 29.86, 30.64], "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "2", "data": [3.8, 4.11, 5.14, 5.85, 5.77, 5.14, 5.88, 5.49, 5.58, 5.93, 6.09, 6.64, 7.19], "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "1", "data": [9.59, 6.97, 5.68, 4.79, 4.36, 3.37, 3.14, 2.8, 2.98, 2.41, 1.54, 1.18, 0.72], "borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}];
+  new Chart(document.getElementById('rrTrendChart'),{
+    type:'line',
+    data:{labels:rrTrendMonths,datasets:rrTrendSeries},
+    options:merge(baseOpts,{
+      plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},
+      scales:{y:{min:0,max:100,stacked:true,ticks:{callback:v=>v+'%'}}}
+    })
   });
 })();
 
@@ -4971,16 +4960,15 @@ utilSelect.addEventListener('change',function(){
     data:{labels:mlLabels,datasets:[{label:'30+ DPD',data:mlDq,backgroundColor:mlColorsDq,borderRadius:3}]},
     options:barOpts
   });
-  const mlTrendMonths    = ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
-  const mlTrendOutSeries = [{"label": "At/below modeled", "borderColor": "#1D9E75", "backgroundColor": "#1D9E7522", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [26981.8, 26106.5, 26971.4, 29495.8, 31022.0, 32180.0, 34083.4, 35379.1, 37092.9, 39924.4, 37699.9, 39284.4, 38693.4]}, {"label": "Above modeled", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [18655.7, 18147.0, 19265.6, 21020.7, 21475.4, 21553.6, 22066.7, 21103.3, 20438.7, 19234.9, 19527.7, 19974.8, 18963.8]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [5470.4, 3766.9, 3374.5, 3075.0, 2849.1, 2157.4, 2358.9, 2145.6, 2352.4, 1939.9, 1377.3, 1178.9, 907.1]}];
-  const mlTrendDqSeries  = [{"label": "At/below modeled", "borderColor": "#1D9E75", "backgroundColor": "#1D9E7522", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [6.45, 3.73, 3.73, 3.82, 2.41, 2.85, 3.25, 3.7, 4.11, 4.64, 2.86, 3.19, 3.26]}, {"label": "Above modeled", "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [5.46, 3.2, 4.03, 5.48, 8.08, 6.76, 6.82, 6.84, 8.87, 7.13, 7.8, 7.09, 5.38]}, {"label": "No model", "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false, "data": [45.67, 31.57, 33.83, 34.81, 33.86, 38.46, 34.04, 28.46, 22.3, 27.72, 21.73, 28.72, 24.35]}];
-  new Chart(document.getElementById('mlOutTrendChart'),{
-    type:'line',data:{labels:mlTrendMonths,datasets:mlTrendOutSeries},
-    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v+'K'}}}})
-  });
-  new Chart(document.getElementById('mlDqTrendChart'),{
-    type:'line',data:{labels:mlTrendMonths,datasets:mlTrendDqSeries},
-    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
+  const mlTrendMonths = ["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"];
+  const mlTrendSeries = [{"label": "At/below modeled", "data": [52.79, 54.37, 54.37, 55.04, 56.05, 57.58, 58.25, 60.35, 61.94, 65.34, 64.33, 65.0, 66.07], "borderColor": "#1D9E75", "backgroundColor": "#1D9E7566", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "Above modeled", "data": [36.5, 37.79, 38.83, 39.22, 38.8, 38.56, 37.72, 36.0, 34.13, 31.48, 33.32, 33.05, 32.38], "borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}, {"label": "No model", "data": [10.7, 7.84, 6.8, 5.74, 5.15, 3.86, 4.03, 3.66, 3.93, 3.18, 2.35, 1.95, 1.55], "borderColor": "#A8A5A0", "backgroundColor": "#A8A5A033", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true}];
+  new Chart(document.getElementById('mlTrendChart'),{
+    type:'line',
+    data:{labels:mlTrendMonths,datasets:mlTrendSeries},
+    options:merge(baseOpts,{
+      plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},
+      scales:{y:{min:0,max:100,stacked:true,ticks:{callback:v=>v+'%'}}}
+    })
   });
 })();
 
@@ -5025,10 +5013,10 @@ new Chart(document.getElementById('coChart'),{
     data:{
       labels: months,
       datasets:[
-        {type:'bar', label:'Originated ($K)',   data:orig,    backgroundColor:'#D8D4CC55', borderColor:'#D8D4CC', borderWidth:1, borderRadius:2, stack:'cohort', yAxisID:'y'},
-        {type:'bar', label:'30–60 DPD ($K)', data:dq3060,  backgroundColor:'#E08C00CC', borderWidth:0, stack:'dq', yAxisID:'y'},
-        {type:'bar', label:'60–90 DPD ($K)', data:dq6090,  backgroundColor:'#D85A30CC', borderWidth:0, stack:'dq', yAxisID:'y'},
-        {type:'bar', label:'90–120 DPD ($K)',data:dq90120, backgroundColor:'#A32D2DCC', borderWidth:0, stack:'dq', yAxisID:'y'},
+        {type:'bar', label:'Originated ($K)',    data:orig,    backgroundColor:'#D8D4CCAA', borderColor:'#A8A5A0', borderWidth:1, borderRadius:2, stack:'s1', yAxisID:'y'},
+        {type:'bar', label:'30–60 DPD ($K)', data:dq3060,  backgroundColor:'#E08C00EE', borderWidth:0, stack:'s1', yAxisID:'y'},
+        {type:'bar', label:'60–90 DPD ($K)', data:dq6090,  backgroundColor:'#D85A30EE', borderWidth:0, stack:'s1', yAxisID:'y'},
+        {type:'bar', label:'90–120 DPD ($K)',data:dq90120, backgroundColor:'#A32D2DEE', borderWidth:0, stack:'s1', yAxisID:'y'},
         {type:'line',label:'Loss % (cumul.)',    data:lossPct, borderColor:'#1C1B18', borderWidth:2, pointRadius:3,
           tension:0.3, fill:false, yAxisID:'y2'}
       ]
