@@ -58,7 +58,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of March 27, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: days_in_delinq, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-03-27 21:44<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-03-27 21:49<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -5024,6 +5024,7 @@ new Chart(document.getElementById('coChart'),{
         },
         y2:{
           position:'right',
+          min:0, max:6,
           ticks:{font:{size:10},color:'#A8A5A0',callback:v=>v.toFixed(1)+'%'},
           grid:{display:false},border:{display:false}
         }
