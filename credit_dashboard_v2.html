@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 27 Mar 2026, 17:42</span>
+    <span style="font-size:12px;color:#888780">Generated 27 Mar 2026, 17:54</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -187,13 +187,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
   <div class="grid-2" style="margin-bottom:1rem">
     <div class="card">
-      <div class="chart-title">Overall 30-day delinquency rate by RR band — all cohorts</div>
-      <div class="chart-calc">% of approved orgs in each RR band that ever went 30+ DPD, across all underwriting cohorts. A clear slope confirms RR is predictive. Note RR7 likely has additional manual review scrutiny.</div>
+      <div class="chart-title">30-day delinquency rate by RR band — by quarter</div>
+      <div class="chart-calc">% of approved orgs in each RR band that ever went 30+ DPD, by underwriting quarter. A clear separation from green to red confirms RR is predictive. Note RR7 likely has additional manual review scrutiny.</div>
+      <div class="legend">
+        <span><span class="ld" style="background:#16A34A"></span>RR 1–3</span>
+        <span><span class="ld" style="background:#2563EB"></span>RR 4–5</span>
+        <span><span class="ld" style="background:#D97706"></span>RR 6</span>
+        <span><span class="ld" style="background:#EA580C"></span>RR 7</span>
+        <span><span class="ld" style="background:#DC2626"></span>RR 8+</span>
+      </div>
       <div class="chart-wrap"><canvas id="rrOverallBar"></canvas></div>
     </div>
     <div class="card">
-      <div class="chart-title">Share of approvals by RR band — stacks to 100%</div>
-      <div class="chart-calc">% of approved orgs in each RR band by underwriting month. Green growing = improving approval mix toward lower-risk cohorts.</div>
+      <div class="chart-title">Share of approvals by RR band — by quarter, stacks to 100%</div>
+      <div class="chart-calc">% of approved orgs in each RR band by underwriting quarter. Green growing = improving approval mix toward lower-risk cohorts.</div>
       <div class="legend">
         <span><span class="ld" style="background:#16A34A"></span>RR 1–3</span>
         <span><span class="ld" style="background:#2563EB"></span>RR 4–5</span>
@@ -252,8 +259,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
   <div class="grid-2" style="margin-bottom:1rem">
     <div class="card">
-      <div class="chart-title">Share of above-limit approvals by RR band — stacks to 100%</div>
-      <div class="chart-calc">Of orgs approved above the model's recommended limit (&gt;10% over), what % fall in each RR band. Red dominating means overrides concentrated in highest-risk orgs.</div>
+      <div class="chart-title">Above-limit approvals by RR band — count per month</div>
+      <div class="chart-calc">Number of orgs approved above the model's recommended limit (&gt;10% over) per month, broken out by RR band. Rising red/orange bars indicate override risk concentrating in higher-risk orgs.</div>
       <div class="legend">
         <span><span class="ld" style="background:#16A34A"></span>RR 1–5</span>
         <span><span class="ld" style="background:#D97706"></span>RR 6</span>
@@ -263,8 +270,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="chart-wrap-lg"><canvas id="alShareChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="chart-title">Share of above-limit approvals by product score — stacks to 100%</div>
-      <div class="chart-calc">PS 4–5 partners (Toolbox, Ply, Harvv, Relay) have tighter caps per policy. Above-limit approvals concentrated in PS 4–5 represent the highest policy exception risk.</div>
+      <div class="chart-title">Above-limit approvals by product score — count per month</div>
+      <div class="chart-calc">PS 4–5 partners (Toolbox, Ply, Harvv, Relay) have tighter caps per policy. Rising red bars indicate above-limit overrides concentrating in the highest policy exception risk segment.</div>
       <div class="legend">
         <span><span class="ld" style="background:#16A34A"></span>PS 1–3 (lower risk)</span>
         <span><span class="ld" style="background:#DC2626"></span>PS 4–5 (higher risk)</span>
@@ -445,29 +452,28 @@ new Chart(document.getElementById('dpdTrendChart'),{
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
 
-// RR overall bar — green→blue→amber→orange→red
+// RR del rate by quarter — grouped line chart, one line per band
 new Chart(document.getElementById('rrOverallBar'),{
-  type:'bar',
-  data:{
-    labels:["RR 1\u20133", "RR 4\u20135", "RR 6", "RR 7", "RR 8+"],
-    datasets:[{
-      data:[2.6, 5.1, 7.7, 4.6, 1.1],
-      backgroundColor:["#16A34A", "#2563EB", "#D97706", "#EA580C", "#DC2626"],
-      borderWidth:0
-    }]
-  },
+  type:'line',
+  data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:[
+    {label:'RR 1–3',data:[0.0, 0.0, 25.0, 7.1, 2.9, 2.2, 4.2],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 4–5',data:[0, 0.0, 100.0, 0.0, 6.6, 7.5, 7.3],borderColor:'#2563EB',backgroundColor:'#2563EB',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 6',  data:[25.0, 25.0, 0.0, 100.0, 0.0, 0, 0], borderColor:'#D97706',backgroundColor:'#D97706',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 7',  data:[0.0, 0.0, 25.0, 0.0, 0.0, 19.0, 0.0], borderColor:'#EA580C',backgroundColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 8+', data:[0.0, 33.3, 0.0, 0.0, 0.0, 0.0, 0.0],borderColor:'#DC2626',backgroundColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
+  ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
 
-// RR share — green, blue, amber, orange, red
+// RR share by quarter — stacked bar
 new Chart(document.getElementById('rrShareChart'),{
   type:'bar',
-  data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'RR 1–3',data:[14.3, 14.3, 0.0, 50.0, 20.0, 44.4, 25.0, 100.0, 0.0, 0.0, 12.5, 52.0, 38.1, 42.1, 49.2, 41.4, 47.8, 26.0, 40.0, 47.9, 51.7, 42.0, 34.4, 25.7],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
-    {label:'RR 4–5',data:[0.0, 0.0, 0.0, 0.0, 0.0, 11.1, 12.5, 0.0, 0.0, 25.0, 25.0, 24.0, 42.9, 36.8, 36.1, 44.3, 35.9, 54.5, 40.0, 42.5, 36.2, 44.0, 39.8, 32.7],backgroundColor:'rgba(37,99,235,.75)',  borderWidth:0},
-    {label:'RR 6',  data:[21.4, 57.1, 5.6, 0.0, 40.0, 22.2, 0.0, 0.0, 20.0, 25.0, 0.0, 0.0, 2.4, 0.0, 1.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.8, 25.7], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
-    {label:'RR 7',  data:[14.3, 0.0, 55.6, 16.7, 20.0, 22.2, 25.0, 0.0, 40.0, 0.0, 25.0, 4.0, 14.3, 8.8, 6.6, 7.1, 8.7, 10.4, 9.3, 6.8, 8.6, 9.0, 11.8, 11.9], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
-    {label:'RR 8+', data:[50.0, 28.6, 38.9, 33.3, 20.0, 0.0, 37.5, 0.0, 40.0, 50.0, 37.5, 20.0, 2.4, 12.3, 6.6, 7.1, 7.6, 9.1, 10.7, 2.7, 3.4, 5.0, 3.2, 4.0],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
+  data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:[
+    {label:'RR 1–3',data:[7.7, 40.0, 26.7, 37.8, 43.8, 38.9, 46.1],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
+    {label:'RR 4–5',data:[0.0, 5.0, 6.7, 24.3, 38.1, 44.4, 39.8],backgroundColor:'rgba(37,99,235,.75)',  borderWidth:0},
+    {label:'RR 6',  data:[20.5, 20.0, 6.7, 2.7, 1.2, 0.0, 0.0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
+    {label:'RR 7',  data:[30.8, 20.0, 26.7, 8.1, 9.4, 8.8, 8.3], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
+    {label:'RR 8+', data:[41.0, 15.0, 33.3, 27.0, 7.5, 7.9, 5.8],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}})
 });
@@ -485,26 +491,26 @@ new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["20
 new Chart(document.getElementById('afinDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([null, null, null, null, 0.0, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null])},options:discOpts});
 new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[16.67, null, null, null, null, null, null],[0.0, null, null, null, null, null, null],[0.0, null, null, null, null, 0.0, null])},options:discOpts});
 
-// Above limit RR share — green, amber, orange, red (rr_1_5 merged)
+// Above limit RR counts — stacked bar
 new Chart(document.getElementById('alShareChart'),{
   type:'bar',
   data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'RR 1–5',data:[28.6, 66.7, 0.0, 0.0, 100.0, 50.0, 0.0, 0, 0, 100.0, 0.0, 33.3, 66.7, 50.0, 75.0, 33.3, 82.4, 53.8, 0.0, 50.0, 100.0, 80.0, 100.0, 0.0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
-    {label:'RR 6',  data:[14.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
-    {label:'RR 7',  data:[14.3, 0.0, 0.0, 0.0, 0.0, 50.0, 0.0, 0, 0, 0.0, 0.0, 0.0, 16.7, 0.0, 12.5, 33.3, 5.9, 23.1, 0.0, 0.0, 0.0, 0.0, 0.0, 100.0], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
-    {label:'RR 8+', data:[42.9, 33.3, 100.0, 100.0, 0.0, 0.0, 100.0, 0, 0, 0.0, 100.0, 66.7, 16.7, 50.0, 12.5, 33.3, 11.8, 23.1, 100.0, 50.0, 0.0, 20.0, 0.0, 0.0],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
+    {label:'RR 1–5',data:[2, 4, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 4, 2, 6, 2, 14, 7, 0, 1, 4, 4, 1, 0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
+    {label:'RR 6',  data:[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
+    {label:'RR 7',  data:[1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 3, 0, 0, 0, 0, 0, 1], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
+    {label:'RR 8+', data:[3, 2, 2, 1, 0, 0, 2, 0, 0, 0, 2, 2, 1, 2, 1, 2, 2, 3, 2, 1, 0, 1, 0, 0],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
-  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}})
+  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
 });
 
-// Above limit PS share — green vs red
+// Above limit PS counts — stacked bar
 new Chart(document.getElementById('alPsShareChart'),{
   type:'bar',
   data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'PS 1–3',data:[100.0, 45.0, 85.7, 100.0, 37.5, 5.8, 33.3, 11.8, 13.0, 35.7, 60.0, 62.5, 83.3, 100.0, 37.5, 70.0, 31.6, 28.6, 50.0, 50.0, 25.0, 20.0, 0.0, 0.0],backgroundColor:'rgba(22,163,74,.75)', borderWidth:0},
-    {label:'PS 4–5',data:[0.0, 55.0, 14.3, 0.0, 62.5, 94.2, 66.7, 88.2, 87.0, 64.3, 40.0, 37.5, 16.7, 0.0, 62.5, 30.0, 68.4, 71.4, 50.0, 50.0, 75.0, 80.0, 100.0, 100.0],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0}
+    {label:'PS 1–3',data:[34, 18, 6, 9, 3, 4, 4, 2, 3, 5, 9, 5, 5, 5, 3, 7, 6, 4, 1, 1, 1, 1, 0, 0],backgroundColor:'rgba(22,163,74,.75)', borderWidth:0},
+    {label:'PS 4–5',data:[0, 22, 1, 0, 5, 65, 8, 15, 20, 9, 6, 3, 1, 0, 5, 3, 13, 10, 1, 1, 3, 4, 1, 1],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0}
   ]},
-  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}})
+  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
 });
 
 // Avoidable loss — red (avoidable), amber (unavoidable above), green (within limit)
