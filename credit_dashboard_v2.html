@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 31 Mar 2026, 21:59</span>
+    <span style="font-size:12px;color:#888780">Generated 31 Mar 2026, 22:04</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -488,8 +488,8 @@ const discDs=(d13,d45,d6,d7,d8p)=>[
   {label:'RR 8+', data:d8p, borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
 ];
 new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([null, null, null, 8.33, 3.13, 2.22, 4.35],[null, null, null, 0.0, 6.56, 7.55, 7.32],[null, null, null, null, null, null, null],[null, null, null, null, 0.0, 19.05, 0.0],[null, null, null, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
-new Chart(document.getElementById('afinDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([null, null, null, null, 0.0, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null])},options:discOpts});
-new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[16.67, null, null, null, null, null, null],[0.0, null, null, null, null, null, null],[0.0, null, null, null, null, 0.0, null])},options:discOpts});
+new Chart(document.getElementById('afinDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([null, 0.0, 50.0, null, 0.0, 0.0, 50.0],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null],[null, null, null, null, null, null, null])},options:discOpts});
+new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4"],datasets:discDs([0.0, null, null, null, 0.0, null, null],[null, null, 100.0, null, null, null, null],[16.67, null, null, 100.0, 0.0, null, null],[0.0, 0.0, 0.0, null, null, null, null],[0.0, null, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
 
 // Above limit RR counts — stacked bar
 new Chart(document.getElementById('alShareChart'),{
