@@ -71,7 +71,7 @@ tr:last-child td{border-bottom:none}
     <h1>Remittance Float Investigation<span class="partner-badge">Order</span></h1>
     <div class="sub">Servicer commingling analysis · April 01, 2026 · analytics_development.mart</div>
   </div>
-  <div class="header-right">Generated 2026-04-01 15:48<br>Confidential — internal use only</div>
+  <div class="header-right">Generated 2026-04-01 15:52<br>Confidential — internal use only</div>
 </div>
 
 <div class="context-box">
@@ -82,9 +82,9 @@ tr:last-child td{border-bottom:none}
 <div class="alert-banner">
   <div class="alabel">Finding summary</div>
   <p>Before Q1 2024, Order forwarded repayments promptly — funds arrived around the partner due date, roughly 56 days <em>before</em> OatFi's own maturity deadline, and fewer than 0.02% of loans fell in the 45–60 day grace period window. This is the expected baseline for a well-behaved servicer.</p>
-  <p>From April 2024 onwards, <strong>INSERT_POST_PCT%</strong> of paid loans arrived in the 45–60 day grace period — the window between the partner's day-45 cutoff and OatFi's day-60 maturity. These loans were not past due at OatFi, but they arrived in the final 15 days of our window rather than at the partner due date as expected. The worst month was <strong>INSERT_PEAK_MONTH</strong> at <strong>INSERT_PEAK_VAL%</strong>. This pattern is consistent with Order collecting from obligors on time but deliberately holding the funds before remitting.</p>
-  <p><strong>INSERT_REBORROW_ORGS obligors</strong> received new loans from Order while a prior loan was already past the day-45 cutoff and unpaid to OatFi — totaling <strong>INSERT_REBORROW_PRINCIPAL</strong> in new originations. This confirms the cutoff is not being enforced and raises the possibility that new loan proceeds are being used to manufacture repayments on old ones.</p>
-  <p>Conservative float income at 5% annual on <strong>INSERT_PRINCIPAL</strong> principal held for an average of INSERT_HOLD_DAYS days: <strong>INSERT_FLOAT_5PCT</strong>. At prevailing SOFR+ rates during the period the likely range is <strong>INSERT_FLOAT_5PCT–INSERT_FLOAT_HIGH</strong>.</p>
+  <p>From April 2024 onwards, <strong>10.5%</strong> of paid loans arrived in the 45–60 day grace period — the window between the partner's day-45 cutoff and OatFi's day-60 maturity. These loans were not past due at OatFi, but they arrived in the final 15 days of our window rather than at the partner due date as expected. The worst month was <strong>2025-09</strong> at <strong>52.4%</strong>. This pattern is consistent with Order collecting from obligors on time but deliberately holding the funds before remitting.</p>
+  <p><strong>283 obligors</strong> received new loans from Order while a prior loan was already past the day-45 cutoff and unpaid to OatFi — totaling <strong>$600.3M</strong> in new originations. This confirms the cutoff is not being enforced and raises the possibility that new loan proceeds are being used to manufacture repayments on old ones.</p>
+  <p>Conservative float income at 5% annual on <strong>$45.3M</strong> principal held for an average of 52.4 days: <strong>$325K</strong>. At prevailing SOFR+ rates during the period the likely range is <strong>$325K–$813K</strong>.</p>
 </div>
 
 <div class="snap-grid">
@@ -721,7 +721,7 @@ new Chart(document.getElementById('spikeChart'),{
   data:{
     labels:["DPD -5", "DPD -4", "DPD -3", "DPD -2", "DPD -1", "DPD +0", "DPD +1", "DPD +2", "DPD +3", "DPD +4", "DPD +5"],
     datasets:[
-      {label:'Number of payoffs', data:[9143, 7104, 5572, 23268, 22828, 83201, 31387, 23643, 27519, 21404, 61527], backgroundColor:["#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#E24B4A", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB"], borderRadius:3},
+      {label:'Number of payoffs', data:[9143, 7104, 5572, 23268, 22828, 83201, 31387, 23643, 27519, 21404, 61527], backgroundColor:["#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#1D9E75", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB"], borderRadius:3},
       {type:'scatter', label:'Expected at DPD=0 (statistical baseline)', data:[{x:'DPD +0',y:25282}], pointStyle:'crossRot', pointRadius:14, pointBorderWidth:3, borderColor:'#888780', backgroundColor:'#888780'}
     ]
   },
