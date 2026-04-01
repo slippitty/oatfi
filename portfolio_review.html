@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OatFi — Float Investigation: Order</title>
+<title>OatFi — Remittance Float Investigation: Order</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -16,35 +16,37 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14p
 .page{max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
 .header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem}
 .header h1{font-size:20px;font-weight:600;letter-spacing:-.02em}
-.header .partner-badge{display:inline-block;font-family:var(--mono);font-size:11px;background:var(--red-bg);color:var(--red);padding:3px 10px;border-radius:4px;margin-left:10px;letter-spacing:.04em}
+.partner-badge{display:inline-block;font-family:var(--mono);font-size:11px;background:var(--red-bg);color:var(--red);padding:3px 10px;border-radius:4px;margin-left:10px;letter-spacing:.04em}
 .sub{font-size:12px;color:var(--ink2);margin-top:3px;font-family:var(--mono)}
 .header-right{font-size:11px;color:var(--ink3);font-family:var(--mono);text-align:right}
 .sl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border)}
-.alert-banner{background:var(--ink);color:#F0EDE6;border-radius:10px;padding:1.25rem 1.75rem;margin-bottom:2rem;position:relative}
-.alert-banner .label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem}
-.alert-banner p{font-size:13.5px;line-height:1.75;color:#D8D4CC;font-weight:300;margin-bottom:.6rem}
+.context-box{background:var(--surface);border:.5px solid var(--border);border-left:3px solid var(--amber);border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:13px;line-height:1.75;color:var(--ink2)}
+.context-box strong{color:var(--ink);font-weight:500}
+.alert-banner{background:var(--ink);color:#F0EDE6;border-radius:10px;padding:1.5rem 1.75rem;margin-bottom:2rem}
+.alert-banner .alabel{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.75rem}
+.alert-banner p{font-size:13.5px;line-height:1.8;color:#D8D4CC;font-weight:300;margin-bottom:.75rem}
 .alert-banner p:last-child{margin-bottom:0}
 .alert-banner strong{color:#F0EDE6;font-weight:500}
-.snap-grid{display:flex;flex-direction:row;gap:10px;margin-bottom:2rem;flex-wrap:nowrap}
-.snap-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:.875rem 1.25rem;flex:1;min-width:0}
-.snap-card .label{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:.35rem;letter-spacing:.06em;text-transform:uppercase}
+.alert-banner em{font-style:italic}
+.snap-grid{display:flex;gap:10px;margin-bottom:2rem;flex-wrap:wrap}
+.snap-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:.875rem 1.25rem;flex:1;min-width:160px}
+.snap-card .slabel{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:.35rem;letter-spacing:.06em;text-transform:uppercase}
 .snap-card .value{font-size:22px;font-weight:600;line-height:1;letter-spacing:-.02em}
-.snap-card .sub{font-size:11px;color:var(--ink2);margin-top:.3rem;font-family:var(--mono)}
+.snap-card .ssub{font-size:11px;color:var(--ink2);margin-top:.3rem;font-family:var(--mono)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
 .card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem}
 .card-full{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
-.chart-wrap{position:relative;width:100%;height:240px;margin-top:.75rem}
+.explain{font-size:13px;line-height:1.75;color:var(--ink2);margin-bottom:1rem;padding:1rem 1.25rem;background:var(--bg);border-radius:8px;border:.5px solid var(--border)}
+.explain strong{color:var(--ink);font-weight:500}
+.chart-wrap{position:relative;width:100%;margin-top:.75rem}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:6px 10px;text-align:left;border-bottom:.5px solid var(--border)}
 th.num,td.num{text-align:right;font-family:var(--mono)}
 td{padding:9px 10px;border-bottom:.5px solid var(--border);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 .pn{font-weight:500}
-.methodology{background:var(--bg);border:.5px solid var(--border);border-radius:8px;padding:1rem 1.25rem;margin-top:1.25rem;font-size:11.5px;color:var(--ink2);line-height:1.7}
-.methodology strong{color:var(--ink);font-weight:500}
-.tag{display:inline-block;font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:4px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-left:6px}
-.tag-red{background:var(--red-bg);color:var(--red)}
-.tag-amber{background:var(--amber-bg);color:var(--amber)}
+.meth{background:var(--bg);border:.5px solid var(--border);border-radius:8px;padding:.875rem 1.25rem;margin-top:1rem;font-size:11.5px;color:var(--ink2);line-height:1.7}
+.meth strong{color:var(--ink);font-weight:500}
 .footer{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:3rem;padding-top:1rem;border-top:.5px solid var(--border)}
 #gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:12px}
 #gate input{padding:10px 14px;font-size:15px;border:.5px solid var(--border);border-radius:8px;width:220px;outline:none;font-family:var(--sans);background:var(--surface)}
@@ -69,430 +71,691 @@ tr:last-child td{border-bottom:none}
     <h1>Remittance Float Investigation<span class="partner-badge">Order</span></h1>
     <div class="sub">Servicer commingling analysis · April 01, 2026 · analytics_development.mart</div>
   </div>
-  <div class="header-right">Generated 2026-04-01 15:06<br>Confidential — internal use only</div>
+  <div class="header-right">Generated 2026-04-01 15:26<br>Confidential — internal use only</div>
+</div>
+
+<div class="context-box">
+  <strong>Background — how this lending structure works.</strong>
+  OatFi provides capital to small businesses (obligors) through an embedded lending partner, Order. The obligor repays Order directly by the invoice due date. Order is then supposed to pass those funds straight through to OatFi. OatFi has its own later deadline — the maturity date, roughly 60 days after the partner due date — which acts as a grace period. The partner is contractually required to stop lending to an obligor at day 45 if a prior loan is unpaid.
+  <br><br>
+  <strong>What we are investigating.</strong>
+  Instead of passing repayments through immediately, Order may be collecting funds from obligors and holding them in its own accounts — earning interest on OatFi's capital — before remitting just before OatFi's maturity deadline. This is called remittance float or servicer commingling. We are also checking whether Order continued lending to obligors who were already past the day-45 cutoff, which would compound the issue and potentially allow the partner to use new loan proceeds to manufacture repayments on old ones.
 </div>
 
 <div class="alert-banner">
-  <div class="label">Finding summary</div>
-  <p>
-    Before Q1 2024, <strong>Order</strong> exhibited no measurable concentration of payments in the 45–60 day window past due — fewer than 0.02% of paid loans in that range, with funds arriving a median of 56 days <em>before</em> the due date. This is consistent with a pass-through servicer releasing funds promptly on receipt.
-  </p>
-  <p>
-    From April 2024 onwards, <strong>10.5%</strong> of paid loans arrived in the 45–60 day window — a ∞x increase. The average DPD at payoff moved from <strong>-54.9d</strong> to <strong>13.6d</strong>. The peak month was <strong>2025-09-01</strong> at <strong>52.4%</strong>. This pattern is statistically inconsistent with obligor payment behavior and consistent with the servicer batching collected funds and remitting at or near our maturity date, capturing float in the interim.
-  </p>
-  <p>
-    Separately, payments landing on the exact partner due date (DPD=0) are <strong>3.29×</strong> more frequent than the statistical expectation from adjacent days — a second independent signal of batch remittance behavior.
-  </p>
-  <p>
-    Conservative float income estimate at 5% annual over 52.4 average hold days: <strong>$325K</strong>. At prevailing SOFR+ rates during the period, the likely range is <strong>$325K–$813K</strong> on <strong>$45.3M</strong> principal across 90,593 loans.
-  </p>
+  <div class="alabel">Finding summary</div>
+  <p>Before Q1 2024, Order forwarded repayments promptly — funds arrived a median of 56 days <em>before</em> even the partner due date, and fewer than 0.02% of loans fell in the 45–60 day late window. This is the expected baseline for a well-behaved servicer.</p>
+  <p>From April 2024 onwards, <strong>10.5%</strong> of paid loans arrived in the 45–60 day window — a <strong>0×</strong> increase from baseline. Average days-past-due at payoff shifted from <strong>-54.9d</strong> (early) to <strong>+13.6d</strong> (late). The worst month was <strong>2025-09-01</strong> at <strong>52.4%</strong>. This pattern is consistent with Order collecting from obligors on time but deliberately holding the funds until close to OatFi's maturity deadline.</p>
+  <p>A separate statistical test finds payments landing on <em>exactly</em> the partner due date occur at <strong>3.29×</strong> the rate expected from surrounding days — a z-score of 16, which is statistically impossible under normal payment behavior. This is a classic signature of a servicer batch-releasing funds on a fixed schedule rather than passing them through individually as obligors pay.</p>
+  <p>Finally, <strong>294 obligors</strong> received new loans from Order while a prior loan was already past the day-45 cutoff and unpaid to OatFi — totaling <strong>$26961.2M</strong> in new originations. This confirms the cutoff is not being enforced and raises the possibility that new loan proceeds are being used to manufacture repayments on old ones.</p>
+  <p>Conservative float income at 5% annual on <strong>$45.3M</strong> principal held for an average of 52.4 days: <strong>$325K</strong>. At prevailing SOFR+ rates during the period the likely range is <strong>$325K–$813K</strong>.</p>
 </div>
 
 <div class="snap-grid">
   <div class="snap-card">
-    <div class="label">45–60d window — pre Q2-2024</div>
+    <div class="slabel">45–60d window — before Q2-2024</div>
     <div class="value" style="color:var(--green)">0.00%</div>
-    <div class="sub">avg DPD at payoff: -54.9d</div>
+    <div class="ssub">baseline · avg -54.9d at payoff</div>
   </div>
   <div class="snap-card">
-    <div class="label">45–60d window — post Q2-2024</div>
+    <div class="slabel">45–60d window — after Q2-2024</div>
     <div class="value" style="color:var(--red)">10.5%</div>
-    <div class="sub">avg DPD at payoff: 13.6d</div>
+    <div class="ssub">0× increase · avg +13.6d at payoff</div>
   </div>
   <div class="snap-card">
-    <div class="label">Peak month</div>
+    <div class="slabel">Worst month</div>
     <div class="value" style="color:var(--red)">52.4%</div>
-    <div class="sub">2025-09-01</div>
+    <div class="ssub">2025-09-01</div>
   </div>
   <div class="snap-card">
-    <div class="label">DPD=0 overrepresentation</div>
+    <div class="slabel">DPD=0 overrepresentation</div>
     <div class="value" style="color:var(--red)">3.29×</div>
-    <div class="sub">vs expected from neighbor days · z≈16</div>
+    <div class="ssub">batch release signal · z ≈ 16</div>
   </div>
   <div class="snap-card">
-    <div class="label">Principal in window</div>
+    <div class="slabel">Principal held in window</div>
     <div class="value">$45.3M</div>
-    <div class="sub">90,593 loans · avg 52.4d hold</div>
+    <div class="ssub">90,593 loans · avg 52.4d hold</div>
   </div>
   <div class="snap-card">
-    <div class="label">Float income estimate</div>
+    <div class="slabel">Float income estimate</div>
     <div class="value" style="color:var(--red)">$325K+</div>
-    <div class="sub">5% floor · up to $813K at SOFR+</div>
+    <div class="ssub">5% floor · up to $813K at SOFR+</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Obligors re-borrowed while late</div>
+    <div class="value" style="color:var(--red)">294</div>
+    <div class="ssub">$26961.2M new principal · 288,003 loans</div>
   </div>
 </div>
 
-<div class="sl">Signal 1 — % payments arriving in 45–60 day window by month</div>
+<!-- ── SIGNAL 1 ─────────────────────────────────────────────────────────── -->
+<div class="sl">Signal 1 — late remittance window: % of monthly payoffs arriving 45–60 days past due</div>
 <div class="card-full">
-  <p style="font-size:11.5px;color:var(--ink2);margin-bottom:.75rem">
-    45–60 days past the partner's due date — the window between the partner's stated day-45 cutoff and our day-60 maturity. Bars colored by severity.
-    The dashed line shows the DPD=0 percentage (right axis) as a second indicator of batch remittance.
-  </p>
-  <div class="chart-wrap" style="height:260px"><canvas id="trendChart"></canvas></div>
+  <div class="explain">
+    <strong>What this chart shows.</strong> Each bar represents one calendar month. The height shows what percentage of that month's loan payoffs arrived between 45 and 60 days after the partner's own invoice due date. Before Q2-2024 this was essentially zero — the baseline for a healthy servicer. A rising bar means a growing share of obligors' repayments are arriving at OatFi close to the last possible moment, even though the partner likely collected them weeks earlier.
+    <br><br>
+    <strong>The blue line (right axis)</strong> shows the percentage of payoffs landing on exactly the due date (DPD=0). A high DPD=0 rate is a separate signal that funds are being batched and released on a fixed schedule rather than passed through as each obligor pays.
+    <br><br>
+    Bar colors: <span style="color:#B5D4F4;font-weight:600">■</span> below 5% &nbsp;
+    <span style="color:#BA7517;font-weight:600">■</span> 5–10% &nbsp;
+    <span style="color:#D85A30;font-weight:600">■</span> 10–20% &nbsp;
+    <span style="color:#A32D2D;font-weight:600">■</span> above 20%.
+  </div>
+  <div class="chart-wrap" style="height:280px"><canvas id="trendChart"></canvas></div>
 </div>
 
+<!-- ── SIGNAL 2 ─────────────────────────────────────────────────────────── -->
 <div class="grid-2">
   <div class="card">
-    <div class="sl" style="margin-bottom:.5rem">Signal 2 — DPD distribution around due date <span class="tag tag-red">3.19× spike at DPD=0</span></div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">
-      Expected count at DPD=0 based on neighbor average: <strong style="color:var(--ink)">25,282</strong>.
-      Observed: <strong style="color:var(--red)">83,201</strong>.
-      Under random payment timing this is statistically impossible.
-    </p>
+    <div class="sl" style="margin-bottom:.5rem">Signal 2 — DPD=0 spike: payments clustering on the exact due date</div>
+    <div class="explain">
+      <strong>What this chart shows.</strong> Each bar counts how many loan payoffs arrived at a given number of days relative to the partner due date, from 5 days early (DPD -5) to 5 days late (DPD +5). If obligors were paying spontaneously, the bars would be roughly similar across the range. Instead, DPD=0 — the exact due date — has <strong style="color:var(--red)">83,201 payoffs</strong> versus an expected <strong>25,282</strong> based on the days immediately around it. This 3.29× overrepresentation has a z-score of 16, meaning it cannot occur by chance. The most likely explanation: the partner collects funds from obligors whenever they pay, accumulates them, then releases a single batch to OatFi on the invoice due date — earning interest on the float in between.
+    </div>
     <div class="chart-wrap" style="height:200px"><canvas id="spikeChart"></canvas></div>
   </div>
   <div class="card">
-    <div class="sl" style="margin-bottom:.5rem">Float income — sensitivity table</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
-      Estimated float income on <strong style="color:var(--ink)">$45.3M</strong> principal
-      over avg 52.4 hold days at varying annual rates.
-    </p>
+    <div class="sl" style="margin-bottom:.5rem">Float income — how much interest the partner may have earned on OatFi's capital</div>
+    <div class="explain">
+      <strong>How this is calculated.</strong> We take only the loans that arrived in the 45–60 day window after Q2-2024 — the clearest evidence of delayed remittance. We multiply that principal ($45.3M) by an assumed annual interest rate and scale it by the average number of days the funds were held (52.4 days). The table shows estimates at different rates. During 2024–2025, prevailing short-term rates ranged from 4.5% to 7.5%, so the mid-to-high rows are most realistic.
+    </div>
     <table>
-      <thead><tr><th>Annual rate</th><th class="num">Float income est.</th><th>Note</th></tr></thead>
-      <tbody id="sensitivityTable"></tbody>
+      <thead><tr><th>Annual rate</th><th class="num">Estimated float income</th><th>Context</th></tr></thead>
+      <tbody id="sensTbody"></tbody>
     </table>
-    <div class="methodology">
-      <strong>Methodology:</strong> Principal × rate × (avg hold days ÷ 365).
-      Hold days = days between partner due date and actual payoff date received by OatFi,
-      for loans in the 45–60d window post Q2-2024. Excludes loans outside this window.
+    <div class="meth">
+      <strong>Note:</strong> This is a floor estimate — it only counts the 45–60d window loans. Float on earlier-window delays and on the DPD=0 batch releases is not included.
     </div>
   </div>
 </div>
 
-<div class="sl">Signal 3 — top obligors in 45–60 day window (post Q2-2024, by originated volume)</div>
+<!-- ── SIGNAL 3 ─────────────────────────────────────────────────────────── -->
+<div class="sl">Signal 3 — which obligors appear most in the late remittance window?</div>
 <div class="card-full">
-  <p style="font-size:11.5px;color:var(--ink2);margin-bottom:.75rem">
-    Obligors with the largest originated volume in the 45–60 day remittance window.
-    High occurrence counts suggest the partner is not enforcing the day-45 cutoff,
-    or is extending new credit to technically delinquent obligors — compounding the float issue.
-  </p>
+  <div class="explain">
+    <strong>What this table shows.</strong> These are the obligors whose loan payoffs most frequently arrived in the 45–60 day window after Q2-2024, ranked by total originated volume. A genuine late-paying obligor would appear once or twice. Repeated appearances by the same obligor across many loans suggests the partner is systematically holding that obligor's repayments regardless of when the obligor actually paid.
+    <br><br>
+    <strong>Distinct payoff dates</strong> is the most telling column: it counts how many separate remittance events included this obligor. An obligor with 50 loans but only 5 distinct payoff dates was paid out in five batches by the partner — not as the obligor paid each invoice.
+  </div>
   <table>
     <thead><tr>
       <th>#</th><th>Org name</th><th>Org ID</th>
       <th class="num">Loans in window</th>
       <th class="num">Total originated</th>
-      <th class="num">Avg DPD</th>
+      <th class="num">Avg days late</th>
       <th class="num">Distinct payoff dates</th>
     </tr></thead>
     <tbody><tr>
           <td class="num" style="color:#888;font-size:11px">1</td>
-          <td class="pn" style="font-size:12px">US Fitness Group</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64f22ca8de42da005b98</td>
+          <td class="pn">US Fitness Group</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64f22ca8de42da005b981c53</td>
           <td class="num">2,097</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.7M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.1d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">21</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">2</td>
-          <td class="pn" style="font-size:12px">In-shape Family Fitness, LLC.</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">63e29dea70160c005c30</td>
+          <td class="pn">In-shape Family Fitness, LLC.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">63e29dea70160c005c30b074</td>
           <td class="num">3,742</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.7M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.9d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">13</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">3</td>
-          <td class="pn" style="font-size:12px">Ascend Wellness Holdings, Inc.</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6425d27377ef3a005b12</td>
+          <td class="pn">Ascend Wellness Holdings, Inc.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6425d27377ef3a005b120669</td>
           <td class="num">1,617</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.3M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">49.8d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">6</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">4</td>
-          <td class="pn" style="font-size:12px">GOOD DAY FARM, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4e4424541c80044fc</td>
+          <td class="pn">GOOD DAY FARM, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4e4424541c80044fc6d24</td>
           <td class="num">2,774</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.2M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.1d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">18</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">5</td>
-          <td class="pn" style="font-size:12px">Home Team Vacation Rentals, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66313baf95ccdf005b16</td>
+          <td class="pn">Home Team Vacation Rentals, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66313baf95ccdf005b16a590</td>
           <td class="num">1,271</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.2M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.0d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">22</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">6</td>
-          <td class="pn" style="font-size:12px">Kaycha Holdings, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66abd346622092005cf8</td>
+          <td class="pn">Kaycha Holdings, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66abd346622092005cf8e087</td>
           <td class="num">745</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.1M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.1d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">16</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">7</td>
-          <td class="pn" style="font-size:12px">Right At School</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">676215388917d7005aae</td>
+          <td class="pn">Right At School</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">676215388917d7005aaec19b</td>
           <td class="num">3,806</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$1.0M</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.8d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">12</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">8</td>
-          <td class="pn" style="font-size:12px">Verano Holdings Corp</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65d8cbf57e5e5c005b20</td>
+          <td class="pn">Verano Holdings Corp</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65d8cbf57e5e5c005b20cd6d</td>
           <td class="num">2,131</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$837K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.3d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">8</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">9</td>
-          <td class="pn" style="font-size:12px">iAnthus Capital Management, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6596cc53484ef9005a77</td>
+          <td class="pn">iAnthus Capital Management, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6596cc53484ef9005a776b21</td>
           <td class="num">1,153</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$691K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.0d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">18</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">10</td>
-          <td class="pn" style="font-size:12px">Louis Vuitton USA Inc</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6787c66da44328005ad4</td>
+          <td class="pn">Louis Vuitton USA Inc</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6787c66da44328005ad4fc14</td>
           <td class="num">1,978</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$666K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.0d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">13</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">11</td>
-          <td class="pn" style="font-size:12px">Standard Wellness Company, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64528dcfe1dd5d00579c</td>
+          <td class="pn">Standard Wellness Company, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64528dcfe1dd5d00579c32a8</td>
           <td class="num">412</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$639K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.1d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">19</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">12</td>
-          <td class="pn" style="font-size:12px">Apex Dermatology and Skin Surgery Center</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">651d90daba3914005c5f</td>
+          <td class="pn">Apex Dermatology and Skin Surgery Center</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">651d90daba3914005c5ff1c1</td>
           <td class="num">312</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$632K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.3d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">64</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">13</td>
-          <td class="pn" style="font-size:12px">GC Flint LLC dba Jars Cannabis</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6716f59625e6cf005ae7</td>
+          <td class="pn">GC Flint LLC dba Jars Cannabis</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6716f59625e6cf005ae74a15</td>
           <td class="num">1,502</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$591K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.8d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">12</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">14</td>
-          <td class="pn" style="font-size:12px">Undefeated Tribe Operating Company, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">659467b8dc4afe005cdd</td>
+          <td class="pn">Undefeated Tribe Operating Company, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">659467b8dc4afe005cdd16d9</td>
           <td class="num">488</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$557K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.2d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">9</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">15</td>
-          <td class="pn" style="font-size:12px">LOGE Holdings, LLC</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65522b7cbb4233005a19</td>
+          <td class="pn">LOGE Holdings, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65522b7cbb4233005a19049e</td>
           <td class="num">484</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$549K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.1d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">42</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">16</td>
-          <td class="pn" style="font-size:12px">Total Health & Wellness, Inc.</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64f23b78d9f6bc005ada</td>
+          <td class="pn">Total Health & Wellness, Inc.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64f23b78d9f6bc005ada7120</td>
           <td class="num">569</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$535K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.1d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">25</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">17</td>
-          <td class="pn" style="font-size:12px">Hemp Hunter Labs, Inc.</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65202d705b2e3e005a93</td>
+          <td class="pn">Hemp Hunter Labs, Inc.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65202d705b2e3e005a935007</td>
           <td class="num">155</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$532K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">53.6d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">22</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">18</td>
-          <td class="pn" style="font-size:12px">Columbia Care</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6477b29f8a955a0058d3</td>
+          <td class="pn">Columbia Care</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6477b29f8a955a0058d36f3b</td>
           <td class="num">873</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$529K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">52.3d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">11</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">19</td>
-          <td class="pn" style="font-size:12px">Attitude Wellness, LLC dba Lume Cannabis Co.</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4dd314541c80044fc</td>
+          <td class="pn">Attitude Wellness, LLC dba Lume Cannabis Co.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4dd314541c80044fc6d05</td>
           <td class="num">565</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$502K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">55.6d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">12</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">20</td>
-          <td class="pn" style="font-size:12px">Haven</td>
-          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64ac320289289e005a2b</td>
+          <td class="pn">Haven</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64ac320289289e005a2b00a3</td>
           <td class="num">756</td>
           <td class="num" style="color:#BA7517;font-weight:500">$496K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">50.0d</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">7</td>
         </tr></tbody>
   </table>
-  <div class="methodology" style="margin-top:1rem">
-    <strong>Distinct payoff dates:</strong> number of separate remittance events this obligor appears in.
-    A high count relative to loan count suggests the partner is releasing funds in batches
-    rather than passing through individual obligor payments immediately.
+</div>
+
+<!-- ── SIGNAL 4 ─────────────────────────────────────────────────────────── -->
+<div class="sl">Signal 4 — cutoff enforcement: new loans issued while a prior loan was already 45+ days past due and unpaid to OatFi</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>What this means.</strong> Order's contract requires it to stop issuing new loans to an obligor once that obligor is 45 or more days past due on an existing loan. This table shows obligors who received a new loan from Order during the period when a prior loan was already past that cutoff and still unpaid to OatFi.
+    <br><br>
+    This has two serious implications. First, it confirms the day-45 cutoff is not being enforced — this is systematic across <strong>294 obligors</strong>, not isolated exceptions. Second, when a new loan is originated to an already-delinquent obligor, the new loan proceeds can be used to settle the old one. This means some of OatFi's "repayments" may not reflect genuine collections from obligors but rather fresh capital recycled through new originations — a mechanism that masks the true delinquency rate and inflates repayment performance.
+    <br><br>
+    <strong>Max DPD at reborrow</strong> shows how many days past the partner due date the old loan was when the new one was originated. Any value above 45 is a direct breach of the cutoff policy.
+  </div>
+  <div style="display:flex;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap">
+    <div class="snap-card" style="flex:0 0 auto;min-width:180px">
+      <div class="slabel">Obligors affected</div>
+      <div class="value" style="color:var(--red)">294</div>
+      <div class="ssub">received new loan while 45+ DPD</div>
+    </div>
+    <div class="snap-card" style="flex:0 0 auto;min-width:180px">
+      <div class="slabel">New loans issued</div>
+      <div class="value" style="color:var(--red)">288,003</div>
+      <div class="ssub">originated during delinquency window</div>
+    </div>
+    <div class="snap-card" style="flex:0 0 auto;min-width:180px">
+      <div class="slabel">New principal originated</div>
+      <div class="value" style="color:var(--red)">$26961.2M</div>
+      <div class="ssub">while prior loan unpaid to OatFi</div>
+    </div>
+  </div>
+  <table>
+    <thead><tr>
+      <th>#</th><th>Org name</th><th>Org ID</th>
+      <th class="num">New loans while late</th>
+      <th class="num">New principal</th>
+      <th class="num">Max DPD at reborrow</th>
+      <th class="num">First reborrow</th>
+      <th class="num">Last reborrow</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="num" style="color:#888;font-size:11px">1</td>
+          <td class="pn">Verano Holdings Corp</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65d8cbf57e5e5c005b20cd6d</td>
+          <td class="num">14,777</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10458.6M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">278d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-24</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">2</td>
+          <td class="pn">Attitude Wellness, LLC dba Lume Cannabis Co.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4dd314541c80044fc6d05</td>
+          <td class="num">6,775</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$3080.7M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">284d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-31</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">3</td>
+          <td class="pn">AvantStay, Inc.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4e3304541c80044fc6d1a</td>
+          <td class="num">5,577</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$2803.4M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">281d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-02</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-30</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">4</td>
+          <td class="pn">The Cerberean Group LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">652586f9c1a15b005afd8c69</td>
+          <td class="num">6,794</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$1701.9M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">260d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-06-28</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">5</td>
+          <td class="pn">Right At School</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">676215388917d7005aaec19b</td>
+          <td class="num">23,808</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$1460.1M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">267d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-06</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">6</td>
+          <td class="pn">In-shape Family Fitness, LLC.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">63e29dea70160c005c30b074</td>
+          <td class="num">11,586</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$1050.8M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">86d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-29</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-27</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">7</td>
+          <td class="pn">GC Flint LLC dba Jars Cannabis</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6716f59625e6cf005ae74a15</td>
+          <td class="num">4,845</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$607.4M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">284d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-20</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">8</td>
+          <td class="pn">GOOD DAY FARM, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62b4e4424541c80044fc6d24</td>
+          <td class="num">5,260</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$484.4M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">64d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-19</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">9</td>
+          <td class="pn">Fitness Alliance, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">640fceff1857110058917504</td>
+          <td class="num">4,206</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$452.7M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">103d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-07-30</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">10</td>
+          <td class="pn">US Fitness Group</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">64f22ca8de42da005b981c53</td>
+          <td class="num">7,078</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$451.2M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">140d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-04-29</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-04</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">11</td>
+          <td class="pn">GCC Management Company, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6705839851fda5005b661e9d</td>
+          <td class="num">2,360</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$348.6M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">281d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-30</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">12</td>
+          <td class="pn">Louis Vuitton USA Inc</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6787c66da44328005ad4fc14</td>
+          <td class="num">6,127</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$232.5M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">163d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-20</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">13</td>
+          <td class="pn">14th Round Inc</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66db748f00188c005b6889be</td>
+          <td class="num">424</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$221.2M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">278d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-23</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-19</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">14</td>
+          <td class="pn">Ultimate Fitness Group, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">62f57f78f8e9ba004339b2d5</td>
+          <td class="num">2,849</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$143.5M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">228d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-04-16</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-18</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">15</td>
+          <td class="pn">iAnthus Capital Management, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6596cc53484ef9005a776b21</td>
+          <td class="num">2,835</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$139.9M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">68d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-20</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">16</td>
+          <td class="pn">SKECHERS USA INC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65d8c8ac7e5e5c005b20ca08</td>
+          <td class="num">4,266</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$130.7M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">103d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-06-16</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-10</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">17</td>
+          <td class="pn">ST ENTERPRISE LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66e218bbb60d1c005a991c3d</td>
+          <td class="num">2,202</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$127.0M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">281d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-24</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">18</td>
+          <td class="pn">Ascend Wellness Holdings, Inc.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6425d27377ef3a005b120669</td>
+          <td class="num">1,279</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$122.2M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">65d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-24</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-04</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">19</td>
+          <td class="pn">BlueSprig Pediatrics, Inc.</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">65d8bc077e5e5c005b20b0d4</td>
+          <td class="num">6,577</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$111.6M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-05-26</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">20</td>
+          <td class="pn">Brightpath Kids</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6849d475bc2ee4005abab5e4</td>
+          <td class="num">3,731</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$108.7M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-28</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">21</td>
+          <td class="pn">Kaycha Holdings, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66abd346622092005cf8e087</td>
+          <td class="num">1,490</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$108.5M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">22</td>
+          <td class="pn">Spotless Brands Holdings, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66a258955f0d6f005af1d069</td>
+          <td class="num">3,340</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$101.7M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-21</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-26</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">23</td>
+          <td class="pn">Alo Yoga</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">63c8c35b728289005aaa8b70</td>
+          <td class="num">5,537</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$92.0M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">84d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-05-16</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">24</td>
+          <td class="pn">Home Team Vacation Rentals, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66313baf95ccdf005b16a590</td>
+          <td class="num">1,763</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$87.7M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">86d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-18</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-31</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">25</td>
+          <td class="pn">ENDO Fitness, LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6879619feab82e005d854ced</td>
+          <td class="num">835</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$73.9M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-22</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-12</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">26</td>
+          <td class="pn">Skin MD of Mass LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">67365f4e2d436b005cbd0740</td>
+          <td class="num">1,017</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$72.9M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">281d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-24</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-31</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">27</td>
+          <td class="pn">SVJ One LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6723d25516a501005b277ed6</td>
+          <td class="num">288</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$70.2M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">279d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-26</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-19</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">28</td>
+          <td class="pn">Wonderment LLC DBA Ninja Kidz Action Parks</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">6821fc8e7001fd005cd26bdd</td>
+          <td class="num">1,070</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$64.3M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">63d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-19</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">29</td>
+          <td class="pn">DXR Finance 3 LLC</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66b2588fcee9bf005b1d72ed</td>
+          <td class="num">674</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$58.9M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">281d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-24</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">30</td>
+          <td class="pn">Framebridge, Inc</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">66e31e29da5f06005cbc74e1</td>
+          <td class="num">3,795</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$57.9M</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">281d</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-23</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-01</td>
+        </tr></tbody>
+  </table>
+  <div class="meth">
+    <strong>Definition:</strong> A reborrow event is any new origination to an obligor after their existing loan was 45+ days past the partner due date (Order's stated cutoff) and before OatFi received repayment on that loan. Both eventually-paid and still-outstanding prior loans are included.
   </div>
 </div>
 
 <div class="footer">
   OatFi Credit Risk · Remittance float investigation · Partner: Order · Confidential<br>
-  DPD at payoff = days between partner due_date and OatFi-received payoff_date (loan_status).
-  Window definition: 45–60 days past partner due_date. Pre-period: all paid loans before 2024-04-01.
-  Float income: principal × rate × (avg hold days ÷ 365). Statistical test: z-score vs neighbor-day average.
+  DPD at payoff = days between partner due_date and OatFi payoff receipt (positive = late). 45–60d window = between partner day-45 cutoff and OatFi day-60 maturity.
+  Float income = principal × rate × (avg hold days ÷ 365). DPD=0 test = observed vs neighbor-day average (z-score ≈ 16).
+  Reborrow = new origination while prior loan is 45+ days past partner due date and unpaid to OatFi.
 </div>
 </div>
 </div>
 
 <script>
-function checkPw(){
-  var v = document.getElementById('pwInput').value;
-  if (v === 'renegade') {
+function checkPw() {
+  if (document.getElementById('pwInput').value === 'renegade') {
     document.getElementById('gate').style.display = 'none';
     document.getElementById('main').style.display = 'block';
-    sessionStorage.setItem('oatfi_float_auth','1');
+    sessionStorage.setItem('oatfi_float','1');
   } else {
     document.getElementById('pwErr').textContent = 'Incorrect password';
     document.getElementById('pwInput').value = '';
   }
 }
-if (sessionStorage.getItem('oatfi_float_auth') === '1') {
+if (sessionStorage.getItem('oatfi_float') === '1') {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('main').style.display = 'block';
 }
 
 const baseOpts = {
-  responsive: true, maintainAspectRatio: false,
-  interaction: { mode:'index', intersect:false },
-  plugins: {
-    legend: { display:true, position:'bottom', labels:{ boxWidth:8, boxHeight:8, font:{size:10}, color:'#6B6760', padding:8 } },
-    tooltip: { bodyFont:{size:11}, titleFont:{size:11} }
+  responsive:true, maintainAspectRatio:false,
+  interaction:{mode:'index',intersect:false},
+  plugins:{
+    legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+    tooltip:{bodyFont:{size:11},titleFont:{size:11}}
   },
-  scales: {
-    x: { ticks:{ font:{size:10}, color:'#A8A5A0', maxRotation:45, autoSkip:true, maxTicksLimit:14 }, grid:{display:false}, border:{display:false} },
-    y: { ticks:{ font:{size:10}, color:'#A8A5A0' }, grid:{ color:'rgba(0,0,0,.04)' }, border:{display:false} }
+  scales:{
+    x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:14},grid:{display:false},border:{display:false}},
+    y:{ticks:{font:{size:10},color:'#A8A5A0'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
   }
 };
-function merge(a, b) {
-  const o = Object.assign({}, a);
-  for (const k in b) {
-    if (b[k] && typeof b[k]==='object' && !Array.isArray(b[k])) o[k] = merge(a[k]||{}, b[k]);
-    else o[k] = b[k];
-  }
-  return o;
-}
+function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);else o[k]=b[k]}return o}
 
-// Signal 1 — trend chart
-new Chart(document.getElementById('trendChart'), {
-  type: 'bar',
-  data: {
-    labels: ["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],
-    datasets: [
-      {
-        type: 'bar',
-        label: '45–60d window %',
-        data: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.03, 0.0, 0.01, 0.0, 0.32, 0.43, 1.25, 1.43, 1.28, 1.0, 0.94, 0.73, 0.49, 0.45, 0.77, 0.52, 0.61, 0.7, 1.04, 2.53, 8.29, 52.36, 41.93, 28.1, 7.66, 18.34, 35.6, 10.31],
-        backgroundColor: ["#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D", "#BA7517", "#D85A30", "#A32D2D", "#D85A30"],
-        borderRadius: 3,
-        yAxisID: 'y'
-      },
-      {
-        type: 'line',
-        label: 'DPD=0 % (batch release signal)',
-        data: [0.0, 0.0, 0.0, 0.11, 0.0, 0.07, 0.0, 0.04, 0.01, 0.0, 0.21, 0.04, 0.05, 0.01, 1.61, 9.69, 9.68, 6.34, 10.87, 7.48, 6.63, 16.81, 26.64, 22.6, 25.2, 25.83, 22.97, 22.78, 21.33, 1.65, 5.67, 1.23, 1.0, 1.21, 4.05, 3.33, 2.16, 1.47, 2.16],
-        borderColor: '#378ADD',
-        backgroundColor: 'transparent',
-        borderWidth: 2,
-        pointRadius: 2,
-        tension: 0.3,
-        fill: false,
-        yAxisID: 'y2'
-      },
-      {
-        type: 'line',
-        label: 'Avg DPD at payoff',
-        data: [-71.0, -60.8, -61.8, -57.9, -57.4, -54.7, -54.2, -58.5, -57.7, -54.1, -58.4, -55.4, -59.6, -59.8, -36.0, 5.9, 6.1, 8.2, 7.1, 3.1, 5.1, 1.8, 0.2, 0.1, 0.5, -1.6, 0.3, -1.4, -0.6, 3.3, 5.2, 14.3, 38.2, 35.1, 45.7, 6.9, 19.5, 23.9, 24.1],
-        borderColor: '#888780',
-        backgroundColor: 'transparent',
-        borderWidth: 1,
-        borderDash: [4, 3],
-        pointRadius: 0,
-        tension: 0.3,
-        fill: false,
-        yAxisID: 'y3'
-      }
+new Chart(document.getElementById('trendChart'),{
+  type:'bar',
+  data:{
+    labels:["2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],
+    datasets:[
+      {type:'bar',  label:'% payoffs in 45–60d window', data:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 0.0, 0.03, 0.0, 0.01, 0.0, 0.32, 0.43, 1.25, 1.43, 1.28, 1.0, 0.94, 0.73, 0.49, 0.45, 0.77, 0.52, 0.61, 0.7, 1.04, 2.53, 8.29, 52.36, 41.93, 28.1, 7.66, 18.34, 35.6, 10.31], backgroundColor:["#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#B5D4F4", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D", "#BA7517", "#D85A30", "#A32D2D", "#D85A30"], borderRadius:3, yAxisID:'y'},
+      {type:'line', label:'% payoffs on exact due date (DPD=0)', data:[0.0, 0.0, 0.0, 0.11, 0.0, 0.07, 0.0, 0.04, 0.01, 0.0, 0.21, 0.04, 0.05, 0.01, 1.61, 9.69, 9.68, 6.34, 10.87, 7.48, 6.63, 16.81, 26.64, 22.6, 25.2, 25.83, 22.97, 22.78, 21.33, 1.65, 5.67, 1.23, 1.0, 1.21, 4.05, 3.33, 2.16, 1.47, 2.16], borderColor:'#378ADD', backgroundColor:'transparent', borderWidth:2, pointRadius:2, tension:0.3, fill:false, yAxisID:'y2'},
+      {type:'line', label:'Avg days past due at payoff', data:[-71.0, -60.8, -61.8, -57.9, -57.4, -54.7, -54.2, -58.5, -57.7, -54.1, -58.4, -55.4, -59.6, -59.8, -36.0, 5.9, 6.1, 8.2, 7.1, 3.1, 5.1, 1.8, 0.2, 0.1, 0.5, -1.6, 0.3, -1.4, -0.6, 3.3, 5.2, 14.3, 38.2, 35.1, 45.7, 6.9, 19.5, 23.9, 24.1], borderColor:'#888780', backgroundColor:'transparent', borderWidth:1, borderDash:[4,3], pointRadius:0, tension:0.3, fill:false, yAxisID:'y3'}
     ]
   },
-  options: merge(baseOpts, {
-    scales: {
-      y:  { position:'left',  min:0, title:{ display:true, text:'% in 45–60d window', font:{size:10} }, ticks:{ callback: v => v.toFixed(1)+'%' } },
-      y2: { position:'right', min:0, title:{ display:true, text:'% DPD=0', font:{size:10} }, ticks:{ callback: v => v.toFixed(1)+'%' }, grid:{ display:false } },
-      y3: { display:false }
+  options:merge(baseOpts,{
+    scales:{
+      y: {position:'left',  min:0, title:{display:true,text:'% in 45–60d window',font:{size:10}}, ticks:{callback:v=>v.toFixed(1)+'%'}},
+      y2:{position:'right', min:0, title:{display:true,text:'% on exact due date',font:{size:10}}, ticks:{callback:v=>v.toFixed(1)+'%'}, grid:{display:false}},
+      y3:{display:false}
     }
   })
 });
 
-// Signal 2 — spike chart
-new Chart(document.getElementById('spikeChart'), {
-  type: 'bar',
-  data: {
-    labels: ["DPD -5", "DPD -4", "DPD -3", "DPD -2", "DPD -1", "DPD +0", "DPD +1", "DPD +2", "DPD +3", "DPD +4", "DPD +5"],
-    datasets: [
-      {
-        label: 'Payment count',
-        data: [9143, 7104, 5572, 23268, 22828, 83201, 31387, 23643, 27519, 21404, 61527],
-        backgroundColor: ["#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#E24B4A", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB"],
-        borderRadius: 3
-      },
-      {
-        type: 'scatter',
-        label: 'Expected at DPD=0',
-        data: [{ x: 'DPD +0', y: 25282 }],
-        pointStyle: 'crossRot',
-        pointRadius: 12,
-        pointBorderWidth: 2.5,
-        borderColor: '#888780',
-        backgroundColor: '#888780'
-      }
+new Chart(document.getElementById('spikeChart'),{
+  type:'bar',
+  data:{
+    labels:["DPD -5", "DPD -4", "DPD -3", "DPD -2", "DPD -1", "DPD +0", "DPD +1", "DPD +2", "DPD +3", "DPD +4", "DPD +5"],
+    datasets:[
+      {label:'Number of payoffs', data:[9143, 7104, 5572, 23268, 22828, 83201, 31387, 23643, 27519, 21404, 61527], backgroundColor:["#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#E24B4A", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB", "#9FE1CB"], borderRadius:3},
+      {type:'scatter', label:'Expected at DPD=0 (statistical baseline)', data:[{x:'DPD +0',y:25282}], pointStyle:'crossRot', pointRadius:14, pointBorderWidth:3, borderColor:'#888780', backgroundColor:'#888780'}
     ]
   },
-  options: merge(baseOpts, {
-    plugins: { legend: { display:true } },
-    scales: { y: { min:0, ticks:{ callback: v => v.toLocaleString() } } }
+  options:merge(baseOpts,{
+    plugins:{legend:{display:true}},
+    scales:{y:{min:0,ticks:{callback:v=>v.toLocaleString()}}}
   })
 });
 
-// Sensitivity table
-(function() {
-  const rates = [
-    { rate: 0.045, label: '4.5%', note: 'Floor (post-hike baseline)' },
-    { rate: 0.05,  label: '5.0%', note: 'Conservative' },
-    { rate: 0.055, label: '5.5%', note: 'Mid estimate' },
-    { rate: 0.065, label: '6.5%', note: 'SOFR+ spread estimate' },
-    { rate: 0.075, label: '7.5%', note: 'Peak rate period' },
-  ];
+(function(){
   const principal = 45288127.72;
-  const holdDays  = 52.4;
-  const tbody = document.getElementById('sensitivityTable');
-  rates.forEach((r, i) => {
-    const est = principal * r.rate * holdDays / 365;
-    function fmt(v) { return v >= 1e6 ? '$' + (v/1e6).toFixed(2) + 'M' : '$' + Math.round(v/1e3) + 'K'; }
-    const tr = document.createElement('tr');
+  const hold      = 52.4;
+  const rates = [
+    {r:0.045, label:'4.5%', note:'Post-hike floor'},
+    {r:0.050, label:'5.0%', note:'Conservative'},
+    {r:0.055, label:'5.5%', note:'Mid estimate'},
+    {r:0.065, label:'6.5%', note:'SOFR+ spread'},
+    {r:0.075, label:'7.5%', note:'Peak rate period'},
+  ];
+  function fmt(v){return v>=1e6?'$'+(v/1e6).toFixed(2)+'M':'$'+Math.round(v/1e3)+'K';}
+  const tbody = document.getElementById('sensTbody');
+  rates.forEach((r,i) => {
+    const est = principal * r.r * hold / 365;
+    const tr  = document.createElement('tr');
     tr.innerHTML = `
       <td style="font-family:var(--mono);font-size:12px">${r.label}</td>
-      <td class="num" style="font-weight:500;color:${i >= 2 ? '#A32D2D' : '#6B6760'}">${fmt(est)}</td>
-      <td style="font-size:11px;color:var(--ink3)">${r.note}</td>
-    `;
+      <td class="num" style="font-weight:500;color:${i>=2?'#A32D2D':'#6B6760'}">${fmt(est)}</td>
+      <td style="font-size:11px;color:var(--ink3)">${r.note}</td>`;
     tbody.appendChild(tr);
   });
 })();
 </script>
-
 </body></html>
