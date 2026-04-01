@@ -71,7 +71,7 @@ tr:last-child td{border-bottom:none}
     <h1>Remittance Float Investigation<span class="partner-badge">Order</span></h1>
     <div class="sub">Servicer commingling analysis · April 01, 2026 · analytics_development.mart</div>
   </div>
-  <div class="header-right">Generated 2026-04-01 15:47<br>Confidential — internal use only</div>
+  <div class="header-right">Generated 2026-04-01 15:48<br>Confidential — internal use only</div>
 </div>
 
 <div class="context-box">
@@ -82,9 +82,9 @@ tr:last-child td{border-bottom:none}
 <div class="alert-banner">
   <div class="alabel">Finding summary</div>
   <p>Before Q1 2024, Order forwarded repayments promptly — funds arrived around the partner due date, roughly 56 days <em>before</em> OatFi's own maturity deadline, and fewer than 0.02% of loans fell in the 45–60 day grace period window. This is the expected baseline for a well-behaved servicer.</p>
-  <p>From April 2024 onwards, <strong>{post_pct:.1f}%</strong> of paid loans arrived in the 45–60 day grace period — the window between the partner's day-45 cutoff and OatFi's day-60 maturity. These loans were not past due at OatFi, but they arrived in the final 15 days of our window rather than at the partner due date as expected. Average days past the partner due date at payoff shifted from <strong>{pre_avg}d</strong> (on time at Order) to <strong>+{post_avg}d</strong> (late at Order, still current at OatFi). The worst month was <strong>{peak_month}</strong> at <strong>{round(peak_val,1)}%</strong>. This pattern is consistent with Order collecting from obligors on time but deliberately holding the funds before remitting.</p>
-  <p><strong>{reborrow_orgs:,} obligors</strong> received new loans from Order while a prior loan was already past the day-45 cutoff and unpaid to OatFi — totaling <strong>{fmt_usd(reborrow_principal)}</strong> in new originations. This confirms the cutoff is not being enforced and raises the possibility that new loan proceeds are being used to manufacture repayments on old ones.</p>
-  <p>Conservative float income at 5% annual on <strong>{fmt_usd(total_principal_window)}</strong> principal held for an average of {avg_hold_days} days: <strong>{fmt_usd(float_income_5pct)}</strong>. At prevailing SOFR+ rates during the period the likely range is <strong>{fmt_usd(float_income_5pct)}–{fmt_usd(float_income_high)}</strong>.</p>
+  <p>From April 2024 onwards, <strong>INSERT_POST_PCT%</strong> of paid loans arrived in the 45–60 day grace period — the window between the partner's day-45 cutoff and OatFi's day-60 maturity. These loans were not past due at OatFi, but they arrived in the final 15 days of our window rather than at the partner due date as expected. The worst month was <strong>INSERT_PEAK_MONTH</strong> at <strong>INSERT_PEAK_VAL%</strong>. This pattern is consistent with Order collecting from obligors on time but deliberately holding the funds before remitting.</p>
+  <p><strong>INSERT_REBORROW_ORGS obligors</strong> received new loans from Order while a prior loan was already past the day-45 cutoff and unpaid to OatFi — totaling <strong>INSERT_REBORROW_PRINCIPAL</strong> in new originations. This confirms the cutoff is not being enforced and raises the possibility that new loan proceeds are being used to manufacture repayments on old ones.</p>
+  <p>Conservative float income at 5% annual on <strong>INSERT_PRINCIPAL</strong> principal held for an average of INSERT_HOLD_DAYS days: <strong>INSERT_FLOAT_5PCT</strong>. At prevailing SOFR+ rates during the period the likely range is <strong>INSERT_FLOAT_5PCT–INSERT_FLOAT_HIGH</strong>.</p>
 </div>
 
 <div class="snap-grid">
