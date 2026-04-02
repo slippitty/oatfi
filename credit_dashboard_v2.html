@@ -60,13 +60,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 01 Apr 2026, 13:03</span>
+    <span style="font-size:12px;color:#888780">Generated 02 Apr 2026, 13:52</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
   <div class="section-label">
     1. Where we are
-    <span class="badge" style="background:#FCEBEB;color:#A32D2D">ABOVE TARGET</span>
+    <span class="badge" style="background:#EAF3DE;color:#3B6D11">ON TRACK</span>
   </div>
 
   <div class="grid-3" style="margin-bottom:.75rem">
@@ -97,38 +97,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <div class="metric-bg">
       <div class="metric-label">Annualized loss rate</div>
       <div style="display:flex;align-items:baseline;gap:8px">
-        <div class="metric-value" style="color:#A32D2D">296.8bps</div>
-        <span style="font-size:11px;color:#DC2626">
-          ▲254.5bps
+        <div class="metric-value" style="color:#3B6D11">0.2bps</div>
+        <span style="font-size:11px;color:#16A34A">
+          ▼296.6bps
         </span>
       </div>
-      <div class="ns-bar-track"><div class="ns-bar-fill" style="width:100.0%;background:#A32D2D"></div></div>
+      <div class="ns-bar-track"><div class="ns-bar-fill" style="width:0.9%;background:#3B6D11"></div></div>
       <div class="metric-sub" style="margin-top:5px">Target 25bps</div>
       <div class="metric-calc">Monthly loss ÷ trailing 12m orig × 12</div>
     </div>
     <div class="metric-bg">
       <div class="metric-label">120+ DPD formation (this month)</div>
-      <div class="metric-value" style="color:#DC2626">$1.38M</div>
-      <div class="metric-sub">Prior month $190K</div>
+      <div class="metric-value" style="color:#DC2626">$1K</div>
+      <div class="metric-sub">Prior month $1.38M</div>
       <div class="metric-calc">New chargeoffs + first 120 DPD crossing. Each loan counted once.</div>
     </div>
     <div class="metric-bg">
       <div class="metric-label">Early warning: 30+ DPD % of book</div>
-      <div class="metric-value" style="color:#D97706">1.55%</div>
-      <div class="metric-sub">$948K in pipeline</div>
+      <div class="metric-value" style="color:#D97706">1.51%</div>
+      <div class="metric-sub">$938K in pipeline</div>
       <div class="metric-calc">30–120 DPD stock ÷ total outstanding. Leads loss rate by ~60–90 days.</div>
     </div>
     <div class="metric-bg">
       <div class="metric-label">Approval rate</div>
-      <div class="metric-value" style="color:#16A34A">67.0%</div>
-      <div class="metric-sub">Prior 66.7%</div>
+      <div class="metric-value" style="color:#16A34A">80.0%</div>
+      <div class="metric-sub">Prior 67.0%</div>
       <div class="metric-calc">Approved orgs ÷ total orgs evaluated this month.</div>
     </div>
   </div>
 
   <div class="narrative-card" style="margin-bottom:1rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">Annualized loss rate is 296.8bps against a 25bps target — above target, up from 42.4bps last month. Early warning pipeline: 0.84% of book is 30–60 DPD, 0.47% is 60–90 DPD, 0.25% is 90–120 DPD. Approval rate is 67.0% with 2 approvals above modeled limit. Largest active 120+ exposure: GigSafe.</p>
+    <p class="narrative-text">Annualized loss rate is 0.2bps against a 25bps target — on track, down from 296.8bps last month. Early warning pipeline: 0.76% of book is 30–60 DPD, 0.51% is 60–90 DPD, 0.24% is 90–120 DPD. Approval rate is 80.0% with 0 approvals above modeled limit. Largest active 120+ exposure: Relay Financial Technologies, Inc.</p>
   </div>
 
   <div class="grid-3" style="margin-bottom:1rem">
@@ -136,34 +136,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div class="chart-title">30–60 DPD % of outstanding book</div>
       <div class="chart-calc">Stock balance 30–60 DPD ÷ total outstanding at end of month.</div>
       <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
-        <span style="font-size:24px;font-weight:500;color:#D97706">0.84%</span>
+        <span style="font-size:24px;font-weight:500;color:#D97706">0.76%</span>
         <span style="font-size:11px;color:#16A34A">
-          ▼0.0pp vs prior
+          ▼0.08pp vs prior
         </span>
       </div>
-      <div style="font-size:11px;color:#888780">$510K · 298 loans</div>
+      <div style="font-size:11px;color:#888780">$469K · 254 loans</div>
     </div>
     <div class="card">
       <div class="chart-title">60–90 DPD % of outstanding book</div>
       <div class="chart-calc">Stock balance 60–90 DPD ÷ total outstanding at end of month.</div>
       <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
-        <span style="font-size:24px;font-weight:500;color:#EA580C">0.47%</span>
-        <span style="font-size:11px;color:#16A34A">
-          ▼0.34pp vs prior
+        <span style="font-size:24px;font-weight:500;color:#EA580C">0.51%</span>
+        <span style="font-size:11px;color:#DC2626">
+          ▲0.04pp vs prior
         </span>
       </div>
-      <div style="font-size:11px;color:#888780">$286K · 104 loans</div>
+      <div style="font-size:11px;color:#888780">$318K · 147 loans</div>
     </div>
     <div class="card">
       <div class="chart-title">90–120 DPD % of outstanding book</div>
       <div class="chart-calc">Imminent losses — expect flow into 120+ next month.</div>
       <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
-        <span style="font-size:24px;font-weight:500;color:#DC2626">0.25%</span>
+        <span style="font-size:24px;font-weight:500;color:#DC2626">0.24%</span>
         <span style="font-size:11px;color:#16A34A">
-          ▼0.51pp vs prior
+          ▼0.01pp vs prior
         </span>
       </div>
-      <div style="font-size:11px;color:#888780">$152K · 179 loans</div>
+      <div style="font-size:11px;color:#888780">$151K · 176 loans</div>
     </div>
   </div>
 
@@ -420,23 +420,23 @@ function buildLegend(elId,ds){
 // Loss rate
 new Chart(document.getElementById('lossChart'),{
   type:'line',
-  data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'Loss rate (bps)',data:[156.46, 229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 52.93, 178.4, 278.46, 42.37, 296.83],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
+    {label:'Loss rate (bps)',data:[229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 52.08, 178.4, 278.46, 42.37, 296.83, 0.23],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
     {label:'25bps target',data:Array(18).fill(25),borderColor:'#D97706',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
 });
 
 // Vintage
-const vintDatasets=[{"label": "Avalara Technologies, LLC", "data": [0.1, 12.5, 0.0, 256.3, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.2, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#7C3AED", "borderColor": "#7C3AED", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0], "backgroundColor": "#0F766E", "borderColor": "#0F766E", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 0.0, 34.0, 89.1, 0.0, 187.8, 50.2, 464.9, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.7, 0.0], "backgroundColor": "#EA580C", "borderColor": "#EA580C", "borderWidth": 0}, {"label": "Order", "data": [0.0, 0.0, 25.9, 26.5, 120.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [0.0, 39.1, 0.0, 0.0, 60.7, 122.5, 12.4, 27.5, 16.9, 13.1, 17.2, 10.8, 31.1, 9.9, 0.0], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
-const loanDatasets=[{"label": "Avalara Technologies, LLC", "data": [0.0, 0.0, 81.1, 106.0, 0.0, 6.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 89.1, 50.2, 32.0, 118.7, 528.7, 7.3, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.7, 0.0, 0.0], "backgroundColor": "#EA580C", "borderColor": "#EA580C", "borderWidth": 0}, {"label": "Order", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 22.5, 3.9, 0.0, 0.0, 0.0, 0.0, 67.7, 78.8, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [4.6, 9.0, 0.0, 0.0, 7.3, 26.1, 48.7, 52.6, 39.0, 17.7, 12.0, 23.2, 27.2, 41.2, 3.4, 19.0, 21.6, 8.6], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
+const vintDatasets=[{"label": "Avalara Technologies, LLC", "data": [0.0, 8.7, 0.0, 92.1, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#7C3AED", "borderColor": "#7C3AED", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#D97706", "borderColor": "#D97706", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], "backgroundColor": "#0F766E", "borderColor": "#0F766E", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 0.0, 30.5, 74.1, 0.0, 186.3, 39.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "Melengo, Inc.", "data": [0.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#0891B2", "borderColor": "#0891B2", "borderWidth": 0}, {"label": "Order", "data": [0.0, 0.0, 72.9, 23.9, 159.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [0.0, 41.2, 0.0, 0.0, 60.7, 125.5, 12.4, 48.9, 18.3, 13.1, 18.2, 10.8, 32.0, 9.9, 0.0, 6.0, 26.4], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
+const loanDatasets=[{"label": "Avalara Technologies, LLC", "data": [0.0, 0.0, 0.0, 19.2, 0.0, 6.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#D97706", "borderColor": "#D97706", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 74.1, 37.8, 30.6, 118.6, 60.3, 7.3, 1.6, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "Melengo, Inc.", "data": [0.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#7C3AED", "borderColor": "#7C3AED", "borderWidth": 0}, {"label": "Order", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 3.9, 0.0, 0.0, 0.0, 0.0, 67.7, 84.2, 80.2, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [0.0, 4.6, 9.0, 0.0, 7.3, 26.1, 48.7, 52.6, 39.0, 17.7, 12.0, 22.8, 27.2, 37.8, 0.7, 19.0, 21.6, 55.0, 22.2], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
 new Chart(document.getElementById('vintChart'),{
-  type:'bar',data:{labels:["2024-03-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-05-01", "2025-06-01", "2025-07-01"],datasets:vintDatasets},
+  type:'bar',data:{labels:["2023-10-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-09-01", "2025-10-01"],datasets:vintDatasets},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
 });
 buildLegend('vintLegend',vintDatasets);
 new Chart(document.getElementById('loanChart'),{
-  type:'bar',data:{labels:["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01"],datasets:loanDatasets},
+  type:'bar',data:{labels:["2024-01-01", "2024-05-01", "2024-06-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01"],datasets:loanDatasets},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
 });
 buildLegend('loanLegend',loanDatasets);
@@ -444,10 +444,10 @@ buildLegend('loanLegend',loanDatasets);
 // DPD trend
 new Chart(document.getElementById('dpdTrendChart'),{
   type:'line',
-  data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'30–60',data:[3.49, 0.55, 2.44, 2.75, 2.23, 1.75, 0.93, 1.62, 1.94, 1.71, 1.53, 1.5, 1.7, 1.86, 1.9, 1.2, 0.84, 0.84],borderColor:'#D97706',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    {label:'60–90',data:[1.53, 3.03, 0.42, 2.26, 1.95, 1.39, 0.77, 0.68, 1.12, 1.35, 1.26, 1.32, 1.15, 1.17, 1.29, 0.93, 0.81, 0.47],borderColor:'#EA580C',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    {label:'90–120',data:[1.27, 0.94, 2.76, 0.38, 2.01, 1.95, 0.63, 0.48, 0.55, 0.77, 0.71, 0.93, 0.86, 0.8, 0.85, 1.19, 0.76, 0.25],borderColor:'#DC2626',borderWidth:2,pointRadius:2,tension:.3,fill:false}
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
+    {label:'30–60',data:[0.55, 2.44, 2.75, 2.23, 1.75, 0.93, 1.62, 1.94, 1.71, 1.53, 1.5, 1.7, 1.86, 1.9, 1.2, 0.84, 0.84, 0.76],borderColor:'#D97706',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'60–90',data:[3.03, 0.42, 2.26, 1.95, 1.39, 0.77, 0.68, 1.12, 1.35, 1.26, 1.32, 1.15, 1.17, 1.29, 0.93, 0.81, 0.47, 0.51],borderColor:'#EA580C',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'90–120',data:[0.94, 2.76, 0.38, 2.01, 1.95, 0.63, 0.48, 0.55, 0.77, 0.71, 0.93, 0.86, 0.8, 0.85, 1.19, 0.76, 0.25, 0.24],borderColor:'#DC2626',borderWidth:2,pointRadius:2,tension:.3,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
@@ -456,9 +456,9 @@ new Chart(document.getElementById('dpdTrendChart'),{
 new Chart(document.getElementById('rrOverallBar'),{
   type:'line',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
-    {label:'RR 1–3',data:[0.0, 0.0, 25.0, 8.3, 2.9, 2.2, 5.3, 0.0],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 1–3',data:[0, 0.0, 25.0, 8.3, 2.9, 2.2, 5.3, 0.0],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 4–5',data:[0, 0.0, 100.0, 0.0, 6.6, 7.5, 7.3, 0.9],borderColor:'#2563EB',backgroundColor:'#2563EB',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'RR 6',  data:[25.0, 25.0, 0.0, 100.0, 0.0, 0, 0, 0.0], borderColor:'#D97706',backgroundColor:'#D97706',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 6',  data:[20.0, 25.0, 0.0, 100.0, 0.0, 0, 0, 0.0], borderColor:'#D97706',backgroundColor:'#D97706',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 7',  data:[0.0, 0.0, 25.0, 0.0, 0.0, 19.0, 0.0, 0.0], borderColor:'#EA580C',backgroundColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 8+', data:[0.0, 16.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],borderColor:'#DC2626',backgroundColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
   ]},
@@ -469,11 +469,11 @@ new Chart(document.getElementById('rrOverallBar'),{
 new Chart(document.getElementById('rrShareChart'),{
   type:'bar',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
-    {label:'RR 1–3',data:[2.6, 25.0, 26.7, 32.4, 43.8, 38.5, 45.6, 34.4],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
+    {label:'RR 1–3',data:[0.0, 25.0, 26.7, 32.4, 43.8, 38.5, 45.6, 34.4],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
     {label:'RR 4–5',data:[0.0, 5.0, 6.7, 24.3, 38.1, 44.4, 39.8, 37.7],backgroundColor:'rgba(37,99,235,.75)',  borderWidth:0},
-    {label:'RR 6',  data:[20.5, 20.0, 6.7, 2.7, 1.2, 0.0, 0.0, 12.7], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
-    {label:'RR 7',  data:[30.8, 20.0, 26.7, 8.1, 9.4, 8.8, 8.3, 10.7], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
-    {label:'RR 8+', data:[46.2, 30.0, 33.3, 32.4, 7.5, 8.4, 6.3, 4.5],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
+    {label:'RR 6',  data:[20.0, 20.0, 6.7, 2.7, 1.2, 0.0, 0.0, 12.7], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
+    {label:'RR 7',  data:[40.0, 20.0, 26.7, 8.1, 9.4, 8.8, 8.3, 10.7], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
+    {label:'RR 8+', data:[40.0, 30.0, 33.3, 32.4, 7.5, 8.4, 6.3, 4.5],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}})
 });
@@ -494,11 +494,11 @@ new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2
 // Above limit RR counts — stacked bar
 new Chart(document.getElementById('alShareChart'),{
   type:'bar',
-  data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'RR 1–5',data:[2, 4, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 4, 2, 6, 2, 14, 7, 0, 1, 4, 4, 1, 0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
-    {label:'RR 6',  data:[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
-    {label:'RR 7',  data:[1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 3, 0, 0, 0, 0, 0, 1], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
-    {label:'RR 8+', data:[3, 2, 2, 1, 0, 0, 2, 0, 0, 0, 2, 2, 1, 2, 1, 2, 2, 3, 2, 1, 0, 1, 0, 1],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
+  data:{labels:["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
+    {label:'RR 1–5',data:[4, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 4, 2, 6, 2, 14, 7, 0, 1, 4, 4, 1, 0, 0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
+    {label:'RR 6',  data:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
+    {label:'RR 7',  data:[0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 3, 0, 0, 0, 0, 0, 1, 0], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
+    {label:'RR 8+', data:[2, 2, 1, 0, 0, 2, 0, 0, 0, 2, 2, 1, 2, 1, 2, 2, 3, 2, 1, 0, 1, 0, 1, 0],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
 });
@@ -506,9 +506,9 @@ new Chart(document.getElementById('alShareChart'),{
 // Above limit PS counts — stacked bar
 new Chart(document.getElementById('alPsShareChart'),{
   type:'bar',
-  data:{labels:["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'PS 1–3',data:[34, 18, 6, 9, 3, 4, 4, 2, 3, 5, 9, 5, 5, 5, 3, 7, 6, 4, 1, 1, 1, 1, 0, 0],backgroundColor:'rgba(22,163,74,.75)', borderWidth:0},
-    {label:'PS 4–5',data:[0, 22, 1, 0, 5, 65, 8, 15, 20, 9, 6, 3, 1, 0, 5, 3, 13, 10, 1, 1, 3, 4, 1, 2],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0}
+  data:{labels:["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
+    {label:'PS 1–3',data:[18, 6, 9, 3, 4, 4, 2, 3, 5, 9, 5, 5, 5, 3, 7, 6, 4, 1, 1, 1, 1, 0, 0, 0],backgroundColor:'rgba(22,163,74,.75)', borderWidth:0},
+    {label:'PS 4–5',data:[22, 1, 0, 5, 65, 8, 15, 20, 9, 6, 3, 1, 0, 5, 3, 13, 10, 1, 1, 3, 4, 1, 2, 0],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
 });
@@ -519,7 +519,7 @@ new Chart(document.getElementById('avoidLossChart'),{
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
     {label:'Avoidable',   data:[1.8, 26.8, 0.0, 0.0, 1.0, 0.6, 0.0, 0.0],backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
     {label:'Unavoidable', data:[2.3, 5.9, 0.0, 0.0, 3.7, 3.8, 0.2, 0.0],  backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
-    {label:'Within limit',data:[596.3, 700.1, 1093.5, 112.7, 27.3, 68.5, 109.4, 19.3],   backgroundColor:'rgba(22,163,74,.75)', borderWidth:0}
+    {label:'Within limit',data:[596.3, 700.2, 1093.5, 112.7, 27.3, 57.8, 109.4, 19.3],   backgroundColor:'rgba(22,163,74,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>'$'+v+'K'}}}})
 });
@@ -527,15 +527,15 @@ new Chart(document.getElementById('avoidRateChart'),{
   type:'line',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
     {label:'Above limit', data:[6.7, 14.3, null, 0.0, 5.6, 10.8, 12.5, 0.0], borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'Within limit',data:[10.7, 7.1, 8.0, 5.4, 3.2, 5.2, 4.8, 0.3],borderColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
+    {label:'Within limit',data:[10.7, 7.1, 8.0, 5.4, 3.2, 4.8, 4.8, 0.3],borderColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
 
 // MR quality
-const mrAmtDs=[{"label": "Auto approval", "data": [4017.0, 4742.0, 3902.0, 843.0, 304.0, 831.0, 224.0, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [7622.0, 2360.0, 2699.0, 154.0, 512.0, 291.0, 804.0, 244.0], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [1047.0, 19007.0, 14532.0, 2286.0, 0.0, 96.0, 1540.0, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 27266.0, 12014.0, 2240.0, 0.0, 227.0, 732.0, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 82482.0, 41515.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
-const mrRateDs=[{"label": "Auto approval", "data": [9.3, 12.1, 11.7, 7.9, 6.1, 5.3, 3.2, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [18.4, 14.3, 15.8, 4.9, 6.7, 9.8, 9.5, 1.3], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [2.9, 17.6, 7.1, 16.7, 0.0, 7.4, 11.1, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 8.3, 4.8, 3.7, 0.0, 2.1, 2.2, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 20.0, 28.6, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
-const mrMixDs=[{"label": "Auto approval", "data": [365, 281, 230, 140, 49, 57, 63, 108], "backgroundColor": "rgba(22,163,74,0.75)", "borderWidth": 0}, {"label": "Scorecard MR", "data": [38, 70, 57, 41, 60, 102, 74, 79], "backgroundColor": "rgba(220,38,38,0.75)", "borderWidth": 0}, {"label": "KYB MR", "data": [34, 34, 14, 12, 4, 27, 9, 12], "backgroundColor": "rgba(124,58,237,0.75)", "borderWidth": 0}, {"label": "High line / low RR", "data": [5, 12, 42, 27, 46, 47, 46, 64], "backgroundColor": "rgba(37,99,235,0.75)", "borderWidth": 0}, {"label": "High line / high RR", "data": [2, 5, 7, 20, 1, 3, 5, 14], "backgroundColor": "rgba(234,88,12,0.75)", "borderWidth": 0}];
+const mrAmtDs=[{"label": "Auto approval", "data": [4062.0, 5149.0, 3902.0, 843.0, 304.0, 832.0, 225.0, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [7623.0, 2361.0, 2699.0, 154.0, 512.0, 461.0, 804.0, 244.0], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [1048.0, 19007.0, 14532.0, 2286.0, 0.0, 96.0, 1540.0, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 27266.0, 12014.0, 2240.0, 0.0, 0.0, 732.0, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 82482.0, 41518.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
+const mrRateDs=[{"label": "Auto approval", "data": [9.4, 12.1, 11.7, 7.9, 6.1, 5.3, 3.2, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [18.4, 14.3, 15.8, 4.9, 6.7, 10.8, 9.5, 1.3], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [2.9, 17.6, 7.1, 16.7, 0.0, 7.4, 11.1, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 8.3, 4.8, 3.7, 0.0, 0.0, 2.2, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 20.0, 28.6, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
+const mrMixDs=[{"label": "Auto approval", "data": [361, 281, 230, 140, 49, 57, 63, 108], "backgroundColor": "rgba(22,163,74,0.75)", "borderWidth": 0}, {"label": "Scorecard MR", "data": [38, 70, 57, 41, 60, 102, 74, 79], "backgroundColor": "rgba(220,38,38,0.75)", "borderWidth": 0}, {"label": "KYB MR", "data": [34, 34, 14, 12, 4, 27, 9, 12], "backgroundColor": "rgba(124,58,237,0.75)", "borderWidth": 0}, {"label": "High line / low RR", "data": [5, 12, 42, 27, 46, 47, 46, 64], "backgroundColor": "rgba(37,99,235,0.75)", "borderWidth": 0}, {"label": "High line / high RR", "data": [2, 5, 7, 20, 1, 3, 5, 14], "backgroundColor": "rgba(234,88,12,0.75)", "borderWidth": 0}];
 new Chart(document.getElementById('mrAmtChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrAmtDs},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v}}}})}); buildLegend('mrAmtLegend',mrAmtDs);
 new Chart(document.getElementById('mrRateChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrRateDs},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})}); buildLegend('mrRateLegend',mrRateDs);
 new Chart(document.getElementById('mrMixChart'),{type:'bar',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrMixDs},options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true}}})}); buildLegend('mrMixLegend',mrMixDs);
@@ -543,22 +543,22 @@ new Chart(document.getElementById('mrMixChart'),{type:'bar',data:{labels:["2024-
 // UW signals — red, amber, violet, teal
 new Chart(document.getElementById('uwChart'),{
   type:'bar',
-  data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[
-    {label:'Above modeled limit',data:[13, 17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 2],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
-    {label:'Risk rank 7',        data:[2, 0, 2, 0, 2, 1, 6, 5, 4, 5, 8, 8, 7, 5, 5, 9, 11, 13],        backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
-    {label:'Risk rank 8+',       data:[3, 0, 2, 2, 4, 6, 1, 7, 4, 5, 8, 7, 9, 2, 2, 5, 4, 5],        backgroundColor:'rgba(124,58,237,.75)',borderWidth:0},
-    {label:'Over scorecard MR',  data:[12, 10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 15],    backgroundColor:'rgba(13,148,136,.75)',borderWidth:0}
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
+    {label:'Above modeled limit',data:[17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 2, 0],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
+    {label:'Risk rank 7',        data:[0, 2, 0, 2, 1, 6, 5, 4, 5, 8, 8, 7, 5, 5, 9, 11, 13, 0],        backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
+    {label:'Risk rank 8+',       data:[0, 2, 2, 4, 6, 1, 7, 4, 5, 8, 7, 9, 2, 2, 5, 4, 5, 0],        backgroundColor:'rgba(124,58,237,.75)',borderWidth:0},
+    {label:'Over scorecard MR',  data:[10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 15, 0],    backgroundColor:'rgba(13,148,136,.75)',borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:false}}})
 });
 
 // Signal table
 const sigData={
-  'Above modeled limit':[2,2],
-  'Risk rank 7':        [11,13],
-  'Risk rank 8+':       [4,5],
-  'Over scorecard MR':  [15,15],
-  'Approval rate %':    [66.7,67.0],
+  'Above modeled limit':[2,0],
+  'Risk rank 7':        [13,0],
+  'Risk rank 8+':       [5,0],
+  'Over scorecard MR':  [15,0],
+  'Approval rate %':    [67.0,80.0],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
@@ -574,7 +574,7 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
 // RR sparkline
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
-  data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"],datasets:[{data:[6.48, 6.36, 6.75, 6.68, 6.64, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.83],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.68, 6.64, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.83, 3.78],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
   options:merge(baseOpts,{scales:{x:{ticks:{maxTicksLimit:6}},y:{min:4,max:8,ticks:{callback:v=>'RR '+v}}}})
 });
 </script>
