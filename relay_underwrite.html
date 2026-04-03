@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Relay Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 20:29</span>
+    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 20:32</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -397,10 +397,10 @@ new Chart(document.getElementById('lossChart'),{
 });
 
 // Vintage
-const vintDatasets=[{"label": "Relay Financial Technologies, Inc", "data": [41.2, 60.7, 125.5, 12.4, 48.9, 18.3, 13.1, 18.2, 10.8, 32.0, 9.9, 6.0, 26.4], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
+const vintDatasets=[{"label": "Relay Financial Technologies, Inc", "data": [2.5, 6.5, 21.4, 7.3, 4.5, 5.0, 6.0, 26.4], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
 const loanDatasets=[{"label": "Relay Financial Technologies, Inc", "data": [46.4, 22.2], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
 new Chart(document.getElementById('vintChart'),{
-  type:'bar',data:{labels:["2024-05-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-05-01", "2025-06-01", "2025-09-01", "2025-10-01"],datasets:vintDatasets},
+  type:'bar',data:{labels:["2024-05-01", "2024-09-01", "2024-11-01", "2024-12-01", "2025-02-01", "2025-05-01", "2025-09-01", "2025-10-01"],datasets:vintDatasets},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
 });
 buildLegend('vintLegend',vintDatasets);
