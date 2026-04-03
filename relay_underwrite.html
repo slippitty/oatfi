@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Relay Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 16:52</span>
+    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 16:54</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -456,7 +456,7 @@ const discDs=(d13,d45,d6,d7,d8p)=>[
   {label:'RR 7',  data:d7,  borderColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
   {label:'RR 8+', data:d8p, borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
 ];
-new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([null, null, null, null, 16.67, 4.76, 8.7, 0.0],[null, null, null, null, 20.0, 12.7, 16.67, 1.82],[null, null, null, null, null, null, null, 0.0],[null, null, null, null, 0.0, 25.0, null, 0.0],[null, null, null, null, null, 0.0, null, null])},options:discOpts});
+new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([null, null, null, 33.33, 16.67, 4.76, 8.7, 0.0],[null, null, null, 0.0, 20.0, 12.7, 16.67, 1.82],[50.0, 25.0, null, null, null, null, null, 0.0],[null, 0.0, 33.33, 0.0, 0.0, 25.0, 0.0, 0.0],[null, null, 0.0, null, null, 0.0, null, 0.0])},options:discOpts});
 
 // Above limit RR counts — stacked bar
 new Chart(document.getElementById('alShareChart'),{
