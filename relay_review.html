@@ -69,8 +69,6 @@ tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-
-
 <div class="sl">Portfolio snapshot</div>
 <div class="snap-grid">
   <div class="snap-card">
@@ -103,14 +101,8 @@ tr:last-child td{border-bottom:none}
     <div class="value">$3.6M</div>
     <div class="sub">curr_upb &gt; 0, latest snapshot</div>
   </div>
-  <div class="snap-card">
-    <div class="label">MRb exposure</div>
-    <div class="value" id="snapMRB">—</div>
-    <div class="sub">30+ DPD: <span id="snapMRBDQ">—</span></div>
-  </div>
 </div>
 
-<!-- ── NEW: Cohort loss chart ──────────────────────────────────────────── -->
 <div class="card-full">
   <div class="sl" style="margin-bottom:.75rem">Loss % by origination cohort — cumulative losses ÷ originated ($K stacked bars, loss % line)</div>
   <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
@@ -118,7 +110,6 @@ tr:last-child td{border-bottom:none}
   </p>
   <div class="chart-wrap" style="height:280px"><canvas id="cohortLossChart"></canvas></div>
 </div>
-<!-- ── END cohort loss chart ───────────────────────────────────────────── -->
 
 <div class="sl">Top DQ obligors — 30+ DPD (days_in_delinq, matching credit dashboard)</div>
 <div class="card-full">
@@ -382,7 +373,6 @@ tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- ── NEW: Risk rank + modeled limit charts ────────────────────────────── -->
 <div class="sl">3b — Portfolio composition — risk rank and modeled limit</div>
 <div class="grid-2">
   <div class="card">
@@ -432,10 +422,9 @@ tr:last-child td{border-bottom:none}
     <div class="chart-wrap" style="height:220px"><canvas id="mlDqTrendChart"></canvas></div>
   </div>
 </div>
-<!-- ── END new charts ──────────────────────────────────────────────────── -->
 
 <div class="card-full">
-  <div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:.5rem" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.querySelector('span').textContent=this.nextElementSibling.style.display==='none'?'▼ show':'▲ hide'">
+  <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;margin-bottom:.5rem" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.querySelector('span').textContent=this.nextElementSibling.style.display==='none'?'▼ show':'▲ hide'">
     <div class="sl" style="margin-bottom:0;border-bottom:none">Credit limit above modeled limit — all active orgs</div>
     <span style="font-family:var(--mono);font-size:11px;color:var(--ink3)">▼ show</span>
   </div>
@@ -7744,7 +7733,6 @@ tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-
 <div class="sl">5 — Economic environment — NAICS sector stress</div>
 <div class="card-full">
   <div class="sl" style="margin-bottom:.75rem">Sector snapshot table</div>
@@ -7993,31 +7981,8 @@ tr:last-child td{border-bottom:none}
   <div class="chart-wrap" style="height:260px"><canvas id="naicsTrendChart"></canvas></div>
 </div>
 
-<div class="sl">6 — Cannabis (MRb) — size and risk rank</div>
-<div class="grid-2">
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Exposure and 30+ DPD by risk rank</div>
-    <div style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
-      Total MRb exposure: <strong style="color:var(--ink)">$0</strong>
-      &nbsp;·&nbsp; 30+ DPD: <strong style="color:var(--ink3)">
-        —
-      </strong>
-    </div>
-    <table>
-      <thead><tr><th>Risk rank</th><th class="num">Orgs</th><th class="num">Exposure</th><th class="num">30+ DQ</th><th class="num">DQ %</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Exposure by line size bucket</div>
-    <table>
-      <thead><tr><th>Line bucket</th><th class="num">Orgs</th><th class="num">Exposure</th><th class="num">30+ DQ</th><th class="num">DQ %</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</div>
+<div class="sl">6 — MRb — full org list</div>
 <div class="card-full">
-  <div class="sl" style="margin-bottom:.75rem">MRb — full org list</div>
   <div class="mrb-banner">Marijuana-related businesses — flagged accounts. Active exposure only.</div>
   <table>
     <thead><tr>
@@ -8075,14 +8040,6 @@ const baseOpts={
 };
 function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);else o[k]=b[k]}return o}
 const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5","#3B6D11","#888","#D4A017"];
-
-(function(){
-  const mrbExp=[];
-  const mrbDQ =[];
-  function fmtM(v){return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':'$'+(v/1e3).toFixed(0)+'K';}
-  document.getElementById('snapMRB').textContent   =fmtM(mrbExp.reduce((a,b)=>a+b,0));
-  document.getElementById('snapMRBDQ').textContent =fmtM(mrbDQ.reduce((a,b)=>a+b,0));
-})();
 
 const allDpdSeries=[
   {label:'30-60 DPD', data:[2.74, 3.51, 4.11, 5.48, 2.23, 2.37, 0.64, 2.74, 2.5, 1.98, 0.74, 1.33, 1.24, 3.36, 2.73, 1.67, 4.23, 3.32],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
@@ -8143,13 +8100,11 @@ utilSelect.addEventListener('change',function(){
   utilChart.update();
 });
 
-
-// Shared stacked-area options for composition trend charts
 const saOpts = merge(baseOpts,{
   plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},
   scales:{y:{min:0,max:100,stacked:true,ticks:{callback:v=>v+'%'}}}
 });
-// ── NEW: Risk rank charts ─────────────────────────────────────────────────────
+
 (function(){
   const rrLabels    = ["2", "3", "4", "5", "6", "7", "8", "9", "10"];
   const rrOut       = [66326, 437570, 156421, 1173637, 748421, 711093, 63282, 21633, 153578];
@@ -8185,7 +8140,6 @@ const saOpts = merge(baseOpts,{
   });
 })();
 
-// ── NEW: Modeled limit charts ─────────────────────────────────────────────────
 (function(){
   const mlLabels    = ["At/below modeled", "Above modeled", "No model"];
   const mlOut       = [1311099, 2078306, 142556];
@@ -8233,7 +8187,6 @@ new Chart(document.getElementById('moChart'),{
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
 });
 
-
 new Chart(document.getElementById('naicsTrendChart'),{
   type:'line',
   data:{labels:["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-02"],datasets:[{"label": "Construction", "data": [24.49, 27.18, 20.11, 17.83, 18.93, 17.85, 14.87], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Wholesale Trade", "data": [22.37, 0.49, 6.16, 9.31, 7.36, 11.65, 15.02], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [0.0, 0.0, 0.0, 0.0, 1.84, 15.08, 21.7], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [19.91, 26.76, 29.76, 25.46, 5.9, 4.48, 4.17], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Information", "data": [2.67, 7.77, 5.12, 6.5, 8.3, 33.44, 32.11], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Finance & Insurance", "data": [5.04, 4.01, 3.67, 9.69, 8.02, 10.56, 8.82], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Professional Services", "data": [12.91, 10.77, 9.67, 12.25, 17.97, 19.33, 17.91], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Health Care", "data": [14.47, 19.6, 24.11, 26.43, 18.34, 15.2, 14.65], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Food & Accommodation", "data": [10.92, 9.14, 39.36, 53.46, 42.64, 42.35, 41.83], "borderColor": "#888", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}]},
@@ -8246,8 +8199,6 @@ new Chart(document.getElementById('coChart'),{
   options:merge(baseOpts,{scales:{y:{ticks:{callback:v=>'$'+v+'K'}}}})
 });
 
-// ── NEW: Cohort loss chart ────────────────────────────────────────────────────
-// Bars = originated $K. Lines on right axis = DQ % and cumulative loss % of cohort originated.
 (function(){
   const months   = ["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
   const orig     = [230.8, 472.3, 631.8, 896.3, 1351.3, 1933.6, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 5846.0, 847.1];
