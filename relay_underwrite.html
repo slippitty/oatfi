@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Credit Risk Dashboard</title>
+<title>Relay Credit Risk Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -51,7 +51,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 </head>
 <body>
 <div id="gate">
-  <div style="font-size:13px;color:#888780;margin-bottom:4px">Credit Risk Dashboard</div>
+  <div style="font-size:13px;color:#888780;margin-bottom:4px">Relay Credit Risk Dashboard</div>
   <input type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
   <button onclick="checkPw()">Enter</button>
   <div class="err" id="pwErr"></div>
@@ -59,8 +59,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
-    <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 14:27</span>
+    <h1 style="font-size:18px;font-weight:500">Relay Credit Risk Dashboard</h1>
+    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 16:03</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -120,7 +120,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
     <div class="metric-bg">
       <div class="metric-label">Approval rate</div>
-      <div class="metric-value" style="color:#16A34A">28.6%</div>
+      <div class="metric-value" style="color:#16A34A">27.3%</div>
       <div class="metric-sub">Prior 15.5%</div>
       <div class="metric-calc">Approved orgs ÷ total orgs evaluated this month.</div>
     </div>
@@ -558,7 +558,7 @@ const sigData={
   'Risk rank 7':        [6,0],
   'Risk rank 8+':       [2,0],
   'Over scorecard MR':  [5,0],
-  'Approval rate %':    [15.5,28.6],
+  'Approval rate %':    [15.5,27.3],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
@@ -574,7 +574,7 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
 // RR sparkline
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
-  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.06, 6.64, 6.6, 6.71, 6.55, 5.82, 5.52, 5.82, 5.49, 5.51, 5.66, 5.47, 5.19, 5.44, 5.39, 5.39, 5.68, 4.01],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.06, 6.64, 6.6, 6.71, 6.55, 5.82, 5.52, 5.82, 5.49, 5.51, 5.66, 5.47, 5.19, 5.44, 5.39, 5.39, 5.68, 4.06],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
   options:merge(baseOpts,{scales:{x:{ticks:{maxTicksLimit:6}},y:{min:4,max:8,ticks:{callback:v=>'RR '+v}}}})
 });
 </script>
