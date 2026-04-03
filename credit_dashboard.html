@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 18:06</span>
+    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 20:31</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -120,7 +120,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
     <div class="metric-bg">
       <div class="metric-label">Approval rate</div>
-      <div class="metric-value" style="color:#16A34A">77.8%</div>
+      <div class="metric-value" style="color:#16A34A">78.9%</div>
       <div class="metric-sub">Prior 67.4%</div>
       <div class="metric-calc">Approved orgs ÷ total orgs evaluated this month.</div>
     </div>
@@ -128,7 +128,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
   <div class="narrative-card" style="margin-bottom:1rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">Annualized loss rate is 0.2bps against a 25bps target — on track, down from 296.8bps last month. Early warning pipeline: 0.76% of book is 30–60 DPD, 0.57% is 60–90 DPD, 0.25% is 90–120 DPD. Approval rate is 77.8% with 0 approvals above modeled limit. Largest active 120+ exposure: Relay Financial Technologies, Inc.</p>
+    <p class="narrative-text">Annualized loss rate is 0.2bps against a 25bps target — on track, down from 296.8bps last month. Early warning pipeline: 0.76% of book is 30–60 DPD, 0.57% is 60–90 DPD, 0.25% is 90–120 DPD. Approval rate is 78.9% with 0 approvals above modeled limit. Largest active 120+ exposure: Relay Financial Technologies, Inc.</p>
   </div>
 
   <div class="grid-3" style="margin-bottom:1rem">
@@ -429,7 +429,7 @@ new Chart(document.getElementById('lossChart'),{
 
 // Vintage
 const vintDatasets=[{"label": "Avalara Technologies, LLC", "data": [8.7, 0.0, 92.1, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#7C3AED", "borderColor": "#7C3AED", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#D97706", "borderColor": "#D97706", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0], "backgroundColor": "#0F766E", "borderColor": "#0F766E", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 30.5, 74.1, 0.0, 186.3, 39.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "Order", "data": [0.0, 72.9, 23.9, 159.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [41.2, 0.0, 0.0, 60.7, 125.5, 12.4, 48.9, 18.3, 13.1, 18.2, 10.8, 32.0, 9.9, 0.0, 6.0, 26.4], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
-const loanDatasets=[{"label": "Avalara Technologies, LLC", "data": [0.0, 0.0, 19.2, 0.0, 6.0, 0.0, 0.0, 0.2, 0.0, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#D97706", "borderColor": "#D97706", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 74.1, 37.8, 30.6, 118.6, 60.3, 7.3, 1.6, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "Order", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 3.9, 0.0, 0.0, 0.0, 0.0, 67.7, 84.2, 80.2, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [4.6, 9.0, 0.0, 7.3, 26.1, 48.7, 52.6, 39.0, 17.7, 12.0, 22.8, 27.2, 37.8, 0.7, 19.0, 21.6, 55.0, 22.2], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
+const loanDatasets=[{"label": "Avalara Technologies, LLC", "data": [0.0, 0.0, 19.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 23.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#65A30D", "borderColor": "#65A30D", "borderWidth": 0}, {"label": "Flychain", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 0.0, 0.0, 0.0], "backgroundColor": "#D97706", "borderColor": "#D97706", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 74.1, 37.8, 30.6, 118.6, 60.3, 7.3, 1.6, 0.0, 0.0], "backgroundColor": "#2563EB", "borderColor": "#2563EB", "borderWidth": 0}, {"label": "Order", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 20.0, 3.9, 0.0, 0.0, 0.0, 0.0, 67.7, 84.2, 80.2, 0.0, 0.0, 0.0], "backgroundColor": "#16A34A", "borderColor": "#16A34A", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [4.6, 9.0, 0.0, 7.3, 26.1, 48.7, 52.6, 39.0, 17.7, 12.0, 22.8, 27.2, 37.8, 0.7, 19.0, 21.6, 55.0, 22.2], "backgroundColor": "#7E22CE", "borderColor": "#7E22CE", "borderWidth": 0}];
 new Chart(document.getElementById('vintChart'),{
   type:'bar',data:{labels:["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-09-01", "2025-10-01"],datasets:vintDatasets},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
@@ -558,7 +558,7 @@ const sigData={
   'Risk rank 7':        [13,0],
   'Risk rank 8+':       [5,0],
   'Over scorecard MR':  [15,0],
-  'Approval rate %':    [67.4,77.8],
+  'Approval rate %':    [67.4,78.9],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
@@ -574,7 +574,7 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
 // RR sparkline
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
-  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.69, 6.65, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.82, 4.01],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.69, 6.65, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.82, 3.96],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
   options:merge(baseOpts,{scales:{x:{ticks:{maxTicksLimit:6}},y:{min:4,max:8,ticks:{callback:v=>'RR '+v}}}})
 });
 </script>
