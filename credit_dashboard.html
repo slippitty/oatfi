@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 17:56</span>
+    <span style="font-size:12px;color:#888780">Generated 03 Apr 2026, 18:06</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -456,10 +456,10 @@ new Chart(document.getElementById('dpdTrendChart'),{
 new Chart(document.getElementById('rrOverallBar'),{
   type:'line',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
-    {label:'RR 1–3',data:[14.3, 7.7, 8.0, 5.3, 2.7, 2.0, 5.1, 0.0],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'RR 4–5',data:[14.5, 18.4, 7.5, 6.5, 6.6, 6.0, 7.6, 0.8],borderColor:'#2563EB',backgroundColor:'#2563EB',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'RR 6',  data:[11.0, 13.3, 14.1, 8.1, 0.0, 9.1, 0.0, 0.0], borderColor:'#D97706',backgroundColor:'#D97706',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'RR 7',  data:[5.8, 10.8, 21.3, 10.3, 0.0, 18.5, 0.0, 0.0], borderColor:'#EA580C',backgroundColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 1–3',data:[14.3, 0.0, 8.3, 5.3, 2.7, 2.0, 5.1, 0.0],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 4–5',data:[14.6, 18.5, 7.9, 6.7, 6.6, 6.0, 7.6, 0.8],borderColor:'#2563EB',backgroundColor:'#2563EB',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 6',  data:[10.3, 13.5, 13.5, 8.0, 0.0, 9.1, 0.0, 0.0], borderColor:'#D97706',backgroundColor:'#D97706',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 7',  data:[7.5, 11.1, 20.4, 9.4, 0.0, 18.5, 0.0, 0.0], borderColor:'#EA580C',backgroundColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 8+', data:[0.0, 16.7, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],borderColor:'#DC2626',backgroundColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
@@ -469,11 +469,11 @@ new Chart(document.getElementById('rrOverallBar'),{
 new Chart(document.getElementById('rrShareChart'),{
   type:'bar',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
-    {label:'RR 1–3',data:[1.9, 3.0, 6.7, 6.7, 39.0, 33.3, 41.9, 34.0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
-    {label:'RR 4–5',data:[47.9, 37.2, 39.4, 43.6, 40.6, 43.9, 44.9, 39.3],backgroundColor:'rgba(37,99,235,.75)',  borderWidth:0},
-    {label:'RR 6',  data:[32.9, 39.5, 39.9, 35.1, 5.9, 7.3, 0.4, 12.1], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
-    {label:'RR 7',  data:[14.5, 18.9, 12.6, 10.3, 8.0, 8.9, 7.3, 10.3], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
-    {label:'RR 8+', data:[2.8, 1.4, 1.3, 4.3, 6.4, 6.6, 5.6, 4.4],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
+    {label:'RR 1–3',data:[1.9, 2.3, 6.4, 6.7, 39.0, 33.0, 41.9, 34.0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
+    {label:'RR 4–5',data:[47.6, 37.0, 37.3, 42.2, 40.6, 44.2, 44.9, 39.3],backgroundColor:'rgba(37,99,235,.75)',  borderWidth:0},
+    {label:'RR 6',  data:[32.6, 38.8, 41.8, 35.5, 5.9, 7.3, 0.4, 12.1], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
+    {label:'RR 7',  data:[14.8, 20.5, 13.1, 11.3, 8.0, 8.9, 7.3, 10.3], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
+    {label:'RR 8+', data:[3.1, 1.4, 1.3, 4.3, 6.4, 6.6, 5.6, 4.4],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,min:0,max:100,ticks:{callback:v=>v+'%'}}}})
 });
@@ -487,17 +487,17 @@ const discDs=(d13,d45,d6,d7,d8p)=>[
   {label:'RR 7',  data:d7,  borderColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
   {label:'RR 8+', data:d8p, borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
 ];
-new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([20.0, 16.67, 5.26, 6.67, 3.13, 2.22, 4.35, 0.0],[17.14, 18.25, 6.92, 6.45, 6.56, 7.55, 7.32, 0.89],[17.02, 15.65, 14.39, 9.09, null, null, null, 0.0],[null, 11.59, 21.74, 12.5, 0.0, 19.05, 0.0, 0.0],[null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
-new Chart(document.getElementById('afinDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([null, 0.0, 16.67, 0.0, 0.0, 0.0, 16.67, 0.0],[0.0, 22.22, 0.0, 0.0, 16.67, 0.0, 0.0, 0.0],[0.0, null, null, null, null, 50.0, null, 0.0],[null, 0.0, null, null, null, null, null, 0.0],[null, null, null, null, null, null, null, 0.0])},options:discOpts});
-new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([0.0, 0.0, null, null, 0.0, 0.0, null, null],[5.48, 17.65, 18.18, 14.29, 0.0, 0.0, 11.76, 0.0],[7.44, 0.0, 11.76, 4.55, 0.0, 5.0, 0.0, null],[7.81, 7.69, 0.0, 0.0, null, 16.67, null, null],[0.0, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
+new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([20.0, null, 5.56, 6.67, 3.13, 2.22, 4.35, 0.0],[17.14, 18.52, 7.32, 6.74, 6.56, 7.55, 7.32, 0.89],[17.39, 15.75, 13.77, 8.86, null, null, null, 0.0],[null, 12.16, 20.83, 11.54, 0.0, 19.05, 0.0, 0.0],[null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
+new Chart(document.getElementById('afinDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([null, 0.0, 16.67, 0.0, 0.0, 0.0, 16.67, 0.0],[0.0, 20.0, 0.0, 0.0, 16.67, 0.0, 0.0, 0.0],[0.0, null, null, null, null, 50.0, null, 0.0],[null, 0.0, null, null, null, null, null, 0.0],[null, null, null, null, null, null, null, 0.0])},options:discOpts});
+new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([0.0, 0.0, null, null, 0.0, 0.0, null, null],[5.56, 17.65, 20.0, 14.29, 0.0, 0.0, 11.76, 0.0],[6.72, 0.0, 11.11, 4.76, 0.0, 5.0, 0.0, null],[8.96, 6.67, 0.0, 0.0, null, 16.67, null, null],[0.0, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
 
 // Above limit RR counts — stacked bar
 new Chart(document.getElementById('alShareChart'),{
   type:'bar',
   data:{labels:["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
-    {label:'RR 1–5',data:[4, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 4, 2, 6, 2, 14, 7, 0, 1, 4, 4, 1, 0, 0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
-    {label:'RR 6',  data:[12, 2, 2, 3, 36, 5, 9, 14, 7, 7, 2, 0, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
-    {label:'RR 7',  data:[2, 1, 4, 2, 24, 3, 7, 7, 2, 3, 2, 1, 0, 1, 2, 1, 3, 0, 0, 0, 0, 0, 1, 0], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
+    {label:'RR 1–5',data:[5, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 4, 2, 6, 2, 14, 7, 0, 1, 4, 4, 1, 0, 0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
+    {label:'RR 6',  data:[12, 2, 2, 3, 31, 5, 9, 14, 7, 7, 2, 0, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
+    {label:'RR 7',  data:[2, 1, 4, 2, 29, 3, 7, 7, 2, 3, 2, 1, 0, 1, 2, 1, 3, 0, 0, 0, 0, 0, 1, 0], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
     {label:'RR 8+', data:[2, 2, 1, 0, 0, 2, 0, 0, 0, 2, 2, 1, 2, 1, 2, 2, 3, 2, 1, 0, 1, 0, 1, 0],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
@@ -519,23 +519,23 @@ new Chart(document.getElementById('avoidLossChart'),{
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
     {label:'Avoidable',   data:[198.1, 61.8, 23.5, 0.8, 1.0, 0.6, 0.0, 0.0],backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
     {label:'Unavoidable', data:[147.3, 55.4, 37.4, 1.8, 3.7, 3.8, 0.2, 0.0],  backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
-    {label:'Within limit',data:[1480.5, 1945.9, 1838.9, 315.9, 27.3, 104.8, 109.5, 19.3],   backgroundColor:'rgba(22,163,74,.75)', borderWidth:0}
+    {label:'Within limit',data:[1480.5, 2112.5, 1838.9, 315.9, 27.3, 104.8, 123.4, 19.3],   backgroundColor:'rgba(22,163,74,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>'$'+v+'K'}}}})
 });
 new Chart(document.getElementById('avoidRateChart'),{
   type:'line',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
-    {label:'Above limit', data:[9.4, 13.2, 14.9, 6.9, 5.3, 9.5, 12.5, 0.0], borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'Within limit',data:[10.0, 11.5, 13.7, 7.1, 3.0, 5.5, 4.8, 0.3],borderColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
+    {label:'Above limit', data:[9.3, 13.2, 14.9, 6.9, 5.3, 9.5, 12.5, 0.0], borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'Within limit',data:[9.9, 11.5, 13.0, 6.9, 3.0, 5.5, 5.2, 0.3],borderColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
 
 // MR quality
-const mrAmtDs=[{"label": "Auto approval", "data": [4794.0, 5149.0, 3924.0, 843.0, 305.0, 832.0, 225.0, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [8048.0, 2540.0, 2640.0, 154.0, 518.0, 461.0, 804.0, 244.0], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [1114.0, 19007.0, 14532.0, 2286.0, 0.0, 96.0, 1540.0, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 27266.0, 16667.0, 2240.0, 0.0, 0.0, 733.0, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 82482.0, 41521.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
-const mrRateDs=[{"label": "Auto approval", "data": [9.4, 12.1, 11.7, 7.9, 6.1, 5.3, 3.2, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [19.4, 14.3, 15.8, 4.9, 6.7, 10.8, 9.5, 1.3], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [3.1, 17.6, 7.1, 16.7, 0.0, 7.4, 11.1, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 8.3, 4.8, 3.7, 0.0, 0.0, 2.2, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 20.0, 28.6, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
-const mrMixDs=[{"label": "Auto approval", "data": [361, 281, 230, 140, 49, 57, 63, 108], "backgroundColor": "rgba(22,163,74,0.75)", "borderWidth": 0}, {"label": "Scorecard MR", "data": [36, 70, 57, 41, 60, 102, 74, 79], "backgroundColor": "rgba(220,38,38,0.75)", "borderWidth": 0}, {"label": "KYB MR", "data": [32, 34, 14, 12, 4, 27, 9, 12], "backgroundColor": "rgba(124,58,237,0.75)", "borderWidth": 0}, {"label": "High line / low RR", "data": [5, 12, 42, 27, 46, 47, 46, 64], "backgroundColor": "rgba(37,99,235,0.75)", "borderWidth": 0}, {"label": "High line / high RR", "data": [2, 5, 7, 20, 1, 3, 5, 14], "backgroundColor": "rgba(234,88,12,0.75)", "borderWidth": 0}];
+const mrAmtDs=[{"label": "Auto approval", "data": [4794.0, 5149.0, 3924.0, 843.0, 305.0, 832.0, 225.0, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [8048.0, 2540.0, 2640.0, 154.0, 518.0, 461.0, 804.0, 244.0], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [1114.0, 19007.0, 14532.0, 2286.0, 0.0, 96.0, 1540.0, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 27266.0, 15556.0, 2160.0, 0.0, 0.0, 733.0, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 82482.0, 72663.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
+const mrRateDs=[{"label": "Auto approval", "data": [9.4, 12.1, 11.7, 7.9, 6.1, 5.3, 3.2, 0.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [19.4, 14.3, 15.8, 4.9, 6.7, 10.8, 9.5, 1.3], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [3.1, 17.6, 7.1, 16.7, 0.0, 7.4, 11.1, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 8.3, 4.4, 3.6, 0.0, 0.0, 2.2, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 20.0, 50.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
+const mrMixDs=[{"label": "Auto approval", "data": [361, 281, 230, 140, 49, 57, 63, 108], "backgroundColor": "rgba(22,163,74,0.75)", "borderWidth": 0}, {"label": "Scorecard MR", "data": [36, 70, 57, 41, 60, 102, 74, 79], "backgroundColor": "rgba(220,38,38,0.75)", "borderWidth": 0}, {"label": "KYB MR", "data": [32, 34, 14, 12, 4, 27, 9, 12], "backgroundColor": "rgba(124,58,237,0.75)", "borderWidth": 0}, {"label": "High line / low RR", "data": [5, 12, 45, 28, 47, 47, 46, 64], "backgroundColor": "rgba(37,99,235,0.75)", "borderWidth": 0}, {"label": "High line / high RR", "data": [2, 5, 4, 19, 0, 3, 5, 14], "backgroundColor": "rgba(234,88,12,0.75)", "borderWidth": 0}];
 new Chart(document.getElementById('mrAmtChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrAmtDs},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v}}}})}); buildLegend('mrAmtLegend',mrAmtDs);
 new Chart(document.getElementById('mrRateChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrRateDs},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})}); buildLegend('mrRateLegend',mrRateDs);
 new Chart(document.getElementById('mrMixChart'),{type:'bar',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrMixDs},options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true}}})}); buildLegend('mrMixLegend',mrMixDs);
@@ -545,7 +545,7 @@ new Chart(document.getElementById('uwChart'),{
   type:'bar',
   data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
     {label:'Above modeled limit',data:[17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 2, 0],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
-    {label:'Risk rank 7',        data:[0, 2, 0, 2, 1, 6, 5, 4, 5, 8, 8, 7, 5, 5, 9, 11, 13, 0],        backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
+    {label:'Risk rank 7',        data:[0, 5, 1, 5, 1, 6, 5, 4, 5, 8, 8, 7, 5, 5, 9, 11, 13, 0],        backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
     {label:'Risk rank 8+',       data:[0, 2, 2, 4, 6, 1, 7, 4, 5, 8, 7, 9, 2, 2, 5, 4, 5, 0],        backgroundColor:'rgba(124,58,237,.75)',borderWidth:0},
     {label:'Over scorecard MR',  data:[10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 15, 0],    backgroundColor:'rgba(13,148,136,.75)',borderWidth:0}
   ]},
@@ -574,7 +574,7 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
 // RR sparkline
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
-  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.68, 6.64, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.82, 4.01],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.69, 6.65, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.82, 4.01],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
   options:merge(baseOpts,{scales:{x:{ticks:{maxTicksLimit:6}},y:{min:4,max:8,ticks:{callback:v=>'RR '+v}}}})
 });
 </script>
