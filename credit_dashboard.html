@@ -60,7 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 07 Apr 2026, 13:21</span>
+    <span style="font-size:12px;color:#888780">Generated 08 Apr 2026, 11:03</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -99,10 +99,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div style="display:flex;align-items:baseline;gap:8px">
         <div class="metric-value" style="color:#3B6D11">8.9bps</div>
         <span style="font-size:11px;color:#16A34A">
-          ▼287.7bps
+          ▼287.8bps
         </span>
       </div>
-      <div class="ns-bar-track"><div class="ns-bar-fill" style="width:35.8%;background:#3B6D11"></div></div>
+      <div class="ns-bar-track"><div class="ns-bar-fill" style="width:35.6%;background:#3B6D11"></div></div>
       <div class="metric-sub" style="margin-top:5px">Target 25bps</div>
       <div class="metric-calc">Monthly loss ÷ trailing 12m orig × 12</div>
     </div>
@@ -120,7 +120,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
     <div class="metric-bg">
       <div class="metric-label">Approval rate</div>
-      <div class="metric-value" style="color:#16A34A">73.7%</div>
+      <div class="metric-value" style="color:#16A34A">78.2%</div>
       <div class="metric-sub">Prior 67.4%</div>
       <div class="metric-calc">Approved orgs ÷ total orgs evaluated this month.</div>
     </div>
@@ -128,7 +128,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
   <div class="narrative-card" style="margin-bottom:1rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">Annualized loss rate is 8.9bps against a 25bps target — on track, down from 296.7bps last month. Early warning pipeline: 1.04% of book is 30–60 DPD, 0.5% is 60–90 DPD, 0.21% is 90–120 DPD. Approval rate is 73.7% with 0 approvals above modeled limit. Largest active 120+ exposure: Relay Financial Technologies, Inc.</p>
+    <p class="narrative-text">Credit performance remains strong with loss rates at 8.9bps, well below the 25bps target and significantly improved from prior period's 296.7bps. The delinquency pipeline shows manageable stress with 1.04% of accounts in early delinquency stages, while 120+ DPD formations dropped dramatically to $39k from $1.4M in the prior period. Underwriting standards have loosened appropriately with approval rates increasing to 78.2% from 67.4%, while maintaining discipline with only 1 above-model approval versus 2 previously.</p>
   </div>
 
   <div class="grid-3" style="margin-bottom:1rem">
@@ -183,7 +183,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     2. Are we getting better at risk rank?
   </div>
 
-  <div class="ai-interp">Risk rank discriminability by underwrite type is shown below. Cells with fewer than 5 orgs are hidden to avoid statistical noise.</div>
+  <div class="ai-interp">The risk rank model is demonstrating strong discriminatory power for BCD bank statement segment, with consistently higher delinquency rates in the riskiest bands (RR1-3 ranging from 1.01% to 3.33%) compared to the safest bands (RR8+ at 0.0% across all quarters). However, discrimination appears to be deteriorating in the most recent cohort, as the spread between risk bands has narrowed significantly from 3.26 percentage points in 2025-Q4 to just 1.01 percentage points in 2026-Q1, indicating reduced ability to differentiate credit risk.</div>
 
   <div class="grid-2" style="margin-bottom:1rem">
     <div class="card">
@@ -308,7 +308,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <span class="badge" style="background:#EAF3DE;color:#3B6D11">policy change Dec 2024: high-line threshold $250K → $150K</span>
   </div>
 
-  <div class="ai-interp">Manual review quality by category is shown below. The policy change in December 2024 tightened the high-line threshold from $250K to $150K.</div>
+  <div class="ai-interp">Manual review quality shows mixed results, with auto_approval demonstrating the strongest improvement from 1,086 to 42 delinquent dollars per approved organization between Q3 2025 and Q1 2026, while scorecard_mr remains the most consistently problematic category at 245 del/org in the latest quarter. The December 2024 policy change lowering the high-line MR threshold from $250K to $150K appears to be working effectively, as evidenced by the dramatic improvement in auto_approval performance and the volatile but ultimately improving kyb_mr results (from 1,540 to 0 del/org), suggesting better risk identification through increased manual review coverage.</div>
 
   <div class="grid-3" style="margin-bottom:1.5rem">
     <div class="card">
@@ -421,7 +421,7 @@ function buildLegend(elId,ds){
 new Chart(document.getElementById('lossChart'),{
   type:'line',
   data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
-    {label:'Loss rate (bps)',data:[229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 50.85, 178.4, 278.33, 42.16, 296.68, 8.95],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
+    {label:'Loss rate (bps)',data:[229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 50.85, 178.4, 278.33, 42.16, 296.68, 8.91],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
     {label:'25bps target',data:Array(18).fill(25),borderColor:'#D97706',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
@@ -456,7 +456,7 @@ new Chart(document.getElementById('dpdTrendChart'),{
 new Chart(document.getElementById('rrOverallBar'),{
   type:'line',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
-    {label:'RR 1–3',data:[14.3, 0.0, 8.3, 5.3, 2.7, 3.0, 5.1, 0.9],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
+    {label:'RR 1–3',data:[14.3, 0.0, 8.3, 5.3, 2.7, 3.0, 4.1, 0.9],borderColor:'#16A34A',backgroundColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 4–5',data:[14.6, 17.9, 7.9, 6.7, 6.6, 6.0, 6.7, 2.4],borderColor:'#2563EB',backgroundColor:'#2563EB',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 6',  data:[10.3, 13.5, 13.5, 8.0, 0.0, 9.1, 0.0, 0.0], borderColor:'#D97706',backgroundColor:'#D97706',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
     {label:'RR 7',  data:[7.5, 11.1, 20.4, 9.4, 6.7, 14.8, 5.9, 0.0], borderColor:'#EA580C',backgroundColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
@@ -487,7 +487,7 @@ const discDs=(d13,d45,d6,d7,d8p)=>[
   {label:'RR 7',  data:d7,  borderColor:'#EA580C',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
   {label:'RR 8+', data:d8p, borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
 ];
-new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([20.0, null, 5.56, 6.67, 3.13, 3.33, 4.35, 1.01],[17.52, 17.78, 7.32, 6.74, 6.56, 7.55, 7.32, 1.77],[18.18, 15.75, 13.77, 8.86, null, null, null, 0.0],[null, 12.16, 20.83, 11.54, 6.67, 19.05, 5.88, 0.0],[null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
+new Chart(document.getElementById('bcdDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([20.0, null, 5.56, 6.67, 3.13, 3.33, 3.26, 1.01],[17.52, 17.78, 7.32, 6.74, 6.56, 7.55, 7.32, 1.77],[18.18, 15.75, 13.77, 8.86, null, null, null, 0.0],[null, 12.16, 20.83, 11.54, 6.67, 19.05, 5.88, 0.0],[null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
 new Chart(document.getElementById('afinDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([null, 0.0, 16.67, 0.0, 0.0, 0.0, 16.67, 0.0],[0.0, 20.0, 0.0, 0.0, 16.67, 0.0, 0.0, 12.5],[0.0, null, null, null, null, 50.0, null, 0.0],[null, 0.0, null, null, null, null, null, 0.0],[null, null, null, null, null, null, null, 0.0])},options:discOpts});
 new Chart(document.getElementById('eburDiscChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:discDs([0.0, 0.0, null, null, 0.0, 0.0, null, null],[5.45, 17.65, 20.0, 14.29, 0.0, 0.0, 5.88, 0.0],[5.21, 0.0, 11.11, 4.76, 0.0, 5.0, 0.0, null],[8.47, 6.67, 0.0, 0.0, null, 0.0, null, null],[0.0, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])},options:discOpts});
 
@@ -498,7 +498,7 @@ new Chart(document.getElementById('alShareChart'),{
     {label:'RR 1–5',data:[5, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 4, 2, 6, 2, 14, 7, 0, 1, 4, 4, 1, 0, 0],backgroundColor:'rgba(22,163,74,.75)',  borderWidth:0},
     {label:'RR 6',  data:[12, 2, 2, 3, 31, 5, 9, 14, 7, 7, 2, 0, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0], backgroundColor:'rgba(217,119,6,.75)',  borderWidth:0},
     {label:'RR 7',  data:[2, 1, 4, 2, 29, 3, 7, 7, 2, 3, 2, 1, 0, 1, 2, 1, 3, 0, 0, 0, 0, 0, 1, 0], backgroundColor:'rgba(234,88,12,.75)',  borderWidth:0},
-    {label:'RR 8+', data:[2, 2, 1, 0, 0, 2, 0, 0, 0, 2, 2, 1, 2, 1, 2, 2, 3, 2, 1, 0, 1, 0, 1, 0],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
+    {label:'RR 8+', data:[2, 2, 1, 0, 0, 2, 0, 0, 0, 2, 2, 1, 2, 1, 2, 2, 3, 2, 1, 0, 1, 0, 1, 1],backgroundColor:'rgba(220,38,38,.75)',  borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
 });
@@ -507,7 +507,7 @@ new Chart(document.getElementById('alShareChart'),{
 new Chart(document.getElementById('alPsShareChart'),{
   type:'bar',
   data:{labels:["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
-    {label:'PS 1–3',data:[18, 6, 9, 3, 4, 4, 2, 3, 5, 9, 5, 5, 5, 3, 7, 6, 4, 1, 1, 1, 1, 0, 0, 0],backgroundColor:'rgba(22,163,74,.75)', borderWidth:0},
+    {label:'PS 1–3',data:[18, 6, 9, 3, 4, 4, 2, 3, 5, 9, 5, 5, 5, 3, 7, 6, 4, 1, 1, 1, 1, 0, 0, 1],backgroundColor:'rgba(22,163,74,.75)', borderWidth:0},
     {label:'PS 4–5',data:[22, 1, 0, 5, 65, 8, 15, 20, 9, 6, 3, 1, 0, 5, 3, 13, 10, 1, 1, 3, 4, 1, 2, 0],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>v+' orgs'}}}})
@@ -519,7 +519,7 @@ new Chart(document.getElementById('avoidLossChart'),{
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
     {label:'Avoidable',   data:[184.7, 61.9, 23.5, 0.8, 1.0, 0.6, 0.0, 0.0],backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
     {label:'Unavoidable', data:[128.5, 55.5, 37.4, 1.8, 3.7, 3.8, 0.2, 0.0],  backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
-    {label:'Within limit',data:[1061.2, 2200.4, 1646.7, 192.8, 27.8, 119.2, 120.4, 23.9],   backgroundColor:'rgba(22,163,74,.75)', borderWidth:0}
+    {label:'Within limit',data:[1060.2, 2200.6, 1646.8, 192.3, 27.8, 119.3, 109.4, 23.9],   backgroundColor:'rgba(22,163,74,.75)', borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:false},y:{ticks:{callback:v=>'$'+v+'K'}}}})
 });
@@ -527,14 +527,14 @@ new Chart(document.getElementById('avoidRateChart'),{
   type:'line',
   data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:[
     {label:'Above limit', data:[9.5, 13.2, 14.9, 6.9, 5.3, 9.5, 12.5, 0.0], borderColor:'#DC2626',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true},
-    {label:'Within limit',data:[9.8, 11.5, 13.0, 6.9, 3.6, 5.5, 5.6, 1.0],borderColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
+    {label:'Within limit',data:[9.8, 11.5, 13.0, 6.9, 3.6, 5.5, 5.2, 1.0],borderColor:'#16A34A',borderWidth:2,pointRadius:3,tension:.3,fill:false,spanGaps:true}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})
 });
 
 // MR quality
-const mrAmtDs=[{"label": "Auto approval", "data": [4193.0, 4727.0, 3903.0, 845.0, 306.0, 1085.0, 153.0, 42.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [8309.0, 3788.0, 2646.0, 154.0, 525.0, 461.0, 823.0, 245.0], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [0.0, 19008.0, 14532.0, 2286.0, 0.0, 91.0, 1540.0, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 27266.0, 11413.0, 2160.0, 0.0, 0.0, 735.0, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 82482.0, 71808.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
-const mrRateDs=[{"label": "Auto approval", "data": [9.7, 11.7, 11.7, 7.9, 6.1, 7.0, 3.2, 1.9], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [19.4, 14.3, 15.8, 4.9, 8.3, 10.8, 10.8, 2.5], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [0.0, 17.6, 7.1, 16.7, 0.0, 3.7, 11.1, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 8.3, 4.4, 3.6, 0.0, 0.0, 2.2, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 20.0, 50.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
+const mrAmtDs=[{"label": "Auto approval", "data": [4190.0, 5130.0, 3904.0, 841.0, 306.0, 1086.0, 154.0, 42.0], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [8309.0, 3790.0, 2647.0, 154.0, 525.0, 462.0, 674.0, 245.0], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [0.0, 19008.0, 14532.0, 2286.0, 0.0, 91.0, 1540.0, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 27266.0, 11414.0, 2160.0, 0.0, 0.0, 736.0, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 82482.0, 71812.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
+const mrRateDs=[{"label": "Auto approval", "data": [9.7, 11.7, 11.7, 7.9, 6.1, 7.0, 3.2, 1.9], "borderColor": "#16A34A", "backgroundColor": "#16A34A", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "Scorecard MR", "data": [19.4, 14.3, 15.8, 4.9, 8.3, 10.8, 9.5, 2.5], "borderColor": "#DC2626", "backgroundColor": "#DC2626", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "KYB MR", "data": [0.0, 17.6, 7.1, 16.7, 0.0, 3.7, 11.1, 0.0], "borderColor": "#7C3AED", "backgroundColor": "#7C3AED", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / low RR", "data": [0.0, 8.3, 4.4, 3.6, 0.0, 0.0, 2.2, 0.0], "borderColor": "#2563EB", "backgroundColor": "#2563EB", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}, {"label": "High line / high RR", "data": [null, 20.0, 50.0, 0.0, null, 0.0, 0.0, 0.0], "borderColor": "#EA580C", "backgroundColor": "#EA580C", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false, "spanGaps": true}];
 const mrMixDs=[{"label": "Auto approval", "data": [331, 281, 230, 140, 49, 57, 63, 108], "backgroundColor": "rgba(22,163,74,0.75)", "borderWidth": 0}, {"label": "Scorecard MR", "data": [31, 70, 57, 41, 60, 102, 74, 79], "backgroundColor": "rgba(220,38,38,0.75)", "borderWidth": 0}, {"label": "KYB MR", "data": [19, 34, 14, 12, 4, 27, 9, 12], "backgroundColor": "rgba(124,58,237,0.75)", "borderWidth": 0}, {"label": "High line / low RR", "data": [4, 12, 45, 28, 47, 47, 46, 64], "backgroundColor": "rgba(37,99,235,0.75)", "borderWidth": 0}, {"label": "High line / high RR", "data": [2, 5, 4, 19, 0, 3, 5, 14], "backgroundColor": "rgba(234,88,12,0.75)", "borderWidth": 0}];
 new Chart(document.getElementById('mrAmtChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrAmtDs},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>'$'+v}}}})}); buildLegend('mrAmtLegend',mrAmtDs);
 new Chart(document.getElementById('mrRateChart'),{type:'line',data:{labels:["2024-Q2", "2024-Q3", "2024-Q4", "2025-Q1", "2025-Q2", "2025-Q3", "2025-Q4", "2026-Q1"],datasets:mrRateDs},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'%'}}}})}); buildLegend('mrRateLegend',mrRateDs);
@@ -544,9 +544,9 @@ new Chart(document.getElementById('mrMixChart'),{type:'bar',data:{labels:["2024-
 new Chart(document.getElementById('uwChart'),{
   type:'bar',
   data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
-    {label:'Above modeled limit',data:[17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 2, 0],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
+    {label:'Above modeled limit',data:[17, 24, 15, 19, 10, 7, 5, 8, 11, 25, 19, 4, 2, 4, 5, 2, 2, 1],backgroundColor:'rgba(220,38,38,.75)', borderWidth:0},
     {label:'Risk rank 7',        data:[0, 5, 1, 5, 1, 6, 5, 4, 5, 8, 8, 7, 5, 5, 9, 11, 13, 0],        backgroundColor:'rgba(217,119,6,.75)', borderWidth:0},
-    {label:'Risk rank 8+',       data:[0, 2, 2, 4, 6, 1, 7, 4, 5, 8, 7, 9, 2, 2, 5, 4, 5, 0],        backgroundColor:'rgba(124,58,237,.75)',borderWidth:0},
+    {label:'Risk rank 8+',       data:[0, 2, 2, 4, 6, 1, 7, 4, 5, 8, 7, 9, 2, 2, 5, 4, 5, 1],        backgroundColor:'rgba(124,58,237,.75)',borderWidth:0},
     {label:'Over scorecard MR',  data:[10, 26, 8, 18, 8, 17, 26, 15, 29, 28, 27, 25, 15, 18, 36, 15, 15, 0],    backgroundColor:'rgba(13,148,136,.75)',borderWidth:0}
   ]},
   options:merge(baseOpts,{scales:{x:{stacked:false}}})
@@ -554,11 +554,11 @@ new Chart(document.getElementById('uwChart'),{
 
 // Signal table
 const sigData={
-  'Above modeled limit':[2,0],
+  'Above modeled limit':[2,1],
   'Risk rank 7':        [13,0],
-  'Risk rank 8+':       [5,0],
+  'Risk rank 8+':       [5,1],
   'Over scorecard MR':  [15,0],
-  'Approval rate %':    [67.4,73.7],
+  'Approval rate %':    [67.4,78.2],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
@@ -574,7 +574,7 @@ Object.entries(sigData).forEach(([label,[prior,latest]])=>{
 // RR sparkline
 new Chart(document.getElementById('rrTrendChart'),{
   type:'line',
-  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.69, 6.65, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.82, 4.37],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{data:[6.36, 6.75, 6.69, 6.65, 6.69, 5.84, 5.49, 5.36, 5.56, 5.53, 5.69, 5.6, 5.44, 5.45, 5.34, 5.57, 5.82, 3.96],borderColor:'#2563EB',borderWidth:2,pointRadius:2,pointBackgroundColor:'#2563EB',tension:.3,fill:false}]},
   options:merge(baseOpts,{scales:{x:{ticks:{maxTicksLimit:6}},y:{min:4,max:8,ticks:{callback:v=>'RR '+v}}}})
 });
 </script>
