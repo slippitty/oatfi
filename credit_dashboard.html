@@ -61,7 +61,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 <div id="main">
   <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.25rem">
     <h1 style="font-size:18px;font-weight:500">Credit Risk Dashboard</h1>
-    <span style="font-size:12px;color:#888780">Generated 14 Apr 2026, 13:24</span>
+    <span style="font-size:12px;color:#888780">Generated 14 Apr 2026, 14:46</span>
   </div>
 
   <!-- ══ 1. WHERE WE ARE ══ -->
@@ -100,7 +100,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
       <div style="display:flex;align-items:baseline;gap:8px">
         <div class="metric-value" style="color:#3B6D11">11.6bps</div>
         <span style="font-size:11px;color:#16A34A">
-          ▼285.0bps
+          ▼285.1bps
         </span>
       </div>
       <div class="ns-bar-track"><div class="ns-bar-fill" style="width:46.4%;background:#3B6D11"></div></div>
@@ -121,7 +121,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     </div>
     <div class="metric-bg">
       <div class="metric-label">Approval rate</div>
-      <div class="metric-value" style="color:#16A34A">69.0%</div>
+      <div class="metric-value" style="color:#16A34A">68.0%</div>
       <div class="metric-sub">Prior 67.8%</div>
       <div class="metric-calc">Approved orgs ÷ total orgs evaluated this month.</div>
     </div>
@@ -129,7 +129,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
 
   <div class="narrative-card" style="margin-bottom:1rem">
     <div style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888780;margin-bottom:.6rem">Summary</div>
-    <p class="narrative-text">Credit performance remains strong with loss rates at 11.6bps, well below the 25bps target and significantly improved from prior period's 296.6bps. The DPD pipeline shows manageable early-stage delinquencies at 1.01% for 30-60 days, though the consistent flow-through rates across aging buckets warrant monitoring as new 120+ DPD formations dropped dramatically to $52k from $1.4M prior month. Underwriting standards have loosened slightly with approval rates increasing to 69.0% and above-limit approvals rising from 2 to 5 cases, requiring attention to maintain credit discipline.</p>
+    <p class="narrative-text">Current loss rate of 11.6bps is performing 54% better than the 25bps target and represents a dramatic 96% improvement from the prior period's 296.6bps. The delinquency pipeline shows a healthy declining pattern with 1.01% in early stage (30-60 DPD) tapering to 0.73% in late stage (90-120 DPD), while 120+ DPD formation dropped 96% to $52k from $1.37M prior period. Underwriting remains disciplined with approval rates steady at 68.0%, though 5 approvals exceeded modeled limits compared to 2 previously, requiring monitoring as volume scales.</p>
   </div>
 
   <div class="grid-3" style="margin-bottom:1rem">
@@ -184,7 +184,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     2. Are we getting better at risk rank?
   </div>
 
-  <div class="ai-interp">The risk rank system shows strong discriminatory power in the BCD bank statement segment, with the highest-risk customers (RR1-3) experiencing delinquency rates of 2.02-4.44% while the lowest-risk customers (RR8+) maintain 0.0% delinquency across all recent cohorts. Discrimination is improving over time, as evidenced by the declining delinquency rate in the RR1-3 band from 4.44% in 2025-Q3 to 2.02% in 2026-Q1, while maintaining perfect performance in the RR8+ segment.</div>
+  <div class="ai-interp">The risk rank model shows strong discriminatory power for BCD bank statements, with the lowest risk bands (RR1-3) maintaining delinquency rates of 2.02% to 4.44% while the highest risk bands (RR8+) consistently show 0.0% delinquency across all recent quarters. Risk discrimination has been steadily improving, with the gap between good and bad credit widening as RR1-3 delinquency rates declined from 4.44% in 2025-Q3 to 2.02% in 2026-Q1 while RR8+ performance remained perfect.</div>
   <div class="partial-note">Latest quarter (2026-Q2) is partial — delinquency rates will rise as the cohort seasons.</div>
 
   <div class="grid-2" style="margin-bottom:1rem">
@@ -310,7 +310,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backgrou
     <span class="badge" style="background:#EAF3DE;color:#3B6D11">policy change Dec 2024: high-line threshold $250K → $150K</span>
   </div>
 
-  <div class="ai-interp">Manual review quality has significantly improved across all categories, with delinquent dollars per approved organization dropping to zero in Q2 2026 for all three MR types (scorecard_mr, kyb_mr, and auto_approval). The December 2024 policy change to lower the high-line MR threshold from $250K to $150K appears to be working effectively, as scorecard_mr—historically the worst performer with 887 del/org in Q1 2026—has shown the most dramatic improvement, while auto_approval continues to be the most consistently reliable category with the lowest delinquency rates throughout the period.</div>
+  <div class="ai-interp">Manual review quality has significantly improved across all categories, with delinquent dollars per approved organization dropping to $0 in Q2 2026 for all three categories (auto_approval, scorecard_mr, and kyb_mr), compared to much higher delinquency rates in Q4 2025 when kyb_mr performed worst at $1,540 per org and auto_approval performed best at $158 per org. The December 2024 policy change lowering the high-line MR threshold from $250K to $150K appears to be working effectively, as evidenced by the dramatic reduction in delinquencies alongside sustained approval volumes, particularly for auto_approval which more than doubled from 48 to 108 organizations between Q4 2025 and Q1 2026 while maintaining lower delinquency rates.</div>
   <div class="partial-note">Latest quarter (2026-Q2) is partial — delinquency rates will rise as the cohort seasons.</div>
 
   <div class="grid-3" style="margin-bottom:1.5rem">
@@ -424,7 +424,7 @@ function buildLegend(elId,ds){
 new Chart(document.getElementById('lossChart'),{
   type:'line',
   data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[
-    {label:'Loss rate (bps)',data:[229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 49.61, 178.4, 277.81, 41.94, 296.65, 11.6],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
+    {label:'Loss rate (bps)',data:[229.64, 160.25, 73.87, 99.53, 195.08, 992.03, 188.31, 60.58, 131.61, 123.1, 87.16, 147.8, 49.61, 178.4, 277.81, 41.94, 296.65, 11.59],borderColor:'#DC2626',borderWidth:2,pointRadius:2,pointBackgroundColor:'#DC2626',tension:.3,fill:false},
     {label:'25bps target',data:Array(18).fill(25),borderColor:'#D97706',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
@@ -561,7 +561,7 @@ const sigData={
   'Risk rank 7':        [13,0],
   'Risk rank 8+':       [5,4],
   'Over scorecard MR':  [15,2],
-  'Approval rate %':    [67.8,69.0],
+  'Approval rate %':    [67.8,68.0],
 };
 const tbody=document.getElementById('sigTableBody');
 Object.entries(sigData).forEach(([label,[prior,latest]])=>{
