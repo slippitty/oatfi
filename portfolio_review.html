@@ -70,7 +70,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of April 15, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: cutoffdate − mat_dt, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-04-15 20:16<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-04-15 20:30<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -317,10 +317,10 @@ tr:last-child td{border-bottom:none}
 
 <div class="card-full">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;gap:1rem">
-    <div class="sl" style="margin-bottom:0;border-bottom:none;white-space:nowrap">DPD trend — 30+ DPD % (cutoffdate − mat_dt) — toggle partners</div>
+    <div class="sl" style="margin-bottom:0;border-bottom:none;white-space:nowrap">DPD trend — 30–60 / 60–90 / 90–120 (cutoffdate − mat_dt)</div>
     <div class="loss-toggles" id="dpdPartnerToggles"></div>
   </div>
-  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Portfolio-weighted aggregate shown when all or multiple partners selected. Toggle partners to isolate individual trends.</p>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Dollar-weighted aggregate across active partners. Toggle partners to include/exclude from the combined view.</p>
   <div class="chart-wrap" style="height:260px"><canvas id="dpdTrendChart"></canvas></div>
 </div>
 
@@ -18567,133 +18567,100 @@ const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5"
   document.getElementById('snapMRBDQ').textContent =fmtM(mrbDQ.reduce((a,b)=>a+b,0));
 })();
 
-// ── DPD TREND CHART WITH PARTNER TOGGLE BUTTONS ───────────────────────────────
-(function(){
-  const dpdToggleData   = {"Avalara Technologies, LLC": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [44.349, 49.509, 54.606, 47.737, 45.839, 56.808, 65.247, 77.717, 85.516, 100.0, 100.0, 99.994, 99.994], "dq60_plus": [36.508, 37.176, 45.116, 45.651, 39.619, 52.766, 55.083, 74.771, 85.516, 99.949, 100.0, 99.994, 99.994], "dq90_plus": [29.639, 31.071, 33.441, 39.245, 39.619, 43.513, 50.281, 62.533, 80.096, 99.949, 99.945, 99.994, 99.994], "color": "#378ADD"}, "BRKR.IO Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.785, 2.65, 0.915, 0.0, 0.0, 0.407, 0.0, 0.395, 0.533, 0.599, 4.763, 0.0], "dq60_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.533, 0.599, 0.56, 0.0], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.599, 0.0, 0.0], "color": "#1D9E75"}, "Cledara Limited": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "dq60_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "color": "#D85A30"}, "Edstruments (Highnote)": {"dates": ["2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.0, 0.0, 0.0, 0.785], "dq60_plus": [0.0, 0.0, 0.0, 0.0, 0.0], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0], "color": "#A32D2D"}, "Flychain": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.851, 2.321, 2.679, 4.891, 6.649, 8.799, 18.255, 13.913, 15.72, 1.701, 3.968, 3.711, 10.445], "dq60_plus": [0.028, 0.763, 2.131, 2.956, 3.641, 4.426, 8.936, 13.389, 15.481, 0.25, 0.206, 3.663, 4.0], "dq90_plus": [0.0, 0.0, 0.681, 2.352, 1.941, 1.081, 4.441, 7.261, 14.883, 0.0, 0.206, 1.3, 2.594], "color": "#BA7517"}, "GigSafe": {"dates": ["2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "dq60_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "color": "#6B3FA0"}, "Harvv (Qisstpay)": {"dates": ["2025-04-30"], "dq30_plus": [99.143], "dq60_plus": [99.143], "dq90_plus": [94.761], "color": "#185FA5"}, "Hostfi Inc. DBA Accountable": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31"], "dq30_plus": [0.0, 0.0, 0.0, 0.0, 0.0], "dq60_plus": [0.0, 0.0, 0.0, 0.0, 0.0], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0], "color": "#3B6D11"}, "Inxeption": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31"], "dq30_plus": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "dq60_plus": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "dq90_plus": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "color": "#888"}, "Koverly Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.585, 1.048, 1.392, 3.374, 5.216, 5.781, 5.78, 9.279, 8.389, 8.488, 8.681, 2.788, 2.901], "dq60_plus": [0.522, 0.619, 0.803, 0.987, 3.128, 4.836, 4.793, 5.608, 5.94, 7.443, 7.735, 2.612, 2.901], "dq90_plus": [0.071, 0.549, 0.425, 0.241, 0.863, 2.979, 3.865, 4.666, 2.717, 6.212, 6.821, 2.292, 2.484], "color": "#D4A017"}, "Lawtrades": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [2.071, 11.156, 21.525, 30.126, 20.179, 16.012, 14.813, 17.8, 30.281, 36.921, 43.777, 59.705, 22.22], "dq60_plus": [0.0, 1.381, 4.693, 15.149, 15.196, 9.077, 5.5, 3.899, 4.056, 10.049, 19.6, 26.458, 11.224], "dq90_plus": [0.0, 0.0, 0.076, 3.479, 6.148, 5.052, 1.038, 0.001, 0.001, 0.0, 2.253, 6.697, 4.266], "color": "#378ADD"}, "Melengo, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-04-14"], "dq30_plus": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "dq60_plus": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "dq90_plus": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "color": "#1D9E75"}, "MyToolbox Technologies, Inc.": {"dates": ["2025-04-30", "2025-05-31"], "dq30_plus": [100.0, 100.0], "dq60_plus": [100.0, 100.0], "dq90_plus": [100.0, 100.0], "color": "#D85A30"}, "NurseIO": {"dates": ["2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.0, 0.69, 1.819, 0.062, 2.408, 3.394, 0.717, 1.553, 0.605, 1.049], "dq60_plus": [0.0, 0.0, 0.0, 0.045, 0.0, 0.0, 2.087, 0.678, 0.923, 0.578, 0.98], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.578, 0.864, 0.049, 0.534], "color": "#A32D2D"}, "Order": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [1.132, 0.859, 0.864, 1.075, 1.381, 1.942, 1.886, 2.115, 2.039, 1.47, 1.551, 1.26, 1.635], "dq60_plus": [0.953, 0.814, 0.789, 0.698, 1.065, 1.032, 1.361, 1.746, 1.495, 1.085, 1.353, 0.967, 0.981], "dq90_plus": [0.922, 0.658, 0.758, 0.698, 0.691, 0.77, 0.722, 1.268, 1.148, 0.711, 1.012, 0.879, 0.864], "color": "#BA7517"}, "Relay Financial Technologies, Inc": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [16.448, 14.194, 17.829, 17.544, 14.902, 12.983, 13.801, 12.982, 15.004, 16.546, 16.697, 20.099, 16.171], "dq60_plus": [14.079, 13.557, 15.088, 15.046, 12.927, 12.243, 12.468, 11.739, 11.646, 13.816, 15.025, 15.854, 13.028], "dq90_plus": [11.867, 11.83, 14.444, 13.398, 11.305, 10.581, 11.843, 10.932, 10.893, 10.878, 12.665, 14.78, 11.402], "color": "#6B3FA0"}, "Tab Commerce": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 10.782, 11.008], "dq60_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.918], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "color": "#185FA5"}, "WebCargo": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [0.0, 0.0, 100.0, 50.0, 0.003, 100.0, 0.054], "dq60_plus": [0.0, 0.0, 0.0, 50.0, 0.003, 100.0, 0.054], "dq90_plus": [0.0, 0.0, 0.0, 0.0, 0.003, 100.0, 0.054], "color": "#3B6D11"}, "XSQRD, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2026-02-28", "2026-03-31", "2026-04-14"], "dq30_plus": [100.0, 100.0, 100.0, 100.0, 100.0], "dq60_plus": [100.0, 100.0, 100.0, 100.0, 100.0], "dq90_plus": [100.0, 100.0, 100.0, 100.0, 100.0], "color": "#888"}};
-  const dpdAllDates     = ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"];
-  const dpdAll30Plus    = [6.056, 6.152, 6.522, 6.701, 6.159, 5.897, 5.86, 6.581, 6.333, 5.041, 5.123, 3.702, 4.136];
-  const dpdPartnersList = ["Avalara Technologies, LLC", "BRKR.IO Inc.", "Cledara Limited", "Edstruments (Highnote)", "Flychain", "GigSafe", "Harvv (Qisstpay)", "Hostfi Inc. DBA Accountable", "Inxeption", "Koverly Inc.", "Lawtrades", "Melengo, Inc.", "MyToolbox Technologies, Inc.", "NurseIO", "Order", "Relay Financial Technologies, Inc", "Tab Commerce", "WebCargo", "XSQRD, Inc."];
+// ── DPD TREND CHART WITH PARTNER TOGGLES ─────────────────────────────────────
+// Mirrors the loss rate chart: toggles add/remove partners from a combined view.
+// Chart always shows the same three bucket lines, filtered to active partners.
+const allDpdSeries=[
+  {label:'30-60 DPD', data:[0.55, 2.44, 2.75, 2.23, 1.77, 0.98, 1.72, 2.02, 1.97, 1.53, 1.5, 1.7, 1.88, 1.9, 1.66, 0.97, 1.11, 1.17],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+  {label:'60-90 DPD', data:[3.03, 0.42, 2.26, 1.95, 1.39, 0.79, 0.72, 1.21, 1.4, 1.51, 1.32, 1.15, 1.17, 1.31, 0.93, 1.19, 0.54, 0.79],  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+  {label:'90-120 DPD',data:[0.94, 2.76, 0.38, 2.01, 1.95, 0.63, 0.48, 0.59, 0.87, 0.76, 0.97, 0.94, 0.81, 0.85, 1.21, 0.76, 0.71, 0.74], borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+];
+const partnerDpd={"Avalara Technologies, LLC": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [7.84, 12.333, 9.49, 2.086, 6.22, 4.042, 10.164, 2.946, 0.0, 0.051, 0.0, 0.0, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [6.87, 6.105, 11.674, 6.407, 0.0, 9.253, 4.802, 12.238, 5.419, 0.0, 0.054, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [6.329, 3.919, 6.652, 9.675, 1.038, 0.0, 9.24, 5.833, 8.854, 4.929, 0.0, 0.236, 0.253], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [23.31, 27.151, 26.79, 29.57, 38.582, 43.513, 41.041, 56.699, 71.242, 95.02, 99.945, 99.759, 99.74], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "BRKR.IO Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.785, 2.65, 0.915, 0.0, 0.0, 0.407, 0.0, 0.395, 0.0, 0.0, 4.203, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.533, 0.0, 0.56, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.599, 0.0, 0.0], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Cledara Limited": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": []}, "Edstruments (Highnote)": {"dates": ["2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.785], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Flychain": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.822, 1.558, 0.547, 1.936, 3.008, 4.373, 9.319, 0.524, 0.24, 1.451, 3.762, 0.048, 6.444], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.028, 0.763, 1.45, 0.604, 1.7, 3.345, 4.494, 6.128, 0.598, 0.25, 0.0, 2.363, 1.406], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.681, 1.6, 0.53, 1.081, 3.33, 2.938, 6.994, 0.0, 0.206, 1.117, 2.402], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.752, 1.41, 0.0, 1.111, 4.324, 7.889, 0.0, 0.0, 0.183, 0.192], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "GigSafe": {"dates": ["2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": []}, "Harvv (Qisstpay)": {"dates": ["2025-04-30"], "series": [{"label": "60-90 DPD", "data": [4.382], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [94.761], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Hostfi Inc. DBA Accountable": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31"], "series": []}, "Inxeption": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Koverly Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.064, 0.429, 0.589, 2.387, 2.087, 0.944, 0.986, 3.671, 2.449, 1.045, 0.946, 0.176, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.451, 0.07, 0.379, 0.746, 2.266, 1.858, 0.928, 0.941, 3.223, 1.231, 0.914, 0.32, 0.417], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.071, 0.472, 0.062, 0.241, 0.648, 2.188, 1.806, 0.913, 0.795, 3.879, 1.155, 0.042, 0.084], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.078, 0.363, 0.0, 0.215, 0.791, 2.059, 3.753, 1.922, 2.333, 5.665, 2.25, 2.399], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Lawtrades": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [2.071, 9.775, 16.832, 14.977, 4.983, 6.935, 9.313, 13.9, 26.226, 26.872, 24.177, 33.247, 10.995], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 1.381, 4.618, 11.67, 9.049, 4.025, 4.462, 3.898, 4.054, 10.049, 17.347, 19.762, 6.958], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.076, 3.479, 5.468, 4.049, 0.477, 0.0, 0.0, 0.0, 2.253, 6.697, 4.266], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.679, 1.003, 0.56, 0.001, 0.001, 0.0, 0.0, 0.0, 0.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Melengo, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-04-14"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "MyToolbox Technologies, Inc.": {"dates": ["2025-04-30", "2025-05-31"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "NurseIO": {"dates": ["2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 0.69, 1.774, 0.062, 2.408, 1.307, 0.039, 0.631, 0.028, 0.069], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 0.045, 0.0, 0.0, 2.087, 0.1, 0.058, 0.529, 0.446], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.578, 0.0, 0.049, 0.534], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.864, 0.0, 0.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Order": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.179, 0.046, 0.075, 0.377, 0.316, 0.909, 0.525, 0.369, 0.544, 0.386, 0.197, 0.293, 0.654], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.03, 0.155, 0.031, 0.0, 0.374, 0.262, 0.639, 0.478, 0.347, 0.374, 0.342, 0.088, 0.117], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.028, 0.137, 0.024, 0.0, 0.145, 0.133, 0.614, 0.41, 0.427, 0.506, 0.098, 0.001], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.922, 0.63, 0.621, 0.674, 0.691, 0.626, 0.589, 0.655, 0.739, 0.284, 0.506, 0.781, 0.863], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Relay Financial Technologies, Inc": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [2.369, 0.638, 2.741, 2.498, 1.975, 0.74, 1.333, 1.243, 3.358, 2.731, 1.671, 4.245, 3.143], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [2.213, 1.726, 0.644, 1.648, 1.622, 1.662, 0.625, 0.807, 0.753, 2.938, 2.361, 1.075, 1.626], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [2.872, 1.636, 1.824, 0.395, 1.382, 0.65, 1.609, 0.255, 0.701, 0.666, 2.03, 1.876, 1.357], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [8.995, 10.194, 12.62, 13.004, 9.924, 9.931, 10.234, 10.677, 10.191, 10.212, 10.635, 12.904, 10.045], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Tab Commerce": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 10.782, 0.09], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.918], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "WebCargo": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 100.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 50.0, 0.0, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.003, 0.0, 0.0], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 0.054], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "XSQRD, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0, 100.0, 100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}};
+const dpdPartners=Object.keys(partnerDpd).sort();
+const dpdPal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5","#3B6D11","#888","#D4A017"];
+const dpdPartnerColors={};
+dpdPartners.forEach((p,i)=>dpdPartnerColors[p]=dpdPal[i%dpdPal.length]);
+const dpdActive=new Set(dpdPartners);
+const dpdTogglesEl=document.getElementById('dpdPartnerToggles');
 
-  const dpdActive = new Set(dpdPartnersList);
-  const dpdTogglesEl = document.getElementById('dpdPartnerToggles');
-
-  // Compute weighted-average aggregate for any subset of active partners
-  function reaggregateDpd(activeSet){
-    const byDate = {};
-    dpdPartnersList.forEach(p => {
-      if (!activeSet.has(p)) return;
-      const pd = dpdToggleData[p];
-      pd.dates.forEach((d, i) => {
-        if (!byDate[d]) byDate[d] = {upbWeightedDq: 0, totalUpb: 0};
-        // We don't have per-partner UPB here in the toggle data, so we treat each partner equally
-        // and compute a simple average across active partners for each date
-        if (!byDate[d].partners) byDate[d].partners = {};
-        byDate[d].partners[p] = pd.dq30_plus[i] || 0;
+// Re-aggregate the three bucket lines across only active partners.
+function reaggregateDpd(activeSet){
+  const bucketDefs=[
+    {label:'30-60 DPD', color:'#E08C00'},
+    {label:'60-90 DPD', color:'#D85A30'},
+    {label:'90-120 DPD',color:'#A32D2D'},
+  ];
+  const dateSet=new Set();
+  dpdPartners.forEach(p=>{if(activeSet.has(p))partnerDpd[p].dates.forEach(d=>dateSet.add(d));});
+  const dates=Array.from(dateSet).sort();
+  const datasets=bucketDefs.map(bd=>{
+    const data=dates.map(d=>{
+      let sum=0,cnt=0;
+      dpdPartners.forEach(p=>{
+        if(!activeSet.has(p))return;
+        const pd=partnerDpd[p];
+        const idx=pd.dates.indexOf(d);
+        if(idx===-1)return;
+        const s=pd.series.find(x=>x.label===bd.label);
+        sum+=(s?s.data[idx]:0); cnt++;
       });
+      return cnt>0?Math.round(sum/cnt*1000)/1000:null;
     });
-    return dpdAllDates.map(d => {
-      if (!byDate[d] || !byDate[d].partners) return null;
-      const vals = Object.values(byDate[d].partners);
-      if (vals.length === 0) return null;
-      return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 1000) / 1000;
-    });
-  }
-
-  function buildDpdDatasets(){
-    const n = dpdActive.size;
-    // If exactly one partner selected, show its 30/60/90+ DPD breakdown
-    if (n === 1) {
-      const p = [...dpdActive][0];
-      const pd = dpdToggleData[p];
-      const col = pd.color;
-      return {
-        labels: pd.dates,
-        datasets: [
-          {label:'30+ DPD', data:pd.dq30_plus, borderColor:col,        borderWidth:2,pointRadius:2,tension:.3,fill:false},
-          {label:'60+ DPD', data:pd.dq60_plus, borderColor:col+'99',   borderWidth:1.5,pointRadius:2,tension:.3,fill:false,borderDash:[4,2]},
-          {label:'90+ DPD', data:pd.dq90_plus, borderColor:col+'55',   borderWidth:1,pointRadius:2,tension:.3,fill:false,borderDash:[2,3]}
-        ]
-      };
-    }
-    // Multiple or all: show one line per active partner (30+ DPD)
-    const datasets = dpdPartnersList
-      .filter(p => dpdActive.has(p))
-      .map(p => {
-        const pd = dpdToggleData[p];
-        return {
-          label: p,
-          data: pd.dq30_plus,
-          borderColor: pd.color,
-          borderWidth: 2,
-          pointRadius: 2,
-          tension: .3,
-          fill: false
-        };
-      });
-    // Use the dates from the first active partner (all share same date spine)
-    const firstP = dpdPartnersList.find(p => dpdActive.has(p));
-    const labels = firstP ? dpdToggleData[firstP].dates : dpdAllDates;
-    return { labels, datasets };
-  }
-
-  const dpdChart = new Chart(document.getElementById('dpdTrendChart'), {
-    type: 'line',
-    data: buildDpdDatasets(),
-    options: merge(baseOpts, {scales: {y: {min:0, ticks: {callback: v => v.toFixed(2)+'%'}}}})
+    return {label:bd.label,data,borderColor:bd.color,borderWidth:2,pointRadius:2,tension:.3,fill:false};
   });
+  return {labels:dates,datasets};
+}
 
-  function syncDpdChart() {
-    const built = buildDpdDatasets();
-    dpdChart.data.labels   = built.labels;
-    dpdChart.data.datasets = built.datasets;
-    dpdChart.update();
+const dpdChart=new Chart(document.getElementById('dpdTrendChart'),{
+  type:'line',
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:allDpdSeries},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(2)+'%'}}}})
+});
+
+function updateDpdChart(){
+  if(dpdActive.size===dpdPartners.length){
+    dpdChart.data.labels=["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
+    dpdChart.data.datasets=allDpdSeries;
+  }else{
+    const built=reaggregateDpd(dpdActive);
+    dpdChart.data.labels=built.labels;
+    dpdChart.data.datasets=built.datasets;
   }
+  dpdChart.update();
+}
 
-  function syncDpdButtonStyles() {
-    dpdTogglesEl.querySelectorAll('[data-partner]').forEach(btn => {
-      const p   = btn.dataset.partner;
-      const col = dpdToggleData[p].color;
-      const on  = dpdActive.has(p);
-      Object.assign(btn.style, {
-        background: on ? col+'22' : 'var(--bg)',
-        color:      on ? col      : 'var(--ink3)',
-        border:     '.5px solid ' + (on ? col : 'var(--border)')
-      });
-    });
-    const allOn = dpdActive.size === dpdPartnersList.length;
-    Object.assign(dpdAllBtn.style, {
-      background: allOn ? 'var(--ink)' : 'var(--bg)',
-      color:      allOn ? '#fff'       : 'var(--ink3)',
-      border:     '.5px solid ' + (allOn ? 'var(--ink)' : 'var(--border)')
-    });
-  }
+const dpdAllBtn=document.createElement('button');
+dpdAllBtn.textContent='All';
+Object.assign(dpdAllBtn.style,{background:'var(--ink)',color:'#fff',border:'.5px solid var(--ink)'});
+dpdAllBtn.addEventListener('click',()=>{
+  const allOn=dpdActive.size===dpdPartners.length;
+  if(allOn){dpdActive.clear();}else{dpdPartners.forEach(p=>dpdActive.add(p));}
+  syncDpdButtonStyles();
+  updateDpdChart();
+});
+dpdTogglesEl.appendChild(dpdAllBtn);
 
-  // "All" toggle
-  const dpdAllBtn = document.createElement('button');
-  dpdAllBtn.textContent = 'All';
-  Object.assign(dpdAllBtn.style, {background:'var(--ink)',color:'#fff',border:'.5px solid var(--ink)'});
-  dpdAllBtn.addEventListener('click', () => {
-    if (dpdActive.size === dpdPartnersList.length) dpdActive.clear();
-    else dpdPartnersList.forEach(p => dpdActive.add(p));
+dpdPartners.forEach(p=>{
+  const col=dpdPartnerColors[p];
+  const btn=document.createElement('button');
+  btn.textContent=p; btn.dataset.partner=p;
+  Object.assign(btn.style,{background:col+'22',color:col,border:'.5px solid '+col});
+  btn.addEventListener('click',function(){
+    if(dpdActive.has(p))dpdActive.delete(p);else dpdActive.add(p);
     syncDpdButtonStyles();
-    syncDpdChart();
+    updateDpdChart();
   });
-  dpdTogglesEl.appendChild(dpdAllBtn);
+  dpdTogglesEl.appendChild(btn);
+});
 
-  // Per-partner buttons
-  dpdPartnersList.forEach(p => {
-    const col = dpdToggleData[p].color;
-    const btn = document.createElement('button');
-    btn.textContent = p; btn.dataset.partner = p;
-    Object.assign(btn.style, {background:col+'22',color:col,border:'.5px solid '+col});
-    btn.addEventListener('click', () => {
-      if (dpdActive.has(p)) dpdActive.delete(p); else dpdActive.add(p);
-      syncDpdButtonStyles();
-      syncDpdChart();
-    });
-    dpdTogglesEl.appendChild(btn);
+function syncDpdButtonStyles(){
+  dpdTogglesEl.querySelectorAll('[data-partner]').forEach(btn=>{
+    const p=btn.dataset.partner; const col=dpdPartnerColors[p]; const on=dpdActive.has(p);
+    Object.assign(btn.style,{background:on?col+'22':'var(--bg)',color:on?col:'var(--ink3)',border:'.5px solid '+(on?col:'var(--border)')});
   });
-})();
+  const allOn=dpdActive.size===dpdPartners.length;
+  Object.assign(dpdAllBtn.style,{background:allOn?'var(--ink)':'var(--bg)',color:allOn?'#fff':'var(--ink3)',border:'.5px solid '+(allOn?'var(--ink)':'var(--border)')});
+}
 
 // ── LOSS RATE CHART WITH PARTNER TOGGLES ─────────────────────────────────────
 const lossChartData={"Avalara Technologies, LLC": {"months": ["2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 1224.88, 2056.51, 218.0, 6.17, 1564.06, 13838.9, 1893.15, 722.61, 2021.2, 3198.21, 1797.36, 3259.98, 0.0, 0.0, 0.0, 4065.06], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.0, 180000.0, 331099.96, 36940.5, 1080.0, 268880.62, 2353018.35, 312291.28, 104340.01, 239819.42, 334394.1, 146188.88, 202574.34, 189590.4, 70055.92, 0.0, 162666.8], "orig": [15.3, 837119.45, 1744313.54, 3128785.39, 5960954.35, 9484751.78, 11302389.47, 14361761.25, 16665237.98, 17634348.64, 19320118.54, 20334163.81, 21002611.77, 20629406.24, 20403510.35, 19795050.59, 17327183.75, 14238217.99, 12546795.8, 9760250.56, 7456778.83, 0.0, 0.0, 6487669.17, 4801901.27]}, "BRKR.IO Inc.": {"months": ["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 519.77, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 97.1, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7211.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3000.0, 0.0], "orig": [184731.0, 536517.0, 763510.96, 1002935.62, 1126677.64, 1402478.66, 1664815.72, 1981415.77, 2198599.14, 2612265.7, 3081845.63, 3363491.03, 3498587.43, 3707476.91, 3798196.93]}, "Balance Payments Inc.": {"months": ["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 0.0, 882.96, 436.28, 331.37, 922.06, 352.97], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.0, 0.0, 15289.34, 9382.06, 7869.86, 26994.67, 11411.34], "orig": [10.0, 87774.02, 208057.52, 412393.45, 751325.83, 1057721.6, 1401431.44, 1647205.91, 2077928.51, 2580569.49, 2849900.28, 3513181.19, 3879546.18]}, "Flychain": {"months": ["2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 422.35, 512.09, 0.96, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.03, 66.36, 0.0, 0.0, 1.51, 426.34, 161.87, 0.0, 341.38, 129.97, 3277.14, 0.0, 51.15, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8273.12, 11842.23, 31.39, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.66, 7469.36, 0.0, 0.0, 168.66, 48967.28, 18477.67, 0.0, 39104.58, 14000.0, 355263.98, 0.0, 6012.52, 0.0], "orig": [13556.88, 60519.6, 233415.02, 310688.63, 471876.86, 646097.07, 1084901.82, 1529062.37, 1892294.5, 2350613.15, 2775037.57, 3940596.83, 4512585.65, 5845971.14, 6255509.03, 7525645.94, 8632281.58, 9396266.78, 9855431.29, 10463790.28, 11624277.51, 12243175.98, 12871694.85, 12473996.84, 13506224.62, 13316675.64, 13866521.52, 13421179.99, 13782469.18, 13698520.76, 13726453.37, 13745873.34, 12926269.96, 13008820.07, 13568534.7, 14104570.96, 12949923.51]}, "GigSafe": {"months": ["2025-07-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 153.47, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 0.0], "orig": [2000.0, 781915.7, 1682109.37, 3010927.9, 4109391.6, 5225729.76, 5785784.89]}, "Koverly Inc.": {"months": ["2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.74, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 331.03, 0.0, 24.94, 110.58, 2.54, 2.31, 172.47, 101.28, 358.62, 380.93, 59.6, 728.17, 2.56], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 478.06, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 196374.12, 0.0, 17831.74, 88455.66, 2186.13, 2140.85, 169568.26, 102005.45, 380973.76, 412813.42, 65919.97, 836555.16, 2845.47], "orig": [304789.79, 1074402.18, 1769162.43, 3151360.11, 4450418.14, 6486106.3, 8656388.65, 11274935.41, 14679672.27, 17424367.78, 20966238.28, 24292090.96, 29153856.57, 35061424.3, 41351378.08, 48755846.52, 57583778.07, 64144305.19, 71186828.1, 78540313.57, 85798704.55, 95987580.78, 103314985.67, 111183566.94, 117979604.62, 120861758.22, 127479103.49, 130043364.47, 132733572.19, 137861775.8, 133304713.54]}, "Lawtrades": {"months": ["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 308.23, 1356.22, 672.41, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 27394.76, 119810.0, 59036.97, 0.0, 0.0, 0.0, 0.0, 0.0], "orig": [1112899.91, 2325779.05, 3331332.2, 4112227.92, 5428190.75, 6288316.94, 6990831.99, 7772190.05, 9523307.74, 9834339.73, 10768917.97, 11868645.84, 11398285.22, 11102255.32, 10775000.63, 10600869.38, 10665249.28, 10600919.42, 10535936.55, 10156295.64, 8582546.3, 8464620.9, 7538042.66, 7216050.28]}, "Melengo, Inc.": {"months": ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2025-01-01", "2025-09-01", "2025-10-01", "2026-01-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2339.32, 3605.95, 7799.3, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3351.32, 5566.37, 11179.0, 1666.21, 1371.27, 3278.1, 422.58, 8170.01], "orig": [4940.95, 23905.59, 26543.51, 28229.49, 75532.11, 92570.98, 109444.2, 139555.37, 148712.27, 161212.27, 167412.27, 171912.27, 185239.32, 172000.12, 0.0, 0.0, 0.0, 0.0, 0.0]}, "MyToolbox Technologies, Inc.": {"months": ["2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-03-01", "2025-04-01", "2025-06-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 58.94, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3804.58, 0.0, 0.0, 39038.59, 88544.58, 20900.81, 106487.65, 457.75, 77313.27, 30728.69], "orig": [453082.68, 1307624.78, 2379312.18, 3364836.89, 4262466.73, 5505897.86, 6403785.4, 7280102.07, 7746561.71, 7746911.71, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "NurseIO": {"months": ["2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 94.33, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6713.83, 0.0, 0.0], "orig": [1320522.61, 2152898.32, 2799781.13, 3844178.85, 4736976.24, 5531320.01, 6691168.48, 7626511.37, 8541091.31, 9806282.71, 10219625.06]}, "Order": {"months": ["2022-06-01", "2022-08-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5, 0.0, 0.0, 0.0, 0.0, 0.45, 296.03, 234.0, 68.65, 0.64, 25.38, 61.52, 20.74, 195.94, 108.35, 0.0, 0.0, 151.84, 140.68, 2.5, 23.39, 2.94, 46.14, 3.49, 0.0, 62.25, 7.24, 66.68, 150.62, 37.91, 117.89, 14.4], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 473.91, 0.0, 0.0, 0.0, 0.0, 155.4, 129533.26, 125328.26, 43386.32, 461.97, 21131.33, 57885.11, 21411.11, 224202.62, 134140.14, 0.0, 0.0, 230016.08, 221710.56, 4111.97, 39979.72, 5170.22, 83623.7, 6427.71, 0.0, 126098.7, 15118.91, 142393.96, 330931.94, 85399.85, 270685.1, 32152.7], "orig": [600000.0, 1290000.0, 1662500.0, 1762500.0, 1900437.02, 2306255.34, 2963449.95, 4015128.01, 4905333.56, 6224152.78, 7946486.21, 9652377.89, 14704960.6, 16270043.62, 19208671.8, 22980605.03, 28345947.52, 34231579.59, 41065236.24, 52508092.4, 64270457.07, 75841814.65, 87246579.69, 99922098.58, 112914807.46, 123890694.13, 137310079.87, 148565651.89, 160341065.5, 172331798.25, 181781878.14, 189124223.7, 197058295.81, 205127996.79, 211143002.66, 217498861.71, 221317219.86, 232065965.67, 243065081.4, 250519145.65, 256270807.3, 263658829.57, 270304939.18, 275533367.54, 267941313.83]}, "Ply": {"months": ["2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-11-01", "2025-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12568.15, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 65859.64, 0.0, 0.0, 7819.15, 145980.33], "orig": [140.79, 30132.66, 44704.48, 73690.92, 92593.17, 108786.61, 191575.43, 250494.92, 295841.32, 371308.69, 399222.14, 477722.67, 542539.64, 553798.94, 616846.29, 628824.29, 650570.37, 739708.93, 0.0, 0.0]}, "Relay Financial Technologies, Inc": {"months": ["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 228.41, 47.53, 0.97, 198.05, 176.33, 220.41, 261.71, 209.58, 96.61, 95.21, 13.04, 85.14, 41.01, 96.71, 12.22, 42.41, 41.18, 124.67, 25.23], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 10499.54, 3090.25, 86.82, 22612.29, 24614.56, 37986.57, 53742.69, 50905.02, 26661.03, 29607.16, 4508.67, 32489.49, 17017.13, 43172.95, 5917.0, 21868.62, 22142.87, 69022.0, 13951.52], "orig": [230849.14, 703103.94, 1334873.85, 2231164.84, 3582498.72, 5516101.95, 7801832.04, 10708770.64, 13700949.76, 16751500.89, 20681465.31, 24642561.44, 29146800.13, 33117391.31, 37314493.25, 41498628.47, 45790476.53, 49797064.71, 53567249.2, 58128246.85, 61874371.12, 64522650.57, 66438656.69, 66359202.72]}, "XSQRD, Inc.": {"months": ["2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-06-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2025-01-01", "2025-06-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 944.05, 2947.54, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7147.01, 23889.48, 12904.71, 32709.35, 34854.54, 11115.04, 44372.58, 8160.26, 8095.65], "orig": [5274.58, 25274.58, 36140.26, 62312.26, 70962.7, 110825.11, 127105.24, 186782.99, 233403.98, 346672.63, 524571.85, 602671.8, 632992.27, 721318.13, 801774.04, 795898.16, 869441.25, 908473.53, 972586.88, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}};
