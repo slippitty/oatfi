@@ -70,7 +70,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of April 15, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: cutoffdate − mat_dt, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-04-15 20:39<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-04-15 20:41<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -140,6 +140,14 @@ tr:last-child td{border-bottom:none}
     X-axis = month of initial underwrite decision. Bars = total amount actually borrowed (sum of original_amount across all loans) by orgs in each vintage cohort ($K). Red line = cumulative 120+ DPD balance as % of total borrowed (right axis). Denominator is realized borrowing, not credit line capacity. Recent vintages understated.
   </p>
   <div class="chart-wrap" style="height:280px"><canvas id="vintageBorrowedChart"></canvas></div>
+</div>
+
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Loss ratio by origination cohort — cumulative 120+ DPD losses ÷ cumulative income collected</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
+    Bars = income collected from each cohort’s loans ($K): interest + fees + late fees + non-accrual items. Red line = cumulative loss % of cumulative income (right axis). Dashed orange line = monthly loss ratio (non-cumulative). Recent cohorts understated as both losses and income continue to accrue.
+  </p>
+  <div class="chart-wrap" style="height:280px"><canvas id="cohortLossRatioChart"></canvas></div>
 </div>
 
 <div class="sl">Top DQ obligors — 30+ DPD (cutoffdate − mat_dt)</div>
@@ -17148,14 +17156,6 @@ tr:last-child td{border-bottom:none}
     <div class="sl" style="margin-bottom:.75rem">Monthly outstanding ($K) — stacked by partner</div>
     <div class="chart-wrap"><canvas id="moChart"></canvas></div>
   </div>
-</div>
-
-<div class="card-full">
-  <div class="sl" style="margin-bottom:.75rem">Loss ratio by origination cohort — cumulative 120+ DPD losses ÷ cumulative income collected</div>
-  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
-    Bars = income collected from each cohort’s loans ($K): interest + fees + late fees + non-accrual items. Red line = cumulative loss % of cumulative income (right axis). Dashed orange line = monthly loss ratio (non-cumulative). Recent cohorts understated as both losses and income continue to accrue.
-  </p>
-  <div class="chart-wrap" style="height:280px"><canvas id="cohortLossRatioChart"></canvas></div>
 </div>
 
 <div class="sl">5 — Economic environment — NAICS sector stress</div>
