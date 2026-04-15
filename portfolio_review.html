@@ -62,24 +62,6 @@ tr:last-child td{border-bottom:none}
   <div class="err" id="pwErr"></div>
 </div>
 
-<script>
-function checkPw(){
-  var v=document.getElementById('pwInput').value;
-  if(v==='renegade'){
-    document.getElementById('gate').style.display='none';
-    document.getElementById('main').style.display='block';
-    sessionStorage.setItem('oatfi_auth','1');
-  }else{
-    document.getElementById('pwErr').textContent='Incorrect password';
-    document.getElementById('pwInput').value='';
-  }
-}
-if(sessionStorage.getItem('oatfi_auth')==='1'){
-  document.getElementById('gate').style.display='none';
-  document.getElementById('main').style.display='block';
-}
-</script>
-
 <div id="main" style="display:none">
 <div class="page">
 
@@ -88,7 +70,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of April 15, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: cutoffdate − mat_dt, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-04-15 19:43<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-04-15 19:46<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -150,26 +132,6 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
     X-axis = month of initial underwrite decision. Bars = total credit line assigned at first underwrite ($K). Red line = cumulative loss % of line assigned (right axis). Recent vintages understated as losses take time to develop.
   </p>
   <div class="chart-wrap" style="height:280px"><canvas id="vintageLossChart"></canvas></div>
-</div>
-
-<div class="card-full">
-  <div class="sl" style="margin-bottom:.75rem">Loss by underwriting vintage — total borrowed vs 120+ DPD balance as % of total borrowed</div>
-  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
-    X-axis = month of initial underwrite decision. Bars = total amount actually borrowed across all loans for orgs in that vintage cohort ($K). Red line = cumulative loss % of total borrowed (right axis). Recent vintages understated.
-  </p>
-  <div class="chart-wrap" style="height:280px"><canvas id="vintageBorrowedChart"></canvas></div>
-</div>
-
-<div class="sl">4 — Origination and outstanding balance</div>
-<div class="grid-2">
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Monthly origination ($K) — stacked by partner</div>
-    <div class="chart-wrap"><canvas id="origChart"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Monthly outstanding ($K) — stacked by partner</div>
-    <div class="chart-wrap"><canvas id="moChart"></canvas></div>
-  </div>
 </div>
 
 <div class="sl">Top DQ obligors — 30+ DPD (cutoffdate − mat_dt)</div>
@@ -346,11 +308,12 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
 </div>
 
 <div class="card-full">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem;gap:1rem">
-    <div class="sl" style="margin-bottom:0;border-bottom:none;white-space:nowrap">DPD trend — 30-60 / 60-90 / 90-120 (cutoffdate − mat_dt)</div>
-    <div class="loss-toggles" id="dpdPartnerToggles"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+    <div class="sl" style="margin-bottom:0;border-bottom:none">DPD trend — 30-60 / 60-90 / 90-120 (cutoffdate − mat_dt)</div>
+    <select id="dpdPartnerSelect" style="font-family:var(--mono);font-size:11px;padding:4px 8px;border:.5px solid var(--border);border-radius:6px;background:var(--bg);color:var(--ink);cursor:pointer">
+      <option value="__all__">All partners</option>
+    </select>
   </div>
-  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Toggle partners to include/exclude from aggregate. All partners selected shows portfolio-level DPD rates.</p>
   <div class="chart-wrap" style="height:260px"><canvas id="dpdTrendChart"></canvas></div>
 </div>
 
@@ -17168,6 +17131,18 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
   </div>
 </div>
 
+<div class="sl">4 — Origination and outstanding balance</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Monthly origination ($K) — stacked by partner</div>
+    <div class="chart-wrap"><canvas id="origChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Monthly outstanding ($K) — stacked by partner</div>
+    <div class="chart-wrap"><canvas id="moChart"></canvas></div>
+  </div>
+</div>
+
 <div class="sl">5 — Economic environment — NAICS sector stress</div>
 <div class="card-full">
   <div class="sl" style="margin-bottom:.75rem">Sector snapshot table</div>
@@ -17186,7 +17161,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$222K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">13/147</td>
           <td class="num"><span class="badge badge-ok">3.6%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">9.2%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">9.2%</td>
           <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 5.6pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">54</td>
@@ -17196,7 +17171,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$588K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">27/221</td>
           <td class="num"><span class="badge badge-warn">14.0%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">11.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">11.0%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 3.0pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">42</td>
@@ -17206,7 +17181,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$88K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">6/67</td>
           <td class="num"><span class="badge badge-ok">2.1%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">4.7%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">4.7%</td>
           <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 2.6pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">44</td>
@@ -17216,7 +17191,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$79K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">6/59</td>
           <td class="num"><span class="badge badge-ok">3.0%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">4.1%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">4.1%</td>
           <td class="num"><span style="color:#888">-1.1pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">45</td>
@@ -17226,7 +17201,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$64K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">4/55</td>
           <td class="num"><span class="badge badge-ok">2.5%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">3.7%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3.7%</td>
           <td class="num"><span style="color:#888">-1.2pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">23</td>
@@ -17236,7 +17211,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$63K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">15/72</td>
           <td class="num"><span class="badge badge-ok">4.1%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.0%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 4.1pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">72</td>
@@ -17246,7 +17221,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$36K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">8/63</td>
           <td class="num"><span class="badge badge-ok">2.6%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">2.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2.0%</td>
           <td class="num"><span style="color:#888">+0.6pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">81</td>
@@ -17256,7 +17231,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$13K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3/55</td>
           <td class="num"><span class="badge badge-ok">1.0%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">1.8%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1.8%</td>
           <td class="num"><span style="color:#888">-0.8pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">56</td>
@@ -17266,7 +17241,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$191K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">8/52</td>
           <td class="num"><span class="badge badge-warn">14.9%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.7%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.7%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 14.3pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">32</td>
@@ -17276,7 +17251,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$81K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1/22</td>
           <td class="num"><span class="badge badge-warn">6.7%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.0%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 6.7pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">31</td>
@@ -17286,7 +17261,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$20K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2/27</td>
           <td class="num"><span class="badge badge-ok">1.9%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">1.1%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1.1%</td>
           <td class="num"><span style="color:#888">+0.8pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">48</td>
@@ -17296,7 +17271,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$32K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3/28</td>
           <td class="num"><span class="badge badge-ok">3.1%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.5%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.5%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 2.6pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">51</td>
@@ -17306,7 +17281,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$20K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">5/49</td>
           <td class="num"><span class="badge badge-ok">1.9%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.6%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.6%</td>
           <td class="num"><span style="color:#888">+1.2pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">53</td>
@@ -17316,7 +17291,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$110K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">12/68</td>
           <td class="num"><span class="badge badge-warn">11.3%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">1.6%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1.6%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 9.7pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">33</td>
@@ -17326,7 +17301,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$61K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">5/36</td>
           <td class="num"><span class="badge badge-warn">7.5%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">1.3%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1.3%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 6.2pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">55</td>
@@ -17336,7 +17311,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$19K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2/14</td>
           <td class="num"><span class="badge badge-ok">2.7%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.0%</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 2.7pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">61</td>
@@ -17346,7 +17321,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$381</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2/35</td>
           <td class="num"><span class="badge badge-ok">0.1%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.0%</td>
           <td class="num"><span style="color:#888">+0.1pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">11</td>
@@ -17356,7 +17331,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">—</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
           <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.0%</td>
           <td class="num"><span style="color:#888">+0.0pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">52</td>
@@ -17366,7 +17341,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$7K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3/37</td>
           <td class="num"><span class="badge badge-ok">1.3%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">3.3%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3.3%</td>
           <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 2.1pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">71</td>
@@ -17376,7 +17351,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">$6K</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2/22</td>
           <td class="num"><span class="badge badge-ok">1.4%</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)">0.0%</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">0.0%</td>
           <td class="num"><span style="color:#888">+1.4pp</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">49</td>
@@ -17386,7 +17361,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">—</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
           <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
           <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">92</td>
@@ -17396,7 +17371,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">—</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
           <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
           <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">21</td>
@@ -17406,7 +17381,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">—</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
           <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
           <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
         </tr><tr>
           <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">22</td>
@@ -17416,7 +17391,7 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
           <td class="num">—</td>
           <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
           <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
-          <td class="num" style="font-family:var(--ink2);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
           <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
         </tr></tbody>
   </table>
@@ -18546,6 +18521,22 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
 </div>
 
 <script>
+function checkPw(){
+  var v=document.getElementById('pwInput').value;
+  if(v==='renegade'){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('main').style.display='block';
+    sessionStorage.setItem('oatfi_auth','1');
+  }else{
+    document.getElementById('pwErr').textContent='Incorrect password';
+    document.getElementById('pwInput').value='';
+  }
+}
+if(sessionStorage.getItem('oatfi_auth')==='1'){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('main').style.display='block';
+}
+
 const baseOpts={
   responsive:true,maintainAspectRatio:false,
   interaction:{mode:'index',intersect:false},
@@ -18569,101 +18560,26 @@ const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5"
   document.getElementById('snapMRBDQ').textContent =fmtM(mrbDQ.reduce((a,b)=>a+b,0));
 })();
 
-// ── DPD TREND CHART WITH PARTNER TOGGLES ──────────────────────────────────────
-(function(){
-  const partnerRaw = {"Avalara Technologies, LLC": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [3879885.21, 3547332.64, 3255777.17, 2756620.3, 1931072.96, 1297968.69, 925868.99, 762202.31, 414316.75, 233880.71, 218534.73, 50537.07, 47010.95], "upb_30_60": [304185.19, 437490.48, 308969.36, 57495.92, 120104.64, 52462.8, 94105.0, 22453.1, 0.0, 119.02, 0.0, 0.0, 0.0], "upb_60_90": [266532.3, 216566.1, 380095.31, 176606.81, 0.0, 120104.64, 44462.42, 93280.32, 22453.1, 0.0, 119.02, 0.0, 0.0], "upb_90_120": [245551.55, 139033.39, 216566.1, 266695.3, 20040.3, 0.0, 85550.4, 44462.42, 36684.0, 11528.1, 0.0, 119.02, 119.02]}, "BRKR.IO Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [414497.96, 420517.81, 380417.19, 273279.07, 312839.51, 460270.82, 504260.7, 671866.45, 759527.31, 563198.6, 500856.58, 857761.33, 865574.3], "upb_30_60": [0.0, 3300.0, 10081.0, 2500.0, 0.0, 0.0, 2052.0, 0.0, 3000.0, 0.0, 0.0, 36051.67, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3000.0, 0.0, 4807.69, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3000.0, 0.0, 0.0]}, "Cledara Limited": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [334901.88, 1200449.68, 1060260.21, 1182279.46, 1229547.43, 1219299.71, 1107890.69, 1084420.03, 1108230.56, 997249.27, 1056037.56, 1208950.64, 833050.84], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "Edstruments (Highnote)": {"dates": ["2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [5037.86, 10378.44, 29314.7, 28073.54, 20269.82], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 159.19], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0]}, "Flychain": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [3056958.27, 3142490.71, 3376754.27, 3059921.42, 3484010.6, 3132802.92, 3048499.75, 3131588.84, 2743876.31, 2634758.22, 3166952.65, 3423522.61, 3128701.59], "upb_30_60": [25132.31, 48967.28, 18477.67, 59227.83, 104799.33, 137000.0, 284100.24, 16400.0, 6578.17, 38230.76, 119141.23, 1627.9, 201627.9], "upb_60_90": [866.42, 23976.97, 48967.28, 18477.67, 59227.83, 104799.33, 137000.0, 191897.19, 16400.0, 6578.17, 0.0, 80910.48, 43996.97], "upb_90_120": [0.0, 0.0, 22999.99, 48967.28, 18477.67, 33869.84, 101529.05, 92000.0, 191897.19, 0.0, 6534.2, 38230.76, 75144.26]}, "GigSafe": {"dates": ["2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [279864.06, 28313.84, 283476.77, 278488.4, 29450.01, 30171.14], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "Harvv (Qisstpay)": {"dates": ["2025-04-30"], "total_upb": [173865.64], "upb_30_60": [0.0], "upb_60_90": [7619.35], "upb_90_120": [0.0]}, "Hostfi Inc. DBA Accountable": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31"], "total_upb": [224937.6, 275432.55, 246336.18, 285073.37, 222765.39], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0]}, "Inxeption": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31"], "total_upb": [267362.2, 221737.2, 184647.36, 137461.52, 99195.63, 60381.19, 11073.53], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "Koverly Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [13735698.55, 12555548.61, 14213929.12, 14751605.14, 15541945.34, 16095120.87, 14953545.62, 14620069.82, 16530562.96, 13685336.09, 14580386.35, 14829609.45, 13425470.75], "upb_30_60": [8744.38, 53821.16, 83754.99, 352146.8, 324375.85, 151980.16, 147477.18, 536764.59, 404833.99, 143002.56, 137888.36, 26132.18, 0.0], "upb_60_90": [61909.25, 8744.38, 53821.16, 110027.21, 352146.8, 298974.71, 138787.06, 137634.57, 532834.41, 168464.52, 133284.91, 47409.64, 56012.61], "upb_90_120": [9755.68, 59226.93, 8744.38, 35553.31, 100713.26, 352146.8, 270031.5, 133508.92, 131411.57, 530868.93, 168464.52, 6204.53, 11342.28]}, "Lawtrades": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [2649454.48, 2860799.95, 3109527.62, 3173190.44, 3362871.63, 3161280.35, 2947888.21, 2648189.03, 1683820.13, 1247800.0, 846450.09, 546030.95, 1157191.6], "upb_30_60": [54877.83, 279657.01, 523390.48, 475235.08, 167567.04, 219234.18, 274546.32, 368110.9, 441594.78, 335306.54, 204649.48, 181537.03, 127234.2], "upb_60_90": [0.0, 39498.89, 143587.98, 370325.54, 304293.44, 127226.34, 131542.4, 103236.12, 68263.98, 125390.43, 146834.77, 107905.41, 80523.13], "upb_90_120": [0.0, 0.0, 2352.0, 110386.31, 183893.2, 128010.97, 14069.5, 0.0, 0.0, 0.0, 19068.3, 36565.0, 49365.0]}, "Melengo, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-04-14"], "total_upb": [23337.68, 19396.4, 16107.39, 15661.84, 14812.76, 11034.66, 10612.08, 8170.01, 8170.01, 642.02], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "MyToolbox Technologies, Inc.": {"dates": ["2025-04-30", "2025-05-31"], "total_upb": [30728.69, 30728.69], "upb_30_60": [0.0, 0.0], "upb_60_90": [0.0, 0.0], "upb_90_120": [0.0, 0.0]}, "NurseIO": {"dates": ["2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [1174091.94, 1010436.08, 800909.4, 1425703.73, 1758252.82, 1236314.25, 1133544.93, 1161711.68, 776834.46, 926540.52, 561002.55], "upb_30_60": [0.0, 0.0, 5529.58, 25292.4, 1090.39, 29765.69, 14815.38, 453.22, 4900.66, 255.75, 388.0], "upb_60_90": [0.0, 0.0, 0.0, 635.04, 0.0, 0.0, 23656.26, 1158.93, 453.22, 4900.66, 2502.04], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6713.83, 0.0, 453.22, 2997.59]}, "Order": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [21495493.18, 23282194.23, 24691048.72, 26724279.32, 26539914.61, 29027923.97, 30593275.59, 31548040.63, 32825507.72, 33471785.24, 34217205.25, 32788667.19, 33046712.84], "upb_30_60": [38501.65, 10644.83, 18407.25, 100692.46, 83920.03, 263966.21, 160588.95, 116383.3, 178516.58, 129130.95, 67514.65, 96028.28, 215977.52], "upb_60_90": [6501.91, 36185.92, 7657.36, 0.0, 99295.65, 76094.69, 195554.9, 150694.09, 113843.04, 125044.19, 116878.19, 28731.18, 38700.33], "upb_90_120": [0.0, 6501.91, 33935.98, 6427.71, 0.0, 41979.19, 40615.78, 193591.71, 134453.77, 143070.66, 173119.09, 32152.7, 269.0]}, "Relay Financial Technologies, Inc": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [1728433.78, 2048872.11, 1882616.32, 1976681.84, 2351142.48, 2617150.72, 2696068.23, 2927503.72, 3119012.57, 3324499.17, 3397074.61, 3280649.12, 4353188.66], "upb_30_60": [40947.69, 13062.76, 51597.8, 49376.89, 46435.63, 19373.23, 35950.78, 36380.8, 104733.85, 90778.03, 56770.31, 139253.75, 136806.07], "upb_60_90": [38242.02, 35368.28, 12130.08, 32568.55, 38128.82, 43500.58, 16857.4, 23627.55, 23490.95, 97664.38, 80194.55, 35253.95, 70787.91], "upb_90_120": [49641.93, 33523.37, 34337.5, 7801.39, 32489.49, 17017.13, 43369.42, 7456.68, 21868.62, 22142.87, 68950.35, 61538.11, 59068.84]}, "Tab Commerce": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [70292.04, 965598.23, 739084.09, 990736.71, 1326194.04, 1518149.67, 1499061.41], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0, 163694.07, 1343.54], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 163667.08], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "WebCargo": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [432.45, 1.0, 1.0, 2.0, 38397.0, 1.0, 1859.48], "upb_30_60": [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]}, "XSQRD, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2026-02-28", "2026-03-31", "2026-04-14"], "total_upb": [4911.52, 5995.65, 2700.0, 2700.0, 2700.0], "upb_30_60": [0.0, 0.0, 0.0, 0.0, 0.0], "upb_60_90": [0.0, 0.0, 0.0, 0.0, 0.0], "upb_90_120": [0.0, 0.0, 0.0, 0.0, 0.0]}};
-  const allLabels  = ["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
-  const allData30  = [0.55, 2.44, 2.75, 2.23, 1.77, 0.98, 1.72, 2.02, 1.97, 1.53, 1.5, 1.7, 1.88, 1.9, 1.66, 0.97, 1.11, 1.17];
-  const allData60  = [3.03, 0.42, 2.26, 1.95, 1.39, 0.79, 0.72, 1.21, 1.4, 1.51, 1.32, 1.15, 1.17, 1.31, 0.93, 1.19, 0.54, 0.79];
-  const allData90  = [0.94, 2.76, 0.38, 2.01, 1.95, 0.63, 0.48, 0.59, 0.87, 0.76, 0.97, 0.94, 0.81, 0.85, 1.21, 0.76, 0.71, 0.74];
-  const dpdPartners = Object.keys(partnerRaw).sort();
-  const dpdPal = ["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5","#3B6D11","#888","#D4A017"];
-  const dpdPartnerColors = {};
-  dpdPartners.forEach((p,i) => dpdPartnerColors[p] = dpdPal[i % dpdPal.length]);
-  const dpdActive = new Set(dpdPartners);
-  const dpdTogglesEl = document.getElementById('dpdPartnerToggles');
+const allDpdSeries=[
+  {label:'30-60 DPD', data:[0.55, 2.44, 2.75, 2.23, 1.77, 0.98, 1.72, 2.02, 1.97, 1.53, 1.5, 1.7, 1.88, 1.9, 1.66, 0.97, 1.11, 1.17],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+  {label:'60-90 DPD', data:[3.03, 0.42, 2.26, 1.95, 1.39, 0.79, 0.72, 1.21, 1.4, 1.51, 1.32, 1.15, 1.17, 1.31, 0.93, 1.19, 0.54, 0.79],  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+  {label:'90-120 DPD',data:[0.94, 2.76, 0.38, 2.01, 1.95, 0.63, 0.48, 0.59, 0.87, 0.76, 0.97, 0.94, 0.81, 0.85, 1.21, 0.76, 0.71, 0.74], borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+];
+const partnerDpd={"Avalara Technologies, LLC": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [7.84, 12.333, 9.49, 2.086, 6.22, 4.042, 10.164, 2.946, 0.0, 0.051, 0.0, 0.0, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [6.87, 6.105, 11.674, 6.407, 0.0, 9.253, 4.802, 12.238, 5.419, 0.0, 0.054, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [6.329, 3.919, 6.652, 9.675, 1.038, 0.0, 9.24, 5.833, 8.854, 4.929, 0.0, 0.236, 0.253], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [23.31, 27.151, 26.79, 29.57, 38.582, 43.513, 41.041, 56.699, 71.242, 95.02, 99.945, 99.759, 99.74], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "BRKR.IO Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.785, 2.65, 0.915, 0.0, 0.0, 0.407, 0.0, 0.395, 0.0, 0.0, 4.203, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.533, 0.0, 0.56, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.599, 0.0, 0.0], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Cledara Limited": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": []}, "Edstruments (Highnote)": {"dates": ["2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.785], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Flychain": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.822, 1.558, 0.547, 1.936, 3.008, 4.373, 9.319, 0.524, 0.24, 1.451, 3.762, 0.048, 6.444], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.028, 0.763, 1.45, 0.604, 1.7, 3.345, 4.494, 6.128, 0.598, 0.25, 0.0, 2.363, 1.406], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.681, 1.6, 0.53, 1.081, 3.33, 2.938, 6.994, 0.0, 0.206, 1.117, 2.402], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.752, 1.41, 0.0, 1.111, 4.324, 7.889, 0.0, 0.0, 0.183, 0.192], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "GigSafe": {"dates": ["2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": []}, "Harvv (Qisstpay)": {"dates": ["2025-04-30"], "series": [{"label": "60-90 DPD", "data": [4.382], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [94.761], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Hostfi Inc. DBA Accountable": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31"], "series": []}, "Inxeption": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Koverly Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.064, 0.429, 0.589, 2.387, 2.087, 0.944, 0.986, 3.671, 2.449, 1.045, 0.946, 0.176, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.451, 0.07, 0.379, 0.746, 2.266, 1.858, 0.928, 0.941, 3.223, 1.231, 0.914, 0.32, 0.417], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.071, 0.472, 0.062, 0.241, 0.648, 2.188, 1.806, 0.913, 0.795, 3.879, 1.155, 0.042, 0.084], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.078, 0.363, 0.0, 0.215, 0.791, 2.059, 3.753, 1.922, 2.333, 5.665, 2.25, 2.399], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Lawtrades": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [2.071, 9.775, 16.832, 14.977, 4.983, 6.935, 9.313, 13.9, 26.226, 26.872, 24.177, 33.247, 10.995], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 1.381, 4.618, 11.67, 9.049, 4.025, 4.462, 3.898, 4.054, 10.049, 17.347, 19.762, 6.958], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.076, 3.479, 5.468, 4.049, 0.477, 0.0, 0.0, 0.0, 2.253, 6.697, 4.266], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.679, 1.003, 0.56, 0.001, 0.001, 0.0, 0.0, 0.0, 0.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Melengo, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-04-14"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "MyToolbox Technologies, Inc.": {"dates": ["2025-04-30", "2025-05-31"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "NurseIO": {"dates": ["2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 0.69, 1.774, 0.062, 2.408, 1.307, 0.039, 0.631, 0.028, 0.069], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 0.045, 0.0, 0.0, 2.087, 0.1, 0.058, 0.529, 0.446], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.578, 0.0, 0.049, 0.534], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.864, 0.0, 0.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Order": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.179, 0.046, 0.075, 0.377, 0.316, 0.909, 0.525, 0.369, 0.544, 0.386, 0.197, 0.293, 0.654], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.03, 0.155, 0.031, 0.0, 0.374, 0.262, 0.639, 0.478, 0.347, 0.374, 0.342, 0.088, 0.117], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.028, 0.137, 0.024, 0.0, 0.145, 0.133, 0.614, 0.41, 0.427, 0.506, 0.098, 0.001], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.922, 0.63, 0.621, 0.674, 0.691, 0.626, 0.589, 0.655, 0.739, 0.284, 0.506, 0.781, 0.863], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Relay Financial Technologies, Inc": {"dates": ["2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [2.369, 0.638, 2.741, 2.498, 1.975, 0.74, 1.333, 1.243, 3.358, 2.731, 1.671, 4.245, 3.143], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [2.213, 1.726, 0.644, 1.648, 1.622, 1.662, 0.625, 0.807, 0.753, 2.938, 2.361, 1.075, 1.626], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [2.872, 1.636, 1.824, 0.395, 1.382, 0.65, 1.609, 0.255, 0.701, 0.666, 2.03, 1.876, 1.357], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [8.995, 10.194, 12.62, 13.004, 9.924, 9.931, 10.234, 10.677, 10.191, 10.212, 10.635, 12.904, 10.045], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "Tab Commerce": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 10.782, 0.09], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.918], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "WebCargo": {"dates": ["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "30-60 DPD", "data": [0.0, 0.0, 100.0, 0.0, 0.0, 0.0, 0.0], "borderColor": "#E08C00", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "60-90 DPD", "data": [0.0, 0.0, 0.0, 50.0, 0.0, 0.0, 0.0], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "90-120 DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.003, 0.0, 0.0], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "120+ DPD", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 100.0, 0.054], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}, "XSQRD, Inc.": {"dates": ["2025-04-30", "2025-05-31", "2026-02-28", "2026-03-31", "2026-04-14"], "series": [{"label": "120+ DPD", "data": [100.0, 100.0, 100.0, 100.0, 100.0], "borderColor": "#5C0E0E", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}};
+const dpdSelect=document.getElementById('dpdPartnerSelect');
+Object.keys(partnerDpd).sort().forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;dpdSelect.appendChild(o);});
+const dpdChart=new Chart(document.getElementById('dpdTrendChart'),{
+  type:'line',
+  data:{labels:["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:allDpdSeries},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(2)+'%'}}}})
+});
+dpdSelect.addEventListener('change',function(){
+  if(this.value==='__all__'){dpdChart.data.labels=["2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];dpdChart.data.datasets=allDpdSeries;}
+  else{const pd=partnerDpd[this.value];dpdChart.data.labels=pd.dates;dpdChart.data.datasets=pd.series;}
+  dpdChart.update();
+});
 
-  function buildDpdDatasets(activeSet) {
-    if (activeSet.size === dpdPartners.length) {
-      return [
-        {label:'30-60 DPD', data:allData30, borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-        {label:'60-90 DPD', data:allData60, borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-        {label:'90-120 DPD',data:allData90, borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-      ];
-    }
-    if (activeSet.size === 0) return [];
-    const allDates = new Set();
-    dpdPartners.forEach(p => { if (activeSet.has(p)) partnerRaw[p].dates.forEach(d => allDates.add(d)); });
-    const dates = Array.from(allDates).sort();
-    const agg30=[], agg60=[], agg90=[];
-    dates.forEach(d => {
-      let tot=0, b30=0, b60=0, b90=0;
-      dpdPartners.forEach(p => {
-        if (!activeSet.has(p)) return;
-        const idx = partnerRaw[p].dates.indexOf(d);
-        if (idx === -1) return;
-        tot += partnerRaw[p].total_upb[idx];
-        b30 += partnerRaw[p].upb_30_60[idx];
-        b60 += partnerRaw[p].upb_60_90[idx];
-        b90 += partnerRaw[p].upb_90_120[idx];
-      });
-      agg30.push(tot > 0 ? Math.round(b30/tot*10000)/100 : 0);
-      agg60.push(tot > 0 ? Math.round(b60/tot*10000)/100 : 0);
-      agg90.push(tot > 0 ? Math.round(b90/tot*10000)/100 : 0);
-    });
-    dpdChart.data.labels = dates;
-    return [
-      {label:'30-60 DPD', data:agg30, borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-      {label:'60-90 DPD', data:agg60, borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-      {label:'90-120 DPD',data:agg90, borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    ];
-  }
-
-  function updateDpdChart() {
-    if (dpdActive.size === dpdPartners.length) dpdChart.data.labels = allLabels;
-    dpdChart.data.datasets = buildDpdDatasets(dpdActive);
-    dpdChart.update();
-  }
-
-  const dpdChart = new Chart(document.getElementById('dpdTrendChart'), {
-    type: 'line',
-    data: { labels: allLabels, datasets: buildDpdDatasets(dpdActive) },
-    options: merge(baseOpts, {scales:{y:{min:0,ticks:{callback:v=>v.toFixed(2)+'%'}}}})
-  });
-
-  const dpdAllBtn = document.createElement('button');
-  dpdAllBtn.textContent = 'All';
-  Object.assign(dpdAllBtn.style, {background:'var(--ink)',color:'#fff',border:'.5px solid var(--ink)'});
-  dpdAllBtn.addEventListener('click', () => {
-    const allOn = dpdActive.size === dpdPartners.length;
-    if (allOn) { dpdActive.clear(); } else { dpdPartners.forEach(p => dpdActive.add(p)); }
-    syncDpdButtonStyles(); updateDpdChart();
-  });
-  dpdTogglesEl.appendChild(dpdAllBtn);
-
-  dpdPartners.forEach(p => {
-    const col = dpdPartnerColors[p];
-    const btn = document.createElement('button');
-    btn.textContent = p; btn.dataset.partner = p;
-    Object.assign(btn.style, {background:col+'22',color:col,border:'.5px solid '+col});
-    btn.addEventListener('click', function() {
-      if (dpdActive.has(p)) dpdActive.delete(p); else dpdActive.add(p);
-      syncDpdButtonStyles(); updateDpdChart();
-    });
-    dpdTogglesEl.appendChild(btn);
-  });
-
-  function syncDpdButtonStyles() {
-    dpdTogglesEl.querySelectorAll('[data-partner]').forEach(btn => {
-      const p = btn.dataset.partner; const col = dpdPartnerColors[p]; const on = dpdActive.has(p);
-      Object.assign(btn.style, {background:on?col+'22':'var(--bg)',color:on?col:'var(--ink3)',border:'.5px solid '+(on?col:'var(--border)')});
-    });
-    const allOn = dpdActive.size === dpdPartners.length;
-    Object.assign(dpdAllBtn.style, {background:allOn?'var(--ink)':'var(--bg)',color:allOn?'#fff':'var(--ink3)',border:'.5px solid '+(allOn?'var(--ink)':'var(--border)')});
-  }
-})();
-
-// ── LOSS RATE CHART WITH PARTNER TOGGLES ──────────────────────────────────────
+// ── LOSS RATE CHART WITH PARTNER TOGGLES ─────────────────────────────────────
 const lossChartData={"Avalara Technologies, LLC": {"months": ["2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 1224.88, 2056.51, 218.0, 6.17, 1564.06, 13838.9, 1893.15, 722.61, 2021.2, 3198.21, 1797.36, 3259.98, 0.0, 0.0, 0.0, 4065.06], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.0, 180000.0, 331099.96, 36940.5, 1080.0, 268880.62, 2353018.35, 312291.28, 104340.01, 239819.42, 334394.1, 146188.88, 202574.34, 189590.4, 70055.92, 0.0, 162666.8], "orig": [15.3, 837119.45, 1744313.54, 3128785.39, 5960954.35, 9484751.78, 11302389.47, 14361761.25, 16665237.98, 17634348.64, 19320118.54, 20334163.81, 21002611.77, 20629406.24, 20403510.35, 19795050.59, 17327183.75, 14238217.99, 12546795.8, 9760250.56, 7456778.83, 0.0, 0.0, 6487669.17, 4801901.27]}, "BRKR.IO Inc.": {"months": ["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 519.77, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 97.1, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7211.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3000.0, 0.0], "orig": [184731.0, 536517.0, 763510.96, 1002935.62, 1126677.64, 1402478.66, 1664815.72, 1981415.77, 2198599.14, 2612265.7, 3081845.63, 3363491.03, 3498587.43, 3707476.91, 3798196.93]}, "Balance Payments Inc.": {"months": ["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 0.0, 882.96, 436.28, 331.37, 922.06, 352.97], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.0, 0.0, 15289.34, 9382.06, 7869.86, 26994.67, 11411.34], "orig": [10.0, 87774.02, 208057.52, 412393.45, 751325.83, 1057721.6, 1401431.44, 1647205.91, 2077928.51, 2580569.49, 2849900.28, 3513181.19, 3879507.18]}, "Flychain": {"months": ["2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 422.35, 512.09, 0.96, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.03, 66.36, 0.0, 0.0, 1.51, 426.34, 161.87, 0.0, 341.38, 129.97, 3277.14, 0.0, 51.15, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8273.12, 11842.23, 31.39, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.66, 7469.36, 0.0, 0.0, 168.66, 48967.28, 18477.67, 0.0, 39104.58, 14000.0, 355263.98, 0.0, 6012.52, 0.0], "orig": [13556.88, 60519.6, 233415.02, 310688.63, 471876.86, 646097.07, 1084901.82, 1529062.37, 1892294.5, 2350613.15, 2775037.57, 3940596.83, 4512585.65, 5845971.14, 6255509.03, 7525645.94, 8632281.58, 9396266.78, 9855431.29, 10463790.28, 11624277.51, 12243175.98, 12871694.85, 12473996.84, 13506224.62, 13316675.64, 13866521.52, 13421179.99, 13782469.18, 13698520.76, 13726453.37, 13745873.34, 12926269.96, 13008820.07, 13568534.7, 14104570.96, 12949923.51]}, "GigSafe": {"months": ["2025-07-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 153.47, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 0.0], "orig": [2000.0, 781915.7, 1682109.37, 3010927.9, 4109391.6, 5225729.76, 5785784.89]}, "Koverly Inc.": {"months": ["2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.74, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 331.03, 0.0, 24.94, 110.58, 2.54, 2.31, 172.47, 101.28, 358.62, 380.93, 59.6, 728.17, 2.56], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 478.06, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 196374.12, 0.0, 17831.74, 88455.66, 2186.13, 2140.85, 169568.26, 102005.45, 380973.76, 412813.42, 65919.97, 836555.16, 2845.47], "orig": [304789.79, 1074402.18, 1769162.43, 3151360.11, 4450418.14, 6486106.3, 8656388.65, 11274935.41, 14679672.27, 17424367.78, 20966238.28, 24292090.96, 29153856.57, 35061424.3, 41351378.08, 48755846.52, 57583778.07, 64144305.19, 71186828.1, 78540313.57, 85798704.55, 95987580.78, 103314985.67, 111183566.94, 117979604.62, 120861758.22, 127479103.49, 130043364.47, 132733572.19, 137861775.8, 133296147.27]}, "Lawtrades": {"months": ["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 308.23, 1356.22, 672.41, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 27394.76, 119810.0, 59036.97, 0.0, 0.0, 0.0, 0.0, 0.0], "orig": [1112899.91, 2325779.05, 3331332.2, 4112227.92, 5428190.75, 6288316.94, 6990831.99, 7772190.05, 9523307.74, 9834339.73, 10768917.97, 11868645.84, 11398285.22, 11102255.32, 10775000.63, 10600869.38, 10665249.28, 10600919.42, 10535936.55, 10156295.64, 8582546.3, 8464620.9, 7538042.66, 7216050.28]}, "Melengo, Inc.": {"months": ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2025-01-01", "2025-09-01", "2025-10-01", "2026-01-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2339.32, 3605.95, 7799.3, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3351.32, 5566.37, 11179.0, 1666.21, 1371.27, 3278.1, 422.58, 8170.01], "orig": [4940.95, 23905.59, 26543.51, 28229.49, 75532.11, 92570.98, 109444.2, 139555.37, 148712.27, 161212.27, 167412.27, 171912.27, 185239.32, 172000.12, 0.0, 0.0, 0.0, 0.0, 0.0]}, "MyToolbox Technologies, Inc.": {"months": ["2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-03-01", "2025-04-01", "2025-06-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 58.94, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3804.58, 0.0, 0.0, 39038.59, 88544.58, 20900.81, 106487.65, 457.75, 77313.27, 30728.69], "orig": [453082.68, 1307624.78, 2379312.18, 3364836.89, 4262466.73, 5505897.86, 6403785.4, 7280102.07, 7746561.71, 7746911.71, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "NurseIO": {"months": ["2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 94.33, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6713.83, 0.0, 0.0], "orig": [1320522.61, 2152898.32, 2799781.13, 3844178.85, 4736976.24, 5531320.01, 6691168.48, 7626511.37, 8541091.31, 9806282.71, 10219625.06]}, "Order": {"months": ["2022-06-01", "2022-08-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5, 0.0, 0.0, 0.0, 0.0, 0.45, 296.03, 234.0, 68.65, 0.64, 25.38, 61.52, 20.74, 195.94, 108.35, 0.0, 0.0, 151.84, 140.68, 2.5, 23.39, 2.94, 46.14, 3.49, 0.0, 62.25, 7.24, 66.68, 150.62, 37.91, 117.89, 14.4], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 473.91, 0.0, 0.0, 0.0, 0.0, 155.4, 129533.26, 125328.26, 43386.32, 461.97, 21131.33, 57885.11, 21411.11, 224202.62, 134140.14, 0.0, 0.0, 230016.08, 221710.56, 4111.97, 39979.72, 5170.22, 83623.7, 6427.71, 0.0, 126098.7, 15118.91, 142393.96, 330931.94, 85399.85, 270685.1, 32152.7], "orig": [600000.0, 1290000.0, 1662500.0, 1762500.0, 1900437.02, 2306255.34, 2963449.95, 4015128.01, 4905333.56, 6224152.78, 7946486.21, 9652377.89, 14704960.6, 16270043.62, 19208671.8, 22980605.03, 28345947.52, 34231579.59, 41065236.24, 52508092.4, 64270457.07, 75841814.65, 87246579.69, 99922098.58, 112914807.46, 123890694.13, 137310079.87, 148565651.89, 160341065.5, 172331798.25, 181781878.14, 189124223.7, 197058295.81, 205127996.79, 211143002.66, 217498861.71, 221317219.86, 232065965.67, 243065081.4, 250519145.65, 256270807.3, 263658829.57, 270304939.18, 275533367.54, 267907378.18]}, "Ply": {"months": ["2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-11-01", "2025-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12568.15, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 65859.64, 0.0, 0.0, 7819.15, 145980.33], "orig": [140.79, 30132.66, 44704.48, 73690.92, 92593.17, 108786.61, 191575.43, 250494.92, 295841.32, 371308.69, 399222.14, 477722.67, 542539.64, 553798.94, 616846.29, 628824.29, 650570.37, 739708.93, 0.0, 0.0]}, "Relay Financial Technologies, Inc": {"months": ["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 228.41, 47.53, 0.97, 198.05, 176.33, 220.41, 261.71, 209.58, 96.61, 95.21, 13.04, 85.14, 41.01, 96.71, 12.22, 42.41, 41.18, 124.67, 25.23], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 10499.54, 3090.25, 86.82, 22612.29, 24614.56, 37986.57, 53742.69, 50905.02, 26661.03, 29607.16, 4508.67, 32489.49, 17017.13, 43172.95, 5917.0, 21868.62, 22142.87, 69022.0, 13951.52], "orig": [230849.14, 703103.94, 1334873.85, 2231164.84, 3582498.72, 5516101.95, 7801832.04, 10708770.64, 13700949.76, 16751500.89, 20681465.31, 24642561.44, 29146800.13, 33117391.31, 37314493.25, 41498628.47, 45790476.53, 49797064.71, 53567249.2, 58128246.85, 61874371.12, 64522650.57, 66438656.69, 66359202.72]}, "XSQRD, Inc.": {"months": ["2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-06-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2025-01-01", "2025-06-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 944.05, 2947.54, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7147.01, 23889.48, 12904.71, 32709.35, 34854.54, 11115.04, 44372.58, 8160.26, 8095.65], "orig": [5274.58, 25274.58, 36140.26, 62312.26, 70962.7, 110825.11, 127105.24, 186782.99, 233403.98, 346672.63, 524571.85, 602671.8, 632992.27, 721318.13, 801774.04, 795898.16, 869441.25, 908473.53, 972586.88, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}};
 const allLossMonths=["2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
 const allLossBps=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 330.36, 364.33, 11.72, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2, 0.0, 0.0, 0.0, 20.87, 40.1, 257.5, 165.22, 53.97, 82.91, 25.91, 76.04, 528.52, 164.88, 239.8, 165.8, 75.43, 101.07, 197.94, 998.67, 188.99, 60.66, 131.75, 123.19, 87.22, 147.86, 50.65, 181.34, 281.6, 42.48, 296.18, 13.37];
@@ -18675,6 +18591,7 @@ const lossActive=new Set(lossPartners);
 const lossTogglesEl=document.getElementById('lossPartnerToggles');
 
 function reaggregateLoss(activeSet){
+  // Sum raw bal and orig per month across only the active partners, then compute bps
   const byMonth={};
   lossPartners.forEach(p=>{
     if(!activeSet.has(p))return;
@@ -18685,11 +18602,12 @@ function reaggregateLoss(activeSet){
       byMonth[m].orig +=(pd.orig[i] ||0);
     });
   });
-  return allLossMonths.map(m=>{
+  const bps=allLossMonths.map(m=>{
     const d=byMonth[m];
     if(!d||d.orig===0)return null;
     return Math.round(d.bal/d.orig*12*10000*100)/100;
   });
+  return bps;
 }
 
 function updateLossChart(){
@@ -18703,16 +18621,20 @@ function updateLossChart(){
   lossChart.update();
 }
 
+// "All" toggle button
 const lossAllBtn=document.createElement('button');
 lossAllBtn.textContent='All';
 Object.assign(lossAllBtn.style,{background:'var(--ink)',color:'#fff',border:'.5px solid var(--ink)'});
 lossAllBtn.addEventListener('click',()=>{
   const allOn=lossActive.size===lossPartners.length;
-  if(allOn){lossActive.clear();}else{lossPartners.forEach(p=>lossActive.add(p));}
-  syncLossButtonStyles(); updateLossChart();
+  if(allOn){lossActive.clear();}
+  else{lossPartners.forEach(p=>lossActive.add(p));}
+  syncLossButtonStyles();
+  updateLossChart();
 });
 lossTogglesEl.appendChild(lossAllBtn);
 
+// Per-partner toggle buttons
 lossPartners.forEach(p=>{
   const col=lossPartnerColors[p];
   const btn=document.createElement('button');
@@ -18720,14 +18642,16 @@ lossPartners.forEach(p=>{
   Object.assign(btn.style,{background:col+'22',color:col,border:'.5px solid '+col});
   btn.addEventListener('click',function(){
     if(lossActive.has(p))lossActive.delete(p); else lossActive.add(p);
-    syncLossButtonStyles(); updateLossChart();
+    syncLossButtonStyles();
+    updateLossChart();
   });
   lossTogglesEl.appendChild(btn);
 });
 
 function syncLossButtonStyles(){
   lossTogglesEl.querySelectorAll('[data-partner]').forEach(btn=>{
-    const p=btn.dataset.partner; const col=lossPartnerColors[p]; const on=lossActive.has(p);
+    const p=btn.dataset.partner; const col=lossPartnerColors[p];
+    const on=lossActive.has(p);
     Object.assign(btn.style,{background:on?col+'22':'var(--bg)',color:on?col:'var(--ink3)',border:'.5px solid '+(on?col:'var(--border)')});
   });
   const allOn=lossActive.size===lossPartners.length;
@@ -18736,10 +18660,13 @@ function syncLossButtonStyles(){
 
 const lossChart=new Chart(document.getElementById('lossRateChart'),{
   type:'line',
-  data:{labels:allLossMonths,datasets:[
-    {label:'All partners',data:allLossBps,borderColor:'#1C1B18',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    {label:'25bps',data:Array(allLossMonths.length).fill(25),borderColor:'#BA7517',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
-  ]},
+  data:{
+    labels:allLossMonths,
+    datasets:[
+      {label:'All partners',data:allLossBps,borderColor:'#1C1B18',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+      {label:'25bps',data:Array(allLossMonths.length).fill(25),borderColor:'#BA7517',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
+    ]
+  },
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
 });
 
@@ -18758,95 +18685,167 @@ utilSelect.addEventListener('change',function(){
   utilChart.update();
 });
 
-const saOpts=merge(baseOpts,{
+const saOpts = merge(baseOpts,{
   plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},
   scales:{y:{min:0,max:100,stacked:true,ticks:{callback:v=>v+'%'}}}
 });
 
 (function(){
-  const rrLabels=["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]; const rrOut=[3665, 4453488, 18109184, 8516177, 12395615, 7604156, 4407204, 1126795, 812056, 1544270]; const rrDq=[0, 0, 276769, 314454, 533171, 444708, 510417, 30489, 0, 328988];
-  const rrColorsOut=["#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#BA7517BB", "#BA7517BB", "#BA7517BB", "#A32D2DBB", "#A32D2DBB", "#A32D2DBB"]; const rrColorsDq=["#2E6B0A", "#2E6B0A", "#2E6B0A", "#2E6B0A", "#BA7517", "#BA7517", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D"];
+  const rrLabels    = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  const rrOut       = [3665, 4453488, 18109184, 8516177, 12395615, 7604156, 4407204, 1126795, 812056, 1544270];
+  const rrDq        = [0, 0, 276769, 314454, 533171, 444708, 510417, 30489, 0, 328988];
+  const rrColorsOut = ["#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#BA7517BB", "#BA7517BB", "#BA7517BB", "#A32D2DBB", "#A32D2DBB", "#A32D2DBB"];
+  const rrColorsDq  = ["#2E6B0A", "#2E6B0A", "#2E6B0A", "#2E6B0A", "#BA7517", "#BA7517", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D"];
   function fmtD(v){return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e3?'$'+(v/1e3).toFixed(0)+'K':'$'+v;}
-  const barOpts=merge(baseOpts,{plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fmtD(ctx.parsed.y)}}},scales:{y:{ticks:{callback:v=>fmtD(v)}},x:{ticks:{font:{size:11}}}}});
-  new Chart(document.getElementById('rrOutChart'),{type:'bar',data:{labels:rrLabels,datasets:[{label:'Outstanding',data:rrOut,backgroundColor:rrColorsOut,borderRadius:3}]},options:barOpts});
-  new Chart(document.getElementById('rrDqChart'),{type:'bar',data:{labels:rrLabels,datasets:[{label:'30+ DPD',data:rrDq,backgroundColor:rrColorsDq,borderRadius:3}]},options:barOpts});
-  new Chart(document.getElementById('rrTrendChart'),{type:'line',data:{labels:["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "10", "data": [9.74, 8.9, 7.52, 6.93, 5.5, 5.7, 5.14, 5.26, 4.31, 3.42, 3.11, 2.64, 2.62]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "9", "data": [2.09, 2.31, 2.27, 2.02, 2.04, 1.87, 1.52, 1.3, 1.57, 1.72, 1.77, 1.53, 1.38]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "8", "data": [2.48, 2.41, 2.56, 2.53, 2.19, 2.2, 2.22, 2.17, 1.83, 1.1, 1.22, 1.48, 1.91]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "7", "data": [8.62, 8.33, 7.84, 8.17, 9.45, 8.2, 7.97, 7.8, 7.12, 7.78, 8.12, 7.68, 7.47]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "6", "data": [15.18, 13.86, 14.74, 14.37, 13.8, 12.68, 13.41, 12.73, 12.06, 12.56, 12.85, 12.82, 12.89]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "5", "data": [26.66, 25.86, 25.84, 23.34, 23.84, 23.95, 24.54, 23.08, 21.62, 21.7, 21.11, 21.01, 21.02]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "4", "data": [12.25, 13.42, 13.98, 14.35, 14.97, 14.63, 15.4, 14.52, 16.47, 15.56, 15.76, 15.04, 14.44]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "3", "data": [19.15, 20.33, 19.87, 22.9, 23.09, 25.26, 24.65, 28.12, 29.35, 30.31, 29.67, 31.73, 30.71]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "2", "data": [3.82, 4.58, 5.38, 5.4, 5.12, 5.5, 5.14, 5.0, 5.68, 5.84, 6.38, 6.07, 7.55]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "1", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01]}]},options:saOpts});
-  new Chart(document.getElementById('rrDqTrendChart'),{type:'line',data:{labels:["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "10", "data": [45.62, 39.38, 31.55, 27.36, 28.44, 30.01, 24.26, 19.48, 16.79, 10.52, 11.22, 10.31, 13.49]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "9", "data": [0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.0, 0.04, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "8", "data": [2.5, 5.24, 9.09, 12.45, 3.54, 10.08, 9.94, 8.3, 7.62, 0.87, 0.81, 1.47, 1.25]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "7", "data": [17.5, 17.0, 15.53, 20.9, 23.87, 23.16, 24.04, 21.02, 9.07, 9.91, 8.06, 18.85, 20.93]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "6", "data": [22.97, 16.37, 20.44, 18.09, 17.42, 14.22, 17.59, 14.79, 21.84, 27.31, 23.92, 18.38, 18.23]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "5", "data": [10.17, 19.0, 18.34, 16.14, 19.07, 18.31, 15.2, 15.72, 21.32, 20.04, 23.55, 22.65, 21.86]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "4", "data": [0.0, 0.5, 2.31, 2.99, 5.42, 4.21, 6.28, 16.73, 17.86, 22.7, 24.82, 14.23, 12.89]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "3", "data": [1.22, 2.49, 2.73, 2.06, 2.22, 0.01, 2.68, 3.91, 5.51, 8.65, 7.62, 14.12, 11.35]}]},options:saOpts});
+  const barOpts=merge(baseOpts,{
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fmtD(ctx.parsed.y)}}},
+    scales:{y:{ticks:{callback:v=>fmtD(v)}},x:{ticks:{font:{size:11}}}}
+  });
+  new Chart(document.getElementById('rrOutChart'),{
+    type:'bar',
+    data:{labels:rrLabels,datasets:[{label:'Outstanding',data:rrOut,backgroundColor:rrColorsOut,borderRadius:3}]},
+    options:barOpts
+  });
+  new Chart(document.getElementById('rrDqChart'),{
+    type:'bar',
+    data:{labels:rrLabels,datasets:[{label:'30+ DPD',data:rrDq,backgroundColor:rrColorsDq,borderRadius:3}]},
+    options:barOpts
+  });
+  const rrTrendMonths   = ["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
+  const rrTrendSeries   = [{"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "10", "data": [9.74, 8.9, 7.52, 6.93, 5.5, 5.7, 5.14, 5.26, 4.31, 3.42, 3.11, 2.64, 2.62]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "9", "data": [2.09, 2.31, 2.27, 2.02, 2.04, 1.87, 1.52, 1.3, 1.57, 1.72, 1.77, 1.53, 1.38]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "8", "data": [2.48, 2.41, 2.56, 2.53, 2.19, 2.2, 2.22, 2.17, 1.83, 1.1, 1.22, 1.48, 1.91]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "7", "data": [8.62, 8.33, 7.84, 8.17, 9.45, 8.2, 7.97, 7.8, 7.12, 7.78, 8.12, 7.68, 7.47]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "6", "data": [15.18, 13.86, 14.74, 14.37, 13.8, 12.68, 13.41, 12.73, 12.06, 12.56, 12.85, 12.82, 12.89]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "5", "data": [26.66, 25.86, 25.84, 23.34, 23.84, 23.95, 24.54, 23.08, 21.62, 21.7, 21.11, 21.01, 21.02]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "4", "data": [12.25, 13.42, 13.98, 14.35, 14.97, 14.63, 15.4, 14.52, 16.47, 15.56, 15.76, 15.04, 14.44]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "3", "data": [19.15, 20.33, 19.87, 22.9, 23.09, 25.26, 24.65, 28.12, 29.35, 30.31, 29.67, 31.73, 30.71]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "2", "data": [3.82, 4.58, 5.38, 5.4, 5.12, 5.5, 5.14, 5.0, 5.68, 5.84, 6.38, 6.07, 7.55]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "1", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01]}];
+  const rrTrendDqSeries = [{"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "10", "data": [45.62, 39.38, 31.55, 27.36, 28.44, 30.01, 24.26, 19.48, 16.79, 10.52, 11.22, 10.31, 13.49]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "9", "data": [0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.0, 0.04, 0.0, 0.0, 0.0, 0.0, 0.0]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "8", "data": [2.5, 5.24, 9.09, 12.45, 3.54, 10.08, 9.94, 8.3, 7.62, 0.87, 0.81, 1.47, 1.25]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "7", "data": [17.5, 17.0, 15.53, 20.9, 23.87, 23.16, 24.04, 21.02, 9.07, 9.91, 8.06, 18.85, 20.93]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "6", "data": [22.97, 16.37, 20.44, 18.09, 17.42, 14.22, 17.59, 14.79, 21.84, 27.31, 23.92, 18.38, 18.23]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "5", "data": [10.17, 19.0, 18.34, 16.14, 19.07, 18.31, 15.2, 15.72, 21.32, 20.04, 23.55, 22.65, 21.86]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "4", "data": [0.0, 0.5, 2.31, 2.99, 5.42, 4.21, 6.28, 16.73, 17.86, 22.7, 24.82, 14.23, 12.89]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "3", "data": [1.22, 2.49, 2.73, 2.06, 2.22, 0.01, 2.68, 3.91, 5.51, 8.65, 7.62, 14.12, 11.35]}];
+  new Chart(document.getElementById('rrTrendChart'),{
+    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendSeries},options:saOpts
+  });
+  new Chart(document.getElementById('rrDqTrendChart'),{
+    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendDqSeries},options:saOpts
+  });
 })();
 
 (function(){
-  const mlLabels=["At/below modeled", "Above modeled", "No model"]; const mlOut=[39049648, 19010419, 912541]; const mlDq=[1292212, 824573, 322212];
-  const mlColorsOut=["#1D9E75BB", "#A32D2DBB", "#A8A5A0BB"]; const mlColorsDq=["#1D9E75", "#A32D2D", "#A8A5A0"];
+  const mlLabels    = ["At/below modeled", "Above modeled", "No model"];
+  const mlOut       = [39049648, 19010419, 912541];
+  const mlDq        = [1292212, 824573, 322212];
+  const mlColorsOut = ["#1D9E75BB", "#A32D2DBB", "#A8A5A0BB"];
+  const mlColorsDq  = ["#1D9E75", "#A32D2D", "#A8A5A0"];
   function fmtD(v){return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e3?'$'+(v/1e3).toFixed(0)+'K':'$'+v;}
-  const barOpts=merge(baseOpts,{plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fmtD(ctx.parsed.y)}}},scales:{y:{ticks:{callback:v=>fmtD(v)}},x:{ticks:{font:{size:12}}}}});
-  new Chart(document.getElementById('mlOutChart'),{type:'bar',data:{labels:mlLabels,datasets:[{label:'Outstanding',data:mlOut,backgroundColor:mlColorsOut,borderRadius:3}]},options:barOpts});
-  new Chart(document.getElementById('mlDqChart'),{type:'bar',data:{labels:mlLabels,datasets:[{label:'30+ DPD',data:mlDq,backgroundColor:mlColorsDq,borderRadius:3}]},options:barOpts});
-  new Chart(document.getElementById('mlTrendChart'),{type:'line',data:{labels:["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{"borderColor": "#1D9E75", "backgroundColor": "#1D9E7566", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "At/below modeled", "data": [54.71, 54.72, 55.35, 56.71, 58.31, 58.76, 60.76, 62.28, 65.82, 64.94, 65.54, 66.9, 66.22]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "Above modeled", "data": [37.68, 38.68, 39.1, 38.3, 38.02, 37.41, 35.8, 33.92, 31.23, 32.92, 32.7, 31.83, 32.24]}, {"borderColor": "#A8A5A0", "backgroundColor": "#A8A5A033", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "No model", "data": [7.61, 6.6, 5.55, 4.99, 3.67, 3.83, 3.43, 3.8, 2.95, 2.14, 1.76, 1.28, 1.55]}]},options:saOpts});
-  new Chart(document.getElementById('mlDqTrendChart'),{type:'line',data:{labels:["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{"borderColor": "#1D9E75", "backgroundColor": "#1D9E7566", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "At/below modeled", "data": [33.86, 34.62, 34.52, 23.6, 30.4, 32.98, 40.0, 40.26, 49.17, 37.77, 43.17, 52.3, 52.98]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "Above modeled", "data": [20.75, 26.21, 34.12, 49.92, 45.01, 43.73, 41.99, 46.28, 35.73, 51.94, 45.83, 37.7, 33.81]}, {"borderColor": "#A8A5A0", "backgroundColor": "#A8A5A033", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "No model", "data": [45.39, 39.16, 31.36, 26.48, 24.59, 23.29, 18.01, 13.46, 15.09, 10.29, 11.0, 9.99, 13.21]}]},options:saOpts});
+  const barOpts=merge(baseOpts,{
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fmtD(ctx.parsed.y)}}},
+    scales:{y:{ticks:{callback:v=>fmtD(v)}},x:{ticks:{font:{size:12}}}}
+  });
+  new Chart(document.getElementById('mlOutChart'),{
+    type:'bar',
+    data:{labels:mlLabels,datasets:[{label:'Outstanding',data:mlOut,backgroundColor:mlColorsOut,borderRadius:3}]},
+    options:barOpts
+  });
+  new Chart(document.getElementById('mlDqChart'),{
+    type:'bar',
+    data:{labels:mlLabels,datasets:[{label:'30+ DPD',data:mlDq,backgroundColor:mlColorsDq,borderRadius:3}]},
+    options:barOpts
+  });
+  const mlTrendMonths   = ["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
+  const mlTrendSeries   = [{"borderColor": "#1D9E75", "backgroundColor": "#1D9E7566", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "At/below modeled", "data": [54.71, 54.72, 55.35, 56.71, 58.31, 58.76, 60.76, 62.28, 65.82, 64.94, 65.54, 66.9, 66.22]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "Above modeled", "data": [37.68, 38.68, 39.1, 38.3, 38.02, 37.41, 35.8, 33.92, 31.23, 32.92, 32.7, 31.83, 32.24]}, {"borderColor": "#A8A5A0", "backgroundColor": "#A8A5A033", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "No model", "data": [7.61, 6.6, 5.55, 4.99, 3.67, 3.83, 3.43, 3.8, 2.95, 2.14, 1.76, 1.28, 1.55]}];
+  const mlTrendDqSeries = [{"borderColor": "#1D9E75", "backgroundColor": "#1D9E7566", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "At/below modeled", "data": [33.86, 34.62, 34.52, 23.6, 30.4, 32.98, 40.0, 40.26, 49.17, 37.77, 43.17, 52.3, 52.98]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "Above modeled", "data": [20.75, 26.21, 34.12, 49.92, 45.01, 43.73, 41.99, 46.28, 35.73, 51.94, 45.83, 37.7, 33.81]}, {"borderColor": "#A8A5A0", "backgroundColor": "#A8A5A033", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "No model", "data": [45.39, 39.16, 31.36, 26.48, 24.59, 23.29, 18.01, 13.46, 15.09, 10.29, 11.0, 9.99, 13.21]}];
+  new Chart(document.getElementById('mlTrendChart'),{
+    type:'line',data:{labels:mlTrendMonths,datasets:mlTrendSeries},options:saOpts
+  });
+  new Chart(document.getElementById('mlDqTrendChart'),{
+    type:'line',data:{labels:mlTrendMonths,datasets:mlTrendDqSeries},options:saOpts
+  });
 })();
 
-new Chart(document.getElementById('origChart'),{type:'bar',data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 184.7, 351.8, 227.0, 239.4, 123.7, 275.8, 262.3, 316.6, 217.2, 413.7, 469.6, 281.6, 319.8, 560.7, 317.7], "backgroundColor": "#378ADD", "borderWidth": 0}, {"label": "Cledara Limited", "data": [4.0, 20.0, 17.5, 19.3, 11.8, 60.1, 382.2, 1824.5, 1935.7, 2062.5, 1987.5, 1903.9, 1899.7, 1905.7, 1871.3, 1788.3, 1787.5, 2078.6, 1188.6], "backgroundColor": "#1D9E75", "borderWidth": 0}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 13.4, 27.7, 28.5, 14.0], "backgroundColor": "#D85A30", "borderWidth": 0}, {"label": "Flychain", "data": [716.2, 1052.5, 1523.7, 1077.2, 1052.9, 767.9, 1617.8, 1190.8, 1132.3, 902.1, 1629.1, 854.3, 925.9, 1071.9, 704.1, 1159.8, 1612.7, 1303.9, 463.1], "backgroundColor": "#A32D2D", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 779.9, 900.2, 1328.8, 1098.5, 1116.3, 560.1], "backgroundColor": "#BA7517", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [3535.8, 6677.2, 6984.7, 8786.7, 10127.0, 8596.2, 9212.8, 9972.0, 10663.1, 12933.6, 10869.3, 11194.4, 11962.6, 9559.3, 13602.1, 11350.9, 12817.2, 13724.4, 4647.2], "backgroundColor": "#6B3FA0", "borderWidth": 0}, {"label": "Lawtrades", "data": [393.5, 781.4, 1751.1, 311.0, 934.6, 1099.7, 642.5, 916.8, 678.3, 606.8, 1380.3, 795.8, 637.5, 401.7, 177.4, 193.1, 0.0, 8.0, 777.7], "backgroundColor": "#185FA5", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1320.5, 832.4, 646.9, 1044.4, 892.8, 794.3, 1159.8, 935.3, 914.6, 1265.2, 413.3], "backgroundColor": "#3B6D11", "borderWidth": 0}, {"label": "Order", "data": [9743.6, 15127.5, 17278.7, 18282.2, 16940.9, 19836.9, 20586.6, 20959.9, 19142.1, 20737.3, 22463.6, 23979.7, 27729.6, 22581.6, 23030.4, 25670.2, 23587.0, 25065.3, 12960.7], "backgroundColor": "#888", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [1184.7, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 5846.0, 3881.6], "backgroundColor": "#D4A017", "borderWidth": 0}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 81.6, 1256.2, 951.4, 1409.3, 1407.5, 1920.9, 929.1], "backgroundColor": "#378ADD", "borderWidth": 0}]},options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}});});
-new Chart(document.getElementById('moChart'),{type:'line',data:{labels:["2024-10-31", "2024-11-30", "2024-12-31", "2025-01-31", "2025-02-28", "2025-03-31", "2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"],datasets:[{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 170.3, 360.1, 414.5, 420.5, 380.4, 273.3, 312.8, 460.3, 504.3, 671.9, 759.5, 563.2, 500.9, 857.8, 865.6], "backgroundColor": "#378ADD99", "borderColor": "#378ADD", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Cledara Limited", "data": [19.7, 20.0, 17.5, 1.1, 11.8, 49.8, 334.9, 1200.4, 1060.3, 1182.3, 1229.5, 1219.3, 1107.9, 1084.4, 1108.2, 997.2, 1056.0, 1209.0, 833.1], "backgroundColor": "#1D9E7599", "borderColor": "#1D9E75", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 10.4, 29.3, 28.1, 20.3], "backgroundColor": "#D85A3099", "borderColor": "#D85A30", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Flychain", "data": [2380.4, 2294.1, 2669.7, 2958.3, 2991.6, 2732.5, 3057.0, 3142.5, 3376.8, 3059.9, 3484.0, 3132.8, 3048.5, 3131.6, 2743.9, 2634.8, 3167.0, 3423.5, 3128.7], "backgroundColor": "#A32D2D99", "borderColor": "#A32D2D", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 279.9, 28.3, 283.5, 278.5, 29.5, 30.2], "backgroundColor": "#BA751799", "borderColor": "#BA7517", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Koverly Inc.", "data": [6687.9, 8918.0, 10130.1, 11136.4, 13949.5, 13788.1, 13735.7, 12555.5, 14213.9, 14751.6, 15541.9, 16095.1, 14953.5, 14620.1, 16530.6, 13685.3, 14580.4, 14829.6, 13425.5], "backgroundColor": "#6B3FA099", "borderColor": "#6B3FA0", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Lawtrades", "data": [2027.1, 2334.0, 3024.4, 2700.1, 2839.1, 2717.1, 2649.5, 2860.8, 3109.5, 3173.2, 3362.9, 3161.3, 2947.9, 2648.2, 1683.8, 1247.8, 846.5, 546.0, 1157.2], "backgroundColor": "#185FA599", "borderColor": "#185FA5", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1174.1, 1010.4, 800.9, 1425.7, 1758.3, 1236.3, 1133.5, 1161.7, 776.8, 926.5, 561.0], "backgroundColor": "#3B6D1199", "borderColor": "#3B6D11", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Order", "data": [17768.1, 17721.1, 18708.8, 19226.8, 19335.1, 21579.6, 21495.5, 23282.2, 24691.0, 26724.3, 26539.9, 29027.9, 30593.3, 31548.0, 32825.5, 33471.8, 34217.2, 32788.7, 33046.7], "backgroundColor": "#88888899", "borderColor": "#888", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Relay Financial Technologies, Inc", "data": [883.6, 974.3, 1140.9, 1393.9, 1424.1, 1814.3, 1728.4, 2048.9, 1882.6, 1976.7, 2351.1, 2617.2, 2696.1, 2927.5, 3119.0, 3324.5, 3397.1, 3280.6, 4353.2], "backgroundColor": "#D4A01799", "borderColor": "#D4A017", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 70.3, 965.6, 739.1, 990.7, 1326.2, 1518.1, 1499.1], "backgroundColor": "#378ADD99", "borderColor": "#378ADD", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}]},options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}});});
-new Chart(document.getElementById('naicsTrendChart'),{type:'line',data:{labels:["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"],datasets:[{"label": "Construction", "data": [13.68, 15.24, 5.87, 11.67, 14.71, 4.19, 4.12], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Wholesale Trade", "data": [4.93, 3.07, 5.54, 7.87, 6.84, 2.14, 2.12], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [4.43, 3.97, 2.34, 2.45, 2.73, 2.87, 3.04], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [3.88, 2.78, 2.37, 0.64, 1.08, 3.82, 2.5], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Information", "data": [0.79, 1.82, 7.44, 3.15, 2.95, 6.05, 1.89], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Finance & Insurance", "data": [3.42, 5.82, 2.14, 1.66, 0.83, 1.19, 1.29], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Professional Services", "data": [11.13, 12.96, 7.87, 10.47, 12.53, 12.79, 13.99], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Health Care", "data": [9.27, 9.07, 10.22, 2.76, 2.19, 1.65, 3.57], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Food & Accommodation", "data": [2.99, 2.34, 9.32, 5.7, 4.35, 2.53, 2.64], "borderColor": "#888", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}]},options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}});});
-new Chart(document.getElementById('coChart'),{type:'bar',data:{labels:["2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-03-01"],datasets:[{label:'Charge-offs ($K)',data:[497.8, 156.2, 386.3, 334.4, 121.1, 440.3, 661.8, 978.7, 1181.8],backgroundColor:'#A32D2D',borderRadius:3}]},options:merge(baseOpts,{scales:{y:{ticks:{callback:v=>'$'+v+'K'}}}});});
+new Chart(document.getElementById('origChart'),{
+  type:'bar',
+  data:{labels:["2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],datasets:[{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 184.7, 351.8, 227.0, 239.4, 123.7, 275.8, 262.3, 316.6, 217.2, 413.7, 469.6, 281.6, 319.8, 560.7, 317.7], "backgroundColor": "#378ADD", "borderWidth": 0}, {"label": "Cledara Limited", "data": [4.0, 20.0, 17.5, 19.3, 11.8, 60.1, 382.2, 1824.5, 1935.7, 2062.5, 1987.5, 1903.9, 1899.7, 1905.7, 1871.3, 1788.3, 1787.5, 2078.6, 1188.6], "backgroundColor": "#1D9E75", "borderWidth": 0}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 13.4, 27.7, 28.5, 14.0], "backgroundColor": "#D85A30", "borderWidth": 0}, {"label": "Flychain", "data": [716.2, 1052.5, 1523.7, 1077.2, 1052.9, 767.9, 1617.8, 1190.8, 1132.3, 902.1, 1629.1, 854.3, 925.9, 1071.9, 704.1, 1159.8, 1612.7, 1303.9, 463.1], "backgroundColor": "#A32D2D", "borderWidth": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 779.9, 900.2, 1328.8, 1098.5, 1116.3, 560.1], "backgroundColor": "#BA7517", "borderWidth": 0}, {"label": "Koverly Inc.", "data": [3535.8, 6677.2, 6984.7, 8786.7, 10127.0, 8596.2, 9212.8, 9972.0, 10663.1, 12933.6, 10869.3, 11194.4, 11962.6, 9559.3, 13602.1, 11350.9, 12817.2, 13724.4, 4647.2], "backgroundColor": "#6B3FA0", "borderWidth": 0}, {"label": "Lawtrades", "data": [393.5, 781.4, 1751.1, 311.0, 934.6, 1099.7, 642.5, 916.8, 678.3, 606.8, 1380.3, 795.8, 637.5, 401.7, 177.4, 193.1, 0.0, 8.0, 777.7], "backgroundColor": "#185FA5", "borderWidth": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1320.5, 832.4, 646.9, 1044.4, 892.8, 794.3, 1159.8, 935.3, 914.6, 1265.2, 413.3], "backgroundColor": "#3B6D11", "borderWidth": 0}, {"label": "Order", "data": [9743.6, 15127.5, 17278.7, 18282.2, 16940.9, 19836.9, 20586.6, 20959.9, 19142.1, 20737.3, 22463.6, 23979.7, 27729.6, 22581.6, 23030.4, 25670.2, 23587.0, 25065.3, 12960.7], "backgroundColor": "#888", "borderWidth": 0}, {"label": "Relay Financial Technologies, Inc", "data": [1184.7, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5698.8, 5846.0, 3881.6], "backgroundColor": "#D4A017", "borderWidth": 0}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 81.6, 1256.2, 951.4, 1409.3, 1407.5, 1920.9, 929.1], "backgroundColor": "#378ADD", "borderWidth": 0}]},
+  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
+});
+
+new Chart(document.getElementById('moChart'),{
+  type:'line',
+  data:{labels:["2024-10-31", "2024-11-30", "2024-12-31", "2025-01-31", "2025-02-28", "2025-03-31", "2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"],datasets:[{"label": "BRKR.IO Inc.", "data": [0.0, 0.0, 0.0, 0.0, 170.3, 360.1, 414.5, 420.5, 380.4, 273.3, 312.8, 460.3, 504.3, 671.9, 759.5, 563.2, 500.9, 857.8, 865.6], "backgroundColor": "#378ADD99", "borderColor": "#378ADD", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Cledara Limited", "data": [19.7, 20.0, 17.5, 1.1, 11.8, 49.8, 334.9, 1200.4, 1060.3, 1182.3, 1229.5, 1219.3, 1107.9, 1084.4, 1108.2, 997.2, 1056.0, 1209.0, 833.1], "backgroundColor": "#1D9E7599", "borderColor": "#1D9E75", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Edstruments (Highnote)", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.0, 10.4, 29.3, 28.1, 20.3], "backgroundColor": "#D85A3099", "borderColor": "#D85A30", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Flychain", "data": [2380.4, 2294.1, 2669.7, 2958.3, 2991.6, 2732.5, 3057.0, 3142.5, 3376.8, 3059.9, 3484.0, 3132.8, 3048.5, 3131.6, 2743.9, 2634.8, 3167.0, 3423.5, 3128.7], "backgroundColor": "#A32D2D99", "borderColor": "#A32D2D", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "GigSafe", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 279.9, 28.3, 283.5, 278.5, 29.5, 30.2], "backgroundColor": "#BA751799", "borderColor": "#BA7517", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Koverly Inc.", "data": [6687.9, 8918.0, 10130.1, 11136.4, 13949.5, 13788.1, 13735.7, 12555.5, 14213.9, 14751.6, 15541.9, 16095.1, 14953.5, 14620.1, 16530.6, 13685.3, 14580.4, 14829.6, 13425.5], "backgroundColor": "#6B3FA099", "borderColor": "#6B3FA0", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Lawtrades", "data": [2027.1, 2334.0, 3024.4, 2700.1, 2839.1, 2717.1, 2649.5, 2860.8, 3109.5, 3173.2, 3362.9, 3161.3, 2947.9, 2648.2, 1683.8, 1247.8, 846.5, 546.0, 1157.2], "backgroundColor": "#185FA599", "borderColor": "#185FA5", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "NurseIO", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1174.1, 1010.4, 800.9, 1425.7, 1758.3, 1236.3, 1133.5, 1161.7, 776.8, 926.5, 561.0], "backgroundColor": "#3B6D1199", "borderColor": "#3B6D11", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Order", "data": [17768.1, 17721.1, 18708.8, 19226.8, 19335.1, 21579.6, 21495.5, 23282.2, 24691.0, 26724.3, 26539.9, 29027.9, 30593.3, 31548.0, 32825.5, 33471.8, 34217.2, 32788.7, 33046.7], "backgroundColor": "#88899", "borderColor": "#888", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Relay Financial Technologies, Inc", "data": [883.6, 974.3, 1140.9, 1393.9, 1424.1, 1814.3, 1728.4, 2048.9, 1882.6, 1976.7, 2351.1, 2617.2, 2696.1, 2927.5, 3119.0, 3324.5, 3397.1, 3280.6, 4353.2], "backgroundColor": "#D4A01799", "borderColor": "#D4A017", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}, {"label": "Tab Commerce", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 70.3, 965.6, 739.1, 990.7, 1326.2, 1518.1, 1499.1], "backgroundColor": "#378ADD99", "borderColor": "#378ADD", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}]},
+  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
+});
+
+new Chart(document.getElementById('naicsTrendChart'),{
+  type:'line',
+  data:{labels:["2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-14"],datasets:[{"label": "Construction", "data": [13.68, 15.24, 5.87, 11.67, 14.71, 4.19, 4.12], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Wholesale Trade", "data": [4.93, 3.07, 5.54, 7.87, 6.84, 2.14, 2.12], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [4.43, 3.97, 2.34, 2.45, 2.73, 2.87, 3.04], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [3.88, 2.78, 2.37, 0.64, 1.08, 3.82, 2.5], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Information", "data": [0.79, 1.82, 7.44, 3.15, 2.95, 6.05, 1.89], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Finance & Insurance", "data": [3.42, 5.82, 2.14, 1.66, 0.83, 1.19, 1.29], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Professional Services", "data": [11.13, 12.96, 7.87, 10.47, 12.53, 12.79, 13.99], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Health Care", "data": [9.27, 9.07, 10.22, 2.76, 2.19, 1.65, 3.57], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Food & Accommodation", "data": [2.99, 2.34, 9.32, 5.7, 4.35, 2.53, 2.64], "borderColor": "#888", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}]},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
+});
+
+new Chart(document.getElementById('coChart'),{
+  type:'bar',
+  data:{labels:["2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-03-01"],datasets:[{label:'Charge-offs ($K)',data:[497.8, 156.2, 386.3, 334.4, 121.1, 440.3, 661.8, 978.7, 1181.8],backgroundColor:'#A32D2D',borderRadius:3}]},
+  options:merge(baseOpts,{scales:{y:{ticks:{callback:v=>'$'+v+'K'}}}})
+});
 
 (function(){
-  const months=["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"]; const orig=[2062.4, 1998.9, 6980.0, 2554.3, 4743.9, 6111.5, 7944.1, 11051.0, 10432.2, 18334.2, 19844.2, 20725.1, 22215.3, 23522.8, 27649.3, 22806.2, 27846.1, 26947.4, 32278.6, 32616.9, 33509.0, 35464.0, 37716.7, 41249.9, 40384.6, 44257.3, 45168.1, 46413.4, 50632.0, 45066.0, 50770.0, 51371.8, 49579.0, 53581.1, 26521.4]; const lossPct=[0.75, 12.04, 2.43, 1.57, 2.63, 3.51, 1.49, 8.36, 1.22, 0.84, 1.75, 2.75, 3.09, 5.04, 3.16, 2.95, 2.66, 1.19, 1.58, 1.22, 0.77, 2.16, 1.08, 1.44, 0.83, 1.58, 0.99, 0.83, 0.32, 0.08, 0.0, 0.0, 0.0, 0.0, 0.0];
-  const pct3060=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.68, 0.47, 0.07, 0.21, 0.03, 0.0]; const pct6090=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.09, 0.24, 0.13, 0.06, 0.43, 0.0, 0.0, 0.0]; const pct90120=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.17, 0.13, 0.05, 0.08, 0.0, 0.0, 0.0, 0.0];
-  new Chart(document.getElementById('cohortLossChart'),{type:'bar',data:{labels:months,datasets:[
-    {type:'bar', label:'Originated ($K)',data:orig,      backgroundColor:'#D8D4CCAA',borderColor:'#A8A5A0',borderWidth:1,borderRadius:2,yAxisID:'y'},
-    {type:'line',label:'30–60 DPD %', data:pct3060,  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'},
-    {type:'line',label:'60–90 DPD %', data:pct6090,  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'},
-    {type:'line',label:'90–120 DPD %',data:pct90120, borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'},
-    {type:'line',label:'Loss % (cumul.)', data:lossPct,  borderColor:'#1C1B18',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2',borderDash:[4,3]}
-  ]},options:merge(baseOpts,{
-    plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},tooltip:{callbacks:{label:ctx=>ctx.dataset.yAxisID==='y2'?ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%':ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K'}}},
-    scales:{
-      x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:18},grid:{display:false},border:{display:false}},
-      y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
-      y2:{position:'right',min:0,max:6,ticks:{font:{size:10},color:'#A8A5A0',callback:v=>v.toFixed(1)+'%'},grid:{display:false},border:{display:false}}
-    }
-  })});
+  const months   = ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
+  const orig     = [2062.4, 1998.9, 6980.0, 2554.3, 4743.9, 6111.5, 7944.1, 11051.0, 10432.2, 18334.2, 19844.2, 20725.1, 22215.3, 23522.8, 27649.3, 22806.2, 27846.1, 26947.4, 32278.6, 32616.9, 33509.0, 35464.0, 37716.7, 41249.9, 40384.6, 44257.3, 45168.1, 46413.4, 50632.0, 45066.0, 50770.0, 51371.8, 49579.0, 53581.1, 26521.4];
+  const lossPct  = [0.75, 12.04, 2.43, 1.57, 2.63, 3.51, 1.49, 8.36, 1.22, 0.84, 1.75, 2.75, 3.09, 5.04, 3.16, 2.95, 2.66, 1.19, 1.58, 1.22, 0.77, 2.16, 1.08, 1.44, 0.83, 1.58, 0.99, 0.83, 0.32, 0.08, 0.0, 0.0, 0.0, 0.0, 0.0];
+  const pct3060  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.68, 0.47, 0.07, 0.21, 0.03, 0.0];
+  const pct6090  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.09, 0.24, 0.13, 0.06, 0.43, 0.0, 0.0, 0.0];
+  const pct90120 = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.17, 0.13, 0.05, 0.08, 0.0, 0.0, 0.0, 0.0];
+  new Chart(document.getElementById('cohortLossChart'),{
+    type:'bar',
+    data:{
+      labels: months,
+      datasets:[
+        {type:'bar',  label:'Originated ($K)',  data:orig,     backgroundColor:'#D8D4CCAA',borderColor:'#A8A5A0',borderWidth:1,borderRadius:2,yAxisID:'y'},
+        {type:'line', label:'30–60 DPD %',  data:pct3060,  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'},
+        {type:'line', label:'60–90 DPD %',  data:pct6090,  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'},
+        {type:'line', label:'90–120 DPD %', data:pct90120, borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'},
+        {type:'line', label:'Loss % (cumul.)',  data:lossPct,  borderColor:'#1C1B18',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2',borderDash:[4,3]}
+      ]
+    },
+    options:merge(baseOpts,{
+      plugins:{
+        legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+        tooltip:{callbacks:{label:ctx=>ctx.dataset.yAxisID==='y2'?ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%':ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K'}}
+      },
+      scales:{
+        x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:18},grid:{display:false},border:{display:false}},
+        y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
+        y2:{position:'right',min:0,max:6,ticks:{font:{size:10},color:'#A8A5A0',callback:v=>v.toFixed(1)+'%'},grid:{display:false},border:{display:false}}
+      }
+    })
+  });
 })();
 
 (function(){
-  const vMonths=["2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"]; const vLine=[85.0, 1530.0, 644.0, 18307.0, 7395.3, 17037.1, 2657.0, 3520.5, 3808.5, 11215.5, 3648.0, 16588.0, 13745.5, 3203.5, 7740.5, 6214.5, 5327.6, 8719.0, 9349.5, 8318.0, 6281.0, 6366.5, 3572.0, 4430.5, 9000.8, 5925.3, 6335.5, 8324.0, 4597.5, 6812.5, 4563.5, 3478.0, 5436.0, 4526.5, 4142.5, 3090.5]; const vLossPct=[0.0, 0.467, 6.753, 9.654, 4.423, 7.005, 1.306, 6.717, 10.095, 2.295, 2.142, 1.38, 2.885, 36.622, 30.223, 21.993, 5.379, 12.368, 1.96, 8.428, 2.353, 0.703, 4.488, 0.0, 0.358, 0.281, 0.016, 0.0, 0.256, 0.505, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-  const vLossKs=[0.0, 7.1, 43.5, 1767.4, 327.1, 1193.4, 34.7, 236.5, 384.5, 257.4, 78.1, 229.0, 396.5, 1173.2, 2339.4, 1366.8, 286.6, 1078.4, 183.3, 701.1, 147.8, 44.8, 160.3, 0.0, 32.2, 16.7, 1.0, 0.0, 11.8, 34.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]; const vOrgs=[2, 11, 10, 63, 71, 150, 20, 27, 43, 42, 38, 141, 150, 42, 55, 102, 187, 101, 81, 136, 74, 87, 61, 77, 129, 60, 78, 95, 70, 66, 62, 51, 63, 57, 58, 38]; const vLossOrgs=[0, 1, 3, 10, 19, 31, 4, 3, 5, 6, 8, 11, 23, 19, 23, 17, 21, 18, 8, 12, 8, 7, 3, 0, 4, 3, 1, 0, 3, 5, 0, 0, 0, 0, 0, 0];
-  new Chart(document.getElementById('vintageLossChart'),{type:'bar',data:{labels:vMonths,datasets:[
-    {type:'bar', label:'Line assigned ($K)',data:vLine,    backgroundColor:'#378ADD44',borderColor:'#378ADD',borderWidth:1,borderRadius:2,yAxisID:'y'},
-    {type:'line',label:'Loss % of line',   data:vLossPct, borderColor:'#A32D2D',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2'}
-  ]},options:merge(baseOpts,{
-    plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},tooltip:{callbacks:{label:ctx=>{
-      if(ctx.dataset.yAxisID==='y2'){const ol=vLossOrgs[ctx.dataIndex];return ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%'+(ol>0?' ('+ol+' orgs)':'');}
-      const o=vOrgs[ctx.dataIndex];const lk=vLossKs[ctx.dataIndex];
-      return [ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K ('+o+' orgs)',lk>0?'Loss balance: $'+lk.toFixed(1)+'K':'No losses yet'];
-    }}}},
-    scales:{
-      x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:24},grid:{display:false},border:{display:false}},
-      y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
-      y2:{position:'right',min:0,ticks:{font:{size:10},color:'#A32D2D',callback:v=>v.toFixed(1)+'%'},grid:{display:false},border:{display:false}}
-    }
-  })});
-})();
-
-(function(){
-  const vbMonths=["2022-12-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"]; const vbBorrowed=[106.0, 20118.1, 4326.3, 441948.1, 244633.7, 565715.9, 22522.2, 80946.7, 55324.0, 84119.0, 24609.8, 38073.2, 41138.6, 50042.4, 54809.0, 213219.1, 30435.6, 61020.3, 60215.5, 58809.3, 63379.3, 17767.0, 9814.2, 22549.1, 30923.0, 18122.4, 14755.7, 11242.0, 11583.2, 9544.7, 11249.9, 3192.4, 3954.9, 2279.6, 1459.9, 1317.9];
-  const vbLossPct=[0.0, 0.036, 1.005, 0.4, 0.134, 0.211, 0.154, 0.292, 0.695, 0.306, 0.317, 0.601, 0.964, 2.344, 4.268, 0.641, 0.942, 1.767, 0.304, 1.192, 0.233, 0.252, 1.634, 0.0, 0.104, 0.092, 0.007, 0.0, 0.102, 0.361, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]; const vbLossKs=[0.0, 7.1, 43.5, 1767.4, 327.1, 1193.4, 34.7, 236.5, 384.5, 257.4, 78.1, 229.0, 396.5, 1173.2, 2339.4, 1366.8, 286.6, 1078.4, 183.3, 701.1, 147.8, 44.8, 160.3, 0.0, 32.2, 16.7, 1.0, 0.0, 11.8, 34.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]; const vbOrgs=[0, 1, 3, 10, 19, 31, 4, 3, 5, 6, 8, 11, 23, 19, 23, 17, 21, 18, 8, 12, 8, 7, 3, 0, 4, 3, 1, 0, 3, 5, 0, 0, 0, 0, 0, 0];
-  new Chart(document.getElementById('vintageBorrowedChart'),{type:'bar',data:{labels:vbMonths,datasets:[
-    {type:'bar', label:'Total borrowed ($K)',  data:vbBorrowed, backgroundColor:'#1D9E7544',borderColor:'#1D9E75',borderWidth:1,borderRadius:2,yAxisID:'y'},
-    {type:'line',label:'Loss % of borrowed',   data:vbLossPct,  borderColor:'#A32D2D',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2'}
-  ]},options:merge(baseOpts,{
-    plugins:{legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},tooltip:{callbacks:{label:ctx=>{
-      if(ctx.dataset.yAxisID==='y2'){const ol=vbOrgs[ctx.dataIndex];return ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%'+(ol>0?' ('+ol+' orgs)':'');}
-      const lk=vbLossKs[ctx.dataIndex];
-      return [ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K',lk>0?'Loss balance: $'+lk.toFixed(1)+'K':'No losses yet'];
-    }}}},
-    scales:{
-      x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:24},grid:{display:false},border:{display:false}},
-      y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
-      y2:{position:'right',min:0,ticks:{font:{size:10},color:'#A32D2D',callback:v=>v.toFixed(1)+'%'},grid:{display:false},border:{display:false}}
-    }
-  })});
+  const vMonths   = ["2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
+  const vLine     = [85.0, 1530.0, 644.0, 18307.0, 7395.3, 17037.1, 2657.0, 3520.5, 3808.5, 11215.5, 3648.0, 16588.0, 13745.5, 3203.5, 7740.5, 6214.5, 5327.6, 8719.0, 9349.5, 8318.0, 6281.0, 6366.5, 3572.0, 4430.5, 9000.8, 5925.3, 6335.5, 8324.0, 4597.5, 6812.5, 4563.5, 3478.0, 5436.0, 4526.5, 4142.5, 3090.5];
+  const vLossPct  = [0.0, 0.467, 6.753, 9.654, 4.423, 7.005, 1.306, 6.717, 10.095, 2.295, 2.142, 1.38, 2.885, 36.622, 30.223, 21.993, 5.379, 12.368, 1.96, 8.428, 2.353, 0.703, 4.488, 0.0, 0.358, 0.281, 0.016, 0.0, 0.256, 0.505, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  const vLossKs   = [0.0, 7.1, 43.5, 1767.4, 327.1, 1193.4, 34.7, 236.5, 384.5, 257.4, 78.1, 229.0, 396.5, 1173.2, 2339.4, 1366.8, 286.6, 1078.4, 183.3, 701.1, 147.8, 44.8, 160.3, 0.0, 32.2, 16.7, 1.0, 0.0, 11.8, 34.4, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  const vOrgs     = [2, 11, 10, 63, 71, 150, 20, 27, 43, 42, 38, 141, 150, 42, 55, 102, 187, 101, 81, 136, 74, 87, 61, 77, 129, 60, 78, 95, 70, 66, 62, 51, 63, 57, 58, 38];
+  const vLossOrgs = [0, 1, 3, 10, 19, 31, 4, 3, 5, 6, 8, 11, 23, 19, 23, 17, 21, 18, 8, 12, 8, 7, 3, 0, 4, 3, 1, 0, 3, 5, 0, 0, 0, 0, 0, 0];
+  new Chart(document.getElementById('vintageLossChart'),{
+    type:'bar',
+    data:{
+      labels:vMonths,
+      datasets:[
+        {type:'bar', label:'Line assigned ($K)',data:vLine,backgroundColor:'#378ADD44',borderColor:'#378ADD',borderWidth:1,borderRadius:2,yAxisID:'y'},
+        {type:'line',label:'Loss % of line',   data:vLossPct,borderColor:'#A32D2D',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2'}
+      ]
+    },
+    options:merge(baseOpts,{
+      plugins:{
+        legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+        tooltip:{callbacks:{label:ctx=>{
+          if(ctx.dataset.yAxisID==='y2'){
+            const ol=vLossOrgs[ctx.dataIndex];
+            return ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%'+(ol>0?' ('+ol+' orgs)':'');
+          }
+          const o=vOrgs[ctx.dataIndex]; const lk=vLossKs[ctx.dataIndex];
+          return [ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K ('+o+' orgs)',lk>0?'Loss balance: $'+lk.toFixed(1)+'K':'No losses yet'];
+        }}}
+      },
+      scales:{
+        x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:24},grid:{display:false},border:{display:false}},
+        y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
+        y2:{position:'right',min:0,ticks:{font:{size:10},color:'#A32D2D',callback:v=>v.toFixed(1)+'%'},grid:{display:false},border:{display:false}}
+      }
+    })
+  });
 })();
 </script>
 </div>
