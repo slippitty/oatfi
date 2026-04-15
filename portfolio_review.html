@@ -70,7 +70,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of April 15, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: cutoffdate − mat_dt, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-04-15 20:30<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-04-15 20:35<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -17150,6 +17150,14 @@ tr:last-child td{border-bottom:none}
   </div>
 </div>
 
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Loss ratio by origination cohort — cumulative 120+ DPD losses ÷ cumulative income collected</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
+    Bars = income collected from each cohort’s loans ($K): interest + fees + late fees + non-accrual items. Red line = cumulative loss % of cumulative income (right axis). Dashed orange line = monthly loss ratio (non-cumulative). Recent cohorts understated as both losses and income continue to accrue.
+  </p>
+  <div class="chart-wrap" style="height:280px"><canvas id="cohortLossRatioChart"></canvas></div>
+</div>
+
 <div class="sl">5 — Economic environment — NAICS sector stress</div>
 <div class="card-full">
   <div class="sl" style="margin-bottom:.75rem">Sector snapshot table</div>
@@ -18962,6 +18970,39 @@ new Chart(document.getElementById('coChart'),{
         x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:24},grid:{display:false},border:{display:false}},
         y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
         y2:{position:'right',min:0,ticks:{font:{size:10},color:'#A32D2D',callback:v=>v.toFixed(2)+'%'},grid:{display:false},border:{display:false}}
+      }
+    })
+  });
+})();
+
+// ── COHORT LOSS RATIO CHART ───────────────────────────────────────────────────
+(function(){
+  const months      = ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"];
+  const incomeKs    = [4.2, 0.0, 11.1, 9.9, 14.2, 66.0, 110.0, 349.0, 173.8, 232.3, 294.7, 329.3, 539.0, 488.6, 531.5, 596.6, 562.6, 577.7, 744.0, 553.5, 622.9, 666.8, 653.9, 761.1, 691.2, 742.6, 753.7, 761.6, 828.0, 686.7, 774.5, 678.2, 539.5, 225.8, 5.8];
+  const cumRatioPct = [366.076, 6081.661, 2784.79, 1852.226, 1499.949, 764.204, 428.839, 327.438, 267.594, 219.466, 195.738, 191.106, 175.012, 187.639, 183.707, 172.43, 167.108, 153.899, 142.626, 136.274, 127.587, 126.448, 121.273, 117.571, 112.587, 111.248, 107.734, 104.067, 98.533, 93.728, 88.6, 84.543, 81.571, 80.388, 80.358];
+  const monRatioPct = [366.076, 0, 1530.528, 407.301, 876.882, 325.167, 107.735, 264.859, 73.29, 66.525, 117.598, 173.307, 127.405, 242.773, 164.311, 112.829, 131.628, 55.289, 68.525, 71.62, 41.283, 114.808, 62.103, 78.009, 48.474, 93.956, 59.601, 50.718, 19.387, 5.067, 0.174, 0.0, 0.0, 0.0, 0.0];
+  new Chart(document.getElementById('cohortLossRatioChart'),{
+    type:'bar',
+    data:{
+      labels: months,
+      datasets:[
+        {type:'bar',  label:'Income collected ($K)', data:incomeKs,    backgroundColor:'#1D9E7544',borderColor:'#1D9E75',borderWidth:1,borderRadius:2,yAxisID:'y'},
+        {type:'line', label:'Cumulative loss ratio',  data:cumRatioPct, borderColor:'#A32D2D',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y2'},
+        {type:'line', label:'Monthly loss ratio',     data:monRatioPct, borderColor:'#E08C00',borderWidth:1.5,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2',borderDash:[4,3]}
+      ]
+    },
+    options:merge(baseOpts,{
+      plugins:{
+        legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+        tooltip:{callbacks:{label:ctx=>{
+          if(ctx.dataset.yAxisID==='y2') return ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%';
+          return ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K';
+        }}}
+      },
+      scales:{
+        x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:18},grid:{display:false},border:{display:false}},
+        y:{position:'left',ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}},
+        y2:{position:'right',min:0,ticks:{font:{size:10},color:'#A32D2D',callback:v=>v.toFixed(1)+'%'},grid:{display:false},border:{display:false}}
       }
     })
   });
