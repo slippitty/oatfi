@@ -70,7 +70,7 @@ tr:last-child td{border-bottom:none}
     <h1>OatFi — Portfolio Review</h1>
     <div class="sub">As of April 15, 2026 &nbsp;·&nbsp; analytics_development.mart &nbsp;·&nbsp; DPD: cutoffdate − mat_dt, curr_upb &gt; 0</div>
   </div>
-  <div class="header-right">Generated 2026-04-15 18:34<br>Excl: Balance Payments, Oat Financial LLC</div>
+  <div class="header-right">Generated 2026-04-15 18:41<br>Excl: Balance Payments, Oat Financial LLC</div>
 </div>
 
 <div class="sl">Assessment</div>
@@ -18798,7 +18798,6 @@ if(sessionStorage.getItem('oatfi_auth')==='1'){
 }
 </script>
 <script>
-try {
 
 const baseOpts={
   responsive:true,maintainAspectRatio:false,
@@ -19150,10 +19149,6 @@ new Chart(document.getElementById('coChart'),{type:'bar',data:{labels:["2025-05-
     }
   })});
 })();
-} catch(e) {
-  console.error('Dashboard data error:', e);
-  document.getElementById('pwErr').textContent='JS error: '+e.message;
-}
 </script>
 </div>
 </body></html>
