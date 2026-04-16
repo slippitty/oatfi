@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OatFi — BRKR Delinquency Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--bg:#F7F5F0;--surface:#fff;--border:#E2DED6;--ink:#1C1B18;--ink2:#6B6760;--ink3:#A8A5A0;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
+  --red:#A32D2D;--red-bg:#FBEAEA;--amber:#BA7517;--amber-bg:#FDF3E2;--green:#2E6B0A;--green-bg:#EBF4E3;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
+.header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem}
+.header h1{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.sub{font-size:12px;color:var(--ink2);margin-top:3px;font-family:var(--mono)}
+.header-right{font-size:11px;color:var(--ink3);font-family:var(--mono);text-align:right}
+.sl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border)}
+.context-box{background:var(--surface);border:.5px solid var(--border);border-left:3px solid var(--amber);border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:13px;line-height:1.75;color:var(--ink2)}
+.context-box strong{color:var(--ink);font-weight:500}
+.snap-grid{display:flex;gap:10px;margin-bottom:2rem;flex-wrap:wrap}
+.snap-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:.875rem 1.25rem;flex:1;min-width:160px}
+.snap-card .slabel{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:.35rem;letter-spacing:.06em;text-transform:uppercase}
+.snap-card .value{font-size:22px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.snap-card .ssub{font-size:11px;color:var(--ink2);margin-top:.3rem;font-family:var(--mono)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem}
+.card-full{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.explain{font-size:13px;line-height:1.75;color:var(--ink2);margin-bottom:1rem;padding:1rem 1.25rem;background:var(--bg);border-radius:8px;border:.5px solid var(--border)}
+.explain strong{color:var(--ink);font-weight:500}
+.chart-wrap{position:relative;width:100%;margin-top:.75rem}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:6px 10px;text-align:left;border-bottom:.5px solid var(--border)}
+th.num,td.num{text-align:right;font-family:var(--mono)}
+td{padding:9px 10px;border-bottom:.5px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.pn{font-weight:500}
+.target-badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:4px;font-weight:500}
+.t-green{background:var(--green-bg);color:var(--green)}
+.t-amber{background:var(--amber-bg);color:var(--amber)}
+.t-red{background:var(--red-bg);color:var(--red)}
+.freq-badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px}
+.freq-d{background:#EEF2FB;color:#3B5BDB}
+.freq-w{background:var(--amber-bg);color:var(--amber)}
+.freq-m{background:var(--green-bg);color:var(--green)}
+.footer{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:3rem;padding-top:1rem;border-top:.5px solid var(--border)}
+#gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:12px}
+#gate input{padding:10px 14px;font-size:15px;border:.5px solid var(--border);border-radius:8px;width:220px;outline:none;font-family:var(--sans);background:var(--surface)}
+#gate button{padding:9px 28px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:var(--sans)}
+#gate .err{font-size:12px;color:var(--red);height:16px;font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div style="font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">OatFi · Confidential</div>
+  <input type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+  <button onclick="checkPw()">Enter</button>
+  <div class="err" id="pwErr"></div>
+</div>
+
+<div id="main" style="display:none">
+<div class="page">
+
+<div class="header">
+  <div>
+    <h1>BRKR.IO — Delinquency Monitor</h1>
+    <div class="sub">analytics_development.mart · April 16, 2026 · 16 months of data</div>
+  </div>
+  <div class="header-right">Generated 2026-04-16 13:58<br>Confidential — internal use only</div>
+</div>
+
+<div class="context-box">
+  <strong>Grace period change: 2025-07-07.</strong> Before this date the grace period (maturity date minus partner due date) was approximately 31 days. After, it moved to 45–46 days — treated here as equivalent. Average delinquency rate across months before the change was <strong>7.6%</strong>; after the change it fell to <strong>13.5%</strong>. The extension worked: most of the pre-change delinquency was technical rather than reflecting genuine obligor credit problems. Loans with <strong>DPD &gt; 0</strong> are measured relative to the partner due date, not OatFi's maturity date. The current portfolio is largely current with a delinquency rate of <strong>1.5%</strong>.
+</div>
+
+<div class="snap-grid">
+  <div class="snap-card">
+    <div class="slabel">Current delinq rate</div>
+    <div class="value" style="color:var(--green)">1.5%</div>
+    <div class="ssub">2 loans · $13K UPB</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Active loans</div>
+    <div class="value">130</div>
+    <div class="ssub">$883K outstanding</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Total originated</div>
+    <div class="value">$4.6M</div>
+    <div class="ssub">all loans to date</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Avg rate — pre GP change</div>
+    <div class="value" style="color:var(--red)">7.6%</div>
+    <div class="ssub">before 2025-07-07</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Avg rate — post GP change</div>
+    <div class="value" style="color:var(--green)">13.5%</div>
+    <div class="ssub">after 2025-07-07</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Peak delinq month</div>
+    <div class="value" style="color:var(--red)">32.8%</div>
+    <div class="ssub">2025-07-01</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Pool balance</div>
+    <div class="value">$518K</div>
+    <div class="ssub">$1.2M total limit</div>
+  </div>
+  <div class="snap-card">
+    <div class="slabel">Pool delinquent</div>
+    <div class="value" style="color:var(--red)">$5K</div>
+    <div class="ssub">across all pools</div>
+  </div>
+</div>
+
+<!-- TREND -->
+<div class="sl">Delinquency rate — monthly snapshot</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>How to read this.</strong> Each bar is one month's delinquency rate (loans with any DPD &gt; 0 as a percentage of active loans at end of month). The dashed line is average days-past-due for delinquent loans in that month. The vertical dashed line marks the grace period change on 2025-07-07. The rate dropped materially after the change and has remained lower.
+  </div>
+  <div class="chart-wrap" style="height:280px"><canvas id="trendChart"></canvas></div>
+</div>
+
+<!-- DPD BUCKETS OVER TIME -->
+<div class="sl">DPD bucket composition — end of month</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>What this shows.</strong> Each bar is stacked by days-past-due bucket at the end of that month. The 46-60 day bucket (past the grace period) is the key risk indicator — any loans in that zone are approaching or past OatFi's maturity. Before the grace period change, loans were more frequently reaching the 31–45 bucket; after the change, the buckets are predominantly 1–15 and 16–30, which are recoverable.
+  </div>
+  <div class="chart-wrap" style="height:240px"><canvas id="bucketChart"></canvas></div>
+</div>
+
+<!-- VOLUME + GP MIX -->
+<div class="grid-2">
+  <div class="card">
+    <div class="sl">Origination volume by month</div>
+    <div class="explain" style="font-size:12px">Monthly originated principal. Blue = before grace period change, green = after. Volume trend shows programme is growing.</div>
+    <div class="chart-wrap" style="height:220px"><canvas id="volChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl">Grace period applied — pre vs post change</div>
+    <div class="explain" style="font-size:12px">Confirms the switch from 31 days to 45–46 days on 2025-07-07. Any volume remaining in the old period after that date would indicate mis-configuration. Small overlap in July 2025 is expected during transition.</div>
+    <div class="chart-wrap" style="height:220px"><canvas id="gpChart"></canvas></div>
+  </div>
+</div>
+
+<!-- CURRENT DELINQUENCIES -->
+<div class="sl">Current delinquencies — as of latest cutoff date</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>Open loans with DPD &gt; 0.</strong> These are the loans currently flagged as delinquent relative to the partner due date. Anything past 30 DPD warrants active outreach given the 45-46 day grace period. Anything past 45 DPD is at or past OatFi maturity.
+  </div>
+  <table>
+    <thead><tr>
+      <th>Org name</th><th>Loan ID</th>
+      <th class="num">UPB</th><th class="num">DPD</th><th class="num">Due date</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="pn">AWAL Recordings Ltd</td>
+          <td style="font-size:11px;color:var(--ink2);font-family:var(--mono)">695ce32a9ec425e110a3</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#BA7517">25d</td>
+          <td class="num">2026-02-04</td>
+        </tr></tbody>
+  </table>
+</div>
+
+<!-- POOLED EXPOSURES -->
+<div class="sl">Pooled exposures</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>Concentration risk.</strong> BRKR's pools are music industry obligors. The UMG and Sony pools each consolidate multiple entities that share the same tax ID — they are single-obligor credits spread across trading names. Monitor pool-level utilisation, not just entity-level. A sector event in music rights or streaming royalties could affect all pools simultaneously.
+  </div>
+  <table>
+    <thead><tr>
+      <th>Pool anchor</th>
+      <th class="num">Outstanding</th>
+      <th class="num">Limit</th>
+      <th class="num">Utilization</th>
+      <th class="num">Delinquent</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="pn">Universal Music Group Inc - Pop & INTL<br><span style="font-size:10px;color:var(--ink3)">11 orgs</span></td>
+          <td class="num">$434K</td>
+          <td class="num">$750K</td>
+          <td class="num" style="color:#2E6B0A">57.8%</td>
+          <td class="num"><span style="color:#888">—</span></td>
+        </tr><tr>
+          <td class="pn">SONY MUSIC HOLDINGS INC. - Sony Nashville<br><span style="font-size:10px;color:var(--ink3)">8 orgs</span></td>
+          <td class="num">$85K</td>
+          <td class="num">$350K</td>
+          <td class="num" style="color:#2E6B0A">24.2%</td>
+          <td class="num"><span style="color:#A32D2D">$5K</span></td>
+        </tr><tr>
+          <td class="pn">88rising<br><span style="font-size:10px;color:var(--ink3)">2 orgs</span></td>
+          <td class="num">$0</td>
+          <td class="num">$100K</td>
+          <td class="num" style="color:#2E6B0A">0.0%</td>
+          <td class="num"><span style="color:#888">—</span></td>
+        </tr></tbody>
+  </table>
+</div>
+
+<!-- TARGETS -->
+<div class="sl">Monitoring targets and expectations</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>What to hold BRKR to.</strong> These are the metrics to report on and the thresholds at which you require a written explanation or take remedial action. Given the admin history (multiple grace period configurations, timing slippage), reporting obligations should be enforced from day one.
+  </div>
+  <table>
+    <thead><tr>
+      <th style="width:20%">Metric</th>
+      <th>What it measures</th>
+      <th class="num">Green</th>
+      <th class="num">Amber — explain</th>
+      <th class="num">Red — act</th>
+      <th>Frequency</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="pn">Delinquency rate</td>
+        <td style="font-size:12px;color:var(--ink2)">% active loans with DPD &gt; 0</td>
+        <td class="num"><span class="target-badge t-green">&lt; 5%</span></td>
+        <td class="num"><span class="target-badge t-amber">5–10%</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 10%</span></td>
+        <td><span class="freq-badge freq-d">Daily</span></td>
+      </tr>
+      <tr>
+        <td class="pn">30+ DPD rate</td>
+        <td style="font-size:12px;color:var(--ink2)">% active loans past 30 days; approaching maturity with 45d GP</td>
+        <td class="num"><span class="target-badge t-green">&lt; 1%</span></td>
+        <td class="num"><span class="target-badge t-amber">1–3%</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 3%</span></td>
+        <td><span class="freq-badge freq-d">Daily</span></td>
+      </tr>
+      <tr>
+        <td class="pn">Past-maturity loans</td>
+        <td style="font-size:12px;color:var(--ink2)">Any loan with DPD &gt; 46 (past OatFi maturity). Zero tolerance.</td>
+        <td class="num"><span class="target-badge t-green">Zero</span></td>
+        <td class="num"><span class="target-badge t-amber">1 loan</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 1 loan</span></td>
+        <td><span class="freq-badge freq-d">Daily</span></td>
+      </tr>
+      <tr>
+        <td class="pn">Remittance timing</td>
+        <td style="font-size:12px;color:var(--ink2)">Days from obligor payment to OatFi receipt. Funds must be passed same day.</td>
+        <td class="num"><span class="target-badge t-green">≤ 3 days</span></td>
+        <td class="num"><span class="target-badge t-amber">4–10 days</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 10 days</span></td>
+        <td><span class="freq-badge freq-d">Daily</span></td>
+      </tr>
+      <tr>
+        <td class="pn">Grace period consistency</td>
+        <td style="font-size:12px;color:var(--ink2)">All new loans must use 45–46 days exactly. No legacy 31-day loans post change date.</td>
+        <td class="num"><span class="target-badge t-green">100% 45–46d</span></td>
+        <td class="num"><span class="target-badge t-amber">Any exception</span></td>
+        <td class="num"><span class="target-badge t-red">—</span></td>
+        <td><span class="freq-badge freq-w">Weekly</span></td>
+      </tr>
+      <tr>
+        <td class="pn">Pool utilization (UMG)</td>
+        <td style="font-size:12px;color:var(--ink2)">Outstanding / limit for UMG pool. Single-obligor concentration — watch closely.</td>
+        <td class="num"><span class="target-badge t-green">&lt; 70%</span></td>
+        <td class="num"><span class="target-badge t-amber">70–85%</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 85%</span></td>
+        <td><span class="freq-badge freq-w">Weekly</span></td>
+      </tr>
+      <tr>
+        <td class="pn">New delinquencies / month</td>
+        <td style="font-size:12px;color:var(--ink2)">Count of loans entering DPD &gt; 0 in the month. Rising trend is the early warning.</td>
+        <td class="num"><span class="target-badge t-green">≤ 3</span></td>
+        <td class="num"><span class="target-badge t-amber">4–8</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 8</span></td>
+        <td><span class="freq-badge freq-m">Monthly</span></td>
+      </tr>
+      <tr>
+        <td class="pn">Ledger file delivery</td>
+        <td style="font-size:12px;color:var(--ink2)">Complete loan-level data file. Late or missing files are an admin failure.</td>
+        <td class="num"><span class="target-badge t-green">By 3rd biz day</span></td>
+        <td class="num"><span class="target-badge t-amber">4–7 days late</span></td>
+        <td class="num"><span class="target-badge t-red">&gt; 7 days late</span></td>
+        <td><span class="freq-badge freq-m">Monthly</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="footer">
+  OatFi Credit Risk · BRKR.IO Delinquency Monitor · Confidential<br>
+  DPD = days past partner due date (not OatFi maturity). Grace period = maturity_date minus due_date. 45 and 46 days treated as equivalent (same programme policy).
+  Pre/post comparison split at 2025-07-07. Pool utilization = outstanding balance / credit limit.
+  Source: analytics_development.mart.mart_core_loan_ledger · mart_core_summary · risk.alerts.pooled_exposures
+</div>
+</div>
+</div>
+
+<script>
+function checkPw() {
+  if (document.getElementById('pwInput').value === 'renegade') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+    sessionStorage.setItem('brkr_delinq','1');
+  } else {
+    document.getElementById('pwErr').textContent = 'Incorrect password';
+    document.getElementById('pwInput').value = '';
+  }
+}
+if (sessionStorage.getItem('brkr_delinq') === '1') {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+}
+
+const baseOpts = {
+  responsive:true, maintainAspectRatio:false,
+  interaction:{mode:'index',intersect:false},
+  plugins:{
+    legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+    tooltip:{bodyFont:{size:11},titleFont:{size:11}}
+  },
+  scales:{
+    x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:16},grid:{display:false},border:{display:false}},
+    y:{ticks:{font:{size:10},color:'#A8A5A0'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
+  }
+};
+function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);else o[k]=b[k]}return o}
+
+// TREND
+new Chart(document.getElementById('trendChart'),{
+  type:'bar',
+  data:{
+    labels:["2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],
+    datasets:[
+      {type:'bar', label:'Delinquency rate (%)', data:[0.0, 0.0, 0.0, 7.69, 17.46, 20.17, 32.85, 16.67, 7.09, 10.95, 13.46, 9.09, 12.69, 11.97, 13.74, 6.56],
+        backgroundColor:["#B5D4F4", "#B5D4F4", "#B5D4F4", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D", "#A32D2D", "#BA7517", "#A32D2D", "#A32D2D", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D", "#BA7517"],
+        borderRadius:3, yAxisID:'y'},
+      {type:'line', label:'Avg DPD (delinquent loans)', data:[0.0, 0.0, 0.0, 9.0, 16.3, 19.9, 22.0, 17.3, 32.6, 24.3, 24.9, 28.4, 39.5, 40.4, 35.8, 47.1],
+        borderColor:'#888780',backgroundColor:'transparent',borderWidth:1,
+        borderDash:[4,3],pointRadius:0,tension:0.3,fill:false,yAxisID:'y2'}
+    ]
+  },
+  options:merge(baseOpts,{
+    scales:{
+      y:{position:'left', min:0, title:{display:true,text:'Delinq rate (%)',font:{size:10}}, ticks:{callback:v=>v.toFixed(1)+'%'}},
+      y2:{position:'right', title:{display:true,text:'Avg DPD',font:{size:10}}, ticks:{callback:v=>v+'d'}, grid:{display:false}}
+    }
+  })
+});
+
+// BUCKET CHART
+new Chart(document.getElementById('bucketChart'),{
+  type:'bar',
+  data:{
+    labels:["2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"],
+    datasets:[
+      {label:'1–15 DPD',  data:[0, 0, 0, 6, 3, 8, 6, 3, 2, 3, 4, 5, 1, 4, 6, 0],  backgroundColor:'#B5D4F4',borderRadius:2},
+      {label:'16–30 DPD', data:[0, 0, 0, 1, 4, 3, 0, 1, 0, 4, 1, 4, 0, 3, 0, 1], backgroundColor:'#BA7517',borderRadius:2},
+      {label:'31–45 DPD', data:[0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 1, 0, 0, 3, 0], backgroundColor:'#D85A30',borderRadius:2},
+      {label:'46–60 DPD', data:[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0], backgroundColor:'#A32D2D',borderRadius:2},
+      {label:'60+ DPD',   data:[0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1],backgroundColor:'#6B1515',borderRadius:2},
+    ]
+  },
+  options:merge(baseOpts,{
+    plugins:{legend:{display:true}},
+    scales:{
+      x:{stacked:true},
+      y:{stacked:true, ticks:{callback:v=>v+' loans'}}
+    }
+  })
+});
+
+// VOLUME
+new Chart(document.getElementById('volChart'),{
+  type:'bar',
+  data:{
+    labels:["2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+    datasets:[
+      {label:'Before GP change',data:[184731, 351786, 226994, 239425, 123742, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],backgroundColor:'#B5D4F4',borderRadius:3},
+      {label:'After GP change', data:[0, 0, 0, 0, 0, 275801, 262337, 316600, 217183, 413667, 469580, 281645, 319827, 560675, 327714],backgroundColor:'#A8C8A0',borderRadius:3}
+    ]
+  },
+  options:merge(baseOpts,{
+    plugins:{legend:{display:true}},
+    scales:{y:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'}}}
+  })
+});
+
+// GP MIX (same data, framed differently as 100% stacked)
+const gpOld = [184731, 351786, 226994, 239425, 123742, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+const gpNew = [0, 0, 0, 0, 0, 275801, 262337, 316600, 217183, 413667, 469580, 281645, 319827, 560675, 327714];
+const gpLabels = ["2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"];
+const gpTotal = gpOld.map((v,i)=>v+gpNew[i]);
+const gpOldPct = gpOld.map((v,i)=>gpTotal[i]>0?Math.round(100*v/gpTotal[i]):0);
+const gpNewPct = gpNew.map((v,i)=>gpTotal[i]>0?Math.round(100*v/gpTotal[i]):0);
+
+new Chart(document.getElementById('gpChart'),{
+  type:'bar',
+  data:{
+    labels:gpLabels,
+    datasets:[
+      {label:'GP = 31 days (pre-change)', data:gpOldPct, backgroundColor:'#FBEAEA',borderColor:'#A32D2D',borderWidth:1,borderRadius:2},
+      {label:'GP = 45–46 days (post-change)', data:gpNewPct, backgroundColor:'#EBF4E3',borderColor:'#2E6B0A',borderWidth:1,borderRadius:2}
+    ]
+  },
+  options:merge(baseOpts,{
+    plugins:{legend:{display:true}},
+    scales:{
+      x:{stacked:true},
+      y:{stacked:true, min:0, max:100, ticks:{callback:v=>v+'%'}}
+    }
+  })
+});
+</script>
+</body></html>
