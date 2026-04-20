@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OatFi — Collections KPIs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--bg:#F7F5F0;--surface:#fff;--border:#E2DED6;--ink:#1C1B18;--ink2:#6B6760;--ink3:#A8A5A0;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
+  --red:#A32D2D;--red-bg:#FBEAEA;--amber:#BA7517;--amber-bg:#FDF3E2;--green:#2E6B0A;--green-bg:#EBF4E3;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:2.5rem 2rem}
+.header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem}
+.header h1{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.sub{font-size:12px;color:var(--ink2);margin-top:3px;font-family:var(--mono)}
+.header-right{font-size:11px;color:var(--ink3);font-family:var(--mono);text-align:right}
+.sl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border)}
+.context-box{background:var(--surface);border:.5px solid var(--border);border-left:3px solid var(--ink);border-radius:8px;padding:1rem 1.25rem;margin-bottom:2rem;font-size:13px;line-height:1.75;color:var(--ink2)}
+.context-box strong{color:var(--ink);font-weight:500}
+.snap-grid{display:flex;gap:10px;margin-bottom:2rem;flex-wrap:wrap}
+.snap-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:.875rem 1.25rem;flex:1;min-width:160px}
+.snap-card .slabel{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:.35rem;letter-spacing:.06em;text-transform:uppercase}
+.snap-card .value{font-size:22px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.snap-card .ssub{font-size:11px;color:var(--ink2);margin-top:.3rem;font-family:var(--mono)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem}
+.card-full{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+.explain{font-size:13px;line-height:1.75;color:var(--ink2);margin-bottom:1rem;padding:1rem 1.25rem;background:var(--bg);border-radius:8px;border:.5px solid var(--border)}
+.explain strong{color:var(--ink);font-weight:500}
+.chart-wrap{position:relative;width:100%;margin-top:.75rem}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:6px 10px;text-align:left;border-bottom:.5px solid var(--border)}
+th.num,td.num{text-align:right;font-family:var(--mono)}
+td{padding:9px 10px;border-bottom:.5px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.pn{font-weight:500}
+.chip{display:inline-block;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:.06em;font-weight:500}
+.meth{background:var(--bg);border:.5px solid var(--border);border-radius:8px;padding:.875rem 1.25rem;margin-top:1rem;font-size:11.5px;color:var(--ink2);line-height:1.7}
+.meth strong{color:var(--ink);font-weight:500}
+.footer{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:3rem;padding-top:1rem;border-top:.5px solid var(--border)}
+#gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:12px}
+#gate input{padding:10px 14px;font-size:15px;border:.5px solid var(--border);border-radius:8px;width:220px;outline:none;font-family:var(--sans);background:var(--surface)}
+#gate button{padding:9px 28px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:var(--sans)}
+#gate .err{font-size:12px;color:var(--red);height:16px;font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div style="font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">OatFi · Confidential</div>
+  <input type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+  <button onclick="checkPw()">Enter</button>
+  <div class="err" id="pwErr"></div>
+</div>
+
+<div id="main" style="display:none">
+<div class="page">
+
+<div class="header">
+  <div>
+    <h1>Collections KPI Dashboard</h1>
+    <div class="sub">Scorecard · April 20, 2026 · analytics_development.mart</div>
+  </div>
+  <div class="header-right">Generated 2026-04-20 23:40<br>Confidential — internal use only</div>
+</div>
+
+<div class="context-box">
+  <strong>Scope.</strong> This dashboard tracks six KPIs for the collections function. Roll rates (goals 1–4) measure what share of originated principal remains outstanding at each DPD milestone, on seasoned vintages (at least 180 days past maturity), weighted by origination volume across the trailing six qualifying months. Goal 5 is the current delinquent-status principal balance. Goal 6 is year-to-date recovery dollars on loans whose maturity has fully passed.
+  <br><br>
+  <strong>Filters applied.</strong> Small and non-core partners are excluded (Relay, Balance, MyToolbox, XSQRD, Buildstock, Ply, Harvv/Qisstpay, Inxeption, Melengo). Koverly loans originated after Oct 31, 2025 are excluded as new book.
+</div>
+
+<!-- ── SCORECARD ─────────────────────────────────────────────────────────── -->
+<div class="sl">Scorecard — current readings vs targets</div>
+<div class="card-full">
+  <table>
+    <thead><tr>
+      <th>#</th><th>KPI</th><th class="num">Current</th>
+      <th class="num">Goal</th><th class="num">Stretch</th>
+      <th>Status</th><th>Note</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="num" style="color:#888;font-size:11px">1</td>
+          <td class="pn">Roll-to-30</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">13.63%</td>
+          <td class="num" style="color:var(--ink2)">≤ 12.0%</td>
+          <td class="num" style="color:var(--ink3);font-size:11px">—</td>
+          <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">2</td>
+          <td class="pn">Roll-to-60</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">13.00%</td>
+          <td class="num" style="color:var(--ink2)">≤ 11.0%</td>
+          <td class="num" style="color:var(--ink3);font-size:11px">—</td>
+          <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">3</td>
+          <td class="pn">Roll-to-90</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">12.22%</td>
+          <td class="num" style="color:var(--ink2)">≤ 10.0%</td>
+          <td class="num" style="color:var(--ink3);font-size:11px">—</td>
+          <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">4</td>
+          <td class="pn">Roll-to-120</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">11.80%</td>
+          <td class="num" style="color:var(--ink2)">≤ 10.0%</td>
+          <td class="num" style="color:var(--ink3);font-size:11px">≤ 8.5%</td>
+          <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">5</td>
+          <td class="pn">Delinquent balance</td>
+          <td class="num" style="font-weight:600;color:var(--green);font-size:14px">$1.97M</td>
+          <td class="num" style="color:var(--ink2)">≤ $2.25M</td>
+          <td class="num" style="color:var(--ink3);font-size:11px">≤ $1.75M</td>
+          <td><span class="chip" style="background:var(--green)20;color:var(--green)">ON TRACK</span></td>
+          <td style="font-size:11px;color:var(--ink2)">865 delinquent loans</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">6</td>
+          <td class="pn">Recoveries YTD 2026</td>
+          <td class="num" style="font-weight:600;color:var(--green);font-size:14px">$6.47M</td>
+          <td class="num" style="color:var(--ink2)">≥ $2.25M</td>
+          <td class="num" style="color:var(--ink3);font-size:11px">≥ $3.00M</td>
+          <td><span class="chip" style="background:var(--green)20;color:var(--green)">ON TRACK</span></td>
+          <td style="font-size:11px;color:var(--ink2)">vs $2.25M annual target</td>
+        </tr></tbody>
+  </table>
+  <div class="meth">
+    <strong>Status rules.</strong> Green = meeting or beating goal. Amber = within 10% of goal. Red = missing by more than 10%. Roll rates and delinquent balance are lower-is-better; recoveries are higher-is-better.
+  </div>
+</div>
+
+<!-- ── ROLL RATES TREND ──────────────────────────────────────────────────── -->
+<div class="sl">Goals 1–4 — roll rates by maturity month (seasoned vintages, oldest → newest)</div>
+<div class="card-full">
+  <div class="explain">
+    <strong>What this chart shows.</strong> Each line is one roll rate (30/60/90/120 DPD). The x-axis is maturity month; the y-axis is the share of originated principal still outstanding at that DPD milestone. Only vintages that have had at least 180 days to roll are shown. Goal targets appear as horizontal dashed lines. The trailing-six average at the right end of the chart is the number appearing on the scorecard.
+  </div>
+  <div class="chart-wrap" style="height:340px"><canvas id="rollChart"></canvas></div>
+</div>
+
+<!-- ── RECOVERIES ────────────────────────────────────────────────────────── -->
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.5rem">Goal 6 — monthly recovery dollars</div>
+    <div class="explain">
+      <strong>What this chart shows.</strong> Monthly dollars recovered on loans whose maturity had fully passed as of the payment date. 2025 is baseline history; 2026 is tracked against the annual target.
+    </div>
+    <div class="chart-wrap" style="height:240px"><canvas id="recChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.5rem">Goal 6 — cumulative 2026 progress</div>
+    <div class="explain">
+      <strong>Progress toward annual target.</strong> Running total of 2026 recoveries against the $2.25M goal.
+    </div>
+    <div class="chart-wrap" style="height:240px"><canvas id="cumChart"></canvas></div>
+    <div class="meth">
+      <strong>YTD 2026: $6.47M</strong> recovered · Goal $2.25M · Stretch $3.00M<br>
+      <strong>2025 full year:</strong> $19.10M recovered (reference baseline)<br>
+      <strong>Charge-off pool:</strong> $914K outstanding across recent charge-off vintages
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  OatFi Collections · Scorecard dashboard · Confidential — internal use only<br>
+  Roll rates: seasoned at 180 days past maturity; weighted by origination volume over the trailing six qualifying maturity months.
+  Recoveries: payments on loans whose maturity had fully passed as of payment date.
+  Delinquent balance: current principal_balance on loans in DELINQUENT status.
+</div>
+</div>
+</div>
+
+<script>
+function checkPw() {
+  if (document.getElementById('pwInput').value === 'renegade') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('main').style.display = 'block';
+    sessionStorage.setItem('oatfi_kpi','1');
+  } else {
+    document.getElementById('pwErr').textContent = 'Incorrect password';
+    document.getElementById('pwInput').value = '';
+  }
+}
+if (sessionStorage.getItem('oatfi_kpi') === '1') {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+}
+
+const baseOpts = {
+  responsive:true, maintainAspectRatio:false,
+  interaction:{mode:'index',intersect:false},
+  plugins:{
+    legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+    tooltip:{bodyFont:{size:11},titleFont:{size:11}}
+  },
+  scales:{
+    x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:14},grid:{display:false},border:{display:false}},
+    y:{ticks:{font:{size:10},color:'#A8A5A0'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
+  }
+};
+function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);else o[k]=b[k]}return o}
+
+// Roll rates chart
+new Chart(document.getElementById('rollChart'),{
+  type:'line',
+  data:{
+    labels:["2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10"],
+    datasets:[
+      {label:'Roll-to-30',  data:[2.69, 2.34, 2.05, 5.57, 33.37, 50.24, 13.47, 43.29, 45.0, 50.72, 48.83, 43.1, 28.43, 18.92, 12.78, 13.04, 11.34, 12.52, 14.58, 14.83, 17.1, 11.46, 11.3, 12.98],  borderColor:'#5A8AC6', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
+      {label:'Roll-to-60',  data:[2.62, 1.67, 1.56, 5.37, 33.37, 49.08, 12.79, 42.85, 44.59, 49.8, 47.79, 42.64, 27.16, 17.84, 12.3, 10.63, 10.68, 11.35, 13.79, 14.25, 16.21, 11.11, 10.58, 12.49],  borderColor:'#BA7517', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
+      {label:'Roll-to-90',  data:[2.62, 1.67, 1.56, 2.99, 31.55, 49.07, 12.72, 42.71, 44.52, 49.71, 47.52, 42.64, 27.11, 17.06, 10.83, 10.26, 10.44, 11.05, 12.7, 13.37, 15.67, 10.55, 9.7, 11.67],  borderColor:'#D85A30', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
+      {label:'Roll-to-120', data:[2.41, 1.35, 0.84, 2.99, 31.55, 49.06, 12.69, 42.68, 44.52, 48.54, 47.27, 42.59, 26.39, 14.17, 10.06, 9.97, 10.31, 10.0, 11.56, 13.0, 15.43, 10.12, 9.45, 11.57], borderColor:'#A32D2D', backgroundColor:'transparent', borderWidth:2,    tension:.25, pointRadius:3},
+      {label:'Target 30',  data:[12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0], borderColor:'#5A8AC6', borderDash:[4,3], borderWidth:.8, pointRadius:0, fill:false},
+      {label:'Target 120', data:[10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0], borderColor:'#A32D2D', borderDash:[4,3], borderWidth:.8, pointRadius:0, fill:false}
+    ]
+  },
+  options:merge(baseOpts,{
+    scales:{
+      y:{title:{display:true,text:'% of originated principal',font:{size:10}},ticks:{callback:v=>v.toFixed(0)+'%'}}
+    }
+  })
+});
+
+// Recoveries bar chart
+new Chart(document.getElementById('recChart'),{
+  type:'bar',
+  data:{
+    labels:["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+    datasets:[{
+      label:'Dollars recovered',
+      data:[1428976, 1136216, 1621769, 2585865, 1575255, 1051957, 1559589, 1871066, 1798937, 1227290, 1332966, 1906813, 3265482, 798505, 1762467, 639962],
+      backgroundColor:["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"].map(l => l.startsWith('2026') ? '#2E6B0A' : '#B5D4F4'),
+      borderRadius:3
+    }]
+  },
+  options:merge(baseOpts,{
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'}}
+    }
+  })
+});
+
+// Cumulative 2026 chart
+(function(){
+  const cum = [{"month": "2026-01", "cumulative": 3265482}, {"month": "2026-02", "cumulative": 4063987}, {"month": "2026-03", "cumulative": 5826453}, {"month": "2026-04", "cumulative": 6466415}];
+  const target = 2250000;
+  const stretch = 3000000;
+  new Chart(document.getElementById('cumChart'),{
+    type:'line',
+    data:{
+      labels: cum.map(c => c.month),
+      datasets:[
+        {label:'Cumulative recoveries', data:cum.map(c=>c.cumulative), borderColor:'#2E6B0A', backgroundColor:'#EBF4E3', borderWidth:2, fill:true, tension:.15, pointRadius:3},
+        {label:'Annual goal', data:cum.map(()=>target), borderColor:'#1C1B18', borderDash:[4,3], borderWidth:1, pointRadius:0, fill:false},
+        {label:'Stretch', data:cum.map(()=>stretch), borderColor:'#A32D2D', borderDash:[4,3], borderWidth:1, pointRadius:0, fill:false}
+      ]
+    },
+    options:merge(baseOpts,{
+      scales:{
+        y:{ticks:{callback:v=>'$'+(v/1e6).toFixed(1)+'M'}}
+      }
+    })
+  });
+})();
+</script>
+</body></html>
