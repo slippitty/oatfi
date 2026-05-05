@@ -62,9 +62,9 @@ tr:last-child td{border-bottom:none}
 <div class="header">
   <div>
     <h1>Collections KPI Dashboard</h1>
-    <div class="sub">Scorecard · April 20, 2026 · analytics_development.mart</div>
+    <div class="sub">Scorecard · May 05, 2026 · analytics_development.mart</div>
   </div>
-  <div class="header-right">Generated 2026-04-20 23:40<br>Confidential — internal use only</div>
+  <div class="header-right">Generated 2026-05-05 14:09<br>Confidential — internal use only</div>
 </div>
 
 <div class="context-box">
@@ -85,7 +85,7 @@ tr:last-child td{border-bottom:none}
     <tbody><tr>
           <td class="num" style="color:#888;font-size:11px">1</td>
           <td class="pn">Roll-to-30</td>
-          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">13.63%</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">13.27%</td>
           <td class="num" style="color:var(--ink2)">≤ 12.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">—</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
@@ -93,7 +93,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">2</td>
           <td class="pn">Roll-to-60</td>
-          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">13.00%</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">12.64%</td>
           <td class="num" style="color:var(--ink2)">≤ 11.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">—</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
@@ -101,7 +101,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">3</td>
           <td class="pn">Roll-to-90</td>
-          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">12.22%</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">11.80%</td>
           <td class="num" style="color:var(--ink2)">≤ 10.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">—</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
@@ -109,7 +109,7 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">4</td>
           <td class="pn">Roll-to-120</td>
-          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">11.80%</td>
+          <td class="num" style="font-weight:600;color:var(--red);font-size:14px">11.53%</td>
           <td class="num" style="color:var(--ink2)">≤ 10.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">≤ 8.5%</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
@@ -117,15 +117,15 @@ tr:last-child td{border-bottom:none}
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">5</td>
           <td class="pn">Delinquent balance</td>
-          <td class="num" style="font-weight:600;color:var(--green);font-size:14px">$1.97M</td>
+          <td class="num" style="font-weight:600;color:var(--green);font-size:14px">$1.80M</td>
           <td class="num" style="color:var(--ink2)">≤ $2.25M</td>
           <td class="num" style="color:var(--ink3);font-size:11px">≤ $1.75M</td>
           <td><span class="chip" style="background:var(--green)20;color:var(--green)">ON TRACK</span></td>
-          <td style="font-size:11px;color:var(--ink2)">865 delinquent loans</td>
+          <td style="font-size:11px;color:var(--ink2)">794 delinquent loans</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">6</td>
           <td class="pn">Recoveries YTD 2026</td>
-          <td class="num" style="font-weight:600;color:var(--green);font-size:14px">$6.47M</td>
+          <td class="num" style="font-weight:600;color:var(--green);font-size:14px">$6.73M</td>
           <td class="num" style="color:var(--ink2)">≥ $2.25M</td>
           <td class="num" style="color:var(--ink3);font-size:11px">≥ $3.00M</td>
           <td><span class="chip" style="background:var(--green)20;color:var(--green)">ON TRACK</span></td>
@@ -162,7 +162,7 @@ tr:last-child td{border-bottom:none}
     </div>
     <div class="chart-wrap" style="height:240px"><canvas id="cumChart"></canvas></div>
     <div class="meth">
-      <strong>YTD 2026: $6.47M</strong> recovered · Goal $2.25M · Stretch $3.00M<br>
+      <strong>YTD 2026: $6.73M</strong> recovered · Goal $2.25M · Stretch $3.00M<br>
       <strong>2025 full year:</strong> $19.10M recovered (reference baseline)<br>
       <strong>Charge-off pool:</strong> $914K outstanding across recent charge-off vintages
     </div>
@@ -212,12 +212,12 @@ function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeo
 new Chart(document.getElementById('rollChart'),{
   type:'line',
   data:{
-    labels:["2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10"],
+    labels:["2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11"],
     datasets:[
-      {label:'Roll-to-30',  data:[2.69, 2.34, 2.05, 5.57, 33.37, 50.24, 13.47, 43.29, 45.0, 50.72, 48.83, 43.1, 28.43, 18.92, 12.78, 13.04, 11.34, 12.52, 14.58, 14.83, 17.1, 11.46, 11.3, 12.98],  borderColor:'#5A8AC6', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
-      {label:'Roll-to-60',  data:[2.62, 1.67, 1.56, 5.37, 33.37, 49.08, 12.79, 42.85, 44.59, 49.8, 47.79, 42.64, 27.16, 17.84, 12.3, 10.63, 10.68, 11.35, 13.79, 14.25, 16.21, 11.11, 10.58, 12.49],  borderColor:'#BA7517', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
-      {label:'Roll-to-90',  data:[2.62, 1.67, 1.56, 2.99, 31.55, 49.07, 12.72, 42.71, 44.52, 49.71, 47.52, 42.64, 27.11, 17.06, 10.83, 10.26, 10.44, 11.05, 12.7, 13.37, 15.67, 10.55, 9.7, 11.67],  borderColor:'#D85A30', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
-      {label:'Roll-to-120', data:[2.41, 1.35, 0.84, 2.99, 31.55, 49.06, 12.69, 42.68, 44.52, 48.54, 47.27, 42.59, 26.39, 14.17, 10.06, 9.97, 10.31, 10.0, 11.56, 13.0, 15.43, 10.12, 9.45, 11.57], borderColor:'#A32D2D', backgroundColor:'transparent', borderWidth:2,    tension:.25, pointRadius:3},
+      {label:'Roll-to-30',  data:[2.34, 2.05, 5.57, 33.37, 50.24, 13.47, 43.29, 45.0, 50.72, 48.83, 43.1, 28.43, 18.92, 12.78, 13.04, 11.34, 12.52, 14.58, 14.83, 17.1, 11.46, 11.3, 12.31, 12.33],  borderColor:'#5A8AC6', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
+      {label:'Roll-to-60',  data:[1.67, 1.56, 5.37, 33.37, 49.08, 12.79, 42.85, 44.59, 49.8, 47.79, 42.64, 27.16, 17.84, 12.3, 10.63, 10.68, 11.35, 13.79, 14.25, 16.21, 11.11, 10.58, 11.54, 12.25],  borderColor:'#BA7517', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
+      {label:'Roll-to-90',  data:[1.67, 1.56, 2.99, 31.55, 49.07, 12.72, 42.71, 44.52, 49.71, 47.52, 42.64, 27.11, 17.06, 10.83, 10.26, 10.44, 11.05, 12.7, 13.37, 15.67, 10.55, 9.7, 10.73, 8.64],  borderColor:'#D85A30', backgroundColor:'transparent', borderWidth:1.5, tension:.25, pointRadius:2},
+      {label:'Roll-to-120', data:[1.35, 0.84, 2.99, 31.55, 49.06, 12.69, 42.68, 44.52, 48.54, 47.27, 42.59, 26.39, 14.17, 10.06, 9.97, 10.31, 10.0, 11.56, 13.0, 15.43, 10.12, 9.45, 10.62, 8.64], borderColor:'#A32D2D', backgroundColor:'transparent', borderWidth:2,    tension:.25, pointRadius:3},
       {label:'Target 30',  data:[12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0, 12.0], borderColor:'#5A8AC6', borderDash:[4,3], borderWidth:.8, pointRadius:0, fill:false},
       {label:'Target 120', data:[10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0], borderColor:'#A32D2D', borderDash:[4,3], borderWidth:.8, pointRadius:0, fill:false}
     ]
@@ -233,11 +233,11 @@ new Chart(document.getElementById('rollChart'),{
 new Chart(document.getElementById('recChart'),{
   type:'bar',
   data:{
-    labels:["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"],
+    labels:["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"],
     datasets:[{
       label:'Dollars recovered',
-      data:[1428976, 1136216, 1621769, 2585865, 1575255, 1051957, 1559589, 1871066, 1798937, 1227290, 1332966, 1906813, 3265482, 798505, 1762467, 639962],
-      backgroundColor:["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04"].map(l => l.startsWith('2026') ? '#2E6B0A' : '#B5D4F4'),
+      data:[1428976, 1136216, 1621769, 2585865, 1575255, 1051957, 1559589, 1871066, 1798937, 1227290, 1332966, 1906813, 3265482, 798505, 1762467, 842389, 56657],
+      backgroundColor:["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"].map(l => l.startsWith('2026') ? '#2E6B0A' : '#B5D4F4'),
       borderRadius:3
     }]
   },
@@ -251,7 +251,7 @@ new Chart(document.getElementById('recChart'),{
 
 // Cumulative 2026 chart
 (function(){
-  const cum = [{"month": "2026-01", "cumulative": 3265482}, {"month": "2026-02", "cumulative": 4063987}, {"month": "2026-03", "cumulative": 5826453}, {"month": "2026-04", "cumulative": 6466415}];
+  const cum = [{"month": "2026-01", "cumulative": 3265482}, {"month": "2026-02", "cumulative": 4063987}, {"month": "2026-03", "cumulative": 5826453}, {"month": "2026-04", "cumulative": 6668842}, {"month": "2026-05", "cumulative": 6725499}];
   const target = 2250000;
   const stretch = 3000000;
   new Chart(document.getElementById('cumChart'),{
