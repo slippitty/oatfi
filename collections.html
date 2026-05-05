@@ -49,7 +49,7 @@ tr:last-child td{border-bottom:none}
     <h1>Collections KPI Dashboard</h1>
     <div class="sub">Fiscal year scorecard · May 05, 2026</div>
   </div>
-  <div class="header-right">Generated 2026-05-05 16:41<br>Confidential — internal use only</div>
+  <div class="header-right">Generated 2026-05-05 17:10<br>Confidential — internal use only</div>
 </div>
 
 <div class="sl">Scorecard</div>
@@ -67,7 +67,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="color:var(--ink2)">≤ 12.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">—</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
-          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted, daily snapshot</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">2</td>
           <td class="pn">Roll-to-60</td>
@@ -75,7 +75,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="color:var(--ink2)">≤ 11.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">—</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
-          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted, daily snapshot</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">3</td>
           <td class="pn">Roll-to-90</td>
@@ -83,7 +83,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="color:var(--ink2)">≤ 10.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">—</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
-          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted, daily snapshot</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">4</td>
           <td class="pn">Roll-to-120</td>
@@ -91,7 +91,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="color:var(--ink2)">≤ 10.0%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">≤ 8.5%</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
-          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted</td>
+          <td style="font-size:11px;color:var(--ink2)">Trailing six seasoned vintages, weighted, daily snapshot</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">5</td>
           <td class="pn">Delinquent balance</td>
@@ -99,7 +99,7 @@ tr:last-child td{border-bottom:none}
           <td class="num" style="color:var(--ink2)">≤ 2.5%</td>
           <td class="num" style="color:var(--ink3);font-size:11px">≤ 2.0%</td>
           <td><span class="chip" style="background:var(--red)20;color:var(--red)">OFF TARGET</span></td>
-          <td style="font-size:11px;color:var(--ink2)">% of total UPB ($1.27M of $43.59M)</td>
+          <td style="font-size:11px;color:var(--ink2)">% of UPB ($1.27M of $43.59M)</td>
         </tr><tr>
           <td class="num" style="color:#888;font-size:11px">6</td>
           <td class="pn">Recovery rate FY-to-date</td>
@@ -123,7 +123,7 @@ tr:last-child td{border-bottom:none}
 </div>
 
 <div class="footer">
-  Roll rates: trailing six maturity months seasoned at least 180 days as of each cutoff date, weighted by origination volume.<br>
+  Roll rates: trailing six maturity months seasoned at least 180 days as of each cutoff date, weighted by origination volume. Unpaid amounts evaluated daily — payments only count if payment_date is on or before the cutoff.<br>
   Delinquent balance: from mart_core_loan_ledger, sum(curr_upb where days_in_delinq > 30) / sum(curr_upb) per cutoffdate.<br>
   Recovery rate: cumulative within FY — cash recoveries collected post-60-DPD on loans crossing 60 DPD on or after FY start, divided by their balance at the moment of crossing.
 </div>
@@ -162,13 +162,13 @@ const baseOpts = {
     x:{ticks:{font:{size:10},color:'#A8A5A0',autoSkip:false},grid:{display:false},border:{display:false}},
     y:{ticks:{font:{size:10},color:'#A8A5A0',callback:v=>v.toFixed(0)+'%'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
   },
-  spanGaps:true
+  spanGaps:false
 };
 
 charts.forEach((c, i) => {
   const datasets = [
-    {label:'FY2026', data:c.fy26, borderColor:'#1C1B18', backgroundColor:'transparent', borderWidth:2,   tension:.1, pointRadius:0, fill:false},
-    {label:'FY2025', data:c.fy25, borderColor:'#B8B3A8', backgroundColor:'transparent', borderWidth:1.2, tension:.1, pointRadius:0, fill:false},
+    {label:'FY2026', data:c.fy26, borderColor:'#1C1B18', backgroundColor:'transparent', borderWidth:1.5, tension:0, pointRadius:0, fill:false, spanGaps:false},
+    {label:'FY2025', data:c.fy25, borderColor:'#B8B3A8', backgroundColor:'transparent', borderWidth:1,   tension:0, pointRadius:0, fill:false, spanGaps:false},
     {label:'Goal',   data:Array(labels.length).fill(c.target), borderColor:'#2E6B0A', borderDash:[5,4], borderWidth:1, pointRadius:0, fill:false}
   ];
   if (c.stretch !== null) {
