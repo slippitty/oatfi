@@ -76,7 +76,7 @@ tr:last-child td{border-bottom:none}
 <div class="sl">Assessment</div>
 <div class="narrative">
   <span class="ai-badge">Claude · auto-generated</span>
-  <p># Portfolio Delinquency Review — Q2 2026</p><p class='np'>Portfolio delinquency health deteriorated modestly quarter-over-quarter, driven primarily by Order's elevated 30–60 day bucket at 0.54% (up 34 bps) offset partially by Koverly's movement out of early-stage delinquency. Lawtrades remains structurally late with elevated 60–90 day balances at 5.01%, though the 30–60 bucket compressed 23.3 percentage points from Q1. Overall weighted 30+ DPD stands at approximately 1.4% of total portfolio UPB.</p><p class='np'>Leading indicators show Order carrying the largest forward-looking stress at $8.2M in balances past partner due date but not yet past OatFi maturity, with confirmed obligations of $710K already materialized. Lawtrades carries $709K in leading exposure against $154K confirmed, while BRKR.IO Inc. shows $430K forward and $40K confirmed. Cledara Limited presents a secondary watch point with $225K leading balance and zero confirmed, suggesting early-stage payment delays at the partner level that have not yet cascaded to loan maturity breach.</p><p class='np'>Construction sector exhibits the highest delinquency concentration at 12.17% DQ31+ across $1.9M UPB, representing economy-driven stress rather than partner-specific dysfunction. Professional Services follows at 7.5% across $3.85M, with exposure concentrated in Lawtrades and BRKR.IO partnerships. Real Estate at 10.9% and Retail segments at 7.43% on one book show secondary stress points. Wholesale Trade and Health Care remain stable near 3.6%, indicating less cyclical pressure.</p><p class='np'>Top current delinquencies are concentrated in Relay ($811K across six obligors including Fred's Plumbing at $189K, IFANE LLC at $137K, and RE Stores LLC at $99K) and Order ($225K across SVJ One LLC, NorthEast Extracts, and GVB Biopharma). Koverly holds $234K in top-name delinquency split between Marino ave inc ($185K) and TITANIO TRAVELGOODS ($49K). Flychain's two senior living facilities (Camelot Chateau and Noble House) each carry $100K delinquent balances in the Health Care sector. Charge-off patterns over the past 12 months show concentration in Koverly ($1.73M), Avalara ($1.32M), and Order ($955K), with smaller tail losses across Flychain, Lawtrades, and emerging partners, indicating both partner-level credit selection variance and potential sponsor-driven seasoning issues.</p>
+  <p># Portfolio Credit Quality Review — Q2 2026</p><p class='np'>Portfolio delinquency remains stable quarter-over-quarter, with Order's 30–60 DPD cohort tightening 9 basis points month-over-month to 0.54%, though elevated versus prior quarter's 0.20%; Koverly shows structural improvement with 30–60 DPD at zero after aggressive prior-quarter remediation, offset by elevated 90–120 DPD of 0.43% reflecting slow resolution of deeply aged accounts; Tab Commerce and BRKR.IO show minor 30–60 deterioration. Lawtrades carries chronic delinquency at elevated levels across the curve and drives outsized charge-off volume relative to portfolio size.</p><p class='np'>Leading obligor exposure totals $10.7 million across the portfolio. Order's leading balance of $8.2 million significantly exceeds peers; within that cohort, Trendly Inc. ($138K), SVJ One LLC ($71K, 60 DPD at partner), and Naturae LLC ($53K) represent material concentrations still current or near-term manageable. Lawtrades' leading obligors total $709K with Apollo.io and Ironclad each at $81–82K and already 10 days past due at partner level. BRKR.IO's $430K leading balance includes Venus Brands (22 DPD) and Simple Social (at 30 DPD partner threshold). Cledara's $225K leading balance is notable given zero delinquency in confirmed portfolio, suggesting origination timing risk rather than obligor stress.</p><p class='np'>Construction sector shows marked stress at 12.17% DPD 31+, concentrated in Koverly and Relay partners and driven primarily by partner-level underwriting or servicing degradation rather than macroeconomic headwinds; Real Estate at 10.9% follows similar pattern. Professional Services at 7.5% and Manufacturing at 6.75% display elevated rates; Professional Services stress maps to Lawtrades' legal services focus and BRKR.IO's consulting client base, suggesting partner-driven friction. Retail splits into two cohorts with one at 7.43%, indicating subsegment weakness unrelated to broader sector movement. Healthcare and Wholesale Trade remain benign near 3.6%.</p><p class='np'>Top 30+ DPD balances are concentrated in three partners: Koverly holds $298K across Marino Ave Inc ($185K), TITANIO Travelgoods ($49K), and Lilmod Illameid ($38K), all reflecting partner underwriting deterioration; Order contributes $89K primarily from NorthEast Extracts ($67K) and M.L.A. Horizon ($22K). Relay's top delinquent obligors total $378K across fifteen names, including Hedgerow Properties ($45K), Compass Contracting ($24K), and Dreamline Suites ($25K), concentrated in construction and real estate sectors signaling systemic servicing or partner-level underwriting issues. No NAICS overlap between largest delinquent names and leading obligor cohorts.</p><p class='np'>Charge-offs over the trailing twelve months total $4.6 million across nine partners, with Koverly ($1.73M), Avalara ($1.32M), and Order ($956K) accounting for 73% of principal written off; Flychain at $459K and Lawtrades at $110K follow. The concentration in three partners and absence of broad-based charge-off activity across the partner base suggests partner-level underwriting or portfolio quality issues rather than systemic portfolio deterioration, though Koverly's $1.73M charge-off against $11.7M UPB warrants review of remaining portfolio composition for similar obligor characteristics.</p>
 </div>
 
 <div class="sl">Portfolio snapshot</div>
@@ -152,472 +152,173 @@ tr:last-child td{border-bottom:none}
 
 <div class="sl">Top DQ obligors — 30+ DPD (cutoffdate − mat_dt)</div>
 <div class="card-full">
-  <p style="font-size:11.5px;color:var(--ink2);margin-bottom:.75rem">
-    Top 50 obligors past OatFi mat_dt by 30+ DPD. Total column includes 5–30 DPD bucket as added context. % partner uses 5+ DPD denominator.
-  </p>
-  <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:.5rem">
-    <label style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--ink2);cursor:pointer;user-select:none">
-      <input type="checkbox" id="topDqHideRelay" style="cursor:pointer"> Hide Relay
-    </label>
-  </div>
-  <table id="topDqTable">
+  <table>
     <thead><tr>
       <th>#</th><th>Obligor</th><th>Partner</th>
-      <th class="num">5–30</th>
       <th class="num">30–60</th><th class="num">60–90</th>
       <th class="num">90–120</th><th class="num">120+</th>
       <th class="num">Total</th><th class="num">% partner</th>
     </tr></thead>
-    <tbody><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">1</td>
-          <td class="pn">Fred's Plumbing</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">$87,488</td>
-          <td class="num">$101,597</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$189,085</td>
-          <td class="num"><span style="color:var(--ink3)">10.4%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">2</td>
+    <tbody><tr>
+          <td class="num" style="color:#888;font-size:11px">1</td>
           <td class="pn">Marino ave inc</td>
           <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$185,202</td>
           <td class="num" style="font-weight:600">$185,202</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">52.8%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">3</td>
-          <td class="pn">KKG Enterprise</td>
-          <td style="color:var(--ink2);font-size:12px">Tab Commerce</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$1,317</td>
-          <td class="num">$163,667</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$164,984</td>
-          <td class="num"><span style="color:#A32D2D;font-weight:600">80.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">4</td>
-          <td class="pn">IFANE, LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">$59,895</td>
-          <td class="num">$77,600</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$137,495</td>
-          <td class="num"><span style="color:var(--ink3)">7.6%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">5</td>
-          <td class="pn">Camelot Chateau Assisted Living LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Flychain</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$100,000</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$100,000</td>
-          <td class="num"><span style="color:#A32D2D;font-weight:600">35.8%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">6</td>
-          <td class="pn">Noble House Senior Living LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Flychain</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$100,000</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$100,000</td>
-          <td class="num"><span style="color:#A32D2D;font-weight:600">35.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">7</td>
-          <td class="pn">RE Stores LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$99,909</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$99,909</td>
-          <td class="num"><span style="color:var(--ink3)">5.5%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">8</td>
-          <td class="pn">Equip It Inc</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$72,655</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$72,655</td>
-          <td class="num"><span style="color:var(--ink3)">4.0%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">9</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">2</td>
           <td class="pn">NorthEast Extracts, LLC</td>
           <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$67,149</td>
           <td class="num" style="font-weight:600">$67,149</td>
-          <td class="num"><span style="color:var(--ink3)">9.5%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">10</td>
-          <td class="pn">GVB Biopharma</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">—</td>
-          <td class="num">$66,451</td><td class="num">$696</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$67,147</td>
-          <td class="num"><span style="color:var(--ink3)">9.5%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">11</td>
-          <td class="pn">AAA Trucks, LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$64,194</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$64,194</td>
-          <td class="num"><span style="color:var(--ink3)">3.5%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">12</td>
-          <td class="pn">Ultra Carriers Inc.</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$49,990</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$49,990</td>
-          <td class="num"><span style="color:var(--ink3)">2.8%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">13</td>
-          <td class="pn">SVJ One LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">—</td>
-          <td class="num">$28,908</td><td class="num">$20,507</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$49,415</td>
-          <td class="num"><span style="color:var(--ink3)">7.0%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">14</td>
+          <td class="num"><span style="color:#9A5C00;font-weight:600">18.4%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">3</td>
           <td class="pn">TITANIO TRAVELGOODS GROUP LLC</td>
           <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$49,116</td>
           <td class="num" style="font-weight:600">$49,116</td>
           <td class="num"><span style="color:var(--ink3)">14.0%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">15</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">4</td>
           <td class="pn">Hedgerow Properties LLC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$45,231</td>
           <td class="num" style="font-weight:600">$45,231</td>
-          <td class="num"><span style="color:var(--ink3)">2.5%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">16</td>
-          <td class="pn">MINT HOUSE INC.</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">$10,797</td>
-          <td class="num">$34,359</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$45,156</td>
-          <td class="num"><span style="color:var(--ink3)">6.4%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">17</td>
-          <td class="pn">LOGE Holdings, LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">$10,698</td>
-          <td class="num">$33,427</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$44,125</td>
-          <td class="num"><span style="color:var(--ink3)">6.3%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">18</td>
-          <td class="pn">Headspace</td>
-          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
-          <td class="num">$13,245</td>
-          <td class="num">—</td><td class="num">$29,202</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$42,446</td>
-          <td class="num"><span style="color:#9A5C00;font-weight:600">27.5%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">19</td>
-          <td class="pn">Hudson Valley Hemp Company LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">—</td>
-          <td class="num">$1,217</td><td class="num">$11,672</td>
-          <td class="num">$28,136</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$41,026</td>
-          <td class="num"><span style="color:var(--ink3)">5.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">20</td>
-          <td class="pn">Sunrise outlet Inc.</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$8,472</td>
-          <td class="num">$19,113</td><td class="num">$10,404</td>
-          <td class="num" style="font-weight:600">$37,990</td>
-          <td class="num"><span style="color:var(--ink3)">2.1%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">21</td>
+          <td class="num"><span style="color:var(--ink3)">3.3%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">5</td>
           <td class="pn">Lilmod Illameid Inc</td>
           <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$37,788</td>
           <td class="num" style="font-weight:600">$37,788</td>
           <td class="num"><span style="color:var(--ink3)">10.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">22</td>
-          <td class="pn">Arclight Painting LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$31,749</td><td class="num">$725</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$32,473</td>
-          <td class="num"><span style="color:var(--ink3)">1.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">23</td>
-          <td class="pn">Photomules LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">$4,151</td>
-          <td class="num">$26,848</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$30,999</td>
-          <td class="num"><span style="color:var(--ink3)">1.7%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">24</td>
-          <td class="pn">Turion Space</td>
-          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$27,612</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$27,612</td>
-          <td class="num"><span style="color:#9A5C00;font-weight:600">17.9%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">25</td>
-          <td class="pn">Rossiter & Cummaro Enterprise Management, LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">$1,268</td>
-          <td class="num">$15,272</td><td class="num">$10,415</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$26,955</td>
-          <td class="num"><span style="color:var(--ink3)">3.8%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">26</td>
-          <td class="pn">Smart Medical Solutions LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num">$26,132</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$26,132</td>
-          <td class="num"><span style="color:var(--ink3)">7.4%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">27</td>
-          <td class="pn">NEIMAN WHOLESALE DISTRIBUTORS INC</td>
-          <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num">$24,046</td><td class="num">$2,080</td>
-          <td class="num" style="font-weight:600">$26,125</td>
-          <td class="num"><span style="color:var(--ink3)">7.4%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">28</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">6</td>
           <td class="pn">ABC Residential Casework Inc.</td>
           <td style="color:var(--ink2);font-size:12px">Koverly Inc.</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$26,116</td>
           <td class="num" style="font-weight:600">$26,116</td>
           <td class="num"><span style="color:var(--ink3)">7.4%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">29</td>
-          <td class="pn">Dreamline Suites Inc</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$0</td><td class="num">—</td>
-          <td class="num">$5,015</td><td class="num">$19,840</td>
-          <td class="num" style="font-weight:600">$24,855</td>
-          <td class="num"><span style="color:var(--ink3)">1.4%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">30</td>
-          <td class="pn">Ben Hall Law, PLLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$24,827</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$24,827</td>
-          <td class="num"><span style="color:var(--ink3)">1.4%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">31</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">7</td>
           <td class="pn">OConnor Enterprise Group Inc</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$24,759</td>
           <td class="num" style="font-weight:600">$24,759</td>
-          <td class="num"><span style="color:var(--ink3)">1.4%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">32</td>
+          <td class="num"><span style="color:var(--ink3)">1.8%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">8</td>
           <td class="pn">Solano LLC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$24,376</td>
           <td class="num" style="font-weight:600">$24,376</td>
-          <td class="num"><span style="color:var(--ink3)">1.3%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">33</td>
-          <td class="pn">Brentwood Property Group</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$5,494</td><td class="num">$18,709</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$24,203</td>
-          <td class="num"><span style="color:var(--ink3)">1.3%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">34</td>
+          <td class="num"><span style="color:var(--ink3)">1.8%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">9</td>
           <td class="pn">Compass Contracting LLC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$24,106</td>
           <td class="num" style="font-weight:600">$24,106</td>
-          <td class="num"><span style="color:var(--ink3)">1.3%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">35</td>
-          <td class="pn">Recess Speech Therapy a Professional Corporation</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$14,634</td><td class="num">$8,274</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$22,908</td>
-          <td class="num"><span style="color:var(--ink3)">1.3%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">36</td>
-          <td class="pn">THE ONE BRANDS NY INC</td>
-          <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">$3,412</td>
-          <td class="num">$5,012</td><td class="num">$13,791</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$22,215</td>
-          <td class="num"><span style="color:var(--ink3)">3.1%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">37</td>
+          <td class="num"><span style="color:var(--ink3)">1.7%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">10</td>
           <td class="pn">M.L.A. HORIZON, INC.</td>
           <td style="color:var(--ink2);font-size:12px">Order</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$22,129</td>
           <td class="num" style="font-weight:600">$22,129</td>
-          <td class="num"><span style="color:var(--ink3)">3.1%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">38</td>
-          <td class="pn">Mystis Adult and Family SVCS LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$21,554</td><td class="num">$79</td>
-          <td class="num">$246</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$21,879</td>
-          <td class="num"><span style="color:var(--ink3)">1.2%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">39</td>
-          <td class="pn">J & J Design Studio LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">$191</td>
-          <td class="num">$10,408</td><td class="num">—</td>
-          <td class="num">—</td><td class="num">$11,276</td>
-          <td class="num" style="font-weight:600">$21,875</td>
-          <td class="num"><span style="color:var(--ink3)">1.2%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">40</td>
+          <td class="num"><span style="color:var(--ink3)">6.1%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">11</td>
           <td class="pn">CulinaryLab SPC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$21,485</td>
           <td class="num" style="font-weight:600">$21,485</td>
-          <td class="num"><span style="color:var(--ink3)">1.2%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">41</td>
+          <td class="num"><span style="color:var(--ink3)">1.6%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">12</td>
           <td class="pn">Bad Ass Rehabs LLC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$21,272</td>
           <td class="num" style="font-weight:600">$21,272</td>
-          <td class="num"><span style="color:var(--ink3)">1.2%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">42</td>
-          <td class="pn">By Design Creative LLC</td>
+          <td class="num"><span style="color:var(--ink3)">1.5%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">13</td>
+          <td class="pn">Dreamline Suites Inc</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">$4,759</td>
-          <td class="num">$1,968</td><td class="num">$8,173</td>
-          <td class="num">$3,910</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$18,809</td>
-          <td class="num"><span style="color:var(--ink3)">1.0%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">43</td>
-          <td class="pn">Sojouner Holdings LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num">$6,952</td><td class="num">$10,287</td>
-          <td class="num" style="font-weight:600">$17,239</td>
-          <td class="num"><span style="color:var(--ink3)">1.0%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">44</td>
+          <td class="num">$0</td><td class="num">—</td>
+          <td class="num">$5,015</td><td class="num">$19,840</td>
+          <td class="num" style="font-weight:600">$24,855</td>
+          <td class="num"><span style="color:var(--ink3)">1.8%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">14</td>
           <td class="pn">7X Consulting Group LLC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$16,940</td>
           <td class="num" style="font-weight:600">$16,940</td>
-          <td class="num"><span style="color:var(--ink3)">0.9%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">45</td>
-          <td class="pn">Stitch Fix</td>
-          <td style="color:var(--ink2);font-size:12px">Lawtrades</td>
-          <td class="num">—</td>
-          <td class="num">—</td><td class="num">$16,000</td>
-          <td class="num">—</td><td class="num">—</td>
-          <td class="num" style="font-weight:600">$16,000</td>
-          <td class="num"><span style="color:var(--ink3)">10.4%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">46</td>
-          <td class="pn">The Dream Clean Team LLC</td>
-          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
-          <td class="num">$3,728</td><td class="num">$2,844</td>
-          <td class="num">$1,199</td><td class="num">$8,216</td>
-          <td class="num" style="font-weight:600">$15,988</td>
-          <td class="num"><span style="color:var(--ink3)">0.9%</span></td>
-        </tr><tr data-relay="0">
-          <td class="num row-idx" style="color:#888;font-size:11px">47</td>
+          <td class="num"><span style="color:var(--ink3)">1.2%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">15</td>
           <td class="pn">R A H TRANS INC</td>
           <td style="color:var(--ink2);font-size:12px">Avalara Technologies, LLC</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$15,611</td>
           <td class="num" style="font-weight:600">$15,611</td>
           <td class="num"><span style="color:#A32D2D;font-weight:600">44.9%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">48</td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">16</td>
           <td class="pn">Kin Home</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$15,235</td>
           <td class="num" style="font-weight:600">$15,235</td>
-          <td class="num"><span style="color:var(--ink3)">0.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">49</td>
+          <td class="num"><span style="color:var(--ink3)">1.1%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">17</td>
           <td class="pn">Byte Dreams Group</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$15,000</td>
           <td class="num" style="font-weight:600">$15,000</td>
-          <td class="num"><span style="color:var(--ink3)">0.8%</span></td>
-        </tr><tr data-relay="1">
-          <td class="num row-idx" style="color:#888;font-size:11px">50</td>
+          <td class="num"><span style="color:var(--ink3)">1.1%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">18</td>
           <td class="pn">STANDARD MGT ASSOCIATION, LLC</td>
           <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
-          <td class="num">—</td>
           <td class="num">—</td><td class="num">—</td>
           <td class="num">—</td><td class="num">$14,267</td>
           <td class="num" style="font-weight:600">$14,267</td>
-          <td class="num"><span style="color:var(--ink3)">0.8%</span></td>
+          <td class="num"><span style="color:var(--ink3)">1.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">19</td>
+          <td class="pn">LinkedLeads Inc.</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$13,590</td>
+          <td class="num" style="font-weight:600">$13,590</td>
+          <td class="num"><span style="color:var(--ink3)">1.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">20</td>
+          <td class="pn">Built Soflo Design and Construction Services LLC DBA SoFlo Built It LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$13,293</td>
+          <td class="num" style="font-weight:600">$13,293</td>
+          <td class="num"><span style="color:var(--ink3)">1.0%</span></td>
         </tr></tbody>
   </table>
 </div>
@@ -18862,29 +18563,9 @@ const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5"
   document.getElementById('snapMRBDQ').textContent =fmtM(mrbDQ.reduce((a,b)=>a+b,0));
 })();
 
-// ── TOP DQ TABLE: Relay toggle ───────────────────────────────────────────────
-(function(){
-  const cb=document.getElementById('topDqHideRelay');
-  const tbody=document.querySelector('#topDqTable tbody');
-  if(!cb||!tbody)return;
-  function applyFilter(){
-    const hide=cb.checked;
-    const rows=Array.from(tbody.querySelectorAll('tr'));
-    let n=1;
-    rows.forEach(r=>{
-      const isRelay=r.getAttribute('data-relay')==='1';
-      const idxCell=r.querySelector('.row-idx');
-      if(hide && isRelay){
-        r.style.display='none';
-      }else{
-        r.style.display='';
-        if(idxCell) idxCell.textContent=n++;
-      }
-    });
-  }
-  cb.addEventListener('change',applyFilter);
-})();
-
+// ── DPD TREND CHART WITH PARTNER TOGGLES ─────────────────────────────────────
+// Mirrors the loss rate chart: toggles add/remove partners from a combined view.
+// Chart always shows the same three bucket lines, filtered to active partners.
 const allDpdSeries=[
   {label:'30-60 DPD', data:[2.44, 2.75, 2.23, 1.77, 0.98, 1.72, 2.02, 1.97, 1.53, 1.5, 1.69, 1.88, 2.02, 1.69, 1.14, 1.12, 1.29, 1.37],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
   {label:'60-90 DPD', data:[0.42, 2.26, 1.95, 1.39, 0.79, 0.72, 1.21, 1.4, 1.51, 1.32, 1.15, 1.17, 1.3, 1.05, 1.22, 0.7, 0.75, 0.77],  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
@@ -18898,6 +18579,7 @@ dpdPartners.forEach((p,i)=>dpdPartnerColors[p]=dpdPal[i%dpdPal.length]);
 const dpdActive=new Set(dpdPartners);
 const dpdTogglesEl=document.getElementById('dpdPartnerToggles');
 
+// Re-aggregate the three bucket lines across only active partners.
 function reaggregateDpd(activeSet){
   const bucketDefs=[
     {label:'30-60 DPD', color:'#E08C00'},
@@ -18976,6 +18658,7 @@ function syncDpdButtonStyles(){
   Object.assign(dpdAllBtn.style,{background:allOn?'var(--ink)':'var(--bg)',color:allOn?'#fff':'var(--ink3)',border:'.5px solid '+(allOn?'var(--ink)':'var(--border)')});
 }
 
+// ── LOSS RATE CHART WITH PARTNER TOGGLES ─────────────────────────────────────
 const lossChartData={"Avalara Technologies, LLC": {"months": ["2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.0, 1224.88, 2056.51, 218.0, 6.17, 1564.06, 13816.21, 1893.15, 722.61, 2021.2, 3198.21, 1797.36, 3259.98, 0.0, 0.0, 0.0, 4065.06, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.9, 0.0, 180000.0, 331099.96, 36940.5, 1080.0, 268880.62, 2349160.27, 312291.28, 104340.01, 239819.42, 334394.1, 146188.88, 202574.34, 189590.4, 64540.89, 0.0, 162666.8, 119.02], "orig": [15.3, 837119.45, 1744313.54, 3128785.39, 5960954.35, 9484751.78, 11302389.47, 14361761.25, 16665237.98, 17634348.64, 19320118.54, 20334163.81, 21002611.77, 20629406.24, 20403510.35, 19795050.59, 17327183.75, 14238217.99, 12546795.8, 9760250.56, 7456778.83, 0.0, 0.0, 6487669.17, 4801901.27, 0.0]}, "BRKR.IO Inc.": {"months": ["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 519.77, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 97.1, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7211.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3000.0, 0.0, 0.0], "orig": [184731.0, 536517.0, 763510.96, 1002935.62, 1126677.64, 1402478.66, 1664815.72, 1981415.77, 2198599.14, 2612265.7, 3081845.63, 3363491.03, 3498587.43, 3707476.91, 4038111.97, 3968939.01]}, "Balance Payments Inc.": {"months": ["2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.6, 0.0, 882.96, 436.28, 331.37, 843.0, 487.28, 214.23], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7.0, 0.0, 15289.34, 9382.06, 7869.86, 24680.07, 17078.24, 7909.0], "orig": [10.0, 87774.02, 208057.52, 412393.45, 751325.83, 1057721.6, 1401431.44, 1647205.91, 2077928.51, 2580569.49, 2849900.28, 3513181.19, 4205806.5, 4430159.94]}, "Flychain": {"months": ["2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 422.35, 512.09, 0.96, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.03, 66.36, 0.0, 0.0, 1.51, 426.34, 161.87, 0.0, 341.38, 129.97, 3277.14, 0.0, 36.15, 1047.44, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8273.12, 11842.23, 31.39, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.66, 7469.36, 0.0, 0.0, 168.66, 48967.28, 18477.67, 0.0, 39104.58, 14000.0, 355263.98, 0.0, 4249.28, 119141.23, 0.0], "orig": [13556.88, 60519.6, 233415.02, 310688.63, 471876.86, 646097.07, 1084901.82, 1529062.37, 1892294.5, 2350613.15, 2775037.57, 3940596.83, 4512585.65, 5845971.14, 6255509.03, 7525645.94, 8632281.58, 9396266.78, 9855431.29, 10463790.28, 11624277.51, 12243175.98, 12871694.85, 12473996.84, 13506224.62, 13316675.64, 13866521.52, 13421179.99, 13782469.18, 13698520.76, 13726453.37, 13745873.34, 12926269.96, 13008820.07, 13568534.7, 14104570.96, 13649458.64, 12927266.39]}, "GigSafe": {"months": ["2025-07-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 153.47, 0.0, 0.0, 0.0, 0.0, 4300.78, 0.0], "bal": [0.0, 1000.0, 0.0, 0.0, 0.0, 0.0, 236996.36, 0.0], "orig": [2000.0, 781915.7, 1682109.37, 3010927.9, 4109391.6, 5225729.76, 6612649.87, 6885500.98]}, "Koverly Inc.": {"months": ["2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2.74, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 331.03, 0.0, 24.94, 110.58, 2.54, 2.31, 172.47, 86.39, 358.06, 380.93, 57.34, 728.17, 2.47, 1.89], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 478.06, 0.01, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 196374.12, 0.0, 17831.74, 88455.66, 2186.13, 2140.85, 169568.26, 87005.45, 380373.76, 412813.42, 63426.2, 836555.16, 2845.59, 2079.56], "orig": [304789.79, 1074402.18, 1769162.43, 3151360.11, 4450418.14, 6486106.3, 8656388.65, 11274935.41, 14679672.27, 17424367.78, 20966238.28, 24292090.96, 29153856.57, 35061424.3, 41351378.08, 48755846.52, 57583778.07, 64144305.19, 71186828.1, 78540313.57, 85798704.55, 95987580.78, 103314985.67, 111183566.94, 117979604.62, 120861758.22, 127479103.49, 130043364.47, 132733572.19, 137861775.8, 138417580.19, 131786532.78]}, "Lawtrades": {"months": ["2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 308.23, 1356.22, 672.41, 0.0, 0.0, 0.0, 0.0, 1005.87, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 27394.76, 119810.0, 59036.97, 0.0, 0.0, 0.0, 0.0, 63002.5, 0.0], "orig": [1112899.91, 2325779.05, 3331332.2, 4112227.92, 5428190.75, 6288316.94, 6990831.99, 7772190.05, 9523307.74, 9834339.73, 10768917.97, 11868645.84, 11398285.22, 11102255.32, 10775000.63, 10600869.38, 10665249.28, 10600919.42, 10535936.55, 10156295.64, 8582546.3, 8464620.9, 7538042.66, 7516181.27, 7171708.76]}, "Melengo, Inc.": {"months": ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2025-01-01", "2025-09-01", "2025-10-01", "2026-01-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 2339.32, 3605.95, 7799.3, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3351.32, 5566.37, 11179.0, 1666.21, 1371.27, 3278.1, 422.58, 8170.01], "orig": [4940.95, 23905.59, 26543.51, 28229.49, 75532.11, 92570.98, 109444.2, 139555.37, 148712.27, 161212.27, 167412.27, 171912.27, 185239.32, 172000.12, 0.0, 0.0, 0.0, 0.0, 0.0]}, "MyToolbox Technologies, Inc.": {"months": ["2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-03-01", "2025-04-01", "2025-06-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 58.94, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3804.58, 0.0, 0.0, 39038.59, 88544.58, 20900.81, 106487.65, 457.75, 77313.27, 30728.69], "orig": [453082.68, 1307624.78, 2379312.18, 3364836.89, 4262466.73, 5505897.86, 6403785.4, 7280102.07, 7746561.71, 7746911.71, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "NurseIO": {"months": ["2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 94.33, 0.0, 5.07, 27.35], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6713.83, 0.0, 453.22, 2544.37], "orig": [1320522.61, 2152898.32, 2799781.13, 3844178.85, 4736976.24, 5531320.01, 6691168.48, 7626511.37, 8541091.31, 9806282.71, 10731036.73, 11164537.84]}, "Order": {"months": ["2022-06-01", "2022-08-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.5, 0.0, 0.0, 0.0, 0.0, 0.45, 296.03, 234.0, 68.65, 0.64, 25.38, 61.52, 20.74, 195.94, 108.35, 0.0, 0.0, 151.84, 140.68, 2.5, 23.39, 2.94, 46.14, 3.49, 0.0, 62.25, 7.24, 66.68, 125.36, 7.22, 101.09, 81.91, 0.12], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 473.91, 0.0, 0.0, 0.0, 0.0, 155.4, 129533.26, 125328.26, 43386.32, 461.97, 21131.33, 57885.11, 21411.11, 224202.62, 134140.14, 0.0, 0.0, 230016.08, 221710.56, 4111.97, 39979.72, 5170.22, 83623.7, 6427.71, 0.0, 126098.7, 15118.91, 142393.96, 275442.79, 16261.41, 232116.39, 191397.21, 269.0], "orig": [600000.0, 1290000.0, 1662500.0, 1762500.0, 1900437.02, 2306255.34, 2963449.95, 4015128.01, 4905333.56, 6224152.78, 7946486.21, 9652377.89, 14704960.6, 16270043.62, 19208671.8, 22980605.03, 28345947.52, 34231579.59, 41065236.24, 52508092.4, 64270457.07, 75841814.65, 87246579.69, 99922098.58, 112914807.46, 123890694.13, 137310079.87, 148565651.89, 160341065.5, 172331798.25, 181781878.14, 189124223.7, 197058295.81, 205127996.79, 211143002.66, 217498861.71, 221317219.86, 232065965.67, 243065081.4, 250519145.65, 256270807.3, 263658829.57, 270304939.18, 275533367.54, 280396128.66, 269277794.14]}, "Ply": {"months": ["2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-11-01", "2025-04-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12568.15, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 65859.64, 0.0, 0.0, 7819.15, 145980.33], "orig": [140.79, 30132.66, 44704.48, 73690.92, 92593.17, 108786.61, 191575.43, 250494.92, 295841.32, 371308.69, 399222.14, 477722.67, 542539.64, 553798.94, 616846.29, 628824.29, 650570.37, 739708.93, 0.0, 0.0]}, "Relay Financial Technologies, Inc": {"months": ["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 228.41, 47.53, 0.97, 198.05, 176.33, 220.41, 261.71, 209.58, 96.61, 95.21, 10.71, 85.14, 40.93, 96.13, 12.08, 41.77, 40.39, 248.38, 105.07, 113.64], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 10499.54, 3090.25, 86.82, 22612.29, 24614.56, 37986.57, 53742.69, 50905.02, 26661.03, 29607.16, 3703.01, 32489.49, 17017.13, 43172.95, 5917.0, 21868.62, 22142.87, 141178.62, 62949.34, 66599.47], "orig": [230849.14, 703103.94, 1334873.85, 2231164.84, 3582498.72, 5516101.95, 7801832.04, 10708770.64, 13700949.76, 16751500.89, 20681465.31, 24642561.44, 29146800.13, 33117391.31, 37314493.25, 41498628.47, 45790476.53, 49886291.84, 53893635.2, 58800702.28, 62830304.81, 65793260.79, 68206858.89, 71895473.18, 70329377.74]}, "XSQRD, Inc.": {"months": ["2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-06-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2025-01-01", "2025-06-01"], "bps": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 944.05, 2947.54, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], "bal": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 7147.01, 23889.48, 12904.71, 32709.35, 34854.54, 11115.04, 44372.58, 8160.26, 8095.65], "orig": [5274.58, 25274.58, 36140.26, 62312.26, 70962.7, 110825.11, 127105.24, 186782.99, 233403.98, 346672.63, 524571.85, 602671.8, 632992.27, 721318.13, 801774.04, 795898.16, 869441.25, 908473.53, 972586.88, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}};
 const allLossMonths=["2022-06-01", "2022-07-01", "2022-08-01", "2022-09-01", "2022-10-01", "2022-11-01", "2022-12-01", "2023-01-01", "2023-02-01", "2023-03-01", "2023-04-01", "2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"];
 const allLossBps=[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 330.36, 364.33, 11.72, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2, 0.0, 0.0, 0.0, 20.87, 40.1, 257.5, 165.22, 53.97, 82.91, 25.91, 76.04, 528.52, 164.88, 239.8, 165.8, 75.43, 101.07, 197.94, 997.31, 188.99, 60.66, 131.75, 122.95, 87.22, 147.83, 46.83, 180.95, 266.89, 26.23, 301.58, 146.14, 17.3];
@@ -19241,11 +18924,13 @@ new Chart(document.getElementById('coChart'),{
   });
 })();
 
+// ── VINTAGE BORROWED CHART (NEW) ──────────────────────────────────────────────
 (function(){
   const vMonths        = ["2023-05-01", "2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"];
   const vBorrowed      = [43.7, 20548.6, 3448.9, 96119.7, 116672.9, 117794.5, 19061.5, 24318.8, 35693.5, 50454.6, 23759.9, 37823.4, 35731.7, 18890.8, 23582.3, 33990.6, 24297.2, 40588.9, 51774.0, 43356.0, 25570.3, 18269.6, 9991.4, 25090.6, 30880.2, 19300.5, 16144.0, 12616.2, 12611.7, 11505.1, 13325.1, 3825.3, 5248.2, 3430.1, 2717.4, 2149.0, 138.8];
   const vLossPctBorrow = [0.0, 0.035, 1.261, 1.839, 0.28, 1.013, 0.182, 0.972, 1.077, 0.746, 0.329, 0.772, 1.169, 6.19, 9.905, 4.036, 1.286, 2.642, 0.358, 1.676, 0.581, 0.235, 1.692, 0.0, 0.174, 0.086, 0.198, 0.0, 0.332, 0.325, 1.779, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
   const vLossKs        = [0.0, 7.1, 43.5, 1767.4, 327.1, 1193.4, 34.7, 236.5, 384.5, 376.6, 78.1, 292.0, 417.6, 1169.2, 2335.9, 1371.9, 312.5, 1072.3, 185.4, 726.5, 148.5, 43.0, 169.1, 0.0, 53.7, 16.7, 32.0, 0.0, 41.9, 37.4, 237.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
+  const vOrgs          = [2, 11, 10, 63, 71, 150, 20, 27, 44, 42, 38, 141, 150, 42, 55, 102, 187, 101, 81, 136, 74, 87, 61, 77, 129, 60, 78, 95, 70, 66, 63, 51, 64, 60, 72, 76, 11];
   const vBorrowOrgs    = [2, 11, 10, 63, 71, 150, 20, 27, 44, 42, 38, 141, 150, 42, 55, 102, 187, 101, 81, 136, 74, 87, 61, 77, 129, 60, 78, 95, 70, 66, 63, 51, 64, 60, 72, 76, 11];
   const vLossOrgs      = [0, 1, 3, 10, 19, 31, 4, 3, 5, 7, 8, 12, 26, 19, 23, 19, 23, 18, 8, 15, 9, 7, 4, 0, 6, 3, 6, 0, 5, 5, 1, 0, 0, 0, 0, 0, 0];
   new Chart(document.getElementById('vintageBorrowedChart'),{
@@ -19278,6 +18963,7 @@ new Chart(document.getElementById('coChart'),{
   });
 })();
 
+// ── COHORT LOSS RATIO CHART ───────────────────────────────────────────────────
 (function(){
   const months      = ["2023-06-01", "2023-07-01", "2023-08-01", "2023-09-01", "2023-10-01", "2023-11-01", "2023-12-01", "2024-01-01", "2024-02-01", "2024-03-01", "2024-04-01", "2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"];
   const incomeKs    = [4.2, 0.0, 11.1, 9.9, 14.2, 66.0, 110.0, 349.0, 173.9, 232.3, 294.7, 329.3, 539.0, 488.6, 533.1, 596.6, 562.6, 577.7, 744.2, 553.5, 622.9, 666.8, 653.9, 761.5, 691.2, 743.5, 753.7, 761.9, 844.4, 728.6, 807.5, 754.8, 647.5, 556.4, 147.9, 2.5];
