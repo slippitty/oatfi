@@ -88,13 +88,18 @@ tr:last-child td{border-bottom:none}
   </div>
   <div class="snap-card">
     <div class="label">120+ DPD formation</div>
-    <div class="value" style="color:#8F1C1C">$0</div>
-    <div class="sub">new losses this month</div>
+    <div class="value" style="color:#8F1C1C">$64K</div>
+    <div class="sub">new losses in 2026-07</div>
   </div>
   <div class="snap-card">
     <div class="label">Loss rate (ann.)</div>
-    <div class="value" style="color:#2E6B0A">0.0bps</div>
-    <div class="sub">vs 25bps target</div>
+    <div class="value" style="color:#8F1C1C">94.1bps</div>
+    <div class="sub">2026-07 · vs 25bps target</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">120+ DPD stock</div>
+    <div class="value" style="color:#5C0E0E">13.64%</div>
+    <div class="sub">% of outstanding — cumulative, no chargeoffs</div>
   </div>
   <div class="snap-card">
     <div class="label">Total outstanding</div>
@@ -381,31 +386,31 @@ tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<div class="sl">3b — Portfolio composition — risk rank and modeled limit</div>
 <div class="grid-2">
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Outstanding by risk rank — current month ($)</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Green = RR 1–4, amber = 5–7, red = 8–10.</p>
-    <div class="chart-wrap" style="height:200px"><canvas id="rrOutChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD rate by risk rank — current month</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance ÷ outstanding within each rank. Grey = under $50K outstanding, too thin to read. Dashed line = portfolio rate.</p>
+    <div class="chart-wrap" style="height:210px"><canvas id="rrRateChart"></canvas></div>
   </div>
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">30+ DPD balance by risk rank — current month ($)</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance (30+ DPD, days_in_delinq) by latest Taktile risk rank.</p>
-    <div class="chart-wrap" style="height:200px"><canvas id="rrDqChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD rate by risk rank — excluding 365+ day balance</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Same measure with balances over a year past due removed. The gap against the left chart is legacy stock, not current performance.</p>
+    <div class="chart-wrap" style="height:210px"><canvas id="rrRateExChart"></canvas></div>
   </div>
 </div>
 <div class="grid-2">
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">Outstanding composition by risk rank — 12-month trend</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">% of total outstanding. Adds to 100% each month.</p>
-    <div class="chart-wrap" style="height:220px"><canvas id="rrTrendChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD rate by risk band — 12-month trend</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Banded because ranks 1, 2 and 9 hold too few obligors to plot individually.</p>
+    <div class="chart-wrap" style="height:220px"><canvas id="rrBandTrendChart"></canvas></div>
   </div>
   <div class="card">
-    <div class="sl" style="margin-bottom:.75rem">30+ DPD composition by risk rank — 12-month trend</div>
-    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">% of total 30+ DPD balance. Adds to 100% each month.</p>
-    <div class="chart-wrap" style="height:220px"><canvas id="rrDqTrendChart"></canvas></div>
+    <div class="sl" style="margin-bottom:.75rem">Rank-ordering power — cumulative 30+ DPD captured</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Obligors ordered worst rank first. Diagonal = no discrimination. Gini 0.23.</p>
+    <div class="chart-wrap" style="height:220px"><canvas id="rrCapChart"></canvas></div>
   </div>
 </div>
+
 <div class="grid-2">
   <div class="card">
     <div class="sl" style="margin-bottom:.75rem">Outstanding — above vs at/below modeled limit — current month ($)</div>
@@ -465,16 +470,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-05-08</td>
         </tr><tr>
-          <td class="pn">Trailer Dealership Inc.</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$100K</td>
-          <td class="num">$50K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$50K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-30</td>
-        </tr><tr>
           <td class="pn">Amir Alexander Rouhani, MD, Professional Corporation</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$16K</td>
@@ -484,6 +479,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-03</td>
+        </tr><tr>
+          <td class="pn">Trailer Dealership Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$100K</td>
+          <td class="num">$50K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$50K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-30</td>
         </tr><tr>
           <td class="pn">SIKHNET.INC.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -495,26 +500,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-08</td>
         </tr><tr>
-          <td class="pn">Civitello Construction Services LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$6K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-17</td>
-        </tr><tr>
-          <td class="pn">Multiple Solutions LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$861</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-19</td>
-        </tr><tr>
           <td class="pn">Photomules LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$29K</td>
@@ -525,6 +510,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-06</td>
         </tr><tr>
+          <td class="pn">Civitello Construction Services LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$6K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-17</td>
+        </tr><tr>
           <td class="pn">The Community and College Fellowship, Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -534,6 +529,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
           <td style="font-size:11px;color:var(--ink2)">E</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-04</td>
+        </tr><tr>
+          <td class="pn">Multiple Solutions LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$861</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$50K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$45K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-19</td>
         </tr><tr>
           <td class="pn">Sourhouse LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -635,6 +640,36 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-11</td>
         </tr><tr>
+          <td class="pn">Canary Yellow Logistics Ltd</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-08</td>
+        </tr><tr>
+          <td class="pn">United Global Parcel Service LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$216</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-13</td>
+        </tr><tr>
+          <td class="pn">AAA Trucks, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-05-25</td>
+        </tr><tr>
           <td class="pn">Compass Contracting LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$24K</td>
@@ -655,36 +690,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
         </tr><tr>
-          <td class="pn">AAA Trucks, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-05-25</td>
-        </tr><tr>
-          <td class="pn">Canary Yellow Logistics Ltd</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-08</td>
-        </tr><tr>
-          <td class="pn">ARSidekicks</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-25</td>
-        </tr><tr>
           <td class="pn">Composite Fundamentals Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$18K</td>
@@ -695,15 +700,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-24</td>
         </tr><tr>
-          <td class="pn">United Global Parcel Service LLC</td>
+          <td class="pn">ARSidekicks</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$216</td>
+          <td class="num">$0</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
           <td class="num">$5K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$20K</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-13</td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-25</td>
         </tr><tr>
           <td class="pn">Mystis Adult and Family SVCS LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -895,16 +900,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-06</td>
         </tr><tr>
-          <td class="pn">Economy Plumbing Services LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$9K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$8K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
-        </tr><tr>
           <td class="pn">KEM Business Solutions, Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$5K</td>
@@ -914,6 +909,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-16</td>
+        </tr><tr>
+          <td class="pn">Economy Plumbing Services LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$9K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$8K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
         </tr><tr>
           <td class="pn">MLA Industries</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -1055,6 +1060,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-08</td>
         </tr><tr>
+          <td class="pn">Lenny's Bike Shop LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$5K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-03</td>
+        </tr><tr>
           <td class="pn">TeeCO Company, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -1075,26 +1090,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
         </tr><tr>
-          <td class="pn">Lenny's Bike Shop LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$5K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-03</td>
-        </tr><tr>
-          <td class="pn">Empowered Electrical Services, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$5K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-02</td>
-        </tr><tr>
           <td class="pn">TRJD Enterprises, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -1114,6 +1109,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-14</td>
+        </tr><tr>
+          <td class="pn">Empowered Electrical Services, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$5K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-02</td>
         </tr><tr>
           <td class="pn">NoYoRo, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -1315,7 +1320,7 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-02</td>
         </tr><tr>
-          <td class="pn">Creative Floors, LLC</td>
+          <td class="pn">Timberline One</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$100K</td>
@@ -1325,7 +1330,7 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-08</td>
         </tr><tr>
-          <td class="pn">Timberline One</td>
+          <td class="pn">Creative Floors, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$100K</td>
@@ -1575,16 +1580,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-08</td>
         </tr><tr>
-          <td class="pn">Ant The Glazier LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$2K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-13</td>
-        </tr><tr>
           <td class="pn">Infinity Worldwide Vacations Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$7K</td>
@@ -1594,6 +1589,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-09</td>
+        </tr><tr>
+          <td class="pn">Ant The Glazier LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$2K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-13</td>
         </tr><tr>
           <td class="pn">EBR Construction</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -1855,6 +1860,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-10</td>
         </tr><tr>
+          <td class="pn">Jouvin Advisory, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$10K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$24K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$1K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-02</td>
+        </tr><tr>
           <td class="pn">Rejuvenation Medicine</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$114</td>
@@ -1874,16 +1889,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-31</td>
-        </tr><tr>
-          <td class="pn">Jouvin Advisory, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$10K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$24K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$1K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-02</td>
         </tr><tr>
           <td class="pn">Linestar express llc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2085,16 +2090,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-17</td>
         </tr><tr>
-          <td class="pn">Landingplace Hospitality LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$282</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$6K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$1K</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
-          <td style="font-size:11px;color:var(--ink2)">E</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-06-05</td>
-        </tr><tr>
           <td class="pn">Innovative DevOps Solutions, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -2104,6 +2099,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-15</td>
+        </tr><tr>
+          <td class="pn">Landingplace Hospitality LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$282</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$6K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$1K</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">10</span></td>
+          <td style="font-size:11px;color:var(--ink2)">E</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-06-05</td>
         </tr><tr>
           <td class="pn">Summit City Investments, Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2265,16 +2270,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-19</td>
         </tr><tr>
-          <td class="pn">The Cliffs LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$11K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$30K</td>
-          <td class="num">$29K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$944</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
-        </tr><tr>
           <td class="pn">Two Roads Guesthouse, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -2284,6 +2279,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-10</td>
+        </tr><tr>
+          <td class="pn">The Cliffs LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$30K</td>
+          <td class="num">$29K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$944</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
         </tr><tr>
           <td class="pn">4D Restoration LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2315,16 +2320,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-08-29</td>
         </tr><tr>
-          <td class="pn">Summit Business Advisors LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$268</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
-          <td class="num">$9K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$934</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-18</td>
-        </tr><tr>
           <td class="pn">Seismic Cycles LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$1K</td>
@@ -2334,6 +2329,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-25</td>
+        </tr><tr>
+          <td class="pn">Summit Business Advisors LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$268</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
+          <td class="num">$9K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$934</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-18</td>
         </tr><tr>
           <td class="pn">Namnum Design Co.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2415,16 +2420,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-01</td>
         </tr><tr>
-          <td class="pn">Nikki Yelton RD</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$1K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
-          <td class="num">$7K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$910</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-30</td>
-        </tr><tr>
           <td class="pn">Monaco Media Enterprises LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$2K</td>
@@ -2434,6 +2429,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-01-20</td>
+        </tr><tr>
+          <td class="pn">Nikki Yelton RD</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$1K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$910</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-30</td>
         </tr><tr>
           <td class="pn">Ninja Mountain Bike Performance, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2495,16 +2500,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
         </tr><tr>
-          <td class="pn">Optimum Value Partners LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$23</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$11K</td>
-          <td class="num">$10K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$885</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-13</td>
-        </tr><tr>
           <td class="pn">Worthy Services Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$3K</td>
@@ -2515,15 +2510,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-15</td>
         </tr><tr>
-          <td class="pn">Richmill Power Washing</td>
+          <td class="pn">Optimum Value Partners LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$652</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
-          <td class="num">$12K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$883</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td class="num">$23</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$11K</td>
+          <td class="num">$10K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$885</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-12</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-13</td>
         </tr><tr>
           <td class="pn">Guy Commerce USA Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2534,6 +2529,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
+        </tr><tr>
+          <td class="pn">Richmill Power Washing</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$652</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
+          <td class="num">$12K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$883</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-12</td>
         </tr><tr>
           <td class="pn">The Crafter's Box, Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2575,16 +2580,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-14</td>
         </tr><tr>
-          <td class="pn">Fleming Services, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$12K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$12K</td>
-          <td class="num">$11K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$857</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-13</td>
-        </tr><tr>
           <td class="pn">Wiggle Worm Gardens</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -2595,15 +2590,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-02</td>
         </tr><tr>
-          <td class="pn">Thyme For Design, Inc.</td>
+          <td class="pn">Fleming Services, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$487</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
-          <td class="num">$7K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$856</td>
+          <td class="num">$12K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$12K</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$857</td>
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-13</td>
         </tr><tr>
           <td class="pn">Saint Botolph Sutar LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2614,6 +2609,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-31</td>
+        </tr><tr>
+          <td class="pn">Thyme For Design, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$487</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$856</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
         </tr><tr>
           <td class="pn">Mejicanos Transportation LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2655,16 +2660,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
         </tr><tr>
-          <td class="pn">Mutti & Co. LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$4K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$4K</td>
-          <td class="num">$3K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$833</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-19</td>
-        </tr><tr>
           <td class="pn">Davis Creative LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$6K</td>
@@ -2674,6 +2669,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-10</td>
+        </tr><tr>
+          <td class="pn">Mutti & Co. LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$4K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$4K</td>
+          <td class="num">$3K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$833</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-19</td>
         </tr><tr>
           <td class="pn">Sunrise outlet Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2935,16 +2940,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-28</td>
         </tr><tr>
-          <td class="pn">La Casa de Ceramica LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$23K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$24K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$748</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
-        </tr><tr>
           <td class="pn">Elevate Staging Co LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -2954,6 +2949,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-11</td>
+        </tr><tr>
+          <td class="pn">La Casa de Ceramica LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$23K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$24K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$748</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
         </tr><tr>
           <td class="pn">Idlewood Consulting, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2965,16 +2970,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-03</td>
         </tr><tr>
-          <td class="pn">Asfaleia</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$11K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$16K</td>
-          <td class="num">$15K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$745</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-09</td>
-        </tr><tr>
           <td class="pn">Tanner Industries</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$4K</td>
@@ -2984,6 +2979,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-11</td>
+        </tr><tr>
+          <td class="pn">Asfaleia</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$16K</td>
+          <td class="num">$15K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$745</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-03-09</td>
         </tr><tr>
           <td class="pn">Jonathan Wang Design</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -2995,16 +3000,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-29</td>
         </tr><tr>
-          <td class="pn">Mentality Today, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$1K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$38K</td>
-          <td class="num">$37K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$737</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-01</td>
-        </tr><tr>
           <td class="pn">310 Creekside LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$8K</td>
@@ -3014,6 +3009,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+        </tr><tr>
+          <td class="pn">Mentality Today, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$1K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$38K</td>
+          <td class="num">$37K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$737</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-01</td>
         </tr><tr>
           <td class="pn">Sonora LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3085,16 +3090,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-02</td>
         </tr><tr>
-          <td class="pn">Surge Telecom</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$2K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$3K</td>
-          <td class="num">$2K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$723</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-03</td>
-        </tr><tr>
           <td class="pn">ROA Refinishing Enterprises</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -3104,6 +3099,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-24</td>
+        </tr><tr>
+          <td class="pn">Surge Telecom</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$2K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$3K</td>
+          <td class="num">$2K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$723</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-03</td>
         </tr><tr>
           <td class="pn">Jupiter Plumbing LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3185,15 +3190,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-19</td>
         </tr><tr>
-          <td class="pn">Mesmerized Marketing LLC</td>
+          <td class="pn">C1 Staffing LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$672</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$18K</td>
-          <td class="num">$17K</td>
+          <td class="num">$13K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$22K</td>
+          <td class="num">$22K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$705</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-20</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-08</td>
         </tr><tr>
           <td class="pn">notjustMD LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3205,15 +3210,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-15</td>
         </tr><tr>
-          <td class="pn">C1 Staffing LLC</td>
+          <td class="pn">Mesmerized Marketing LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$13K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$22K</td>
-          <td class="num">$22K</td>
+          <td class="num">$672</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$18K</td>
+          <td class="num">$17K</td>
           <td class="num" style="color:#A32D2D;font-weight:600">+$705</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-08</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-20</td>
         </tr><tr>
           <td class="pn">Blue Barn Homes, Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3395,6 +3400,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-06</td>
         </tr><tr>
+          <td class="pn">Sleep Solutions 1, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$5K</td>
+          <td class="num">$4K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$651</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+        </tr><tr>
           <td class="pn">Miss Daisy's Attic, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$5K</td>
@@ -3425,15 +3440,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-04</td>
         </tr><tr>
-          <td class="pn">Sleep Solutions 1, LLC</td>
+          <td class="pn">Les Chalets LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$5K</td>
-          <td class="num">$4K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$651</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$649</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-28</td>
         </tr><tr>
           <td class="pn">SN Trade Dot Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3444,16 +3459,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-17</td>
-        </tr><tr>
-          <td class="pn">Les Chalets LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
-          <td class="num">$7K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$649</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-28</td>
         </tr><tr>
           <td class="pn">Bowling Green Athletics, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3495,16 +3500,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-07</td>
         </tr><tr>
-          <td class="pn">The Lefty Project LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$9K</td>
-          <td class="num">$8K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$642</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-19</td>
-        </tr><tr>
           <td class="pn">Desert Valley Abatement</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$9K</td>
@@ -3514,6 +3509,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-09</td>
+        </tr><tr>
+          <td class="pn">The Lefty Project LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$9K</td>
+          <td class="num">$8K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$642</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-19</td>
         </tr><tr>
           <td class="pn">Inspired Management Consulting LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3695,16 +3700,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-07</td>
         </tr><tr>
-          <td class="pn">CASI Creative LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$2K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$11K</td>
-          <td class="num">$10K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$589</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-31</td>
-        </tr><tr>
           <td class="pn">Accounting Pro Tools LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$16K</td>
@@ -3714,6 +3709,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-01</td>
+        </tr><tr>
+          <td class="pn">CASI Creative LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$2K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$11K</td>
+          <td class="num">$10K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$589</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-31</td>
         </tr><tr>
           <td class="pn">Wright Bookings LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3725,16 +3730,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-21</td>
         </tr><tr>
-          <td class="pn">S BLOSSER, LLC dba FOREGROUND</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
-          <td class="num">$9K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$586</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-15</td>
-        </tr><tr>
           <td class="pn">RDE Central</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -3744,6 +3739,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-13</td>
+        </tr><tr>
+          <td class="pn">S BLOSSER, LLC dba FOREGROUND</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
+          <td class="num">$9K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$586</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-15</td>
         </tr><tr>
           <td class="pn">DSG BUILDERS INC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3845,16 +3850,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-20</td>
         </tr><tr>
-          <td class="pn">MIKA INC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$6K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$567</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-13</td>
-        </tr><tr>
           <td class="pn">Cindy's Wine and Spirits, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$2</td>
@@ -3864,6 +3859,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-14</td>
+        </tr><tr>
+          <td class="pn">MIKA INC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$6K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$567</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-13</td>
         </tr><tr>
           <td class="pn">UTOPIS HOLDINGS LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -3955,16 +3960,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-19</td>
         </tr><tr>
-          <td class="pn">Paladin Medicine PLLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$17K</td>
-          <td class="num">$16K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$541</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-26</td>
-        </tr><tr>
           <td class="pn">Creative Strategy, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$9</td>
@@ -3974,6 +3969,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-01-26</td>
+        </tr><tr>
+          <td class="pn">Paladin Medicine PLLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$17K</td>
+          <td class="num">$16K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$541</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-26</td>
         </tr><tr>
           <td class="pn">Oritas ai inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4145,16 +4150,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-07</td>
         </tr><tr>
-          <td class="pn">Homescapes Pro, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$8K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$9K</td>
-          <td class="num">$8K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$501</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-16</td>
-        </tr><tr>
           <td class="pn">The Balloon River</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$1</td>
@@ -4164,6 +4159,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-12</td>
+        </tr><tr>
+          <td class="pn">Homescapes Pro, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$8K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$9K</td>
+          <td class="num">$8K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$501</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-16</td>
         </tr><tr>
           <td class="pn">481 Fred</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4225,16 +4230,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-03</td>
         </tr><tr>
-          <td class="pn">Key Performance Property Management LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$22K</td>
-          <td class="num">$22K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$488</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-17</td>
-        </tr><tr>
           <td class="pn">ROAD HOUSE CONSULTING LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -4245,15 +4240,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-18</td>
         </tr><tr>
-          <td class="pn">MELTED. LLC</td>
+          <td class="pn">Key Performance Property Management LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$7K</td>
+          <td class="num">$0</td>
           <td class="num" style="color:#A32D2D;font-weight:600">$22K</td>
           <td class="num">$22K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$487</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$488</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#A32D2D;background:#FBEAEA">8</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-08</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-17</td>
         </tr><tr>
           <td class="pn">CLS Legacy Group, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4264,6 +4259,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-12</td>
+        </tr><tr>
+          <td class="pn">MELTED. LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$22K</td>
+          <td class="num">$22K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$487</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-08</td>
         </tr><tr>
           <td class="pn">KM Squared LLC dba The Grounds Guys of Ballantyne</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4295,16 +4300,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-17</td>
         </tr><tr>
-          <td class="pn">Yoga Loft MB, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$294</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$25K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$473</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
-        </tr><tr>
           <td class="pn">Blue Blaze Enterprises Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$7K</td>
@@ -4314,6 +4309,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
+        </tr><tr>
+          <td class="pn">Yoga Loft MB, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$294</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$25K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$473</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
         </tr><tr>
           <td class="pn">Calvin property solutions</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4335,16 +4340,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-13</td>
         </tr><tr>
-          <td class="pn">BerthaSEED Properties LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$348</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$6K</td>
-          <td class="num">$6K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$459</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-19</td>
-        </tr><tr>
           <td class="pn">Refined Hair of Austin, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$10K</td>
@@ -4354,6 +4349,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-10</td>
+        </tr><tr>
+          <td class="pn">BerthaSEED Properties LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$348</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$6K</td>
+          <td class="num">$6K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$459</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-19</td>
         </tr><tr>
           <td class="pn">Junk in the Truck Hauling LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4415,16 +4420,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-07</td>
         </tr><tr>
-          <td class="pn">Merry Makers LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$5K</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$448</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-01-17</td>
-        </tr><tr>
           <td class="pn">WiserCare Home Care LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$3</td>
@@ -4434,6 +4429,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
+        </tr><tr>
+          <td class="pn">Merry Makers LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$5K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$448</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-01-17</td>
         </tr><tr>
           <td class="pn">TNA Transport Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4585,16 +4590,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-17</td>
         </tr><tr>
-          <td class="pn">JM Construction Ebenezer</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$16K</td>
-          <td class="num">$16K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$414</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-23</td>
-        </tr><tr>
           <td class="pn">Emberflow LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$21K</td>
@@ -4604,6 +4599,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">D</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-10</td>
+        </tr><tr>
+          <td class="pn">JM Construction Ebenezer</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$16K</td>
+          <td class="num">$16K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$414</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-23</td>
         </tr><tr>
           <td class="pn">Moore Bread</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4625,16 +4630,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-19</td>
         </tr><tr>
-          <td class="pn">Luxury Home Escapes</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$11K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
-          <td class="num">$25K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$405</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-17</td>
-        </tr><tr>
           <td class="pn">Float Studio Design Inc.</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$2K</td>
@@ -4644,6 +4639,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-08</td>
+        </tr><tr>
+          <td class="pn">Luxury Home Escapes</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$25K</td>
+          <td class="num">$25K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$405</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-17</td>
         </tr><tr>
           <td class="pn">Affinity Ventures LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -4875,16 +4880,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-17</td>
         </tr><tr>
-          <td class="pn">NIT Pro Build LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$5K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
-          <td class="num">$10K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$357</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-10</td>
-        </tr><tr>
           <td class="pn">Explendid LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$2K</td>
@@ -4894,6 +4889,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-09-02</td>
+        </tr><tr>
+          <td class="pn">NIT Pro Build LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$5K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
+          <td class="num">$10K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$357</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-10</td>
         </tr><tr>
           <td class="pn">Ear Care and Hearing of St. Louis, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5095,16 +5100,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-02-08</td>
         </tr><tr>
-          <td class="pn">The Johven Co</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$45K</td>
-          <td class="num">$45K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$318</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-18</td>
-        </tr><tr>
           <td class="pn">DDM Pizzeria One Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -5114,6 +5109,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-03-14</td>
+        </tr><tr>
+          <td class="pn">The Johven Co</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$45K</td>
+          <td class="num">$45K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$318</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-18</td>
         </tr><tr>
           <td class="pn">Vigil Electronic Systems LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5145,16 +5150,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-04-09</td>
         </tr><tr>
-          <td class="pn">Latitude Bookkeeping Services LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$3K</td>
-          <td class="num">$3K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$303</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-13</td>
-        </tr><tr>
           <td class="pn">Smego Construction Company LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$2K</td>
@@ -5165,15 +5160,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-18</td>
         </tr><tr>
-          <td class="pn">Wheeler Group</td>
+          <td class="pn">Latitude Bookkeeping Services LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$2K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$4K</td>
-          <td class="num">$4K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$302</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-16</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$3K</td>
+          <td class="num">$3K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$303</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-13</td>
         </tr><tr>
           <td class="pn">FlatOut Ventures LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5195,6 +5190,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-18</td>
         </tr><tr>
+          <td class="pn">Wheeler Group</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$2K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$4K</td>
+          <td class="num">$4K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$302</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-16</td>
+        </tr><tr>
           <td class="pn">Profit Partners LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$207</td>
@@ -5215,16 +5220,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-12-14</td>
         </tr><tr>
-          <td class="pn">Arizona OCD and Anxiety Center, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$506</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
-          <td class="num">$10K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$291</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-07</td>
-        </tr><tr>
           <td class="pn">JP Bookkeeping Services Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$8K</td>
@@ -5235,15 +5230,15 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-02</td>
         </tr><tr>
-          <td class="pn">FIVEFREEDOMS LLC</td>
+          <td class="pn">Arizona OCD and Anxiety Center, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$3K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$3K</td>
-          <td class="num">$3K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$290</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+          <td class="num">$506</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$10K</td>
+          <td class="num">$10K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$291</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-07</td>
         </tr><tr>
           <td class="pn">Still I Run</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5255,6 +5250,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-24</td>
         </tr><tr>
+          <td class="pn">FIVEFREEDOMS LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$3K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$3K</td>
+          <td class="num">$3K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$290</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
+        </tr><tr>
           <td class="pn">Kaster Moving Co., LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$9K</td>
@@ -5265,16 +5270,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-01</td>
         </tr><tr>
-          <td class="pn">Groovy Stays LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$6K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
-          <td class="num">$8K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$282</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-11</td>
-        </tr><tr>
           <td class="pn">Zenchi Zenno LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$342</td>
@@ -5284,6 +5279,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-11</td>
+        </tr><tr>
+          <td class="pn">Groovy Stays LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$6K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$8K</td>
+          <td class="num">$8K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$282</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-11</td>
         </tr><tr>
           <td class="pn">Finea Spaces, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5445,6 +5450,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-09-18</td>
         </tr><tr>
+          <td class="pn">Sapphyre Properties LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$2K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
+          <td class="num">$13K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$256</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-23</td>
+        </tr><tr>
           <td class="pn">The Lawn Pros</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$3K</td>
@@ -5464,16 +5479,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-06-02</td>
-        </tr><tr>
-          <td class="pn">Sapphyre Properties LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$2K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
-          <td class="num">$13K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$256</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-23</td>
         </tr><tr>
           <td class="pn">Lauderdale Jet Ski Adventures</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5535,16 +5540,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-29</td>
         </tr><tr>
-          <td class="pn">NCY Corporation</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$929</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
-          <td class="num">$7K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$240</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">C</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-19</td>
-        </tr><tr>
           <td class="pn">Phoenix Psychology and Counseling LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -5554,6 +5549,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-06</td>
+        </tr><tr>
+          <td class="pn">NCY Corporation</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$929</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$240</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">C</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-19</td>
         </tr><tr>
           <td class="pn">CARPENTREES LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5565,16 +5570,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-19</td>
         </tr><tr>
-          <td class="pn">FusionPig LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$828</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
-          <td class="num">$13K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$235</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-07</td>
-        </tr><tr>
           <td class="pn">Blackwater Capital Management, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$250</td>
@@ -5584,6 +5579,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-18</td>
+        </tr><tr>
+          <td class="pn">FusionPig LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$828</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$13K</td>
+          <td class="num">$13K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$235</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-07</td>
         </tr><tr>
           <td class="pn">JLG Home improvement llc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5785,16 +5790,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-12</td>
         </tr><tr>
-          <td class="pn">Shady Hill Studios LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$130</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$11K</td>
-          <td class="num">$11K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$199</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-24</td>
-        </tr><tr>
           <td class="pn">North Peak Solar LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$4K</td>
@@ -5804,6 +5799,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-01-22</td>
+        </tr><tr>
+          <td class="pn">Shady Hill Studios LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$130</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$11K</td>
+          <td class="num">$11K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$199</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-24</td>
         </tr><tr>
           <td class="pn">Allure Waxing</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -5865,6 +5870,16 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-11</td>
         </tr><tr>
+          <td class="pn">Vida Counseling, Inc.</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$17K</td>
+          <td class="num">$17K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$172</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-20</td>
+        </tr><tr>
           <td class="pn">PURA VIDA BAHIA LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -5884,16 +5899,6 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-29</td>
-        </tr><tr>
-          <td class="pn">Vida Counseling, Inc.</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$17K</td>
-          <td class="num">$17K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$172</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-07-20</td>
         </tr><tr>
           <td class="pn">Benefits Corner LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -6165,16 +6170,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-10</td>
         </tr><tr>
-          <td class="pn">Imperitiv Solutions, LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$13K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$20K</td>
-          <td class="num">$20K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$118</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-04</td>
-        </tr><tr>
           <td class="pn">ATI CONSULTING SOLUTIONS LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -6184,6 +6179,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-10-20</td>
+        </tr><tr>
+          <td class="pn">Imperitiv Solutions, LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$13K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$20K</td>
+          <td class="num">$20K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$118</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-08-04</td>
         </tr><tr>
           <td class="pn">Eternal Works LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -6285,16 +6290,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-11-19</td>
         </tr><tr>
-          <td class="pn">Harmony Coffee Company</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
-          <td class="num">$7K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$89</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-18</td>
-        </tr><tr>
           <td class="pn">Snyder Accounting & Tax, LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -6304,6 +6299,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">3</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-24</td>
+        </tr><tr>
+          <td class="pn">Harmony Coffee Company</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$7K</td>
+          <td class="num">$7K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$89</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">6</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2024-10-18</td>
         </tr><tr>
           <td class="pn">Citor Transport, Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -6395,16 +6400,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-02-17</td>
         </tr><tr>
-          <td class="pn">Strad Pizza SDL LLC</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$0</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$16K</td>
-          <td class="num">$16K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$58</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
-          <td style="font-size:11px;color:var(--ink2)">D</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-28</td>
-        </tr><tr>
           <td class="pn">Natalie Houston LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$189</td>
@@ -6414,6 +6409,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">7</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2024-12-13</td>
+        </tr><tr>
+          <td class="pn">Strad Pizza SDL LLC</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$0</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$16K</td>
+          <td class="num">$16K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$58</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
+          <td style="font-size:11px;color:var(--ink2)">D</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2025-11-28</td>
         </tr><tr>
           <td class="pn">DogeNet LLC</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -6445,16 +6450,6 @@ tr:last-child td{border-bottom:none}
           <td style="font-size:11px;color:var(--ink2)">C</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-04-24</td>
         </tr><tr>
-          <td class="pn">Gradcon International</td>
-          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
-          <td class="num">$1K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">$19K</td>
-          <td class="num">$19K</td>
-          <td class="num" style="color:#A32D2D;font-weight:600">+$54</td>
-          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
-          <td style="font-size:11px;color:var(--ink2)">B</td>
-          <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-29</td>
-        </tr><tr>
           <td class="pn">Final Harvest Christian Center Inc</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
           <td class="num">$0</td>
@@ -6464,6 +6459,16 @@ tr:last-child td{border-bottom:none}
           <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#9A5C00;background:#FDF3E2">5</span></td>
           <td style="font-size:11px;color:var(--ink2)">B</td>
           <td class="num" style="font-family:var(--mono);font-size:11px">2025-07-24</td>
+        </tr><tr>
+          <td class="pn">Gradcon International</td>
+          <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
+          <td class="num">$1K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">$19K</td>
+          <td class="num">$19K</td>
+          <td class="num" style="color:#A32D2D;font-weight:600">+$54</td>
+          <td><span style="font-family:var(--mono);font-size:10px;padding:2px 6px;border-radius:4px;color:#2E6B0A;background:#EBF4E3">4</span></td>
+          <td style="font-size:11px;color:var(--ink2)">B</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2026-05-29</td>
         </tr><tr>
           <td class="pn">Safe Home Properties</td>
           <td style="font-size:12px;color:var(--ink2)">Relay Financial Technologies, Inc</td>
@@ -7025,37 +7030,66 @@ const saOpts = merge(baseOpts,{
 });
 
 (function(){
-  const rrLabels    = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-  const rrOut       = [11565, 88193, 810624, 490601, 1321687, 897114, 718089, 87755, 21669, 163702];
-  const rrDq        = [0, 0, 120006, 83162, 212510, 208851, 254157, 14776, 0, 118811];
-  const rrColorsOut = ["#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#2E6B0ABB", "#BA7517BB", "#BA7517BB", "#BA7517BB", "#A32D2DBB", "#A32D2DBB", "#A32D2DBB"];
-  const rrColorsDq  = ["#2E6B0A", "#2E6B0A", "#2E6B0A", "#2E6B0A", "#BA7517", "#BA7517", "#BA7517", "#A32D2D", "#A32D2D", "#A32D2D"];
+  const rrLabels   = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  const rrRate     = [null, 0.0, 14.8, 16.95, 16.08, 23.28, 35.39, 16.84, null, 72.58];
+  const rrRateEx   = [null, 0.0, 14.8, 16.95, 14.27, 16.29, 19.6, 16.26, null, 56.71];
+  const rrOut      = [11565, 88193, 810624, 490601, 1321687, 897114, 718089, 87755, 21669, 163702];
+  const rrOrgs     = [1, 2, 142, 128, 182, 181, 153, 27, 4, 26];
+  const rrDqOrgs   = [0, 0, 20, 11, 32, 27, 36, 5, 0, 13];
+  const rrColRate  = ["#D8D4CC", "#2E6B0A", "#2E6B0A", "#2E6B0A", "#BA7517", "#BA7517", "#BA7517", "#A32D2D", "#D8D4CC", "#A32D2D"];
+  const rrColEx    = ["#D8D4CC", "#2E6B0AAA", "#2E6B0AAA", "#2E6B0AAA", "#BA7517AA", "#BA7517AA", "#BA7517AA", "#A32D2DAA", "#D8D4CC", "#A32D2DAA"];
+  const portRate   = 21.95;
   function fmtD(v){return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e3?'$'+(v/1e3).toFixed(0)+'K':'$'+v;}
-  const barOpts=merge(baseOpts,{
-    plugins:{
-      legend:{display:false},
-      tooltip:{callbacks:{label:ctx=>fmtD(ctx.parsed.y)}}
-    },
-    scales:{y:{ticks:{callback:v=>fmtD(v)}},x:{ticks:{font:{size:11}}}}
-  });
-  new Chart(document.getElementById('rrOutChart'),{
+  function rateOpts(){
+    return merge(baseOpts,{
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>{
+          const i=ctx.dataIndex;
+          if(ctx.parsed.y===null||ctx.parsed.y===undefined) return 'too thin to rate ('+fmtD(rrOut[i])+')';
+          if(ctx.dataset.label==='Portfolio') return 'Portfolio: '+ctx.parsed.y.toFixed(2)+'%';
+          return [ctx.parsed.y.toFixed(2)+'% of '+fmtD(rrOut[i]),
+                  rrDqOrgs[i]+' of '+rrOrgs[i]+' obligors delinquent'];
+        }}}
+      },
+      scales:{y:{min:0,ticks:{callback:v=>v+'%'}},x:{ticks:{font:{size:11}}}}
+    });
+  }
+  new Chart(document.getElementById('rrRateChart'),{
     type:'bar',
-    data:{labels:rrLabels,datasets:[{label:'Outstanding',data:rrOut,backgroundColor:rrColorsOut,borderRadius:3}]},
-    options:barOpts
+    data:{labels:rrLabels,datasets:[
+      {type:'bar',label:'30+ DPD rate',data:rrRate,backgroundColor:rrColRate,borderRadius:3},
+      {type:'line',label:'Portfolio',data:rrLabels.map(()=>portRate),borderColor:'#1C1B18',
+        borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
+    ]},
+    options:rateOpts()
   });
-  new Chart(document.getElementById('rrDqChart'),{
+  new Chart(document.getElementById('rrRateExChart'),{
     type:'bar',
-    data:{labels:rrLabels,datasets:[{label:'30+ DPD',data:rrDq,backgroundColor:rrColorsDq,borderRadius:3}]},
-    options:barOpts
+    data:{labels:rrLabels,datasets:[{label:'30+ DPD rate ex 365+',data:rrRateEx,backgroundColor:rrColEx,borderRadius:3}]},
+    options:rateOpts()
   });
-  const rrTrendMonths   = ["2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"];
-  const rrTrendSeries   = [{"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "10", "data": [5.87, 4.31, 4.75, 4.4, 3.38, 4.04, 3.62, 3.2, 3.37, 4.28, 4.08, 3.66, 3.55]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "9", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.25, 0.05, 0.2, 0.85, 0.85, 0.47, 0.47]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "8", "data": [1.7, 1.61, 1.43, 1.89, 2.08, 1.79, 1.87, 2.42, 2.47, 2.04, 1.65, 1.89, 1.9]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "7", "data": [24.03, 20.24, 19.67, 18.8, 17.53, 18.17, 17.96, 22.42, 24.76, 18.79, 19.16, 15.88, 15.57]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "6", "data": [18.6, 18.87, 16.66, 14.94, 15.34, 16.7, 17.97, 17.24, 16.34, 17.18, 17.24, 19.22, 19.46]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "5", "data": [24.07, 21.34, 21.76, 24.85, 28.26, 25.97, 24.05, 26.44, 23.65, 24.78, 27.99, 28.49, 28.66]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "4", "data": [11.92, 11.51, 11.58, 8.79, 8.33, 9.47, 9.75, 10.26, 10.85, 12.39, 10.89, 10.48, 10.64]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "3", "data": [10.75, 19.31, 21.53, 23.9, 22.86, 21.8, 22.72, 14.02, 14.72, 17.65, 15.99, 17.7, 17.58]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "2", "data": [3.08, 2.81, 2.63, 2.44, 2.22, 2.06, 1.8, 3.96, 3.65, 2.06, 2.02, 1.95, 1.91]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "1", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.14, 0.26, 0.25]}];
-  const rrTrendDqSeries = [{"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "10", "data": [17.49, 18.05, 16.49, 16.14, 12.82, 10.78, 9.39, 8.44, 8.02, 6.58, 8.12, 11.68, 11.74]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "9", "data": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.62, 0.0, 0.0]}, {"borderColor": "#A32D2D", "backgroundColor": "#A32D2D66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "8", "data": [2.09, 2.15, 4.07, 0.21, 0.11, 0.09, 0.08, 0.07, 0.83, 1.96, 2.0, 1.45, 1.46]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "7", "data": [43.34, 46.26, 41.92, 42.58, 40.43, 37.78, 33.41, 30.12, 32.06, 28.64, 28.75, 24.99, 25.11]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "6", "data": [21.68, 23.44, 21.37, 20.73, 17.55, 19.1, 19.4, 25.88, 21.98, 15.46, 19.37, 20.53, 20.63]}, {"borderColor": "#BA7517", "backgroundColor": "#BA751766", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "5", "data": [14.45, 10.08, 10.62, 11.27, 20.06, 19.95, 22.87, 17.28, 18.11, 25.92, 17.06, 21.37, 20.99]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "4", "data": [0.0, 0.0, 0.0, 3.53, 0.13, 3.12, 4.86, 5.3, 6.48, 9.41, 10.47, 8.18, 8.22]}, {"borderColor": "#2E6B0A", "backgroundColor": "#2E6B0A66", "borderWidth": 1, "pointRadius": 0, "tension": 0.3, "fill": true, "label": "3", "data": [0.96, 0.0, 5.53, 5.54, 8.89, 9.17, 9.99, 12.91, 12.53, 12.02, 13.6, 11.8, 11.86]}];
-  new Chart(document.getElementById('rrTrendChart'),{
-    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendSeries},options:saOpts
+  new Chart(document.getElementById('rrBandTrendChart'),{
+    type:'line',
+    data:{labels:["2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],datasets:[{"label": "RR 1-4", "data": [0.55, 0.0, 2.07, 3.21, 4.34, 6.56, 9.21, 13.84, 13.63, 20.23, 27.91, 14.96, 14.5], "borderColor": "#2E6B0A", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "RR 5-6", "data": [12.62, 10.83, 11.13, 9.99, 13.86, 16.29, 21.37, 21.21, 21.01, 29.88, 27.13, 19.99, 18.99], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "RR 7", "data": [26.88, 29.68, 28.49, 28.13, 37.06, 37.01, 39.51, 28.85, 27.13, 46.18, 50.55, 35.82, 35.39], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "RR 8-10", "data": [38.58, 44.33, 44.48, 32.33, 38.09, 33.18, 35.06, 32.3, 30.7, 36.13, 55.06, 49.64, 48.91], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]},
+    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(0)+'%'}}}})
   });
-  new Chart(document.getElementById('rrDqTrendChart'),{
-    type:'line',data:{labels:rrTrendMonths,datasets:rrTrendDqSeries},options:saOpts
+  new Chart(document.getElementById('rrCapChart'),{
+    type:'line',
+    data:{datasets:[
+      {label:'Model',data:[{"x": 0, "y": 0}, {"x": 3.55, "y": 11.74}, {"x": 4.02, "y": 11.74}, {"x": 5.92, "y": 13.2}, {"x": 21.5, "y": 38.3}, {"x": 40.95, "y": 58.94}, {"x": 69.62, "y": 79.93}, {"x": 80.26, "y": 88.14}, {"x": 97.84, "y": 100.0}, {"x": 99.75, "y": 100.0}, {"x": 100.0, "y": 100.0}],borderColor:'#A32D2D',borderWidth:2,
+        pointRadius:2,tension:0,fill:false},
+      {label:'No discrimination',data:[{x:0,y:0},{x:100,y:100}],borderColor:'#A8A5A0',
+        borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
+    ]},
+    options:merge(baseOpts,{
+      parsing:false,
+      plugins:{tooltip:{callbacks:{label:ctx=>ctx.parsed.x.toFixed(0)+'% of book → '+ctx.parsed.y.toFixed(0)+'% of 30+ DPD'}}},
+      scales:{
+        x:{type:'linear',min:0,max:100,ticks:{callback:v=>v+'%'}},
+        y:{min:0,max:100,ticks:{callback:v=>v+'%'}}
+      }
+    })
   });
 })();
 
