@@ -378,7 +378,7 @@ tr:last-child td{border-bottom:none}
     The score barely ordered risk before February 2025, a first working model ran from then,
     and the scale was recalibrated again in late February 2026. Rank labels are not comparable
     across those boundaries, so every view below is split by the model era that last scored
-    each obligor. Pre-Feb 2025 covers 19% of outstanding at a 46.28% 30+ rate. v1 (Feb 25 - Feb 26) covers 34% of outstanding at a 23.2% 30+ rate. v2 (post-Feb 26) covers 47% of outstanding at a 9.48% 30+ rate. Some of that gradient is tenure rather than model quality:
+    each obligor. Pre-Feb 2025: 19% of outstanding across 183 obligors at 46.28% 30+. v1 (Feb 25 - Feb 26): 34% of outstanding across 263 obligors at 23.2% 30+. v2 (post-Feb 26): 47% of outstanding across 400 obligors at 9.48% 30+. Some of that gradient is tenure rather than model quality:
     older scores have had longer to go bad and nothing is ever charged off.
   </p>
 </div>
@@ -864,7 +864,7 @@ new Chart(document.getElementById('naicsTrendChart'),{
   const lossPct  = [1.99, 1.9, 0.01, 0.92, 2.23, 1.35, 2.14, 1.84, 1.44, 0.83, 0.36, 0.56, 0.57, 0.93, 0.07, 0.38, 0.38, 0.9, 0.78, 0.59, 0.92, 0.81, 0.32, null, null, null, null, null];
   const pct3060  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, null, null, null, null, null];
   const pct6090  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, null, null, null, null, null];
-  const pct90120 = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, null, null, null, null, null];
+  const pct90120 = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.13, null, null, null, null, null];
   new Chart(document.getElementById('cohortLossChart'),{
     type:'bar',
     data:{
