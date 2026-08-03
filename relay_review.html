@@ -748,11 +748,11 @@ const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5"
 
 const dpdChart=new Chart(document.getElementById('dpdTrendChart'),{
   type:'line',
-  data:{labels:["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],datasets:[
-    {label:'30-60 DPD', data:[2.23, 2.37, 0.64, 2.74, 2.5, 1.98, 0.74, 1.29, 1.19, 5.31, 3.12, 4.45, 4.26, 3.11, 11.25, 10.0, 2.74, 2.65],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    {label:'60-90 DPD', data:[2.74, 2.21, 1.73, 0.64, 1.65, 1.62, 1.66, 0.61, 0.77, 0.7, 4.7, 2.78, 3.31, 2.88, 1.85, 6.73, 4.09, 3.86],  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    {label:'90-120 DPD',data:[3.0, 2.87, 1.64, 1.82, 0.39, 1.38, 0.65, 1.56, 0.24, 0.65, 0.61, 3.96, 1.92, 2.8, 1.69, 1.49, 1.86, 1.8], borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
-    {label:'120+ DPD',  data:[5.57, 8.99, 10.19, 12.62, 13.0, 9.92, 9.93, 9.91, 10.22, 9.42, 9.36, 10.05, 11.97, 12.17, 15.51, 15.45, 14.08, 13.64],borderColor:'#5C0E0E',borderWidth:2,pointRadius:2,tension:.3,fill:false}
+  data:{labels:["2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],datasets:[
+    {label:'30-60 DPD', data:[0.74, 1.29, 1.19, 5.31, 3.12, 4.45, 4.26, 3.11, 11.25, 10.0, 2.74, 2.65],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'60-90 DPD', data:[1.66, 0.61, 0.77, 0.7, 4.7, 2.78, 3.31, 2.88, 1.85, 6.73, 4.09, 3.86],  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'90-120 DPD',data:[0.65, 1.56, 0.24, 0.65, 0.61, 3.96, 1.92, 2.8, 1.69, 1.49, 1.86, 1.8], borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'120+ DPD',  data:[9.93, 9.91, 10.22, 9.42, 9.36, 10.05, 11.97, 12.17, 15.51, 15.45, 14.08, 13.64],borderColor:'#5C0E0E',borderWidth:2,pointRadius:2,tension:.3,fill:false}
   ]},
   options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(2)+'%'}}}})
 });
