@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relay Portfolio Review — August 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{--bg:#F7F5F0;--surface:#fff;--border:#E2DED6;--ink:#1C1B18;--ink2:#6B6760;--ink3:#A8A5A0;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+.page{max-width:1300px;margin:0 auto;padding:2.5rem 2rem}
+.header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;border-bottom:1px solid var(--border);padding-bottom:1.25rem}
+.header h1{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.sub{font-size:12px;color:var(--ink2);margin-top:3px;font-family:var(--mono)}
+.header-right{font-size:11px;color:var(--ink3);font-family:var(--mono);text-align:right}
+.sl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:.5px solid var(--border)}
+.narrative{background:var(--ink);color:#F0EDE6;border-radius:10px;padding:1.5rem 2rem;margin-bottom:2rem;position:relative}
+.ai-badge{position:absolute;top:1.25rem;right:1.5rem;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.1);padding:3px 8px;border-radius:4px;color:rgba(255,255,255,.5)}
+.narrative p,.np{font-size:13.5px;line-height:1.75;color:#D8D4CC;margin-bottom:.75rem;font-weight:300}
+.narrative p:last-child,.np:last-child{margin-bottom:0}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
+.card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem}
+.card-full{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:6px 10px;text-align:left;border-bottom:.5px solid var(--border)}
+th.num,td.num{text-align:right;font-family:var(--mono)}
+td{padding:9px 10px;border-bottom:.5px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.pn{font-weight:500}
+.heat-red   td.pn{border-left:3px solid #8F1C1C;padding-left:8px}
+.heat-amber td.pn{border-left:3px solid #E08C00;padding-left:8px}
+.heat-green td.pn{border-left:3px solid #2E6B0A;padding-left:8px}
+.badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500}
+.badge-ok{background:#EBF4E3;color:#2E6B0A}
+.badge-warn{background:#FDF3E2;color:#9A5C00}
+.badge-alert{background:#FBEAEA;color:#8F1C1C}
+.chart-wrap{position:relative;width:100%;height:220px;margin-top:.75rem}
+.mrb-banner{background:#FBEAEA;border:.5px solid #f5c5c5;border-radius:8px;padding:.75rem 1rem;font-size:12px;color:#8F1C1C;margin-bottom:1rem;font-family:var(--mono)}
+.snap-grid{display:flex;flex-direction:row;gap:10px;margin-bottom:2rem;flex-wrap:nowrap}
+.snap-card{background:var(--surface);border:.5px solid var(--border);border-radius:10px;padding:.875rem 1.25rem;flex:1;min-width:0}
+.snap-card .label{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:.35rem;letter-spacing:.06em;text-transform:uppercase}
+.snap-card .value{font-size:22px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.snap-card .sub{font-size:11px;color:var(--ink2);margin-top:.3rem;font-family:var(--mono)}
+.footer{font-size:11px;color:var(--ink3);font-family:var(--mono);margin-top:3rem;padding-top:1rem;border-top:.5px solid var(--border)}
+#gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:12px}
+#gate input{padding:10px 14px;font-size:15px;border:.5px solid var(--border);border-radius:8px;width:220px;outline:none;font-family:var(--sans);background:var(--surface)}
+#gate button{padding:9px 28px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:var(--sans)}
+#gate .err{font-size:12px;color:#8F1C1C;height:16px;font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div style="font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px">Relay Portfolio Review</div>
+  <input type="password" id="pwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPw()">
+  <button onclick="checkPw()">Enter</button>
+  <div class="err" id="pwErr"></div>
+</div>
+
+<div id="main" style="display:none">
+<div class="page">
+
+<div class="header">
+  <div>
+    <h1>Relay — Portfolio Review</h1>
+  </div>
+</div>
+
+<div class="narrative">
+  <div class="ai-badge">Generated</div>
+  <p class='np'>Narrative unavailable — set ANTHROPIC_KEY to enable.</p>
+</div>
+
+
+<div class="sl">Portfolio snapshot</div>
+<div class="snap-grid">
+  <div class="snap-card">
+    <div class="label">30–60 DPD</div>
+    <div class="value" style="color:#E08C00">2.41%</div>
+    <div class="sub">delinq ÷ outstanding (days_in_delinq)</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">60–90 DPD</div>
+    <div class="value" style="color:#BA7517">2.67%</div>
+    <div class="sub">% of outstanding</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">90–120 DPD</div>
+    <div class="value" style="color:#8F1C1C">1.80%</div>
+    <div class="sub">% of outstanding — imminent losses</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">120+ DPD formation</div>
+    <div class="value" style="color:#8F1C1C">$64K</div>
+    <div class="sub">new losses in 2026-07</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">Loss rate (ann.)</div>
+    <div class="value" style="color:#8F1C1C">98.2bps</div>
+    <div class="sub">2026-07 · vs 25bps target</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">120–150 DPD</div>
+    <div class="value" style="color:#5C0E0E">0.68%</div>
+    <div class="sub">% of outstanding — closed 30-day bucket</div>
+  </div>
+  <div class="snap-card">
+    <div class="label">Total outstanding</div>
+    <div class="value">$4.9M</div>
+    <div class="sub">curr_upb &gt; 0, latest snapshot</div>
+  </div>
+</div>
+
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Loss % by origination cohort — cumulative losses ÷ originated ($K stacked bars, loss % line)</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
+    Bars = originated ($K) per cohort month. Lines on right axis = % of that cohort’s originated balance currently 30–60 / 60–90 / 90–120 DPD (amber/orange/red) and cumulative loss % (black). DPD lines are a current snapshot for every cohort, so older cohorts sit near zero because they have been repaid and live delinquency shows up in the recent ones. The cumulative loss line is omitted for the most recent 5 cohorts, which are not yet old enough to reach 120 days.
+  </p>
+  <div class="chart-wrap" style="height:280px"><canvas id="cohortLossChart"></canvas></div>
+</div>
+
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Loss by underwriting vintage — initial line assigned vs 120+ DPD balance as % of line</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
+    X-axis = month of initial underwrite decision. Bars = total credit line assigned at first underwrite ($K). Red line = 120+ DPD balance at current snapshot as % of line assigned (right axis). A high loss % for a vintage indicates that cohort of obligors is underperforming relative to the line they were given. Recent vintages understated as losses take time to develop.
+  </p>
+  <div class="chart-wrap" style="height:280px"><canvas id="vintageLossChart"></canvas></div>
+</div>
+
+<div class="sl">Top DQ obligors — 30+ DPD (days_in_delinq, matching credit dashboard)</div>
+<div class="card-full">
+  <table>
+    <thead><tr>
+      <th>#</th><th>Obligor</th><th>Partner</th>
+      <th class="num">30–60</th><th class="num">60–90</th>
+      <th class="num">90–120</th><th class="num">120+</th>
+      <th class="num">Total</th><th class="num">% partner</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="num" style="color:#888;font-size:11px">1</td>
+          <td class="pn">Hedgerow Properties LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$45,231</td>
+          <td class="num" style="font-weight:600">$45,231</td>
+          <td class="num"><span style="color:var(--ink3)">4.5%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">2</td>
+          <td class="pn">DESI DRAPES LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">$13,949</td><td class="num">$24,225</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$38,174</td>
+          <td class="num"><span style="color:var(--ink3)">3.8%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">3</td>
+          <td class="pn">Einsof Holdings LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">$37,368</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$37,368</td>
+          <td class="num"><span style="color:var(--ink3)">3.7%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">4</td>
+          <td class="pn">Women Of Project Management, LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">$22,132</td><td class="num">—</td>
+          <td class="num">$13,562</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$35,694</td>
+          <td class="num"><span style="color:var(--ink3)">3.6%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">5</td>
+          <td class="pn">Vespa Solar LLP</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">$2,892</td><td class="num">$32,304</td>
+          <td class="num">$4</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$35,200</td>
+          <td class="num"><span style="color:var(--ink3)">3.5%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">6</td>
+          <td class="pn">Arclight Painting LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">$31,749</td><td class="num">$719</td>
+          <td class="num" style="font-weight:600">$32,468</td>
+          <td class="num"><span style="color:var(--ink3)">3.2%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">7</td>
+          <td class="pn">Ben Hall Law, PLLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">$14,568</td>
+          <td class="num">$15,727</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$30,295</td>
+          <td class="num"><span style="color:var(--ink3)">3.0%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">8</td>
+          <td class="pn">Sunrise outlet Inc.</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$27,586</td>
+          <td class="num" style="font-weight:600">$27,586</td>
+          <td class="num"><span style="color:var(--ink3)">2.8%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">9</td>
+          <td class="pn">OConnor Enterprise Group Inc</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$24,759</td>
+          <td class="num" style="font-weight:600">$24,759</td>
+          <td class="num"><span style="color:var(--ink3)">2.5%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">10</td>
+          <td class="pn">Solano LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$24,376</td>
+          <td class="num" style="font-weight:600">$24,376</td>
+          <td class="num"><span style="color:var(--ink3)">2.4%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">11</td>
+          <td class="pn">Compass Contracting LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$24,106</td>
+          <td class="num" style="font-weight:600">$24,106</td>
+          <td class="num"><span style="color:var(--ink3)">2.4%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">12</td>
+          <td class="pn">Brentwood Property Group</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$23,203</td>
+          <td class="num" style="font-weight:600">$23,203</td>
+          <td class="num"><span style="color:var(--ink3)">2.3%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">13</td>
+          <td class="pn">Dreamline Suites Inc</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$21,855</td>
+          <td class="num" style="font-weight:600">$21,855</td>
+          <td class="num"><span style="color:var(--ink3)">2.2%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">14</td>
+          <td class="pn">CulinaryLab SPC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$21,485</td>
+          <td class="num" style="font-weight:600">$21,485</td>
+          <td class="num"><span style="color:var(--ink3)">2.1%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">15</td>
+          <td class="pn">Bad Ass Rehabs LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$21,272</td>
+          <td class="num" style="font-weight:600">$21,272</td>
+          <td class="num"><span style="color:var(--ink3)">2.1%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">16</td>
+          <td class="pn">By Design Creative LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">$4,759</td><td class="num">$14,051</td>
+          <td class="num" style="font-weight:600">$18,809</td>
+          <td class="num"><span style="color:var(--ink3)">1.9%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">17</td>
+          <td class="pn">Sojouner Holdings LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">$17,239</td>
+          <td class="num" style="font-weight:600">$17,239</td>
+          <td class="num"><span style="color:var(--ink3)">1.7%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">18</td>
+          <td class="pn">VCS Tech Systems, LLC.</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">$16,951</td><td class="num">—</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$16,951</td>
+          <td class="num"><span style="color:var(--ink3)">1.7%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">19</td>
+          <td class="pn">Ear Care and Hearing of St. Louis, LLC</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">—</td><td class="num">$15,759</td>
+          <td class="num">—</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$15,759</td>
+          <td class="num"><span style="color:var(--ink3)">1.6%</span></td>
+        </tr><tr>
+          <td class="num" style="color:#888;font-size:11px">20</td>
+          <td class="pn">Aval Property Experience</td>
+          <td style="color:var(--ink2);font-size:12px">Relay Financial Technologies, Inc</td>
+          <td class="num">$6,524</td><td class="num">$8,350</td>
+          <td class="num">$363</td><td class="num">—</td>
+          <td class="num" style="font-weight:600">$15,237</td>
+          <td class="num"><span style="color:var(--ink3)">1.5%</span></td>
+        </tr></tbody>
+  </table>
+</div>
+
+<div class="card-full">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+    <div class="sl" style="margin-bottom:0;border-bottom:none">DPD trend — 30-60 / 60-90 / 90-120 / 120-150 (days_in_delinq)</div>
+  </div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Four buckets of equal 30-day width, so the series read as a roll rate. The open-ended 120+ stock is on its own tile above and is not comparable to these. Flow buckets exclude migrated loans, whose delinquency clock starts at ingestion rather than at the advance.</p>
+  <div class="chart-wrap" style="height:260px"><canvas id="dpdTrendChart"></canvas></div>
+</div>
+
+<div class="card-full">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
+    <div class="sl" style="margin-bottom:0;border-bottom:none">Annualized loss rate (bps) — new 120+ DPD formation ÷ trailing 12m originations × 12</div>
+  </div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Each loan counted once at first 120 DPD crossing or formal chargeoff. Recent months understated.</p>
+  <div class="chart-wrap" style="height:220px"><canvas id="lossRateChart"></canvas></div>
+</div>
+
+<div class="sl">1 — Partner leading indicator (past partner due_date, not yet past OatFi mat_dt)</div>
+<div class="card-full">
+  <table>
+    <thead><tr>
+      <th>Partner</th><th class="num">Total bal</th>
+      <th class="num">Leading — past partner due_date, current at OatFi</th>
+      <th class="num">Confirmed — past OatFi mat_dt</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="pn">Relay Financial Technologies, Inc</td>
+          <td class="num">$4.9M</td>
+          <td class="num" style="color:#BA7517">
+            $108K <span style="font-size:10px;color:var(--ink3);font-family:var(--mono)"> 44 obligors</span>
+            <br><span style="font-size:10px;color:var(--ink3)">1-15 DQ: $108K</span>
+          </td>
+          <td class="num" style="color:#8F1C1C">$1.3M
+            <span style="font-size:10px;color:var(--ink3);font-family:var(--mono)"> (319 obligors)</span>
+          </td>
+        </tr></tbody>
+  </table>
+</div>
+
+<div class="sl">2 — Portfolio DQ snapshot vs prior quarter (days_in_delinq, credit dashboard methodology)</div>
+<div class="card-full">
+  <table>
+    <thead><tr>
+      <th>Partner</th><th class="num">UPB</th><th class="num">Current</th>
+      <th class="num">1–30</th><th class="num">30–60</th>
+      <th class="num">60–90</th><th class="num">90–120</th><th class="num">120+</th>
+    </tr></thead>
+    <tbody><tr class="heat-red">
+          <td class="pn">Relay Financial Technologies, Inc</td>
+          <td class="num">$4.9M</td>
+          <td class="num">73.9%</td>
+          <td class="num"><span style="color:#A32D2D">5.5%&nbsp;▲</span><span style="font-size:9px;color:#A8A5A0"> ▲0.3m</span></td>
+          <td class="num"><span style="color:#3B6D11">2.4%&nbsp;▼</span><span style="font-size:9px;color:#A8A5A0"> ▼0.3m</span></td>
+          <td class="num"><span style="color:#A32D2D">2.7%&nbsp;▲</span><span style="font-size:9px;color:#3B6D11"> ▼0.5m</span></td>
+          <td class="num"><span style="color:#A32D2D">1.8%&nbsp;▲</span><span style="font-size:9px;color:#A8A5A0"> 0.1m</span></td>
+          <td class="num"><span style="color:#3B6D11">13.0%&nbsp;▼</span><span style="font-size:9px;color:#3B6D11"> ▼1.1m</span></td>
+        </tr></tbody>
+  </table>
+</div>
+
+<div class="sl">3 — Line management and utilization</div>
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Weighted utilization trend by line size bucket</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Orgs with utilization &gt;120% or zero utilization excluded from chart.</p>
+  <div class="chart-wrap" style="height:240px"><canvas id="utilChart"></canvas></div>
+  <div style="margin-top:.75rem;font-size:11px;font-family:var(--mono);color:var(--ink2)">
+    Zero utilization (credit line, no active loans): <strong>419</strong> orgs · Relay Financial Technologies, Inc: 419
+  </div>
+</div>
+
+<div class="sl">3b — Risk discrimination</div>
+<div class="card-full" style="background:#FDF3E2;border-color:#e8d9b8">
+  <p style="font-size:12px;color:#7a5a12;margin:0">
+    The score barely ordered risk before February 2025, a first working model ran from then,
+    and the scale was recalibrated again in late February 2026. Rank labels are not comparable
+    across those boundaries, so every view below is split by the model era that last scored
+    each obligor. Pre-Feb 2025: 19% of outstanding across 186 obligors at 43.4% 30+. v1 (Feb 25 - Feb 26): 35% of outstanding across 269 obligors at 21.28% 30+. v2 (post-Feb 26): 46% of outstanding across 409 obligors at 9.08% 30+. Some of that gradient is tenure rather than model quality:
+    older scores have had longer to go bad and nothing is ever charged off.
+  </p>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD rate by risk rank and model era</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Delinquent balance ÷ outstanding within each rank and era. Cells under $50K outstanding omitted.</p>
+    <div class="chart-wrap" style="height:210px"><canvas id="rrRateChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD rate by rank — excluding 365+ day balance</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Same split with balances over a year past due removed. The gap against the left chart is legacy stock, not current performance.</p>
+    <div class="chart-wrap" style="height:210px"><canvas id="rrRateExChart"></canvas></div>
+  </div>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">30+ DPD rate by risk band — 12-month trend</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Bands mix eras either side of each cutover, so read the level, not the step.</p>
+    <div class="chart-wrap" style="height:220px"><canvas id="rrBandTrendChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Rank ordering by quarter — achieved vs achievable</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">
+      Each obligor scored on the rank in force at that quarter end. Grey = the Gini a perfect
+      ordering of the same buckets would give, which falls as delinquency spreads across the
+      book. The gap is what the model leaves on the table. Latest: Gini 0.215,
+      capturing 88.0% of what was achievable.
+    </p>
+    <div class="chart-wrap" style="height:220px"><canvas id="giniQuarterChart"></canvas></div>
+  </div>
+</div>
+
+<div class="sl">4 — Origination and outstanding balance</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Monthly origination ($K)</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Excludes loans ingested through the partner migration, which carry an origination date equal to their ingestion date.</p>
+    <div class="chart-wrap"><canvas id="origChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Monthly outstanding ($K) —</div>
+    <div class="chart-wrap"><canvas id="moChart"></canvas></div>
+  </div>
+</div>
+
+<div class="sl">5 — Economic environment — NAICS sector stress</div>
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Sector snapshot table</div>
+  <table style="margin-top:.75rem">
+    <thead><tr>
+      <th>Code</th><th>Sector</th><th class="num">Obligors</th>
+      <th class="num">UPB</th><th class="num">DQ bal</th>
+      <th class="num">DQ/total</th><th class="num">Now</th>
+      <th class="num">6mo ago</th><th class="num">Change</th>
+    </tr></thead>
+    <tbody><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">54</td>
+          <td class="pn">Professional Services</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">169</td>
+          <td class="num">$739K</td>
+          <td class="num">$150K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">20/169</td>
+          <td class="num"><span class="badge badge-alert">20.4%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">27.7%</td>
+          <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 7.4pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">23</td>
+          <td class="pn">Construction</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">69</td>
+          <td class="num">$612K</td>
+          <td class="num">$177K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">17/69</td>
+          <td class="num"><span class="badge badge-alert">29.0%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">25.0%</td>
+          <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 4.0pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">56</td>
+          <td class="pn">Admin/Support</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">51</td>
+          <td class="num">$425K</td>
+          <td class="num">$61K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">7/51</td>
+          <td class="num"><span class="badge badge-warn">14.4%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">25.0%</td>
+          <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 10.6pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">53</td>
+          <td class="pn">Real Estate</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">64</td>
+          <td class="num">$383K</td>
+          <td class="num">$111K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">14/64</td>
+          <td class="num"><span class="badge badge-alert">28.9%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">24.7%</td>
+          <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 4.2pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">62</td>
+          <td class="pn">Health Care</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">62</td>
+          <td class="num">$267K</td>
+          <td class="num">$41K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">7/62</td>
+          <td class="num"><span class="badge badge-alert">15.3%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">18.0%</td>
+          <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 2.8pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">81</td>
+          <td class="pn">Other Services</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">32</td>
+          <td class="num">$198K</td>
+          <td class="num">$11K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">4/32</td>
+          <td class="num"><span class="badge badge-warn">5.8%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">16.3%</td>
+          <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 10.5pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">61</td>
+          <td class="pn">Education</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">16</td>
+          <td class="num">$169K</td>
+          <td class="num">$5</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1/16</td>
+          <td class="num"><span class="badge badge-ok">0.0%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">72</td>
+          <td class="pn">Food & Accommodation</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">29</td>
+          <td class="num">$166K</td>
+          <td class="num">$42K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">7/29</td>
+          <td class="num"><span class="badge badge-alert">25.3%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">44</td>
+          <td class="pn">Retail</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">21</td>
+          <td class="num">$162K</td>
+          <td class="num">$71K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">6/21</td>
+          <td class="num"><span class="badge badge-alert">43.7%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">20.7%</td>
+          <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 23.0pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">51</td>
+          <td class="pn">Information</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">26</td>
+          <td class="num">$135K</td>
+          <td class="num">$14K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">5/26</td>
+          <td class="num"><span class="badge badge-warn">10.6%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">15.5%</td>
+          <td class="num"><span style="color:#2E6B0A;font-weight:600">▼ 4.9pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">48</td>
+          <td class="pn">Transportation</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">20</td>
+          <td class="num">$127K</td>
+          <td class="num">$18K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3/20</td>
+          <td class="num"><span class="badge badge-warn">13.9%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2.9%</td>
+          <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 11.0pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">45</td>
+          <td class="pn">Retail</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">14</td>
+          <td class="num">$123K</td>
+          <td class="num">$13K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">3/14</td>
+          <td class="num"><span class="badge badge-warn">10.4%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">52</td>
+          <td class="pn">Finance & Insurance</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">24</td>
+          <td class="num">$115K</td>
+          <td class="num">$3K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">5/24</td>
+          <td class="num"><span class="badge badge-ok">2.7%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">33</td>
+          <td class="pn">Manufacturing</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">17</td>
+          <td class="num">$114K</td>
+          <td class="num">$24K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">5/17</td>
+          <td class="num"><span class="badge badge-alert">21.3%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">42</td>
+          <td class="pn">Wholesale Trade</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">16</td>
+          <td class="num">$111K</td>
+          <td class="num">$27K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">4/16</td>
+          <td class="num"><span class="badge badge-alert">24.0%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">5.3%</td>
+          <td class="num"><span style="color:#A32D2D;font-weight:600">▲ 18.7pp</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">55</td>
+          <td class="pn">Management</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">11</td>
+          <td class="num">$85K</td>
+          <td class="num">$50K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2/11</td>
+          <td class="num"><span class="badge badge-alert">59.0%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">71</td>
+          <td class="pn">Arts & Entertainment</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">14</td>
+          <td class="num">$76K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">1/14</td>
+          <td class="num"><span class="badge badge-warn">6.0%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">32</td>
+          <td class="pn">Manufacturing</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">9</td>
+          <td class="num">$27K</td>
+          <td class="num">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
+          <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">92</td>
+          <td class="pn">Public Admin</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">3</td>
+          <td class="num">$17K</td>
+          <td class="num">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
+          <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">11</td>
+          <td class="pn">Agriculture</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">5</td>
+          <td class="num">$17K</td>
+          <td class="num">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
+          <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">31</td>
+          <td class="pn">Manufacturing</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">6</td>
+          <td class="num">$8K</td>
+          <td class="num">$5K</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">2/6</td>
+          <td class="num"><span class="badge badge-alert">66.0%</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">49</td>
+          <td class="pn">Transportation</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">2</td>
+          <td class="num">$4K</td>
+          <td class="num">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
+          <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr><tr>
+          <td class="num" style="color:var(--ink3);font-family:var(--mono);font-size:11px">22</td>
+          <td class="pn">Utilities</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px">1</td>
+          <td class="num">$3K</td>
+          <td class="num">—</td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)">—</td>
+          <td class="num"><span style="color:var(--ink3);font-size:11px">—</span></td>
+          <td class="num" style="font-family:var(--mono);font-size:11px;color:var(--ink2)"><span style="color:var(--ink3);font-size:10px">insuff.</span></td>
+          <td class="num"><span style="color:var(--ink3);font-size:10px">n/a</span></td>
+        </tr></tbody>
+  </table>
+</div>
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Sector softening trend — 30+ DPD over 6 months</div>
+  <div class="chart-wrap" style="height:260px"><canvas id="naicsTrendChart"></canvas></div>
+</div>
+
+<div class="sl">6 — Portfolio growth</div>
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Origination decomposition — new vs repeat obligors ($K), active obligor count</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
+    Bars = monthly origination split by whether the obligor drew for the first time that month. Line on the right axis = obligors originating at all. If the line rises while volume per obligor is flat, growth is acquisition rather than deepening.
+  </p>
+  <div class="chart-wrap" style="height:260px"><canvas id="growthChart"></canvas></div>
+  <div style="margin-top:.75rem;font-size:11px;font-family:var(--mono);color:var(--ink2)">
+    Latest month: 5.7% of volume from first-time obligors ·
+    791 active obligors ·
+    $11.27K originated per obligor
+  </div>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">Onboarding funnel — underwritten, lined, activated</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Line assignments from the mongo credit_limit collection. Activation = obligor drew at least once after being lined. 2025-10-01 excluded as a bulk backfill rather than onboarding.</p>
+    <div class="chart-wrap" style="height:220px"><canvas id="funnelChart"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="sl" style="margin-bottom:.75rem">First line size by month ($K)</div>
+    <p style="font-size:11px;color:var(--ink3);margin-bottom:.5rem">Shaded band = 25th to 75th percentile. Line = median, dashed = mean. Mean well above median means a few large lines are carrying the cohort.</p>
+    <div class="chart-wrap" style="height:220px"><canvas id="lineSizeChart"></canvas></div>
+  </div>
+</div>
+<div class="card-full">
+  <div class="sl" style="margin-bottom:.75rem">Line change activity — increases above the axis, reductions below ($K)</div>
+  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">
+    Movement on existing obligors only, excluding first assignment. Net line change over the last twelve months is $595.0K across 13 reductions.
+  </p>
+  <div class="chart-wrap" style="height:220px"><canvas id="lineChangeChart"></canvas></div>
+</div>
+
+<div class="footer">
+  Relay Credit Risk &nbsp;·&nbsp; DPD methodology: days_in_delinq, curr_upb &gt; 0 — exact match to credit dashboard. No lms_lbh_status filter. No charged_off_date exclusion from DQ rates.
+  Leading indicator: past partner due_date, not yet past OatFi mat_dt.
+  Loss rate: first 120 DPD crossing or chargeoff ÷ trailing 12m originations × 12.
+  Utilization &gt;120% excluded. Partners and orgs under $10K excluded.
+  Rate and trend charts exclude migrated loans from 30-119 day buckets and retain them at 120+.
+  Obligor, sector and MRB tables show every dollar owed and will total slightly higher.
+</div>
+</div>
+</div>
+
+<script>
+function checkPw(){
+  var v=document.getElementById('pwInput').value;
+  if(v==='renegade'){
+    document.getElementById('gate').style.display='none';
+    document.getElementById('main').style.display='block';
+    sessionStorage.setItem('oatfi_auth','1');
+  }else{
+    document.getElementById('pwErr').textContent='Incorrect password';
+    document.getElementById('pwInput').value='';
+  }
+}
+if(sessionStorage.getItem('oatfi_auth')==='1'){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('main').style.display='block';
+}
+
+const baseOpts={
+  responsive:true,maintainAspectRatio:false,
+  interaction:{mode:'index',intersect:false},
+  plugins:{
+    legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+    tooltip:{bodyFont:{size:11},titleFont:{size:11}}
+  },
+  scales:{
+    x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:10},grid:{display:false},border:{display:false}},
+    y:{ticks:{font:{size:10},color:'#A8A5A0'},grid:{color:'rgba(0,0,0,.04)'},border:{display:false}}
+  }
+};
+function merge(a,b){const o=Object.assign({},a);for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k]))o[k]=merge(a[k]||{},b[k]);else o[k]=b[k]}return o}
+const pal=["#378ADD","#1D9E75","#D85A30","#A32D2D","#BA7517","#6B3FA0","#185FA5","#3B6D11","#888","#D4A017"];
+
+const dpdChart=new Chart(document.getElementById('dpdTrendChart'),{
+  type:'line',
+  data:{labels:["2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],datasets:[
+    {label:'30-60 DPD', data:[0.74, 1.29, 1.19, 3.03, 2.48, 1.56, 3.09, 2.15, 3.64, 3.53, 2.74, 2.41],  borderColor:'#E08C00',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'60-90 DPD', data:[1.66, 0.61, 0.77, 0.7, 2.62, 2.18, 0.84, 1.86, 1.28, 1.83, 3.19, 2.67],  borderColor:'#D85A30',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'90-120 DPD',data:[0.65, 1.56, 0.24, 0.65, 0.61, 1.88, 1.47, 0.63, 1.16, 0.99, 1.74, 1.8], borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'120-150 DPD',data:[1.24, 0.61, 1.42, 0.19, 0.6, 0.62, 3.4, 1.65, 2.48, 1.54, 0.82, 0.68],borderColor:'#5C0E0E',borderWidth:2,pointRadius:2,tension:.3,fill:false}
+  ]},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(2)+'%'}}}})
+});
+
+const allLossMonths=["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"];
+const allLossBps=[0.0, 0.0, 0.0, 0.0, 0.0, 228.41, 47.53, 0.97, 198.05, 176.33, 220.41, 261.71, 209.58, 96.61, 95.21, 10.71, 85.14, 41.01, 96.71, 12.22, 42.41, 41.28, 253.67, 107.74, 183.34, 108.75, 98.19, 7.65];
+const lossChart=new Chart(document.getElementById('lossRateChart'),{
+  type:'line',
+  data:{labels:allLossMonths,datasets:[
+    {label:'Loss rate',data:allLossBps,borderColor:'#A32D2D',borderWidth:2,pointRadius:2,tension:.3,fill:false},
+    {label:'25bps target',data:allLossMonths.map(()=>25),borderColor:'#BA7517',borderWidth:1,
+      borderDash:[4,3],pointRadius:0,fill:false}
+  ]},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v+'bps'}}}})
+});
+
+const utilChartData={"Relay Financial Technologies, Inc": {"months": ["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"], "series": [{"label": "Below $10K", "data": [36.6, 41.3, 37.6, 40.9, 38.7, 40.6, 39.8, 37.7, 39.5, 37.6, 36.5, 35.9, 38.0, 37.0, 39.6, 37.6, 38.5, 37.8, 39.8], "borderColor": "#378ADD", "backgroundColor": "#378ADD22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$10K\u2013$25K", "data": [24.7, 29.8, 29.5, 31.5, 26.2, 29.5, 28.9, 30.9, 27.4, 28.7, 26.1, 26.9, 26.4, 26.0, 29.6, 28.8, 29.1, 27.9, 29.1], "borderColor": "#1D9E75", "backgroundColor": "#1D9E7522", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$25K\u2013$50K", "data": [21.2, 26.5, 25.7, 27.3, 25.2, 20.1, 24.4, 23.7, 24.3, 20.9, 23.1, 22.7, 22.7, 26.0, 26.3, 24.2, 24.7, 26.6, 28.3], "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$50K\u2013$75K", "data": [21.1, 17.9, 18.2, 17.1, 11.4, 14.7, 17.6, 14.7, 12.7, 14.1, 19.4, 17.7, 17.2, 17.7, 17.9, 19.4, 22.3, 22.0, 24.0], "borderColor": "#D85A30", "backgroundColor": "#D85A3022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$75K+", "data": [39.7, 32.5, 24.5, 25.9, 23.7, 21.3, 34.7, 37.3, 35.2, 34.5, 30.2, 29.5, 25.7, 14.6, 11.1, 15.4, 9.5, 13.2, 15.3], "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]}};
+const utilAllMonths=["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"];
+const utilAllSeries=[{"label": "Below $10K", "data": [36.6, 41.3, 37.6, 40.9, 38.7, 40.6, 39.8, 37.7, 39.5, 37.6, 36.5, 35.9, 38.0, 37.0, 39.6, 37.6, 38.5, 37.8, 39.8], "borderColor": "#378ADD", "backgroundColor": "#378ADD22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$10K\u2013$25K", "data": [24.7, 29.8, 29.5, 31.5, 26.2, 29.5, 28.9, 30.9, 27.4, 28.7, 26.1, 26.9, 26.4, 26.0, 29.6, 28.8, 29.1, 27.9, 29.1], "borderColor": "#1D9E75", "backgroundColor": "#1D9E7522", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$25K\u2013$50K", "data": [21.2, 26.5, 25.7, 27.3, 25.2, 20.1, 24.4, 23.7, 24.3, 20.9, 23.1, 22.7, 22.7, 26.0, 26.3, 24.2, 24.7, 26.6, 28.3], "borderColor": "#BA7517", "backgroundColor": "#BA751722", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$50K\u2013$75K", "data": [21.1, 17.9, 18.2, 17.1, 11.4, 14.7, 17.6, 14.7, 12.7, 14.1, 19.4, 17.7, 17.2, 17.7, 17.9, 19.4, 22.3, 22.0, 24.0], "borderColor": "#D85A30", "backgroundColor": "#D85A3022", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "$75K+", "data": [39.7, 32.5, 24.5, 25.9, 23.7, 21.3, 34.7, 37.3, 35.2, 34.5, 30.2, 29.5, 25.7, 14.6, 11.1, 15.4, 9.5, 13.2, 15.3], "borderColor": "#A32D2D", "backgroundColor": "#A32D2D22", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}];
+const utilChart=new Chart(document.getElementById('utilChart'),{
+  type:'line',data:{labels:utilAllMonths,datasets:utilAllSeries},
+  options:merge(baseOpts,{scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}}}})
+});
+
+const saOpts = merge(baseOpts,{
+  plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y.toFixed(1)+'%'}}},
+  scales:{y:{min:0,max:100,stacked:true,ticks:{callback:v=>v+'%'}}}
+});
+
+(function(){
+  const rrLabels  = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+  const rrCtx     = {"Pre-Feb 2025|5": {"out": 105172, "orgs": 17, "dq_orgs": 4}, "Pre-Feb 2025|6": {"out": 277888, "orgs": 70, "dq_orgs": 14}, "Pre-Feb 2025|7": {"out": 387700, "orgs": 78, "dq_orgs": 23}, "Pre-Feb 2025|8": {"out": 17295, "orgs": 5, "dq_orgs": 2}, "Pre-Feb 2025|10": {"out": 138476, "orgs": 16, "dq_orgs": 7}, "v1 (Feb 25 - Feb 26)|3": {"out": 462813, "orgs": 89, "dq_orgs": 16}, "v1 (Feb 25 - Feb 26)|4": {"out": 13978, "orgs": 2, "dq_orgs": 1}, "v1 (Feb 25 - Feb 26)|5": {"out": 876975, "orgs": 112, "dq_orgs": 24}, "v1 (Feb 25 - Feb 26)|6": {"out": 117984, "orgs": 16, "dq_orgs": 5}, "v1 (Feb 25 - Feb 26)|7": {"out": 180222, "orgs": 34, "dq_orgs": 7}, "v1 (Feb 25 - Feb 26)|8": {"out": 18215, "orgs": 7, "dq_orgs": 2}, "v1 (Feb 25 - Feb 26)|10": {"out": 35195, "orgs": 9, "dq_orgs": 6}, "v2 (post-Feb 26)|1": {"out": 11565, "orgs": 1, "dq_orgs": 0}, "v2 (post-Feb 26)|2": {"out": 79770, "orgs": 2, "dq_orgs": 0}, "v2 (post-Feb 26)|3": {"out": 338475, "orgs": 56, "dq_orgs": 2}, "v2 (post-Feb 26)|4": {"out": 484254, "orgs": 132, "dq_orgs": 9}, "v2 (post-Feb 26)|5": {"out": 479095, "orgs": 58, "dq_orgs": 3}, "v2 (post-Feb 26)|6": {"out": 556677, "orgs": 93, "dq_orgs": 4}, "v2 (post-Feb 26)|7": {"out": 176661, "orgs": 46, "dq_orgs": 3}, "v2 (post-Feb 26)|8": {"out": 71076, "orgs": 16, "dq_orgs": 1}, "v2 (post-Feb 26)|9": {"out": 30682, "orgs": 4, "dq_orgs": 0}, "v2 (post-Feb 26)|10": {"out": 2162, "orgs": 1, "dq_orgs": 0}};
+  function fmtD(v){return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':v>=1e3?'$'+(v/1e3).toFixed(0)+'K':'$'+v;}
+  function rateOpts(){
+    return merge(baseOpts,{
+      plugins:{
+        legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+        tooltip:{callbacks:{label:ctx=>{
+          if(ctx.parsed.y===null||ctx.parsed.y===undefined) return null;
+          const c = rrCtx[ctx.dataset.label+'|'+rrLabels[ctx.dataIndex]];
+          const head = ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%';
+          return c ? [head+' of '+fmtD(c.out), c.dq_orgs+' of '+c.orgs+' obligors delinquent'] : head;
+        }}}
+      },
+      scales:{y:{min:0,ticks:{callback:v=>v+'%'}},x:{ticks:{font:{size:11}},
+        title:{display:true,text:'Risk rank',color:'#A8A5A0',font:{size:10}}}}
+    });
+  }
+  new Chart(document.getElementById('rrRateChart'),{
+    type:'bar', data:{labels:rrLabels,datasets:[{"label": "Pre-Feb 2025", "data": [null, null, null, null, 47.5, 24.91, 52.27, null, null, 52.02], "backgroundColor": "#A8A5A0", "borderRadius": 3}, {"label": "v1 (Feb 25 - Feb 26)", "data": [null, null, 20.32, null, 15.28, 50.56, 16.71, null, null, null], "backgroundColor": "#BA7517", "borderRadius": 3}, {"label": "v2 (post-Feb 26)", "data": [null, 0.0, 6.09, 14.08, 3.93, 13.09, 9.07, 8.42, null, null], "backgroundColor": "#185FA5", "borderRadius": 3}]}, options:rateOpts()
+  });
+  new Chart(document.getElementById('rrRateExChart'),{
+    type:'bar', data:{labels:rrLabels,datasets:[{"label": "Pre-Feb 2025", "data": [null, null, null, null, 40.36, 8.25, 24.96, null, null, 40.27], "backgroundColor": "#A8A5A0", "borderRadius": 3}, {"label": "v1 (Feb 25 - Feb 26)", "data": [null, null, 20.32, null, 13.78, 37.63, 16.71, null, null, null], "backgroundColor": "#BA7517", "borderRadius": 3}, {"label": "v2 (post-Feb 26)", "data": [null, 0.0, 6.09, 14.08, 3.93, 13.09, 9.07, 8.42, null, null], "backgroundColor": "#185FA5", "borderRadius": 3}]}, options:rateOpts()
+  });
+  new Chart(document.getElementById('rrBandTrendChart'),{
+    type:'line', data:{labels:["2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],datasets:[{"label": "RR 1-4", "data": [0.55, 0.0, 2.07, 3.21, 2.43, 4.26, 5.89, 11.32, 11.84, 14.13, 16.8, 14.31, 14.0], "borderColor": "#2E6B0A", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "RR 5-6", "data": [12.62, 10.83, 11.13, 9.99, 12.65, 14.63, 15.43, 15.5, 15.4, 20.26, 19.3, 19.36, 16.76], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "RR 7", "data": [26.88, 29.68, 28.49, 28.13, 32.05, 31.38, 30.33, 25.18, 22.55, 35.74, 31.96, 34.68, 33.41], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}, {"label": "RR 8-10", "data": [38.58, 44.33, 44.48, 32.33, 33.63, 29.3, 30.06, 30.96, 26.59, 25.67, 31.59, 44.07, 38.22], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 2, "tension": 0.3, "fill": false}]},
+    options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(0)+'%'}}}})
+  });
+
+  const gq = ["2024-07-01", "2024-10-01", "2025-01-01", "2025-04-01", "2025-07-01", "2025-10-01", "2026-01-01", "2026-04-01", "2026-07-01"], gCap = [0.0, 76.0, 88.0, 91.0, 98.0, 81.0, 27.0, 72.0, 88.0], gDq = [2.3, 9.0, 13.5, 17.8, 13.0, 13.8, 17.4, 21.8, 19.9];
+  new Chart(document.getElementById('giniQuarterChart'),{
+    type:'line',
+    data:{labels:gq,datasets:[
+      {label:'Achievable ceiling',data:[0.489, 0.512, 0.515, 0.38, 0.403, 0.397, 0.23, 0.207, 0.245],borderColor:'#A8A5A0',
+        backgroundColor:'#A8A5A022',borderWidth:1,borderDash:[4,3],pointRadius:0,
+        tension:0.3,fill:true},
+      {label:'Achieved Gini',data:[0.002, 0.391, 0.453, 0.346, 0.394, 0.322, 0.063, 0.148, 0.215],borderColor:'#185FA5',
+        borderWidth:2,pointRadius:3,tension:0.3,fill:false}
+    ]},
+    options:merge(baseOpts,{
+      plugins:{tooltip:{callbacks:{label:ctx=>{
+        const i=ctx.dataIndex;
+        if(ctx.dataset.label==='Achieved Gini')
+          return ['Gini '+ctx.parsed.y.toFixed(3),
+                  'capturing '+gCap[i]+'% of achievable',
+                  'book 30+ DPD '+gDq[i]+'%'];
+        return 'Ceiling '+ctx.parsed.y.toFixed(3);
+      }}}},
+      scales:{y:{min:0,ticks:{callback:v=>v.toFixed(2)}}}
+    })
+  });
+})();
+
+new Chart(document.getElementById('origChart'),{
+  type:'bar',
+  data:{labels:["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],datasets:[{"label": "Relay Financial Technologies, Inc", "data": [2563.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5543.0, 5846.0, 6169.7, 7400.7, 7724.7, 8914.0, 2146.4], "backgroundColor": "#378ADD", "borderWidth": 0}]},
+  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
+});
+
+new Chart(document.getElementById('moChart'),{
+  type:'line',
+  data:{labels:["2025-02-28", "2025-03-31", "2025-04-30", "2025-05-31", "2025-06-30", "2025-07-31", "2025-08-31", "2025-09-30", "2025-10-31", "2025-11-30", "2025-12-31", "2026-01-31", "2026-02-28", "2026-03-31", "2026-04-30", "2026-05-31", "2026-06-30", "2026-07-31", "2026-08-05"],datasets:[{"label": "Relay Financial Technologies, Inc", "data": [1424.1, 1814.3, 1728.4, 2048.9, 1882.6, 1976.7, 2351.1, 2617.2, 2783.7, 3059.5, 3376.0, 3628.2, 3594.0, 4141.0, 4702.7, 4117.9, 4470.9, 4468.6, 4862.3], "backgroundColor": "#378ADD99", "borderColor": "#378ADD", "borderWidth": 1, "fill": true, "tension": 0.3, "pointRadius": 0}]},
+  options:merge(baseOpts,{scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}})
+});
+
+new Chart(document.getElementById('naicsTrendChart'),{
+  type:'line',
+  data:{labels:["2026-02-28", "2026-03-31", "2026-04-30", "2026-05-31", "2026-06-30", "2026-07-31", "2026-08-05"],datasets:[{"label": "Construction", "data": [24.96, 15.82, 13.36, 32.63, 48.39, 33.93, 28.98], "borderColor": "#378ADD", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Wholesale Trade", "data": [5.3, 3.05, 6.19, 23.57, 24.2, 18.57, 24.0], "borderColor": "#1D9E75", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [20.73, 27.81, 33.19, 33.58, 44.83, 44.09, 43.7], "borderColor": "#D85A30", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Retail", "data": [21.71, 7.49, 7.3, 39.27, 31.12, 8.56, 10.44], "borderColor": "#A32D2D", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Information", "data": [15.47, 34.06, 18.18, 21.31, 31.81, 10.58, 10.61], "borderColor": "#BA7517", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Finance & Insurance", "data": [8.01, 10.55, 7.53, 11.34, 8.5, 2.98, 2.74], "borderColor": "#6B3FA0", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Professional Services", "data": [27.72, 27.6, 25.98, 29.33, 29.23, 23.02, 20.36], "borderColor": "#185FA5", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Health Care", "data": [18.02, 15.39, 22.61, 37.86, 24.65, 12.79, 15.25], "borderColor": "#3B6D11", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}, {"label": "Food & Accommodation", "data": [41.53, 42.87, 38.51, 48.94, 46.49, 31.72, 25.25], "borderColor": "#888", "borderWidth": 2, "pointRadius": 3, "tension": 0.3, "fill": false}]},
+  options:merge(baseOpts,{scales:{y:{min:0,ticks:{callback:v=>v.toFixed(1)+'%'}}}})
+});
+
+(function(){
+  const months   = ["2024-05-01", "2024-06-01", "2024-07-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"];
+  const orig     = [230.8, 472.3, 631.8, 896.3, 1351.3, 1933.6, 2285.7, 2906.9, 2992.2, 3050.6, 3930.0, 3961.1, 4735.1, 4442.8, 4828.9, 5080.4, 5643.2, 5940.2, 6055.9, 7467.9, 6738.3, 5543.0, 5846.0, 6169.7, 7400.7, 7724.7, 8914.0, 2146.4];
+  const lossVals = [4.6, 9.0, 0.1, 8.2, 30.2, 26.1, 48.8, 53.4, 43.2, 25.3, 14.3, 22.0, 27.2, 41.2, 3.3, 19.2, 21.6, 53.3, 47.5, 44.1, 61.9, 44.8, 18.4, 0.0, 0.0, 0.0, 0.0, 0.0];
+  const lossPct  = [1.99, 1.9, 0.01, 0.92, 2.23, 1.35, 2.14, 1.84, 1.44, 0.83, 0.36, 0.56, 0.57, 0.93, 0.07, 0.38, 0.38, 0.9, 0.78, 0.59, 0.92, 0.81, 0.32, null, null, null, null, null];
+  const pct3060  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.62, 0.92, 0.0, 0.0];
+  const pct6090  = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.97, 0.94, 0.0, 0.0, 0.0];
+  const pct90120 = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.13, 0.23, 0.1, 0.0, 0.0, 0.0];
+  new Chart(document.getElementById('cohortLossChart'),{
+    type:'bar',
+    data:{
+      labels: months,
+      datasets:[
+        {type:'bar',  label:'Originated ($K)',   data:orig,     backgroundColor:'#D8D4CCAA', borderColor:'#A8A5A0', borderWidth:1, borderRadius:2, yAxisID:'y'},
+        {type:'line', label:'30–60 DPD %',   data:pct3060,  borderColor:'#E08C00', borderWidth:2, pointRadius:2, tension:0.3, fill:false, yAxisID:'y2'},
+        {type:'line', label:'60–90 DPD %',   data:pct6090,  borderColor:'#D85A30', borderWidth:2, pointRadius:2, tension:0.3, fill:false, yAxisID:'y2'},
+        {type:'line', label:'90–120 DPD %',  data:pct90120, borderColor:'#A32D2D', borderWidth:2, pointRadius:2, tension:0.3, fill:false, yAxisID:'y2'},
+        {type:'line', label:'Loss % (cumul.)',   data:lossPct,  borderColor:'#1C1B18', borderWidth:2, pointRadius:3, tension:0.3, fill:false, yAxisID:'y2', borderDash:[4,3]}
+      ]
+    },
+    options:merge(baseOpts,{
+      plugins:{
+        legend:{display:true,position:'bottom',labels:{boxWidth:8,boxHeight:8,font:{size:10},color:'#6B6760',padding:8}},
+        tooltip:{
+          callbacks:{
+            label: ctx => {
+              if(ctx.dataset.yAxisID==='y2') return ctx.dataset.label+': '+ctx.parsed.y.toFixed(2)+'%';
+              return ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K';
+            }
+          }
+        }
+      },
+      scales:{
+        x:{ticks:{font:{size:10},color:'#A8A5A0',maxRotation:45,autoSkip:true,maxTicksLimit:18},grid:{display:false},border:{display:false}},
+        y:{
+          position:'left',
+          ticks:{font:{size:10},color:'#A8A5A0',callback:v=>'$'+v+'K'},
+          grid:{color:'rgba(0,0,0,.04)'},border:{display:false}
+        },
+        y2:{
+          position:'right',
+          min:0, max:6,
+          ticks:{font:{size:10},color:'#A8A5A0',callback:v=>v.toFixed(1)+'%'},
+          grid:{display:false},border:{display:false}
+        }
+      }
+    })
+  });
+})();
+
+(function(){
+  const gm = ["2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01"];
+  new Chart(document.getElementById('growthChart'),{
+    type:'bar',
+    data:{labels:gm,datasets:[
+      {type:'bar',label:'New obligors ($K)',data:[65.6, 195.1, 108.4, 179.6, 114.9, 99.5, 187.0, 486.7, 124.4, 341.2, 117.1, 142.1, 120.1, 294.3, 175.3, 340.9, 758.6, 503.8],backgroundColor:'#1D9E75',
+        borderWidth:0,borderRadius:2,yAxisID:'y',stack:'v'},
+      {type:'bar',label:'Repeat obligors ($K)',data:[2498.1, 3734.9, 3852.7, 4555.5, 4328.0, 4729.3, 4893.4, 5156.5, 5815.7, 5714.7, 7350.9, 6596.2, 5423.0, 5551.7, 5994.4, 7059.8, 6966.1, 8410.3],backgroundColor:'#D8D4CC',
+        borderColor:'#A8A5A0',borderWidth:1,borderRadius:2,yAxisID:'y',stack:'v'},
+      {type:'line',label:'Active obligors',data:[399, 442, 448, 463, 482, 497, 521, 554, 577, 591, 604, 619, 632, 645, 661, 698, 733, 791],borderColor:'#185FA5',
+        borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'}
+    ]},
+    options:merge(baseOpts,{
+      plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.yAxisID==='y2'
+        ? ctx.dataset.label+': '+ctx.parsed.y
+        : ctx.dataset.label+': $'+ctx.parsed.y.toFixed(0)+'K'}}},
+      scales:{
+        x:{stacked:true},
+        y:{stacked:true,position:'left',ticks:{callback:v=>'$'+v+'K'}},
+        y2:{position:'right',min:0,grid:{display:false},ticks:{font:{size:10},color:'#185FA5'}}
+      }
+    })
+  });
+
+  new Chart(document.getElementById('funnelChart'),{
+    type:'bar',
+    data:{labels:["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01"],datasets:[
+      {type:'bar',label:'Underwritten',data:[60, 47, 74, 39, 92, 99, 107, 118, 102, 113, 72, 112, 124, 104, 377, 132],backgroundColor:'#D8D4CC',borderRadius:2},
+      {type:'bar',label:'Lined',data:[0, 0, 5, 19, 35, 53, 47, 39, 35, 24, 24, 51, 44, 44, 68, 63],backgroundColor:'#378ADD',borderRadius:2},
+      {type:'bar',label:'Activated',data:[0, 0, 4, 12, 27, 44, 39, 32, 35, 19, 23, 42, 32, 35, 60, 45],backgroundColor:'#1D9E75',borderRadius:2},
+      {type:'line',label:'Activation %',data:[0.0, 0.0, 80.0, 63.2, 77.1, 83.0, 83.0, 82.1, 100.0, 79.2, 95.8, 82.4, 72.7, 79.5, 88.2, 71.4],borderColor:'#BA7517',
+        borderWidth:2,pointRadius:2,tension:0.3,fill:false,yAxisID:'y2'}
+    ]},
+    options:merge(baseOpts,{
+      scales:{
+        y:{position:'left',ticks:{font:{size:10}}},
+        y2:{position:'right',min:0,max:100,grid:{display:false},ticks:{callback:v=>v+'%',font:{size:10},color:'#BA7517'}}
+      }
+    })
+  });
+
+  new Chart(document.getElementById('lineSizeChart'),{
+    type:'line',
+    data:{labels:["2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01"],datasets:[
+      {label:'75th pct',data:[0.0, 0.0, 37.5, 31.2, 31.2, 37.5, 32.5, 42.5, 28.8, 42.5, 23.1, 37.5, 33.1, 25.0, 33.1, 33.8],borderColor:'transparent',
+        backgroundColor:'#378ADD22',pointRadius:0,fill:'+1',tension:0.3},
+      {label:'25th pct',data:[0.0, 0.0, 27.5, 7.5, 9.0, 12.0, 12.5, 13.5, 11.5, 8.0, 12.0, 16.5, 11.0, 10.0, 13.0, 11.0],borderColor:'transparent',
+        backgroundColor:'#378ADD22',pointRadius:0,fill:false,tension:0.3},
+      {label:'Median',data:[0.0, 0.0, 27.5, 15.0, 18.0, 20.0, 19.0, 22.5, 20.0, 16.5, 17.0, 22.5, 19.0, 18.0, 21.2, 17.0],borderColor:'#185FA5',borderWidth:2,
+        pointRadius:2,tension:0.3,fill:false},
+      {label:'Mean',data:[0.0, 0.0, 28.3, 21.9, 24.4, 28.5, 31.6, 32.1, 27.5, 29.1, 20.6, 28.1, 29.9, 21.7, 26.8, 25.0],borderColor:'#A32D2D',borderWidth:2,
+        borderDash:[4,3],pointRadius:0,tension:0.3,fill:false}
+    ]},
+    options:merge(baseOpts,{
+      plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': $'+ctx.parsed.y.toFixed(1)+'K'}}},
+      scales:{y:{min:0,ticks:{callback:v=>'$'+v+'K'}}}
+    })
+  });
+
+  new Chart(document.getElementById('lineChangeChart'),{
+    type:'bar',
+    data:{labels:["2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01", "2026-06-01", "2026-07-01"],datasets:[
+      {label:'Line added ($K)',data:[0.0, 0.0, 0.0, 0.0, 0.0, 69.5, 65.0, 420.5, 0.0, 0.0, 144.5, 205.0, 55.0],backgroundColor:'#1D9E75',borderRadius:2,stack:'l'},
+      {label:'Line removed ($K)',data:[-0.0, -7.0, -97.5, -0.0, -30.0, -230.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0, -0.0],backgroundColor:'#A32D2D',borderRadius:2,stack:'l'}
+    ]},
+    options:merge(baseOpts,{
+      plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': $'+Math.abs(ctx.parsed.y).toFixed(0)+'K'}}},
+      scales:{x:{stacked:true},y:{stacked:true,ticks:{callback:v=>'$'+v+'K'}}}
+    })
+  });
+})();
+
+(function(){
+  const vMonths   = ["2024-05-01", "2024-06-01", "2024-08-01", "2024-09-01", "2024-10-01", "2024-11-01", "2024-12-01", "2025-01-01", "2025-02-01", "2025-03-01", "2025-04-01", "2025-05-01", "2025-06-01", "2025-07-01", "2025-08-01", "2025-09-01", "2025-10-01", "2025-11-01", "2025-12-01", "2026-01-01", "2026-02-01", "2026-03-01", "2026-04-01", "2026-05-01"];
+  const vLine     = [3629.0, 151.0, 1199.5, 1390.5, 679.0, 634.5, 1273.0, 364.5, 345.5, 453.5, 403.0, 547.0, 340.0, 560.5, 1297.5, 945.0, 644.5, 1077.5, 518.0, 990.0, 531.5, 1201.0, 915.5, 706.5];
+  const vLossPct  = [2.623, 0.0, 6.881, 9.276, 1.819, 7.726, 1.787, 3.736, 5.265, 2.378, 0.002, 10.889, 2.929, 3.317, 0.0, 4.147, 4.436, 0.451, 0.0, 3.517, 0.0, 0.0, 0.0, 0.0];
+  const vLossKs   = [95.2, 0.0, 82.5, 129.0, 12.4, 49.0, 22.8, 13.6, 18.2, 10.8, 0.0, 59.6, 10.0, 18.6, 0.0, 39.2, 28.6, 4.9, 0.0, 34.8, 0.0, 0.0, 0.0, 0.0];
+  const vOrgs     = [93, 9, 57, 149, 53, 40, 91, 22, 28, 22, 16, 22, 14, 26, 44, 40, 22, 32, 21, 31, 25, 43, 36, 37];
+  const vLossOrgs = [18, 0, 7, 18, 4, 4, 8, 3, 3, 1, 2, 5, 3, 6, 0, 7, 4, 1, 0, 4, 0, 0, 0, 0];
+  new Chart(document.getElementById('vintageLossChart'), {
+    type: 'bar',
+    data: {
+      labels: vMonths,
+      datasets: [
+        {
+          type: 'bar',
+          label: 'Line assigned ($K)',
+          data: vLine,
+          backgroundColor: '#378ADD44',
+          borderColor: '#378ADD',
+          borderWidth: 1,
+          borderRadius: 2,
+          yAxisID: 'y'
+        },
+        {
+          type: 'line',
+          label: 'Loss % of line',
+          data: vLossPct,
+          borderColor: '#A32D2D',
+          borderWidth: 2,
+          pointRadius: 3,
+          tension: 0.3,
+          fill: false,
+          yAxisID: 'y2'
+        }
+      ]
+    },
+    options: merge(baseOpts, {
+      plugins: {
+        legend: {display: true, position: 'bottom', labels: {boxWidth: 8, boxHeight: 8, font: {size: 10}, color: '#6B6760', padding: 8}},
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.dataset.yAxisID === 'y2') {
+                const orgsLost = vLossOrgs[ctx.dataIndex];
+                return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + '%' + (orgsLost > 0 ? ' (' + orgsLost + ' orgs)' : '');
+              }
+              const orgs = vOrgs[ctx.dataIndex];
+              const lossK = vLossKs[ctx.dataIndex];
+              return [
+                ctx.dataset.label + ': $' + ctx.parsed.y.toFixed(1) + 'K (' + orgs + ' orgs)',
+                lossK > 0 ? 'Loss balance: $' + lossK.toFixed(1) + 'K' : 'No losses yet'
+              ];
+            }
+          }
+        }
+      },
+      scales: {
+        x: {ticks: {font: {size: 10}, color: '#A8A5A0', maxRotation: 45, autoSkip: true, maxTicksLimit: 24}, grid: {display: false}, border: {display: false}},
+        y: {
+          position: 'left',
+          ticks: {font: {size: 10}, color: '#A8A5A0', callback: v => '$' + v + 'K'},
+          grid: {color: 'rgba(0,0,0,.04)'},
+          border: {display: false}
+        },
+        y2: {
+          position: 'right',
+          min: 0,
+          ticks: {font: {size: 10}, color: '#A32D2D', callback: v => v.toFixed(1) + '%'},
+          grid: {display: false},
+          border: {display: false}
+        }
+      }
+    })
+  });
+})();
+</script>
+</div>
+</body></html>
