@@ -311,35 +311,6 @@ tr:last-child td{border-bottom:none}
   <div class="chart-wrap" style="height:260px"><canvas id="dpdTrendChart"></canvas></div>
 </div>
 
-<div class="card-full">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
-    <div class="sl" style="margin-bottom:0;border-bottom:none">Annualized loss rate (bps) — new 120+ DPD formation ÷ trailing 12m originations × 12</div>
-  </div>
-  <p style="font-size:11px;color:var(--ink3);margin-bottom:.75rem">Each loan counted once at first 120 DPD crossing or formal chargeoff. Recent months understated.</p>
-  <div class="chart-wrap" style="height:220px"><canvas id="lossRateChart"></canvas></div>
-</div>
-
-<div class="sl">1 — Partner leading indicator (past partner due_date, not yet past OatFi mat_dt)</div>
-<div class="card-full">
-  <table>
-    <thead><tr>
-      <th>Partner</th><th class="num">Total bal</th>
-      <th class="num">Leading — past partner due_date, current at OatFi</th>
-      <th class="num">Confirmed — past OatFi mat_dt</th>
-    </tr></thead>
-    <tbody><tr>
-          <td class="pn">Relay Financial Technologies, Inc</td>
-          <td class="num">$4.5M</td>
-          <td class="num" style="color:#BA7517">
-            $191K <span style="font-size:10px;color:var(--ink3);font-family:var(--mono)"> 103 obligors</span>
-            <br><span style="font-size:10px;color:var(--ink3)">1-15 DQ: $191K</span>
-          </td>
-          <td class="num" style="color:#8F1C1C">$1.4M
-            <span style="font-size:10px;color:var(--ink3);font-family:var(--mono)"> (282 obligors)</span>
-          </td>
-        </tr></tbody>
-  </table>
-</div>
 
 <div class="sl">2 — Portfolio DQ snapshot vs prior quarter (days_in_delinq, credit dashboard methodology)</div>
 <div class="card-full">
