@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Transaction Network</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .node {
+            cursor: move;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+        .link {
+            stroke: #999;
+            stroke-opacity: 0.6;
+            marker-end: url(#end);
+        }
+        .node-label {
+            pointer-events: none;
+            text-anchor: middle;
+            font-size: 12px;
+            font-weight: bold;
+            fill: white;
+        }
+        .edge-label {
+            pointer-events: none;
+            text-anchor: middle;
+            font-size: 12px;
+            font-weight: bold;
+            fill: red;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h2>OatFi Connected Partners Graph</h2>
+    <svg width="1200" height="800"></svg>
+    <div class="tooltip" style="opacity: 0;"></div>
+
+    <script>
+        const svg = d3.select("svg");
+        const width = +svg.attr("width");
+        const height = +svg.attr("height");
+
+        // Add arrow markers for both directions
+        const defs = svg.append("defs");
+        
+        defs.append("marker")
+            .attr("id", "end")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 25)
+            .attr("refY", 0)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M0,-5L10,0L0,5")
+            .attr("fill", "#999");
+            
+        defs.append("marker")
+            .attr("id", "start")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", -15)
+            .attr("refY", 0)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M10,-5L0,0L10,5")
+            .attr("fill", "#999");
+
+        // Data
+        const nodes = [{"id": "Relay Financial Technologies, Inc", "label": "Relay Financial...", "color": "#ff6b6b", "size": 60.0, "x": 746.1797556584794, "y": 494.396373216314, "tooltip": "<b>Relay Financial Technologies, Inc</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 146<br>\u2022 Org Inflow: 21<br>\u2022 Org Outflow: 125<br>\u2022 Org Net: -104<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $6,552,229.50<br>\u2022 Dollar Inflow: $4,197,485.25<br>\u2022 Dollar Outflow: $2,354,744.25<br>\u2022 Dollar Net: $+1,842,741.00<br><br><b>Visual Info:</b><br>\u2022 Node Size: 60.0px radius<br>\u2022 Represents: 146 total organizations", "org_total": 146}, {"id": "Melio", "label": "Melio", "color": "#785cb8", "size": 58.62068965517241, "x": 937.4882418535885, "y": 424.3457033387927, "tooltip": "<b>Melio</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 142<br>\u2022 Org Inflow: 142<br>\u2022 Org Outflow: 0<br>\u2022 Org Net: +142<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $3,796,236.18<br>\u2022 Dollar Inflow: $1,896,814.44<br>\u2022 Dollar Outflow: $1,899,421.74<br>\u2022 Dollar Net: $-2,607.30<br><br><b>Visual Info:</b><br>\u2022 Node Size: 58.6px radius<br>\u2022 Represents: 142 total organizations", "org_total": 142}, {"id": "Koverly Inc.", "label": "Koverly Inc.", "color": "#45b7d1", "size": 47.24137931034483, "x": 592.4813778235489, "y": 437.8996002039124, "tooltip": "<b>Koverly Inc.</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 109<br>\u2022 Org Inflow: 1<br>\u2022 Org Outflow: 108<br>\u2022 Org Net: -107<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $8,476,955.10<br>\u2022 Dollar Inflow: $3,861,562.37<br>\u2022 Dollar Outflow: $4,615,392.73<br>\u2022 Dollar Net: $-753,830.36<br><br><b>Visual Info:</b><br>\u2022 Node Size: 47.2px radius<br>\u2022 Represents: 109 total organizations", "org_total": 109}, {"id": "Cargosprint", "label": "Cargosprint", "color": "#54a0ff", "size": 23.79310344827586, "x": 241.77661017853802, "y": 465.2352013260844, "tooltip": "<b>Cargosprint</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 41<br>\u2022 Org Inflow: 41<br>\u2022 Org Outflow: 0<br>\u2022 Org Net: +41<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $2,511,141.75<br>\u2022 Dollar Inflow: $1,327,765.04<br>\u2022 Dollar Outflow: $1,183,376.71<br>\u2022 Dollar Net: $+144,388.33<br><br><b>Visual Info:</b><br>\u2022 Node Size: 23.8px radius<br>\u2022 Represents: 41 total organizations", "org_total": 41}, {"id": "HouseCall Pro", "label": "HouseCall Pro", "color": "#a55eea", "size": 22.413793103448278, "x": 877.4236240343932, "y": 518.5103358486816, "tooltip": "<b>HouseCall Pro</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 37<br>\u2022 Org Inflow: 37<br>\u2022 Org Outflow: 0<br>\u2022 Org Net: +37<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $5,220,409.19<br>\u2022 Dollar Inflow: $171,912.46<br>\u2022 Dollar Outflow: $5,048,496.73<br>\u2022 Dollar Net: $-4,876,584.27<br><br><b>Visual Info:</b><br>\u2022 Node Size: 22.4px radius<br>\u2022 Represents: 37 total organizations", "org_total": 37}, {"id": "Avalara Inc", "label": "Avalara Inc", "color": "#4ecdc4", "size": 28.275862068965516, "x": 301.44160552957464, "y": 573.0263391788208, "tooltip": "<b>Avalara Inc</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 54<br>\u2022 Org Inflow: 54<br>\u2022 Org Outflow: 0<br>\u2022 Org Net: +54<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $13,919,501.55<br>\u2022 Dollar Inflow: $13,794,361.83<br>\u2022 Dollar Outflow: $125,139.72<br>\u2022 Dollar Net: $+13,669,222.11<br><br><b>Visual Info:</b><br>\u2022 Node Size: 28.3px radius<br>\u2022 Represents: 54 total organizations", "org_total": 54}, {"id": "Cledara Limited", "label": "Cledara Limited", "color": "#96ceb4", "size": 17.24137931034483, "x": 763.1688733583724, "y": 385.86330115495986, "tooltip": "<b>Cledara Limited</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 22<br>\u2022 Org Inflow: 0<br>\u2022 Org Outflow: 22<br>\u2022 Org Net: -22<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $1,234,914.95<br>\u2022 Dollar Inflow: $335,245.25<br>\u2022 Dollar Outflow: $899,669.70<br>\u2022 Dollar Net: $-564,424.45<br><br><b>Visual Info:</b><br>\u2022 Node Size: 17.2px radius<br>\u2022 Represents: 22 total organizations", "org_total": 22}, {"id": "Avalara Technologies, LLC", "label": "Avalara Technol...", "color": "#95a5a6", "size": 14.482758620689655, "x": 544.4661476347862, "y": 288.1572427367281, "tooltip": "<b>Avalara Technologies, LLC</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 14<br>\u2022 Org Inflow: 0<br>\u2022 Org Outflow: 14<br>\u2022 Org Net: -14<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $2,182,246.56<br>\u2022 Dollar Inflow: $64,204.62<br>\u2022 Dollar Outflow: $2,118,041.94<br>\u2022 Dollar Net: $-2,053,837.32<br><br><b>Visual Info:</b><br>\u2022 Node Size: 14.5px radius<br>\u2022 Represents: 14 total organizations", "org_total": 14}, {"id": "Order", "label": "Order", "color": "#95a5a6", "size": 13.10344827586207, "x": 537.9840661568667, "y": 604.5373219315954, "tooltip": "<b>Order</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 10<br>\u2022 Org Inflow: 0<br>\u2022 Org Outflow: 10<br>\u2022 Org Net: -10<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $7,226,933.97<br>\u2022 Dollar Inflow: $0.00<br>\u2022 Dollar Outflow: $7,226,933.97<br>\u2022 Dollar Net: $-7,226,933.97<br><br><b>Visual Info:</b><br>\u2022 Node Size: 13.1px radius<br>\u2022 Represents: 10 total organizations", "org_total": 10}, {"id": "Transcard Payments LLC", "label": "Transcard Payme...", "color": "#95a5a6", "size": 13.793103448275861, "x": 465.35813094032875, "y": 185.3085852926674, "tooltip": "<b>Transcard Payments LLC</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 12<br>\u2022 Org Inflow: 0<br>\u2022 Org Outflow: 12<br>\u2022 Org Net: -12<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $406,072.56<br>\u2022 Dollar Inflow: $185,173.81<br>\u2022 Dollar Outflow: $220,898.75<br>\u2022 Dollar Net: $-35,724.94<br><br><b>Visual Info:</b><br>\u2022 Node Size: 13.8px radius<br>\u2022 Represents: 12 total organizations", "org_total": 12}, {"id": "Flychain", "label": "Flychain", "color": "#feca57", "size": 13.793103448275861, "x": 865.3948732538231, "y": 206.22246775217488, "tooltip": "<b>Flychain</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 12<br>\u2022 Org Inflow: 1<br>\u2022 Org Outflow: 11<br>\u2022 Org Net: -10<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $147,817.09<br>\u2022 Dollar Inflow: $50.83<br>\u2022 Dollar Outflow: $147,766.26<br>\u2022 Dollar Net: $-147,715.43<br><br><b>Visual Info:</b><br>\u2022 Node Size: 13.8px radius<br>\u2022 Represents: 12 total organizations", "org_total": 12}, {"id": "WebCargo", "label": "WebCargo", "color": "#95a5a6", "size": 10.689655172413794, "x": 304.6979923019832, "y": 252.7845592849915, "tooltip": "<b>WebCargo</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 3<br>\u2022 Org Inflow: 3<br>\u2022 Org Outflow: 0<br>\u2022 Org Net: +3<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $43,736.11<br>\u2022 Dollar Inflow: $43,736.11<br>\u2022 Dollar Outflow: $0.00<br>\u2022 Dollar Net: $+43,736.11<br><br><b>Visual Info:</b><br>\u2022 Node Size: 10.7px radius<br>\u2022 Represents: 3 total organizations", "org_total": 3}, {"id": "BRKR.IO Inc.", "label": "BRKR.IO Inc.", "color": "#00d2d3", "size": 11.724137931034482, "x": 770.737981950943, "y": 587.225859113626, "tooltip": "<b>BRKR.IO Inc.</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 6<br>\u2022 Org Inflow: 4<br>\u2022 Org Outflow: 2<br>\u2022 Org Net: +2<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $43,625.17<br>\u2022 Dollar Inflow: $449.00<br>\u2022 Dollar Outflow: $43,176.17<br>\u2022 Dollar Net: $-42,727.17<br><br><b>Visual Info:</b><br>\u2022 Node Size: 11.7px radius<br>\u2022 Represents: 6 total organizations", "org_total": 6}, {"id": "Upflow", "label": "Upflow", "color": "#ff6348", "size": 10.689655172413794, "x": 249.91492973773416, "y": 359.1885759884429, "tooltip": "<b>Upflow</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 3<br>\u2022 Org Inflow: 2<br>\u2022 Org Outflow: 1<br>\u2022 Org Net: +1<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $3,579.34<br>\u2022 Dollar Inflow: $3,032.68<br>\u2022 Dollar Outflow: $546.66<br>\u2022 Dollar Net: $+2,486.02<br><br><b>Visual Info:</b><br>\u2022 Node Size: 10.7px radius<br>\u2022 Represents: 3 total organizations", "org_total": 3}, {"id": "Tab Commerce", "label": "Tab Commerce", "color": "#95a5a6", "size": 10.0, "x": 680.115548990966, "y": 100.0, "tooltip": "<b>Tab Commerce</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 1<br>\u2022 Org Inflow: 0<br>\u2022 Org Outflow: 1<br>\u2022 Org Net: -1<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $1,750.00<br>\u2022 Dollar Inflow: $0.00<br>\u2022 Dollar Outflow: $1,750.00<br>\u2022 Dollar Net: $-1,750.00<br><br><b>Visual Info:</b><br>\u2022 Node Size: 10.0px radius<br>\u2022 Represents: 1 total organizations", "org_total": 1}, {"id": "Payve, Inc.", "label": "Payve, Inc.", "color": "#95a5a6", "size": 10.0, "x": 870.5485681545498, "y": 278.55251071726605, "tooltip": "<b>Payve, Inc.</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 1<br>\u2022 Org Inflow: 0<br>\u2022 Org Outflow: 1<br>\u2022 Org Net: -1<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $2,727.00<br>\u2022 Dollar Inflow: $2,727.00<br>\u2022 Dollar Outflow: $0.00<br>\u2022 Dollar Net: $+2,727.00<br><br><b>Visual Info:</b><br>\u2022 Node Size: 10.0px radius<br>\u2022 Represents: 1 total organizations", "org_total": 1}, {"id": "Hostfi Inc. DBA Accountable", "label": "Hostfi Inc. DBA...", "color": "#ff9ff3", "size": 10.0, "x": 450.82167244152384, "y": 638.7460229149423, "tooltip": "<b>Hostfi Inc. DBA Accountable</b><br><br><b>Organization Metrics:</b><br>\u2022 Total Orgs: 1<br>\u2022 Org Inflow: 1<br>\u2022 Org Outflow: 0<br>\u2022 Org Net: +1<br><br><b>Dollar Metrics:</b><br>\u2022 Total Volume: $834.64<br>\u2022 Dollar Inflow: $834.64<br>\u2022 Dollar Outflow: $0.00<br>\u2022 Dollar Net: $+834.64<br><br><b>Visual Info:</b><br>\u2022 Node Size: 10.0px radius<br>\u2022 Represents: 1 total organizations", "org_total": 1}];
+        const links = [{"source": "Relay Financial Technologies, Inc", "target": "Melio", "orgs": 71}, {"source": "Relay Financial Technologies, Inc", "target": "HouseCall Pro", "orgs": 33}, {"source": "Relay Financial Technologies, Inc", "target": "Avalara Inc", "orgs": 17}, {"source": "Relay Financial Technologies, Inc", "target": "Upflow", "orgs": 1}, {"source": "Relay Financial Technologies, Inc", "target": "Flychain", "orgs": 1}, {"source": "Relay Financial Technologies, Inc", "target": "Hostfi Inc. DBA Accountable", "orgs": 1}, {"source": "Relay Financial Technologies, Inc", "target": "BRKR.IO Inc.", "orgs": 1}, {"source": "Koverly Inc.", "target": "Melio", "orgs": 51}, {"source": "Koverly Inc.", "target": "Cargosprint", "orgs": 36}, {"source": "Koverly Inc.", "target": "Avalara Inc", "orgs": 12}, {"source": "Koverly Inc.", "target": "Relay Financial Technologies, Inc", "orgs": 8}, {"source": "Koverly Inc.", "target": "HouseCall Pro", "orgs": 1}, {"source": "Cledara Limited", "target": "Avalara Inc", "orgs": 12}, {"source": "Cledara Limited", "target": "Relay Financial Technologies, Inc", "orgs": 5}, {"source": "Cledara Limited", "target": "Melio", "orgs": 4}, {"source": "Cledara Limited", "target": "Upflow", "orgs": 1}, {"source": "Avalara Technologies, LLC", "target": "Melio", "orgs": 9}, {"source": "Avalara Technologies, LLC", "target": "Avalara Inc", "orgs": 4}, {"source": "Avalara Technologies, LLC", "target": "HouseCall Pro", "orgs": 1}, {"source": "Order", "target": "Avalara Inc", "orgs": 7}, {"source": "Order", "target": "Melio", "orgs": 1}, {"source": "Order", "target": "HouseCall Pro", "orgs": 1}, {"source": "Order", "target": "Relay Financial Technologies, Inc", "orgs": 1}, {"source": "Transcard Payments LLC", "target": "Cargosprint", "orgs": 5}, {"source": "Transcard Payments LLC", "target": "WebCargo", "orgs": 3}, {"source": "Transcard Payments LLC", "target": "BRKR.IO Inc.", "orgs": 2}, {"source": "Transcard Payments LLC", "target": "Melio", "orgs": 1}, {"source": "Transcard Payments LLC", "target": "Relay Financial Technologies, Inc", "orgs": 1}, {"source": "Flychain", "target": "Relay Financial Technologies, Inc", "orgs": 5}, {"source": "Flychain", "target": "Melio", "orgs": 3}, {"source": "Flychain", "target": "HouseCall Pro", "orgs": 1}, {"source": "Flychain", "target": "BRKR.IO Inc.", "orgs": 1}, {"source": "Flychain", "target": "Koverly Inc.", "orgs": 1}, {"source": "BRKR.IO Inc.", "target": "Avalara Inc", "orgs": 1}, {"source": "BRKR.IO Inc.", "target": "Melio", "orgs": 1}, {"source": "Upflow", "target": "Avalara Inc", "orgs": 1}, {"source": "Tab Commerce", "target": "Relay Financial Technologies, Inc", "orgs": 1}, {"source": "Payve, Inc.", "target": "Melio", "orgs": 1}];
+
+        // Create force simulation
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(150))
+            .force("charge", d3.forceManyBody().strength(-1000))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        // Create links with proper bidirectional handling
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(links)
+            .enter().append("line")
+            .attr("class", "link")
+            .attr("stroke-width", d => Math.max(2, d.orgs / 50))
+            .attr("marker-end", "url(#end)");
+
+        // Create edge labels with proper positioning for bidirectional links
+        const edgeLabels = svg.append("g")
+            .selectAll("text")
+            .data(links)
+            .enter().append("text")
+            .attr("class", "edge-label")
+            .style("fill", "red")
+            .style("font-weight", "bold")
+            .style("font-size", "10px")
+            .text(d => d.orgs);
+
+        // Create nodes
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(nodes)
+            .enter().append("circle")
+            .attr("class", "node")
+            .attr("r", d => d.size)
+            .attr("fill", d => d.color)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        // Create node labels
+        const nodeLabels = svg.append("g")
+            .selectAll("text")
+            .data(nodes)
+            .enter().append("text")
+            .attr("class", "node-label")
+            .style("fill", "black")
+            .style("font-weight", "bold")
+            .text(d => d.label);
+
+        // Tooltip
+        const tooltip = d3.select(".tooltip");
+
+        // Add hover events
+        node.on("mouseover", function(event, d) {
+            tooltip.transition().duration(200).style("opacity", .9);
+            tooltip.html(d.tooltip)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(d) {
+            tooltip.transition().duration(500).style("opacity", 0);
+        });
+
+        // Update positions on tick
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            edgeLabels
+                .attr("x", d => {
+                    const midX = (d.source.x + d.target.x) / 2;
+                    if (d.bidirectional) {
+                        const offset = d.direction === 'forward' ? 10 : -10;
+                        const angle = Math.atan2(d.target.y - d.source.y, d.target.x - d.source.x);
+                        return midX + offset * Math.cos(angle + Math.PI/2);
+                    }
+                    return midX;
+                })
+                .attr("y", d => {
+                    const midY = (d.source.y + d.target.y) / 2;
+                    if (d.bidirectional) {
+                        const offset = d.direction === 'forward' ? 10 : -10;
+                        const angle = Math.atan2(d.target.y - d.source.y, d.target.x - d.source.x);
+                        return midY + offset * Math.sin(angle + Math.PI/2);
+                    }
+                    return midY;
+                });
+
+            node
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+
+            nodeLabels
+                .attr("x", d => d.x)
+                .attr("y", d => d.y + 5);
+        });
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    </script>
+</body>
+</html>
